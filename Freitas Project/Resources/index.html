@@ -3,10 +3,11 @@
 	<head>
 		<title>ProteoWorkbench
 		</title>
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<link rel="stylesheet" href="http://jquerymobile.com/demos/1.1.1/css/themes/default/jquery.mobile-1.1.1.css" />
 		<link rel="stylesheet" href="jqm-docs.css" />
-		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://jquerymobile.com/demos/1.1.1/docs/_assets/js/jqm-docs.js"></script>
+		<script src="http://jquerymobile.com/demos/1.1.1/js/jquery.mobile-1.1.1.js"></script>
 			<style>
 		    img.fullscreen {
 		        max-height: 100%;
@@ -20,8 +21,8 @@
 
 				<div data-role="header" data-theme="f">
 				<h1>Grids</h1>
-				<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-				<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+				<a href="http://jquerymobile.com/demos/1.1.1/" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+				<a href="http://jquerymobile.com/demos/1.1.1/docs/nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 			</div><!-- /header -->
 
 			<div data-role="content">
@@ -99,7 +100,7 @@
 					<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
 				</div>
 
-				<p>Theme classes (not data-theme attributes) from the <a href="../api/themes.html">theming system</a> can be added to an element, including grids. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
+				<p>Theme classes (not data-theme attributes) from the <a href="http://jquerymobile.com/demos/1.1.1/docs/api/themes.html">theming system</a> can be added to an element, including grids. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
 
 				<div class="ui-grid-a">
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Block A</div></div>
@@ -170,15 +171,22 @@
 					<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">B</div></div>
 					<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
 				</div><!-- /grid-c -->
-
-
-				<h2>Making responsive grids</h2>
-				<p>Grids can be made responsive so they adapt to various screen widths which is useful if used for building full page layouts. Learn more in the <a href="content-grids-responsive.html">responsive grids</a>.</p>
-
+				
+				<h2>Grids in toolbars</h2>
+				<p>Grids are helpful for creating layouts within a toolbar. Here's a footer with a 4 column grid.</p>
+				<!--  NOTE: Inline styles are for demo purposes only, please use external styles -->
+				<div data-role="footer" data-theme="a" class="ui-bar ui-grid-c">
+					<div class="ui-block-a"><h3 style="margin-top:10px;">Settings</h3></div>
+					<div class="ui-block-b"><label for="value" style="margin:8px 10px 0 0; text-align:right;">Price</label></div>
+					<div class="ui-block-c"><input id="value" value="5,000"></div>	 
+					<div class="ui-block-d">
+						<div style="margin:6px 0 0 10px;"><button type="submit" data-theme="b">Update</button></div>
+					</div>
+				</div><!-- /footer -->
 
 			</div><!--/content-primary -->		
 
-			<div data-role= "navbar" class="content-secondary">
+			<div class="content-secondary">
 
 				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
@@ -187,12 +195,11 @@
 						<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 								<li data-role="list-divider">Content Formatting</li>
-								<li><a href="content-html.html">Basic HTML styles</a></li>
-								<li data-theme="a"><a href="content-grids.html">Layout grids (columns)</a></li>
-								<li><a href="content-grids-responsive.html">Responsive grids</a></li>
-								<li><a href="content-collapsible.html">Collapsible content blocks</a></li>
-								<li><a href="content-collapsible-set.html">Collapsible sets (accordions)</a></li>
-								<li><a href="content-themes.html">Theming content</a></li>
+								<li><a href="http://jquerymobile.com/demos/1.1.1/docs/content/content-html.html">Basic HTML styles</a></li>
+								<li data-theme="a"><a href="http://jquerymobile.com/demos/1.1.1/docs/content/content-grids.html">Layout grids (columns)</a></li>
+								<li><a href="http://jquerymobile.com/demos/1.1.1/docs/content/content-collapsible.html">Collapsible content blocks</a></li>
+								<li><a href="http://jquerymobile.com/demos/1.1.1/docs/content/content-collapsible-set.html">Collapsible sets (accordions)</a></li>
+								<li><a href="http://jquerymobile.com/demos/1.1.1/docs/content/content-themes.html">Theming content</a></li>
 
 						</ul>
 				</div>
