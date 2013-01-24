@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/python" >
+  def python_function2():
+    return "This is a call from a function in using inline python"
+</script>
+<script>
+	alert(python_function2());
+</script>
+</head>
+
+<body style="background-color:#1c1c1c;margin:0">
+
+	<div id="output" style="background-color:red">
+	Should be Changed!
+	</div>
+
+<script type="text/python" src="test.py"></script>
+<script>
+        val = display();
+		window.alert(val);
+</script>
+
+</body>
+</html>
