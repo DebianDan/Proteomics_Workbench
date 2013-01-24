@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link type="text/css" rel="stylesheet" href="style.css"/>
+
+<script type="text/python">
+def jqchange():
+    jQuery("#output").hide().text("Manipulation in jQuery via Python").fadeIn("slow").animate({"font-size" : "20px"})
+
+window.jqchange = jqchange
+</script>
+</head>
+
+<body style="background-color:#1c1c1c;margin:0">
+
+<div style="border-top:1px solid #404040">
+	<div style="color:#fff;;padding:10px">Welcome to TideSDK Developer
+	</div>
+</div>
+
+<input type="submit" id="jqbutton" value="Change Text with Python" onclick="jqchange()" />
+
+<div id="output" style="background-color:red">
+    This will get replaced when the button is clicked.
+</div>
+
+</body>
+</html>
