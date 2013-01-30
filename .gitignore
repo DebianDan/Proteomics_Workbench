@@ -1,7 +1,9 @@
 # WebStorm
-.idea
+.idea/
 data_files/
 dist/
+old/
+packages/
 
 #################
 ## Eclipse
