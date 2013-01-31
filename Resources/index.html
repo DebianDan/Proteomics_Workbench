@@ -4,21 +4,43 @@
     <title>Proteomics Workbench</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/jquery.mobile-1.3.0-beta.1.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="javascript/jquery-1.9.0.min.js"></script>
     <script src="javascript/jquery.mobile-1.3.0-beta.1.min.js"></script>
     <script src="javascript/main.js"></script>
+    <script src="javascript/validateForm.js"></script>
+	<script type=text/php>
+		function connect(){
+			return "The DB is now connected...";
+		}	
+	</script>
+	<script>
+		alert(connect());
+	</script>
 </head>
 <body>
 
 <div data-role="page" id="projects">
 
+
     <div data-role="header">
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
-        <h1>Proteomics Workbenchhjgfdfdfssdsdfjh</h1>
+        <h1>Proteomics Workbench</h1>
+        <a href="#settings" data-role="button" data-icon="gear">Settings</a>
     </div><!-- /header -->
 
     <div data-role="content">
-        Projects
+        <p id="pageTitle">Projects</p>
+        <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
+
+	<div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		<form action="query.php" method="post" data-ajax="false" onsubmit="return verifyForm(this);">
+        	Title: <input type="text" name="projectTitle"><br>
+        	Description: <input type="text" name="projectDescription"><br>
+            <input type="submit" value="Submit" data-theme="b">
+        </form>
+	</div>
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -27,17 +49,20 @@
         <a href="#projects" class="ui-btn-active" data-role="button">Projects</a>
         <a href="#scripts" data-role="button">Scripts</a>
     </div>
+
 </div>
 
 <div data-role="page" id="scripts">
 
+
     <div data-role="header">
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
-        <h1>Proteomics Workbenchkjhhdfgjdfsdfsdh</h1>
+        <h1>Proteomics Workbench</h1>
+        <a href="#settings" data-role="button" data-icon="gear">Settings</a>
     </div><!-- /header -->
 
     <div data-role="content">
-        Scripts
+        <p id="pageTitle">Scripts</p>
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -45,6 +70,29 @@
         <h3>Navigation panel</h3>
         <a href="#projects" data-role="button">Projects</a>
         <a href="#scripts" class="ui-btn-active" data-role="button">Scripts</a>
+    </div>
+
+</div><!-- /page -->
+
+
+<div data-role="page" id="settings">
+
+
+    <div data-role="header">
+        <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
+        <h1>Proteomics Workbench</h1>
+        <a href="#settings" data-role="button" data-icon="gear">Settings</a>
+    </div><!-- /header -->
+
+    <div data-role="content">
+        <p id="pageTitle">Settings</p>
+    </div><!-- /content -->
+
+    <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
+        <a href="#navPanel" data-theme="b" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" style="float:right;"></a>
+        <h3>Navigation panel</h3>
+        <a href="#projects" data-role="button">Projects</a>
+        <a href="#scripts" data-role="button">Scripts</a>
     </div>
 
 </div><!-- /page -->
