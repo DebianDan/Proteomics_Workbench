@@ -10,7 +10,6 @@
     <script src="javascript/main.js"></script>
     <script src="javascript/validateForm.js"></script>
 	<script>
-		var Ti = Titanium;
 		var app = Ti.API.application;
 		alert("PID: " + app.getPID()); //Alert the process identifier for this application.
 		alert("DataPath: " + app.getDataPath()); //Alert the path to the application's user data directory.
@@ -27,12 +26,13 @@
 	</script>
 	<script>
 		//Create a table
-		db.execute("CREATE  TABLE  IF NOT EXISTS 'main'.'projects' ('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+		//db.execute("CREATE  TABLE  IF NOT EXISTS 'main'.'projects' ('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 		//try to insert a row into the DB
-		db.execute("INSERT INTO projects VALUES(1,'First Project!', 'This is the first project to see if it gets inserted correctly...', 1, DATETIME('NOW'))");      
+		db.execute("INSERT INTO projects (name, description, active, date_created) VALUES('First Project!', 'This is the first project to see if it gets inserted correctly...', 1, DATETIME('NOW'))");      
 
 		//Select from Table
 		var rows = db.execute("SELECT * FROM projects");
+		alert(rows.rowCount());
 		while (rows.isValidRow()) {
 			//Alert the value of fields id and firstName from the Users database
 			alert('The pid is '+rows.fieldByName('pid')+', the project name is '+rows.fieldByName('name')+', the description is '+rows.fieldByName('description')+', the active state is '+rows.fieldByName('active')+', and the date created is '+rows.fieldByName('date_created'));
