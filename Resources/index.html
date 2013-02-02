@@ -58,15 +58,26 @@
     <div data-role="content">
         <p id="pageTitle">Projects</p>
         <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
-
-	<div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
+		<a href="#deleteProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>
+	
+    <!-- popup for Create Project -->
+    <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-		<form action="query.php" method="post" data-ajax="false" onsubmit="return verifyForm(this);">
+		<form action="query.php" method="post" data-ajax="false" onSubmit="return verifyForm(this);">
         	Title: <input type="text" name="projectTitle"><br>
         	Description: <input type="text" name="projectDescription"><br>
             <input type="submit" value="Submit" data-theme="b">
         </form>
 	</div>
+    
+    <!-- popup for Delete Project -->
+    <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title">Are you sure you want to delete this project?</h3>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>    
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b">Delete</a>  
+			</div>
+    </div>
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
