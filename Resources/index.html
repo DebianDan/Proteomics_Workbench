@@ -11,13 +11,9 @@
 </head>
 <body>
 
-<<<<<<< HEAD
-<div data-role="page" id="projects" class="type-interior">
 
+<div data-role="page" id="projects" class="type-interior" data-title="Projects">
 
-=======
-<div data-role="page" id="projects" data-title="Projects">
->>>>>>> origin/steve
     <div data-role="header">
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
         <h1>Proteomics Workbench</h1>
@@ -25,7 +21,7 @@
     </div><!-- /header -->
 
     <div data-role="content">
-<<<<<<< HEAD
+
     <div class="content-primary">
         <p id="pageTitle">Projects</p>
         <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
@@ -46,7 +42,7 @@
 
 					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
-							<ul data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true">
+							<ul id="projectList" data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true" data-filter-placeholder="Search projects...">
 								<li data-role="list-divider">Projects</li>
 								<li><a href="#projectDetails">Project 1</a></li>
 								<li><a href="#projectDetails">Project 2</a></li>
@@ -55,6 +51,7 @@
 							</ul>
 					</div>
 				</div>
+                <!--
 =======
         <h1 id="pageTitle">Projects</h1>
 
@@ -62,7 +59,7 @@
             <a href="#createProjectPopup" data-rel="popup" data-role="button" data-theme="e" data-icon="plus">New Project</a>
             <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                <form action="query.php" method="post" data-ajax="false" onsubmit="return verifyForm(this);">
+                <form action="query.php" method="post" data-ajax="false" onSubmit="return verifyForm(this);">
                     Title: <input type="text" name="projectTitle"><br>
                     Description: <input type="text" name="projectDescription"><br>
                     <input type="submit" value="Submit" data-theme="b">
@@ -79,7 +76,7 @@
             </ul>
         </p>
 
->>>>>>> origin/steve
+>>>>>>> origin/steve -->
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
