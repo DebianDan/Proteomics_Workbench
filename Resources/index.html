@@ -46,7 +46,7 @@
 </head>
 <body>
 
-<div data-role="page" id="projects">
+<div data-role="page" id="projects" class="type-interior">
 
 
     <div data-role="header">
@@ -56,9 +56,9 @@
     </div><!-- /header -->
 
     <div data-role="content">
+    <div class="content-primary">
         <p id="pageTitle">Projects</p>
         <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
-		<a href="#deleteProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>
 	
     <!-- popup for Create Project -->
     <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
@@ -70,14 +70,21 @@
         </form>
 	</div>
     
-    <!-- popup for Delete Project -->
-    <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
-			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-				<h3 class="ui-title">Are you sure you want to delete this project?</h3>
-				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>    
-				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b">Delete</a>  
-			</div>
+    
     </div>
+    <div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true">
+								<li data-role="list-divider">Projects</li>
+								<li><a href="#projectDetails">Project 1</a></li>
+								<li><a href="#projectDetails">Project 2</a></li>
+								<li><a href="#projectDetails">Project 3</a></li>
+								<li><a href="#projectDetails">Project 4</a></li>
+							</ul>
+					</div>
+				</div>
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -123,6 +130,39 @@
 
     <div data-role="content">
         <p id="pageTitle">Settings</p>
+    </div><!-- /content -->
+
+    <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
+        <a href="#navPanel" data-theme="b" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" style="float:right;"></a>
+        <h3>Navigation panel</h3>
+        <a href="#projects" data-role="button">Projects</a>
+        <a href="#scripts" data-role="button">Scripts</a>
+    </div>
+
+</div><!-- /page -->
+
+
+<div data-role="page" id="projectDetails">
+
+
+    <div data-role="header">
+        <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
+        <h1>Proteomics Workbench</h1>
+        <a href="#settings" data-role="button" data-icon="gear">Settings</a>
+    </div><!-- /header -->
+
+    <div data-role="content">
+        <p id="pageTitle">Project Details</p>
+        <a href="#deleteProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>
+        
+        <!-- popup for Delete Project -->
+    <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title">Are you sure you want to delete this project?</h3>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>    
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b">Delete</a>  
+			</div>
+    </div>
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
