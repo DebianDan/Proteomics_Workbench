@@ -8,6 +8,7 @@
     <script src="javascript/jquery-1.9.0.min.js"></script>
     <script src="javascript/jquery.mobile-1.3.0-beta.1.min.js"></script>
     <script src="javascript/main.js"></script>
+    <script src="javascript/validateForm.js"></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
     <!-- popup for Create Project -->
     <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-		<form action="query.php" method="post" data-ajax="false" onSubmit="return verifyForm(this);">
+		<form action="query.php" method="post" data-ajax="false" onSubmit="return processForm(this);">
         	Title: <input type="text" name="projectTitle"><br>
         	Description: <input type="text" name="projectDescription"><br>
             <input type="submit" value="Submit" data-theme="b">
