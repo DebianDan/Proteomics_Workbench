@@ -8,47 +8,16 @@
     <script src="javascript/jquery-1.9.0.min.js"></script>
     <script src="javascript/jquery.mobile-1.3.0-beta.1.min.js"></script>
     <script src="javascript/main.js"></script>
-    <script src="javascript/validateForm.js"></script>
-	<script>
-		var app = Ti.API.application;
-		alert("PID: " + app.getPID()); //Alert the process identifier for this application.
-		alert("DataPath: " + app.getDataPath()); //Alert the path to the application's user data directory.
-		alert("AppName: "+app.getName());
-	</script>
-	<script>
-	/*Create a database which is WebKit compatible.
-    var db = Ti.Database.open('capDB');
-	*/
-	
-	//Create a database (given a path to a sqlite DB!!) May need to be named .db
-    var db = Ti.Database.openFile(Ti.Filesystem.getFile(Ti.Filesystem.getApplicationDataDirectory(), 'capDB.sqlite'));
-	alert("DB Path: " +db.getPath());
-	</script>
-	<script>
-		//Create a table
-		//db.execute("CREATE  TABLE  IF NOT EXISTS 'main'.'projects' ('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
-		//try to insert a row into the DB
-		db.execute("INSERT INTO projects (name, description, active, date_created) VALUES('First Project!', 'This is the first project to see if it gets inserted correctly...', 1, DATETIME('NOW'))");      
-
-		//Select from Table
-		var rows = db.execute("SELECT * FROM projects");
-		alert(rows.rowCount());
-		while (rows.isValidRow()) {
-			//Alert the value of fields id and firstName from the Users database
-			alert('The pid is '+rows.fieldByName('pid')+', the project name is '+rows.fieldByName('name')+', the description is '+rows.fieldByName('description')+', the active state is '+rows.fieldByName('active')+', and the date created is '+rows.fieldByName('date_created'));
-			rows.next();    
-		}
-
-		//Release memory once you are done with the resultset and the database
-		rows.close();
-		db.close();
-	</script>
 </head>
 <body>
 
+<<<<<<< HEAD
 <div data-role="page" id="projects" class="type-interior">
 
 
+=======
+<div data-role="page" id="projects" data-title="Projects">
+>>>>>>> origin/steve
     <div data-role="header">
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
         <h1>Proteomics Workbench</h1>
@@ -56,6 +25,7 @@
     </div><!-- /header -->
 
     <div data-role="content">
+<<<<<<< HEAD
     <div class="content-primary">
         <p id="pageTitle">Projects</p>
         <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
@@ -85,6 +55,31 @@
 							</ul>
 					</div>
 				</div>
+=======
+        <h1 id="pageTitle">Projects</h1>
+
+        <p>
+            <a href="#createProjectPopup" data-rel="popup" data-role="button" data-theme="e" data-icon="plus">New Project</a>
+            <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <form action="query.php" method="post" data-ajax="false" onsubmit="return verifyForm(this);">
+                    Title: <input type="text" name="projectTitle"><br>
+                    Description: <input type="text" name="projectDescription"><br>
+                    <input type="submit" value="Submit" data-theme="b">
+                </form>
+            </div>
+        </p>
+
+        <p>
+
+            <ul id="projectList" data-role="listview" data-filter="true" data-filter-placeholder="Search projects...">
+                <li><a href="acura.html">Acura</a></li>
+                <li><a href="audi.html">Audi</a></li>
+                <li><a href="bmw.html">BMW</a></li>
+            </ul>
+        </p>
+
+>>>>>>> origin/steve
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -96,7 +91,7 @@
 
 </div>
 
-<div data-role="page" id="scripts">
+<div data-role="page" id="scripts" data-title="Scripts">
 
 
     <div data-role="header">
