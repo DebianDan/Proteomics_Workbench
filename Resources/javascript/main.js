@@ -52,7 +52,7 @@ pw.projects = {
         }
     },
     getAllProjects : function(onSuccess, onError){
-        var sql = "SELECT pid, name, description, active, date_created FROM projects ORDER BY pid DESC";
+        var sql = "SELECT pid, name, description, active, date_created FROM projects ORDER BY date_created DESC";
         pw.db.execute(sql, onSuccess, onError);
     },
     createProject : function(name, description, onSuccess, onError){
@@ -77,7 +77,7 @@ $("#createProjectPopup :submit").click(function(){
             function(transaction, results){
                 var pid = results.insertId; //id of last inserted row
                 $("#createProjectPopup").popup("close");
-                $("#projectList").append("<li data-pid=" + pid + "><a href=\"#projectDetails\">"+ title +"</li>");
+                $("#projectList").prepend("<li data-pid=" + pid + "><a href=\"#projectDetails\">"+ title +"</li>");
                 $("#projectList").listview("refresh"); //have to refresh the list after we add an element
             },
             //error callback
