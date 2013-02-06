@@ -1,69 +1,189 @@
 //define our proteomics workbench namespace to hold all of our stuff
 var pw = {};
+
+//DATABASE STUFF
+(function() {
+    var _db; //private variable to hold the returned database object
+    //we define this getter so that it will only try to retrieve the database one time
+    pw.__defineGetter__("db", function(){
+        shortName = 'pwDB';
+        version = '1.0';
+        displayName = 'Database for the Proteomics Workbench software';
+        maxSize = 52428800; // 50MB
+        if(_db == undefined){ //only retrieve the database & create tables on program start
+            console.log("getting the database");
+            _db = openDatabase(shortName, version, displayName, maxSize);
+            console.log("creating initial tables")
+            _db.transaction(
+                function(transaction){
+                    //projects table
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+                }
+            );
+        }
+        return _db;
+    });
+
+    //function used to execute sql
+    pw.db.execute = function(sql, dataHandler, errorHandler){
+        console.log(sql);
+        pw.db.transaction(
+            function(transaction){
+                transaction.executeSql(sql, [], dataHandler, errorHandler);
+            }
+        );
+    }
+})(pw); //this ensures that the closure is in the context of the pw object
+
+//PROJECTS STUFF
 pw.projects = {
     project : function(name, description){
-        var self = this;
-        var name = name;
-        var description = description;
+        this.name = name;
+        this.description = description;
         return this;
     },
-    //returns Ti.Database.ResultSet
-    getProject : function(id){
-        var results = {};
-        //Select Projects in order of Newest First
-        var rows = db.execute("SELECT pid, name, description, active FROM projects ORDER BY pid DESC");
-        results = rows;
-        return results;
+    getProject : function(pid, onSuccess, onError){
+        var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = " + pid;
+        if(pid == undefined){
+            onError("pid must be specified when calling getProject()");
+            return false;
+        }else{
+            pw.db.execute(sql, onSuccess, onError);
+        }
+    },
+    getAllProjects : function(onSuccess, onError){
+        var sql = "SELECT pid, name, description, active, date_created FROM projects ORDER BY date_created DESC";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    createProject : function(name, description, onSuccess, onError){
+        var sql = "INSERT INTO projects (name, description, active, date_created) VALUES('" + name + "', '" + description +"', 1, DATETIME('NOW'))";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    deleteProject : function(id){
+
     }
 };
 
-/////////////
-//get handle to the database
-var db = Ti.Database.openFile(Ti.Filesystem.getFile(Ti.Filesystem.getApplicationDataDirectory(), 'capDB.sqlite'));
-//Create a table
-db.execute("CREATE  TABLE  IF NOT EXISTS 'main'.'projects' ('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
-//Propogate the list of projects from the db
-listProjects();
-/////////////
+//bind to the click event of the create new project button
+$("#createProjectPopup :submit").click(function(){
+    console.log("create new project button clicked");
+    var title = $("#createProjectPopup .projectTitle").val();
+    var description = $("#createProjectPopup .projectDescription").val();
+    if(title == ""){
+        alert('Project title must be filled in.');
+    }else{
+        pw.projects.createProject(title, description,
+            //success callback
+            function(transaction, results){
+                var pid = results.insertId; //id of last inserted row
+                $("#createProjectPopup").popup("close");
+                $("#projectList").prepend("<li data-pid=" + pid + "><a href=\"#project-details?pid=" + pid + "\">"+ title +"</li>");
+                $("#projectList").listview("refresh"); //have to refresh the list after we add an element
+            },
+            //error callback
+            function(transaction, error){
+                alert("there was an error when attempting to create the project: ", error.code);
+            }
+        );
+    }
+});
 
-//Create Project Functionality (needs to be cleaned up)
-function processForm(form) 
+//execute on projects page load
+$('#projects').live('pagebeforecreate', function (event) {
+    //get all projects in database
+    pw.projects.getAllProjects(
+        //success callback
+        function (transaction, results) {
+            console.log(results.rows.length + " projects retrieved");
+            console.log("rendering projects list");
+            var pList = $("#projectList"); //save a reference to the element for efficiency
+            for (var i = 0; i < results.rows.length; i++) {
+                var row = results.rows.item(i);
+                pList.append("<li data-pid=" + row['pid'] + "><a href=\"#project-details?pid=" + row['pid'] + "\">" + row['name'] + "</li>");
+            }
+            $("#projectList").listview("refresh"); //have to refresh the list after we add elements
+        },
+        function (transaction, error) {
+            alert("there was an error when attempting to retrieve the projects: ", error.code);
+        }
+    );
+});
+
+// Listen for any attempts to call changePage().
+$(document).bind("pagebeforechange", function( e, data ) {
+
+    // We only want to handle changePage() calls where the caller is
+    // asking us to load a page by URL.
+    if ( typeof data.toPage === "string" ) {
+        // We are being asked to load a page by URL, but we only
+        // want to handle URLs that request the data for a specific
+        // category.
+        var u = $.mobile.path.parseUrl( data.toPage ),
+            re = /^#project-details/;
+        if ( u.hash.search(re) !== -1 ) {
+
+            // We're being asked to display the items for a specific project.
+            showProjectDetails( u, data.options );
+
+            // Make sure to tell changePage() we've handled this call so it doesn't
+            // have to do anything.
+            e.preventDefault();
+        }
+    }
+});
+
+// Load the data for a specific category, based on
+// the URL passed in. Generate markup for the items in the
+// category, inject it into an embedded page, and then make
+// that page the current active page.
+function showProjectDetails( urlObj, options )
 {
-	var e = form.elements;
-	if(e.projectTitle.value == "")
-	{
-		alert('Project title must be filled in.');
-		e.projectTitle.focus();
-		return false;
-	}
-	else
-	{
-		//create the new project
-		db.execute("INSERT INTO projects (name, description, active, date_created) VALUES('" +e.projectTitle.value+ "', '" +e.projectDescription.value +"', 1, DATETIME('NOW'))");
-		
-		//TODO should check if the add was successful
-		alert(e.projectTitle.value + " was added successfully!");
-		
-		//TODO should take you to that project details page of the newly added project 
-	}
+    var pid = urlObj.hash.replace( /.*pid=/, "" ),
+
+    // The pages we use to display our content are already in
+    // the DOM. The id of the page we are going to write our
+    // content into is specified in the hash before the '?'.
+    pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+
+    pw.projects.getProject(pid, function(transaction, results){
+        console.log(results.rows.length + " rows returned");
+        if(results.rows.length > 0){
+            var row = results.rows.item(0); //get first result
+            // Get the page we are going to dump our content into.
+            var $page = $( pageSelector ),
+            // Get the header for the page.
+            $header = $page.children( ":jqmData(role=header)" ),
+            // Get the content area element for the page.
+            $content = $page.children( ":jqmData(role=content)" );
+            //put the content into the page
+
+            var markup = "Project Name: " + row['name'] + "<br/>";
+            markup += "Project Details: " + row['description'] + "<br/>";
+
+            $content.append( markup);
+            console.log("should be changing page content to " + markup);
+            $header.find( "h1" ).html( row['name'] );
+
+            // Pages are lazily enhanced. We call page() on the page
+            // element to make sure it is always enhanced before we
+            // attempt to enhance the listview markup we just injected.
+            // Subsequent calls to page() are ignored since a page/widget
+            // can only be enhanced once.
+            $page.page();
+
+            // We don't want the data-url of the page we just modified
+            // to be the url that shows up in the browser's location field,
+            // so set the dataUrl option to the URL for the category
+            // we just loaded.
+            options.dataUrl = urlObj.href;
+
+            // Now call changePage() and tell it to switch to
+            // the page we just modified.
+            $.mobile.changePage( $page, options );
+        }
+
+    },function(transaction, error){
+        //error on select
+    });
 }
 
-//should be wrapped into a listProjects() function. proof of concept right now
-//should be able to pass each 'row' into the constructor to create a new pw.projects.project object. or the row collection to create a project collection
-function listProjects() 
-{
-//$('#projects').live('pagebeforecreate', function(event){
-    // manipulate this page before its widgets are auto-initialized
-	if(projects = pw.projects.getProject()){
-		var pList = $("#projectList");
-		while(projects.isValidRow()) {
-			 $("#projectList").append("<li><a href=\"#projectDetails\">"+ projects.fieldByName('name') +"</li>");
-			 projects.next();
-		}
-		//TODO don't think this is needed...
-		//pList.listview('refresh'); //tell jquery mobile that we added some stuff so it can style it
-     }else{
-		alert("no projects found.");
-     }
-	 
-}
