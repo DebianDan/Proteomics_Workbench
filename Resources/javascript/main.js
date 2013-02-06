@@ -18,6 +18,8 @@ var pw = {};
                 function(transaction){
                     //projects table
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+					//assets table
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'name' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'fav' BOOL DEFAULT 0, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
                 }
             );
         }
