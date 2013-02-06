@@ -1,69 +1,111 @@
 //define our proteomics workbench namespace to hold all of our stuff
 var pw = {};
+
+//DATABASE STUFF
+(function() {
+    var _db; //private variable to hold the returned database object
+    //we define this getter so that it will only try to retrieve the database one time
+    pw.__defineGetter__("db", function(){
+        shortName = 'pwDB';
+        version = '1.0';
+        displayName = 'Database for the Proteomics Workbench software';
+        maxSize = 52428800; // 50MB
+        if(_db == undefined){ //only retrieve the database & create tables on program start
+            console.log("getting the database");
+            _db = openDatabase(shortName, version, displayName, maxSize);
+            console.log("creating initial tables")
+            _db.transaction(
+                function(transaction){
+                    //projects table
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+                }
+            );
+        }
+        return _db;
+    });
+
+    //function used to execute sql
+    pw.db.execute = function(sql, dataHandler, errorHandler){
+        console.log(sql);
+        pw.db.transaction(
+            function(transaction){
+                transaction.executeSql(sql, [], dataHandler, errorHandler);
+            }
+        );
+    }
+})(pw); //this ensures that the closure is in the context of the pw object
+
+//PROJECTS STUFF
 pw.projects = {
     project : function(name, description){
-        var self = this;
-        var name = name;
-        var description = description;
+        this.name = name;
+        this.description = description;
         return this;
     },
-    //returns Ti.Database.ResultSet
-    getProject : function(id){
-        var results = {};
-        //Select Projects in order of Newest First
-        var rows = db.execute("SELECT pid, name, description, active FROM projects ORDER BY pid DESC");
-        results = rows;
-        return results;
+    getProject : function(pid, onSuccess, onError){
+        var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = " + pid;
+        if(id == undefined){
+            onError("id must be specified when calling getProject()");
+            return false;
+        }else{
+            pw.db.execute(sql, onSuccess, onError);
+        }
+    },
+    getAllProjects : function(onSuccess, onError){
+        var sql = "SELECT pid, name, description, active, date_created FROM projects ORDER BY pid DESC";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    createProject : function(name, description, onSuccess, onError){
+        var sql = "INSERT INTO projects (name, description, active, date_created) VALUES('" + name + "', '" + description +"', 1, DATETIME('NOW'))";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    deleteProject : function(id){
+
     }
 };
 
-/////////////
-//get handle to the database
-var db = Ti.Database.openFile(Ti.Filesystem.getFile(Ti.Filesystem.getApplicationDataDirectory(), 'capDB.sqlite'));
-//Create a table
-db.execute("CREATE  TABLE  IF NOT EXISTS 'main'.'projects' ('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
-//Propogate the list of projects from the db
-listProjects();
-/////////////
+//bind to the click event of the create new project button
+$("#createProjectPopup :submit").click(function(){
+    console.log("create new project button clicked");
+    var title = $("#createProjectPopup .projectTitle").val();
+    var description = $("#createProjectPopup .projectDescription").val();
+    if(title == ""){
+        alert('Project title must be filled in.');
+    }else{
+        pw.projects.createProject(title, description,
+            //success callback
+            function(transaction, results){
+                var pid = results.insertId; //id of last inserted row
+                $("#createProjectPopup").popup("close");
+                $("#projectList").append("<li data-pid=" + pid + "><a href=\"#projectDetails\">"+ title +"</li>");
+                $("#projectList").listview("refresh"); //have to refresh the list after we add an element
+            },
+            //error callback
+            function(transaction, error){
+                alert("there was an error when attempting to create the project: ", error.code);
+            }
+        );
+    }
+});
 
-//Create Project Functionality (needs to be cleaned up)
-function processForm(form) 
-{
-	var e = form.elements;
-	if(e.projectTitle.value == "")
-	{
-		alert('Project title must be filled in.');
-		e.projectTitle.focus();
-		return false;
-	}
-	else
-	{
-		//create the new project
-		db.execute("INSERT INTO projects (name, description, active, date_created) VALUES('" +e.projectTitle.value+ "', '" +e.projectDescription.value +"', 1, DATETIME('NOW'))");
-		
-		//TODO should check if the add was successful
-		alert(e.projectTitle.value + " was added successfully!");
-		
-		//TODO should take you to that project details page of the newly added project 
-	}
-}
+//execute on projects page load
+$('#projects').live('pagebeforecreate', function (event) {
+    //get all projects in database
+    pw.projects.getAllProjects(
+        //success callback
+        function (transaction, results) {
+            console.log(results.rows.length + " projects retrieved");
+            console.log("rendering projects list");
+            var pList = $("#projectList"); //save a reference to the element for efficiency
+            for (var i = 0; i < results.rows.length; i++) {
+                var row = results.rows.item(i);
+                pList.append("<li data-pid=" + row['pid'] + "><a href=\"#projectDetails\">" + row['name'] + "</li>");
+            }
+            $("#projectList").listview("refresh"); //have to refresh the list after we add elements
+        },
+        function (transaction, error) {
+            alert("there was an error when attempting to retrieve the projects: ", error.code);
+        }
+    );
+});
 
-//should be wrapped into a listProjects() function. proof of concept right now
-//should be able to pass each 'row' into the constructor to create a new pw.projects.project object. or the row collection to create a project collection
-function listProjects() 
-{
-//$('#projects').live('pagebeforecreate', function(event){
-    // manipulate this page before its widgets are auto-initialized
-	if(projects = pw.projects.getProject()){
-		var pList = $("#projectList");
-		while(projects.isValidRow()) {
-			 $("#projectList").append("<li><a href=\"#projectDetails\">"+ projects.fieldByName('name') +"</li>");
-			 projects.next();
-		}
-		//TODO don't think this is needed...
-		//pList.listview('refresh'); //tell jquery mobile that we added some stuff so it can style it
-     }else{
-		alert("no projects found.");
-     }
-	 
-}
