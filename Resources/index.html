@@ -73,7 +73,7 @@
 </div><!-- /page -->
 
 
-<div data-role="page" id="settings">
+<div data-role="page" id="settings" data-title="Settings">
 
 
     <div data-role="header">
@@ -95,8 +95,9 @@
 </div><!-- /page -->
 
 
-<div data-role="page" id="project-details">
+<div data-role="page" id="project-details" data-title="Project Details">
     <div data-role="header">
+    	<a href="#projects" data-role="button" data-icon="back">Back</a>
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
         <h1>Project Details</h1>
         <a href="#settings" data-role="button" data-icon="gear">Settings</a>
@@ -113,6 +114,16 @@
                     <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b">Delete</a>
                 </div>
         </div>
+        
+        <!-- Add Assets -->
+        <a href="#addAssetPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Add Assets</a>
+        <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
+    	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        	File to upload: <input type="file" class="assetFile"><br>
+            <input type="submit" value="Submit" data-theme="b">
+		</div>
+        
+        
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
