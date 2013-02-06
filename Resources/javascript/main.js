@@ -160,7 +160,8 @@ function showProjectDetails( urlObj, options )
             var markup = "Project Name: " + row['name'] + "<br/>";
             markup += "Project Details: " + row['description'] + "<br/>";
 
-            $content.html( markup );
+            $content.append( markup);
+            console.log("should be changing page content to " + markup);
             $header.find( "h1" ).html( row['name'] );
 
             // Pages are lazily enhanced. We call page() on the page
