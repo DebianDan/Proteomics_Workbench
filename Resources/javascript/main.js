@@ -44,8 +44,8 @@ pw.projects = {
     },
     getProject : function(pid, onSuccess, onError){
         var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = " + pid;
-        if(id == undefined){
-            onError("id must be specified when calling getProject()");
+        if(pid == undefined){
+            onError("pid must be specified when calling getProject()");
             return false;
         }else{
             pw.db.execute(sql, onSuccess, onError);
@@ -77,7 +77,7 @@ $("#createProjectPopup :submit").click(function(){
             function(transaction, results){
                 var pid = results.insertId; //id of last inserted row
                 $("#createProjectPopup").popup("close");
-                $("#projectList").prepend("<li data-pid=" + pid + "><a href=\"#projectDetails\">"+ title +"</li>");
+                $("#projectList").prepend("<li data-pid=" + pid + "><a href=\"#project-details?pid=" + pid + "\">"+ title +"</li>");
                 $("#projectList").listview("refresh"); //have to refresh the list after we add an element
             },
             //error callback
@@ -99,7 +99,7 @@ $('#projects').live('pagebeforecreate', function (event) {
             var pList = $("#projectList"); //save a reference to the element for efficiency
             for (var i = 0; i < results.rows.length; i++) {
                 var row = results.rows.item(i);
-                pList.append("<li data-pid=" + row['pid'] + "><a href=\"#projectDetails\">" + row['name'] + "</li>");
+                pList.append("<li data-pid=" + row['pid'] + "><a href=\"#project-details?pid=" + row['pid'] + "\">" + row['name'] + "</li>");
             }
             $("#projectList").listview("refresh"); //have to refresh the list after we add elements
         },
@@ -108,4 +108,81 @@ $('#projects').live('pagebeforecreate', function (event) {
         }
     );
 });
+
+// Listen for any attempts to call changePage().
+$(document).bind("pagebeforechange", function( e, data ) {
+
+    // We only want to handle changePage() calls where the caller is
+    // asking us to load a page by URL.
+    if ( typeof data.toPage === "string" ) {
+        // We are being asked to load a page by URL, but we only
+        // want to handle URLs that request the data for a specific
+        // category.
+        var u = $.mobile.path.parseUrl( data.toPage ),
+            re = /^#project-details/;
+        if ( u.hash.search(re) !== -1 ) {
+
+            // We're being asked to display the items for a specific project.
+            showProjectDetails( u, data.options );
+
+            // Make sure to tell changePage() we've handled this call so it doesn't
+            // have to do anything.
+            e.preventDefault();
+        }
+    }
+});
+
+// Load the data for a specific category, based on
+// the URL passed in. Generate markup for the items in the
+// category, inject it into an embedded page, and then make
+// that page the current active page.
+function showProjectDetails( urlObj, options )
+{
+    var pid = urlObj.hash.replace( /.*pid=/, "" ),
+
+    // The pages we use to display our content are already in
+    // the DOM. The id of the page we are going to write our
+    // content into is specified in the hash before the '?'.
+    pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+
+    pw.projects.getProject(pid, function(transaction, results){
+        console.log(results.rows.length + " rows returned");
+        if(results.rows.length > 0){
+            var row = results.rows.item(0); //get first result
+            // Get the page we are going to dump our content into.
+            var $page = $( pageSelector ),
+            // Get the header for the page.
+            $header = $page.children( ":jqmData(role=header)" ),
+            // Get the content area element for the page.
+            $content = $page.children( ":jqmData(role=content)" );
+            //put the content into the page
+
+            var markup = "Project Name: " + row['name'] + "<br/>";
+            markup += "Project Details: " + row['description'] + "<br/>";
+
+            $content.html( markup );
+            $header.find( "h1" ).html( row['name'] );
+
+            // Pages are lazily enhanced. We call page() on the page
+            // element to make sure it is always enhanced before we
+            // attempt to enhance the listview markup we just injected.
+            // Subsequent calls to page() are ignored since a page/widget
+            // can only be enhanced once.
+            $page.page();
+
+            // We don't want the data-url of the page we just modified
+            // to be the url that shows up in the browser's location field,
+            // so set the dataUrl option to the URL for the category
+            // we just loaded.
+            options.dataUrl = urlObj.href;
+
+            // Now call changePage() and tell it to switch to
+            // the page we just modified.
+            $.mobile.changePage( $page, options );
+        }
+
+    },function(transaction, error){
+        //error on select
+    });
+}
 
