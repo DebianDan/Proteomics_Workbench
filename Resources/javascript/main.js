@@ -19,7 +19,7 @@ var pw = {};
                     //projects table
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//assets table
-                    transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'name' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'fav' BOOL DEFAULT 0, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'fav' BOOL DEFAULT 0, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
                 }
             );
         }
@@ -61,8 +61,9 @@ pw.projects = {
         var sql = "INSERT INTO projects (name, description, active, date_created) VALUES('" + name + "', '" + description +"', 1, DATETIME('NOW'))";
         pw.db.execute(sql, onSuccess, onError);
     },
-    deleteProject : function(id){
-
+    deleteProject : function(id, onSuccess, onError){
+		var sql = "DELETE FROM projects WHERE pid=" + id + "";
+        pw.db.execute(sql, onSuccess, onError);
     }
 };
 
@@ -88,6 +89,23 @@ $("#createProjectPopup :submit").click(function(){
             }
         );
     }
+});
+
+//bind to the click event of the delete project button
+$("#deleteProjectPopup #delete").click(function(){
+    console.log("delete project button clicked");
+    var pid = $("#delete").attr('data-pid');
+	pw.projects.deleteProject(pid,
+		//success callback
+		function(transaction, results){
+//TODO get project list to update after the delete!!!!!!!
+			$("#projectList").listview("refresh"); //have to refresh the list after we add an element
+		},
+		//error callback
+		function(transaction, error){
+			alert("there was an error when attempting to delete the project: ", error.code);
+		}
+	);
 });
 
 //execute on projects page load
@@ -159,9 +177,14 @@ function showProjectDetails( urlObj, options )
             $content = $page.children( ":jqmData(role=content)" );
             //put the content into the page
 
-            var markup = "Project Name: " + row['name'] + "<br/>";
+            //can be deleted later, just for DEBUG
+			var markup = "Project Name: " + row['name'] + "<br/>";
             markup += "Project Details: " + row['description'] + "<br/>";
 			markup += "Date Created: " + row['date_created'] + "<br/>";
+			markup += "PID: " + row['pid'] + "<br/>";
+			
+			//inject the pid into the delete button for deletion NEEDED
+			$('#delete').attr('data-pid', row['pid']);
 
             $content.append( markup);
             console.log("should be changing page content to " + markup);
