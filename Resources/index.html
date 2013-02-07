@@ -97,10 +97,10 @@
 
 <div data-role="page" id="project-details" data-title="Project Details">
     <div data-role="header">
-    	<a href="#projects" data-role="button" data-icon="back">Back</a>
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
         <h1>Project Details</h1>
         <a href="#settings" data-role="button" data-icon="gear">Settings</a>
+        <a href="#projects" data-role="button" data-icon="back">Back</a>
     </div><!-- /header -->
 
     <div data-role="content">
@@ -119,10 +119,28 @@
         <a href="#addAssetPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Add Assets</a>
         <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
     	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        	File to upload: <input type="file" class="assetFile"><br>
+        	Label: <input type="text" class="assetLabel"><br>
+            File to upload: <input type="file" class="assetFile"><br>
             <input type="submit" value="Submit" data-theme="b">
 		</div>
         
+        <!-- List of Assets -->
+        
+	        	<fieldset data-role="controlgroup" style="margin-top:10%;">
+					<legend>Asset List:</legend>
+					<input type="checkbox" name="checkbox-1a" id="checkbox-1a">
+					<label for="checkbox-1a">Asset 1</label>
+	
+					<input type="checkbox" name="checkbox-2a" id="checkbox-2a">
+					<label for="checkbox-2a">Asset 2</label>
+	
+					<input type="checkbox" name="checkbox-3a" id="checkbox-3a">
+					<label for="checkbox-3a">Asset 3</label>
+	
+					<input type="checkbox" name="checkbox-4a" id="checkbox-4a">
+					<label for="checkbox-4a">Asset 4</label>
+			    </fieldset>
+			
         
     </div><!-- /content -->
 
