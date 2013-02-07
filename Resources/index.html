@@ -124,21 +124,37 @@
             <input type="submit" value="Submit" data-theme="b">
 		</div>
         
+        <!-- The h3 tags are used to force project details to be above the project asset list-->
+        <h4></h4>
+        
         <!-- List of Assets -->
         
-	        	<fieldset data-role="controlgroup" style="margin-top:10%;">
-					<legend>Asset List:</legend>
-					<input type="checkbox" name="checkbox-1a" id="checkbox-1a">
-					<label for="checkbox-1a">Asset 1</label>
+        
+	        	<fieldset data-role="controlgroup" style="margin-top:5%;">
+                <div class="ui-body ui-body-b">
+                <div data-role="fieldcontain">
+                   <legend><b>Sort By: </b></legend>
+                   <select name="sortBy" id="sortBy" data-theme="c">
+                      <option value="favorites">Favorites</option>
+                      <option value="date">Date</option>
+                      <option value="type">File Type</option>
+                      <option value="favorites">File Name</option>
+                   </select>
+                </div><br>
+                <div data-role="fieldcontain">
+					<b>Asset List: </b><br><br>
+					<input type="checkbox" name="checkbox-1a" id="checkbox-1a" data-theme="c">
+					<label for="checkbox-1a">Asset 1</label><a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="e"></a>
 	
-					<input type="checkbox" name="checkbox-2a" id="checkbox-2a">
-					<label for="checkbox-2a">Asset 2</label>
+					<input type="checkbox" name="checkbox-2a" id="checkbox-2a" data-theme="c">
+					<label for="checkbox-2a"><i>New Asset</i></label><a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c"></a>
 	
-					<input type="checkbox" name="checkbox-3a" id="checkbox-3a">
-					<label for="checkbox-3a">Asset 3</label>
+					<input type="checkbox" name="checkbox-3a" id="checkbox-3a" data-theme="c">
+					<label for="checkbox-3a">Asset 3</label><a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c"></a>
 	
-					<input type="checkbox" name="checkbox-4a" id="checkbox-4a">
-					<label for="checkbox-4a">Asset 4</label>
+					<input type="checkbox" name="checkbox-4a" id="checkbox-4a" data-theme="c">
+					<label for="checkbox-4a">Asset 4</label><a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c"></a>
+                </div></div>
 			    </fieldset>
 			
         

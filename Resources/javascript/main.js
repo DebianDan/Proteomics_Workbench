@@ -178,15 +178,18 @@ function showProjectDetails( urlObj, options )
             //put the content into the page
 
             //can be deleted later, just for DEBUG
-			var markup = "Project Name: " + row['name'] + "<br/>";
-            markup += "Project Details: " + row['description'] + "<br/>";
+			//Code for Edit button: "<a href=\"#\" data-role=\"button\" data-icon=\"edit\" data-iconpos=\"left\" data-mini=\"true\" data-inline=\"true\" data-theme=\"e\">Edit</a>"
+			var markup = "Project Name: " + row['name'] + "&nbsp;<a href=\"#\">Edit</a>" + "<br/>";
+            markup += "Project Details: " + row['description'] + "&nbsp;<a href=\"#\">Edit</a>" + "<br/>";
 			markup += "Date Created: " + row['date_created'] + "<br/>";
 			markup += "PID: " + row['pid'] + "<br/>";
 			
 			//inject the pid into the delete button for deletion NEEDED
 			$('#delete').attr('data-pid', row['pid']);
 
-            $content.append( markup);
+            //$content.prepend( markup);
+			//Forces the project details to be above the asset list
+			$content.find( "h4" ).html( markup );
             console.log("should be changing page content to " + markup);
             $header.find( "h1" ).html( row['name'] );
 
