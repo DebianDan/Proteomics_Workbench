@@ -8,7 +8,14 @@
 	font-size:20px;
 } 
 
-
+a.fav{
+    position: relative;
+    z-index: 1;
+    float: right;
+    margin: -41px 0 0 0 !important;
+    /*border: 0 1px 0 0 solid #ccc;*/
+    padding: 2px;
+}
 
 @media all and (min-width: 650px){
 

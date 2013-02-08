@@ -20,6 +20,8 @@ var pw = {};
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//assets table
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'fav' BOOL DEFAULT 0, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+                    //favorites table
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL, FOREIGN KEY(pid) REFERENCES projects(pid), FOREIGN KEY(aid) REFERENCES assets(aid))");
                 }
             );
         }
@@ -66,6 +68,24 @@ pw.projects = {
         pw.db.execute(sql, onSuccess, onError);
     }
 };
+
+//I'm going to continue to follow the pattern of the 'projects' object above but
+//part of me feels like 'asset' should be an object on its own containing references to
+//the functions that can change it (setFavorite(), etc). Then the 'project' object can have an array
+//of asset objects...
+pw.assets = {
+    asset : function(name, description, path){
+        //TODO: fill out asset object
+    },
+    addFavorite : function(pid, aid, onSuccess, onError){
+        var sql = "INSERT INTO favorites VALUES(" + pid + ", "+ aid + ")";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    removeFavorite : function(pid, aid, onSuccess, onError){
+        var sql = "DELETE FROM favorites WHERE pid=" + pid + " AND aid="+ aid;
+        pw.db.execute(sql, onSuccess, onError);
+    }
+}
 
 //bind to the click event of the create new project button
 $("#createProjectPopup :submit").click(function(){
@@ -183,6 +203,9 @@ function showProjectDetails( urlObj, options )
             markup += "Project Details: " + row['description'] + "&nbsp;<a href=\"#\">Edit</a>" + "<br/>";
 			markup += "Date Created: " + row['date_created'] + "<br/>";
 			markup += "PID: " + row['pid'] + "<br/>";
+
+            //set active project (lazy hack for now)
+            pw.activeProject = parseInt(row['pid']);
 			
 			//inject the pid into the delete button for deletion NEEDED
 			$('#delete').attr('data-pid', row['pid']);
@@ -215,4 +238,28 @@ function showProjectDetails( urlObj, options )
         //error on select
     });
 }
+
+$(".fav").live("click", function(event, ui){
+    var self = this; //keep reference to this scope
+    var success = function(transaction, results){
+            console.log("favorite toggle success");
+            $(self).buttonMarkup({theme:theme}); //set the theme color based on toggle status
+            $(self).attr("data-fav", Math.abs(fav-1)); //toggle value
+        },
+        fail = function(transaction, error){
+            console.log("favorite toggle fail: " + error.code);
+        };
+
+    var aid = $(this).attr("data-id"), //get asset id
+    fav = parseInt($(this).attr("data-fav")), //is this favorited? (0 or 1)
+    theme = (fav == 0) ? 'e' : 'c'; //if not favorited set to e, otherwise c
+
+    if(fav == 0){
+        pw.assets.addFavorite(pw.activeProject, aid, success, fail);
+    }else{
+        pw.assets.removeFavorite(pw.activeProject, aid, success, fail);
+    }
+
+
+})
 

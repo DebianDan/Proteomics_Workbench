@@ -135,17 +135,19 @@
                 <div data-role="fieldcontain">
                    <legend><b>Sort By: </b></legend>
                    <select name="sortBy" id="sortBy" data-theme="c">
+                       <option value="date">Newest</option>
                       <option value="favorites">Favorites</option>
-                      <option value="date">Date</option>
                       <option value="type">File Type</option>
                       <option value="favorites">File Name</option>
                    </select>
                 </div><br>
                 <div data-role="fieldcontain">
 					<b>Asset List: </b><br><br>
-					<input type="checkbox" name="checkbox-1a" id="checkbox-1a" data-theme="c">
-					<label for="checkbox-1a">Asset 1</label><a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="e"></a>
-	
+                    <input type="checkbox" name="checkbox-1a" id="checkbox-1a" data-theme="c" />
+                    <a class="fav" data-id="1" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a>
+                    <label for="checkbox-1a">
+                        Asset 1
+                    </label>
 					<input type="checkbox" name="checkbox-2a" id="checkbox-2a" data-theme="c">
 					<label for="checkbox-2a"><i>New Asset</i></label><a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c"></a>
 	
