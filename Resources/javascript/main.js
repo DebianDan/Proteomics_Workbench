@@ -19,9 +19,9 @@ var pw = {};
                     //projects table
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//assets table
-                    transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+					transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//favorites table
-                    transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL)");
+					transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL, 'fav' INTEGER NOT NULL DEFAULT 1)");
                 }
             );
         }
@@ -74,11 +74,48 @@ pw.projects = {
 //the functions that can change it (setFavorite(), etc). Then the 'project' object can have an array
 //of asset objects...
 pw.assets = {
-    asset : function(name, description, path){
+    asset : function(name, path){
         //TODO: fill out asset object
+		this.name = name;
+		//asset won't have description
+        //this.description = description;
+		this.path = path;
+        return this;
     },
+	getAsset : function(aid, onSuccess, onError){
+        var sql = "SELECT aid, pid, path, filename, label, filetype, path, date_created FROM assets WHERE aid = " + aid;
+        if(aid == undefined){
+            onError("aid must be specified when calling getAsset()");
+            return false;
+        }else{
+            pw.db.execute(sql, onSuccess, onError);
+        }
+    },
+    getAllAssets : function(pid, onSuccess, onError){
+        var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.label, assets.filetype, assets.path, assets.date_created, favorites.fav FROM assets LEFT JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
+        if(pid == undefined){
+            onError("pid must be specified when calling getAllAssets()");
+            return false;
+        }else{
+            pw.db.execute(sql, onSuccess, onError);
+        }
+    },
+    addAsset : function(pid, path, label, onSuccess, onError){
+		//TODO update when add assets supplies full path
+		//var filename = everything after last \ or /
+		var filename = path;
+		//just the file extension ex: jpg txt csv
+		var filetype = path.substr(path.lastIndexOf('.')+1, path.length);
+        var sql = "INSERT INTO assets (pid, path, filename, label, filetype, date_created) VALUES('" + pid + "', '" + path +"', '" +filename+"', '"+label+"', '"+filetype+"', DATETIME('NOW'))";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    deleteAsset : function(id, onSuccess, onError){
+		var sql = "DELETE FROM assets WHERE aid=" + id + "";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+	//Add functionality
     addFavorite : function(pid, aid, onSuccess, onError){
-        var sql = "INSERT INTO favorites VALUES(" + pid + ", "+ aid + ")";
+        var sql = "INSERT INTO favorites VALUES(" + pid + ", "+ aid + ",1)";
         pw.db.execute(sql, onSuccess, onError);
     },
     removeFavorite : function(pid, aid, onSuccess, onError){
@@ -100,6 +137,7 @@ $("#createProjectPopup :submit").click(function(){
             function(transaction, results){
                 var pid = results.insertId; //id of last inserted row
                 $("#createProjectPopup").popup("close");
+				//clear form data
                 $("#projectList").prepend("<li data-pid=" + pid + "><a href=\"#project-details?pid=" + pid + "\">"+ title +"</li>");
                 $("#projectList").listview("refresh"); //have to refresh the list after we add an element
             },
@@ -115,8 +153,8 @@ $("#createProjectPopup :submit").click(function(){
 $("#deleteProjectPopup #delete").click(function(){
     console.log("delete project button clicked");
 	//TODO decide whether to embed pid or have active project????
-	var pid = $("#delete").attr('data-pid');
-	//var pid = pw.activeProject;
+	//var pid = $("#delete").attr('data-pid');
+	var pid = pw.activeProject;
 	pw.projects.deleteProject(pid,
 		//success callback
 		function(transaction, results){
@@ -131,6 +169,53 @@ $("#deleteProjectPopup #delete").click(function(){
 		}
 	);
 });
+
+//bind to the click event of the add assets button
+$("#addAssetPopup :submit").click(function(){
+    console.log("add asset button clicked");
+    var label = $("#addAssetPopup .assetLabel").val();
+    var path = $("#addAssetPopup .assetFile").val();
+	var pid = pw.activeProject;
+    if(path == ""){
+        alert('Asset File must be chosen.');
+    }else{
+		pw.assets.addAsset(pid, path, label,
+            //success callback
+            function(transaction, results){
+                var aid = results.insertId; //id of last inserted row
+                $("#addAssetPopup").popup("close");
+				//clear form data
+                $("#assetList").prepend('<input type="checkbox" name="aid-'+aid+'" id="aid-'+aid+'" data-theme="c" /><a class="fav" data-aid="'+aid+'" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a><label for="aid-'+aid+'">' + label + '</label>').trigger("create");
+            },
+            //error callback
+            function(transaction, error){
+                alert("there was an error when attempting to create the project: ", error.code);
+            }
+        );
+    }
+});
+
+//TODO after delete asset button is in place
+//bind to the click event of the delete asset button
+/*
+$("#deleteAssetPopup #delete").click(function(){
+    console.log("delete asset button clicked");
+	//find where data-aid will be taken from
+	var aid = $("#delete").attr('data-aid');
+	pw.assets.deleteAsset(aid,
+		//success callback
+		function(transaction, results){
+			//Remove deleted asset from the list
+			//Have to get it to remove whole asset list item
+			$("#assetList").find("input[data-aid='"+aid+"']").remove().page(); 
+		},
+		//error callback
+		function(transaction, error){
+			alert("there was an error when attempting to delete the project: ", error.code);
+		}
+	);
+});
+*/
 
 //execute on projects page load
 $('#projects').live('pagebeforecreate', function (event) {
@@ -194,11 +279,7 @@ function showProjectDetails( urlObj, options )
         if(results.rows.length > 0){
             var row = results.rows.item(0); //get first result
             // Get the page we are going to dump our content into.
-            var $page = $( pageSelector ),
-            // Get the header for the page.
-            $header = $page.children( ":jqmData(role=header)" ),
-            // Get the content area element for the page.
-            $content = $page.children( ":jqmData(role=content)" );
+            var $page = $( pageSelector );
             //put the content into the page
 
             //can be deleted later, just for DEBUG
@@ -218,6 +299,33 @@ function showProjectDetails( urlObj, options )
 			$("#pDetails").html( markup );
             console.log("should be changing page content to " + markup);
             $("#pTitle").html( row['name'] );
+			
+			//Display all the assets for a particular project
+			pw.assets.getAllAssets(pid,
+				//success callback
+				function (transaction, results) {
+					console.log(results.rows.length + " assets retrieved");
+					console.log("rendering assets list");
+					var aList = $("#assetList"); //save a reference to the element for efficiency
+					//clear the assets list to start
+					aList.html("");
+					for (var i = 0; i < results.rows.length; i++) {
+						var row = results.rows.item(i);
+						//initially a favorite
+						var fav = 1;
+						var theme = 'e';
+						//if NOT labeled as a favorite
+						if(row['fav'] !== 1){
+							fav = 0;
+							theme = 'c';
+						}
+						aList.append('<input type="checkbox" name="aid-'+row['aid']+'" id="aid-'+row['aid']+'" data-theme="c" /><a class="fav" data-aid="'+row['aid']+'" data-fav="'+fav+'" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme='+theme+'>Favorite</a><label for="aid-'+row['aid']+'">' + row['label'] + '</label>').trigger("create");
+					}
+				},
+				function (transaction, error) {
+					alert("there was an error when attempting to retrieve the projects: ", error.code);
+				}
+			);
 
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
@@ -253,7 +361,7 @@ $(".fav").live("click", function(event, ui){
             console.log("favorite toggle fail: " + error.code);
         };
 
-    var aid = $(this).attr("data-id"), //get asset id
+    var aid = $(this).attr("data-aid"), //get asset id
     fav = parseInt($(this).attr("data-fav")), //is this favorited? (0 or 1)
     theme = (fav == 0) ? 'e' : 'c'; //if not favorited set to e, otherwise c
 
