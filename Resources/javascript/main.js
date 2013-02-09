@@ -109,9 +109,23 @@ pw.assets = {
         var sql = "INSERT INTO assets (pid, path, filename, label, filetype, date_created) VALUES('" + pid + "', '" + path +"', '" +filename+"', '"+label+"', '"+filetype+"', DATETIME('NOW'))";
         pw.db.execute(sql, onSuccess, onError);
     },
-    deleteAsset : function(id, onSuccess, onError){
-		var sql = "DELETE FROM assets WHERE aid=" + id + "";
+    deleteAssets : function(aids, onSuccess, onError){
+		//remove assets and also remove if its in favorites
+		var sql = "DELETE FROM assets WHERE aid=";
+		var sqlfav = "DELETE FROM favorites WHERE aid=";		
+		for (var i = 0; i < aids.length; i++) {
+			//treat the last aid differently
+			if (i === aids.length-1){
+				sql += aids[i];
+				sqlfav += aids[i];
+			}
+			else{
+				sql += aids[i] + " OR aid=";
+				sqlfav += aids[i] + " OR aid=";
+			}
+		}
         pw.db.execute(sql, onSuccess, onError);
+		pw.db.execute(sqlfav, onSuccess, onError);
     },
 	//Add functionality
     addFavorite : function(pid, aid, onSuccess, onError){
@@ -154,8 +168,6 @@ $("#createProjectPopup :submit").click(function(){
 //bind to the click event of the delete project button
 $("#deleteProjectPopup #delete").click(function(){
     console.log("delete project button clicked");
-	//TODO decide whether to embed pid or have active project????
-	//var pid = $("#delete").attr('data-pid');
 	var pid = pw.activeProject;
 	pw.projects.deleteProject(pid,
 		//success callback
@@ -199,27 +211,44 @@ $("#addAssetPopup :submit").click(function(){
     }
 });
 
-//TODO after delete asset button is in place
 //bind to the click event of the delete asset button
-/*
 $("#deleteAssetPopup #delete").click(function(){
     console.log("delete asset button clicked");
-	//find where data-aid will be taken from
-	var aid = $("#delete").attr('data-aid');
-	pw.assets.deleteAsset(aid,
-		//success callback
-		function(transaction, results){
-			//Remove deleted asset from the list
-			//Have to get it to remove whole asset list item
-			$("#assetList").find("input[data-aid='"+aid+"']").remove().page(); 
-		},
-		//error callback
-		function(transaction, error){
-			alert("there was an error when attempting to delete the project: ", error.code);
-		}
-	);
+	var numChecked = $( "input:checked" ).length;
+	if (numChecked === 0){
+		alert('Choose at least 1 asset to Delete.');
+	}
+	else{
+		//fill up an array of all the assets aid to be deleted
+		var aids = new Array();
+		$('input:checked').each(function () {
+           if (this.checked) {
+				var aid = $(this).attr('name');
+				aid = aid.substring(4,aid.length);
+				//add the aid to the end of the array
+				aids[aids.length] = aid;
+           }
+		});
+		pw.assets.deleteAssets(aids,
+			//success callback
+			function(transaction, results){
+				//Remove all deleted assets completely from the list
+				for (var i = 0; i < aids.length; i++) {
+					//find div that wraps all of the asset, empty, remove, then remove favorite
+					var checkBox = $("#assetList").find("input[name='aid-"+aids[i]+"']").parent();
+					checkBox.empty();
+					checkBox.remove();
+					$("#assetList").find("a[data-aid='"+aids[i]+"']").remove();	
+				}
+			},
+			//error callback
+			function(transaction, error){
+				alert("there was an error when attempting to delete the checked assets: ", error.code);
+			}
+		);
+	}
 });
-*/
+
 
 //execute on projects page load
 $('#projects').live('pagebeforecreate', function (event) {
