@@ -19,9 +19,9 @@ var pw = {};
                     //projects table
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//assets table
-                    transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'fav' BOOL DEFAULT 0, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
-                    //favorites table
-                    transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL, FOREIGN KEY(pid) REFERENCES projects(pid), FOREIGN KEY(aid) REFERENCES assets(aid))");
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+					//favorites table
+                    transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL)");
                 }
             );
         }
@@ -114,12 +114,16 @@ $("#createProjectPopup :submit").click(function(){
 //bind to the click event of the delete project button
 $("#deleteProjectPopup #delete").click(function(){
     console.log("delete project button clicked");
-    var pid = $("#delete").attr('data-pid');
+	//TODO decide whether to embed pid or have active project????
+	var pid = $("#delete").attr('data-pid');
+	//var pid = pw.activeProject;
 	pw.projects.deleteProject(pid,
 		//success callback
 		function(transaction, results){
-//TODO get project list to update after the delete!!!!!!!
-			$("#projectList").listview("refresh"); //have to refresh the list after we add an element
+			//Remove deleted project from the list
+			$("#projectList").find("li[data-pid='"+pid+"']").remove(); 
+			//have to refresh the list after we delete an element
+			$("#projectList").listview("refresh");
 		},
 		//error callback
 		function(transaction, error){
@@ -210,11 +214,10 @@ function showProjectDetails( urlObj, options )
 			//inject the pid into the delete button for deletion NEEDED
 			$('#delete').attr('data-pid', row['pid']);
 
-            //$content.prepend( markup);
 			//Forces the project details to be above the asset list
-			$content.find( "h4" ).html( markup );
+			$("#pDetails").html( markup );
             console.log("should be changing page content to " + markup);
-            $header.find( "h1" ).html( row['name'] );
+            $("#pTitle").html( row['name'] );
 
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
