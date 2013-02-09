@@ -138,6 +138,8 @@ $("#createProjectPopup :submit").click(function(){
                 var pid = results.insertId; //id of last inserted row
                 $("#createProjectPopup").popup("close");
 				//clear form data
+				$("#createProjectPopup .projectTitle").val('');
+				$("#createProjectPopup .projectDescription").val('');
                 $("#projectList").prepend("<li data-pid=" + pid + "><a href=\"#project-details?pid=" + pid + "\">"+ title +"</li>");
                 $("#projectList").listview("refresh"); //have to refresh the list after we add an element
             },
@@ -185,6 +187,8 @@ $("#addAssetPopup :submit").click(function(){
                 var aid = results.insertId; //id of last inserted row
                 $("#addAssetPopup").popup("close");
 				//clear form data
+				$("#addAssetPopup .assetLabel").val('');
+				$("#addAssetPopup .assetFile").val('');
                 $("#assetList").prepend('<input type="checkbox" name="aid-'+aid+'" id="aid-'+aid+'" data-theme="c" /><a class="fav" data-aid="'+aid+'" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a><label for="aid-'+aid+'">' + label + '</label>').trigger("create");
             },
             //error callback
@@ -284,8 +288,8 @@ function showProjectDetails( urlObj, options )
 
             //can be deleted later, just for DEBUG
 			//Code for Edit button: "<a href=\"#\" data-role=\"button\" data-icon=\"edit\" data-iconpos=\"left\" data-mini=\"true\" data-inline=\"true\" data-theme=\"e\">Edit</a>"
-			var markup = "Project Name: " + row['name'] + "&nbsp;<a href=\"#\">Edit</a>" + "<br/>";
-            markup += "Project Details: " + row['description'] + "&nbsp;<a href=\"#\">Edit</a>" + "<br/>";
+			var markup = "Project Name: " + row['name'] + "&nbsp;<a href=\"#editTitlePopup\">Edit</a>" + "<br/>";
+            markup += "Project Details: " + row['description'] + "&nbsp;<a href=\"#editDescPopup\">Edit</a>" + "<br/>";
 			markup += "Date Created: " + row['date_created'] + "<br/>";
 			markup += "PID: " + row['pid'] + "<br/>";
 
