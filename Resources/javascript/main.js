@@ -244,6 +244,7 @@ $("#deleteProjectPopup #delete").click(function(){
 function clearAssetPicker(){
     $("#assetPickerList").html("");
     $("#addAssetPopup").popup("close");
+    return false;
 }
 
 //adds an asset to the project details page (display only)
@@ -264,10 +265,12 @@ function addProjectAssetMarkup(aid, path, fav){
 //removes the asset from the list of assets to be added
 $("#assetPickerList li .cancel").live("click", function(e){
   $(this).parent().parent().remove();
+  e.preventDefault();
 })
 
-$("#addAssetPopup .close").live("click", function(){
+$("#addAssetPopup .close").live("click", function(e){
     clearAssetPicker();
+    e.preventDefault();
 });
 
 //launches the file browser dialogue when adding an asset
@@ -383,7 +386,7 @@ $(document).bind("pagebeforechange", function( e, data ) {
         // want to handle URLs that request the data for a specific
         // category.
         var u = $.mobile.path.parseUrl( data.toPage ),
-            re = /^#project-details/;
+            re = /^#project-details\?pid=/;
         if ( u.hash.search(re) !== -1 ) {
 
             // We're being asked to display the items for a specific project.
