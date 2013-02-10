@@ -184,6 +184,31 @@ $("#deleteProjectPopup #delete").click(function(){
 	);
 });
 
+/***************/
+/*ADDING ASSETS*/
+/***************/
+//removes the asset from the list of assets to be added
+$("#assetPickerList li .cancel").live("click", function(e){
+  $(this).parent().parent().remove();
+})
+
+$("#addAssetPopup .close").live("click", function(){
+    $("#assetPickerList").html(""); //clear list of added assets
+    $("#addAssetPopup").popup("close");
+});
+
+//launches the file browser dialogue when adding an asset
+$("input.assetFile").click(function(){
+    var path = Ti.UI.openFileChooserDialog(function(path){
+        //callback after dialog close
+        for(i = 0; i < path.length; i++){
+            $("#assetPickerList").append("<li data-path='"+path[i]+"'><input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+                "<input type='text' value='"+path[i]+"'/></li>");
+        }
+    }, {multiple:'true',title:'Select data file(s) to add to project'});
+    $("#assetPickerList").trigger('create');
+});
+
 //bind to the click event of the add assets button
 $("#addAssetPopup :submit").click(function(){
     console.log("add asset button clicked");
@@ -201,7 +226,7 @@ $("#addAssetPopup :submit").click(function(){
 				//clear form data
 				$("#addAssetPopup .assetLabel").val('');
 				$("#addAssetPopup .assetFile").val('');
-                $("#assetList").prepend('<input type="checkbox" name="aid-'+aid+'" id="aid-'+aid+'" data-theme="c" /><a class="fav" data-aid="'+aid+'" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a><label for="aid-'+aid+'">' + label + '</label>').trigger("create");
+                $("#assetList").prepend('<input type="checkbox" name="aid-'+aid+'" id="aid-'+aid+'" data-theme="c" /><a class="fav" data-aid="'+aid+'" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a><label for="aid-'+aid+'">' + label + '</label>');
             },
             //error callback
             function(transaction, error){
@@ -210,6 +235,10 @@ $("#addAssetPopup :submit").click(function(){
         );
     }
 });
+
+/*******************/
+/*END ADDING ASSETS*/
+/*******************/
 
 //bind to the click event of the delete asset button
 $("#deleteAssetPopup #delete").click(function(){
@@ -352,7 +381,7 @@ function showProjectDetails( urlObj, options )
 							fav = 0;
 							theme = 'c';
 						}
-						aList.append('<input type="checkbox" name="aid-'+row['aid']+'" id="aid-'+row['aid']+'" data-theme="c" /><a class="fav" data-aid="'+row['aid']+'" data-fav="'+fav+'" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme='+theme+'>Favorite</a><label for="aid-'+row['aid']+'">' + row['label'] + '</label>').trigger("create");
+						aList.append('<input type="checkbox" name="aid-'+row['aid']+'" id="aid-'+row['aid']+'" data-theme="c" /><a class="fav" data-aid="'+row['aid']+'" data-fav="'+fav+'" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme='+theme+'>Favorite</a><label for="aid-'+row['aid']+'">' + row['label'] + '</label>');
 					}
 				},
 				function (transaction, error) {

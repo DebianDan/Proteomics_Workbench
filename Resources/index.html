@@ -134,10 +134,12 @@
          <!-- Add Assets -->
         <a href="#addAssetPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Add Assets</a>
         <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
-    	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        	Label: <input type="text" class="assetLabel" value=""><br>
-            File to upload: <input type="file" class="assetFile" value=""><br>
-            <input type="submit" value="Submit" data-theme="b">
+    	    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+            File path: <input type="button" class="assetFile" value="Select File(s)">
+            <ul id="assetPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
+            </ul>
+            <input type="button" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
+            <input type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>
 		</div>
                  
         <!-- Delete Assets -->
