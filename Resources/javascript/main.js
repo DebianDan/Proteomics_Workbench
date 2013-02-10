@@ -1,3 +1,32 @@
+///////////////////
+// UTILITY STUFF //
+///////////////////
+// TODO: (should be in its own file)
+
+//String.format() utility function, replaces {0} ... {n} in string with supplied arguments based on argument position
+//first, checks if it isn't implemented yet
+if (!String.prototype.format) {
+    String.prototype.format = function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) {
+            return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+                ;
+        });
+    };
+}
+
+//the HTML template for the assets inside of a project -- use with String.format()
+var assetTemplate = '<input type="checkbox" data-aid="{0}" name="checkbox-{0}" id="checkbox-{0}" data-theme="c" />' +
+    '<a class="fav" data-aid="{0}" data-fav="{3}" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="{2}">Favorite</a>' +
+    '<label for="checkbox-{0}" data-aid="{0}">{1}</label>';
+
+///////////////////////
+// END UTILITY STUFF //
+///////////////////////
+
+
 //define our proteomics workbench namespace to hold all of our stuff
 var pw = {};
 
@@ -34,6 +63,18 @@ var pw = {};
         pw.db.transaction(
             function(transaction){
                 transaction.executeSql(sql, [], dataHandler, errorHandler);
+            }
+        );
+    }
+
+    //used to handle multiple statements in a single transaction. sqlArray is plaintext array of statements to execute
+    //not sure if necessary yet
+    pw.db.executeStatements = function(sqlArray, dataHandler, errorHandler){
+        pw.db.transaction(
+            function(transaction){
+                $.each(sqlArray, function(sql){
+                    transaction.executeSql(sql, [], dataHandler, errorHandler);
+                });
             }
         );
     }
@@ -112,20 +153,31 @@ pw.assets = {
     deleteAssets : function(aids, onSuccess, onError){
 		//remove assets and also remove if its in favorites
 		var sql = "DELETE FROM assets WHERE aid=";
-		var sqlfav = "DELETE FROM favorites WHERE aid=";		
+		var sqlFav = "DELETE FROM favorites WHERE aid=";
 		for (var i = 0; i < aids.length; i++) {
 			//treat the last aid differently
 			if (i === aids.length-1){
 				sql += aids[i];
-				sqlfav += aids[i];
+				sqlFav += aids[i];
 			}
 			else{
 				sql += aids[i] + " OR aid=";
-				sqlfav += aids[i] + " OR aid=";
+				sqlFav += aids[i] + " OR aid=";
 			}
 		}
         pw.db.execute(sql, onSuccess, onError);
-		pw.db.execute(sqlfav, onSuccess, onError);
+		pw.db.execute(sqlFav, onSuccess, onError);
+    },
+    deleteAsset : function(aid, onSuccess, onError){
+        iAid = parseInt(aid);
+        if(iAid >= 0 && iAid){
+            var sqlFav = "DELETE FROM favorites WHERE aid={0}".format(aid);
+            var sql = "DELETE FROM assets WHERE aid={0}".format(aid);
+            pw.db.execute(sqlFav);
+            pw.db.execute(sql, onSuccess, onError);
+        }else{
+            console.log("asset ID {0} is not a positive integer.".format(aid));
+        }
     },
 	//Add functionality
     addFavorite : function(pid, aid, onSuccess, onError){
@@ -187,22 +239,44 @@ $("#deleteProjectPopup #delete").click(function(){
 /***************/
 /*ADDING ASSETS*/
 /***************/
+
+//clear list of added assets and close the dialog
+function clearAssetPicker(){
+    $("#assetPickerList").html("");
+    $("#addAssetPopup").popup("close");
+}
+
+//adds an asset to the project details page (display only)
+function addProjectAssetMarkup(aid, path, fav){
+    if(!fav){
+        fav = 0;
+    }
+    var theme = (fav == 0) ? 'c' : 'e';
+
+    var aList = $("#assetList");
+    if(aList){
+        var markup = assetTemplate.format(aid, path, theme, fav);
+        aList.append(markup);
+    }
+    aList.trigger('create');
+}
+
 //removes the asset from the list of assets to be added
 $("#assetPickerList li .cancel").live("click", function(e){
   $(this).parent().parent().remove();
 })
 
 $("#addAssetPopup .close").live("click", function(){
-    $("#assetPickerList").html(""); //clear list of added assets
-    $("#addAssetPopup").popup("close");
+    clearAssetPicker();
 });
 
 //launches the file browser dialogue when adding an asset
-$("input.assetFile").click(function(){
+$("input.chooseFiles").click(function(){
     var path = Ti.UI.openFileChooserDialog(function(path){
         //callback after dialog close
         for(i = 0; i < path.length; i++){
-            $("#assetPickerList").append("<li data-path='"+path[i]+"'><input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+            $("#assetPickerList").append("<li data-path='"+path[i]+"'>" +
+                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
     }, {multiple:'true',title:'Select data file(s) to add to project'});
@@ -210,30 +284,17 @@ $("input.assetFile").click(function(){
 });
 
 //bind to the click event of the add assets button
-$("#addAssetPopup :submit").click(function(){
+$("#addAssetPopup .save").click(function(){
     console.log("add asset button clicked");
-    var label = $("#addAssetPopup .assetLabel").val();
-    var path = $("#addAssetPopup .assetFile").val();
-	var pid = pw.activeProject;
-    if(path == ""){
-        alert('Asset File must be chosen.');
-    }else{
-		pw.assets.addAsset(pid, path, label,
-            //success callback
-            function(transaction, results){
-                var aid = results.insertId; //id of last inserted row
-                $("#addAssetPopup").popup("close");
-				//clear form data
-				$("#addAssetPopup .assetLabel").val('');
-				$("#addAssetPopup .assetFile").val('');
-                $("#assetList").prepend('<input type="checkbox" name="aid-'+aid+'" id="aid-'+aid+'" data-theme="c" /><a class="fav" data-aid="'+aid+'" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a><label for="aid-'+aid+'">' + label + '</label>');
-            },
-            //error callback
-            function(transaction, error){
-                alert("there was an error when attempting to create the project: ", error.code);
-            }
-        );
-    }
+    //get the paths for the added files
+    $("#assetPickerList li").each(function(e){
+        var path = $(this).attr("data-path");
+        //add the asset to the database and then add to the page
+        pw.assets.addAsset(pw.activeProject, path, '', function(transaction, results){
+            addProjectAssetMarkup(results.insertId, path, 0);
+        });
+    });
+    clearAssetPicker();
 });
 
 /*******************/
@@ -242,6 +303,26 @@ $("#addAssetPopup :submit").click(function(){
 
 //bind to the click event of the delete asset button
 $("#deleteAssetPopup #delete").click(function(){
+    var aids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
+    $('#assetList input[data-aid]:checked').each(function () { //get all inputs that are checked and have an attribute of data-aid
+        var aid = $(this).attr('data-aid');
+        if(aid){
+            var self = this;
+            aids.push(aid);
+            pw.assets.deleteAsset(aid, function(transaction, results){
+                $("#assetList [data-aid='" + aid +"']").remove(); //remove elements with the specified attribute
+                console.log("deleted asset with id {0}".format(aid));
+            },function(transaction, error){
+                console.log("error deleting asset {0}: {1}".format(aid, error.message));
+            })
+        }
+    });
+
+    if(aids.length){
+        $("#assetList").trigger('create'); //we removed some stuff so refresh the list
+    }
+
+    /*
     console.log("delete asset button clicked");
 	var numChecked = $( "input:checked" ).length;
 	if (numChecked === 0){
@@ -249,15 +330,7 @@ $("#deleteAssetPopup #delete").click(function(){
 	}
 	else{
 		//fill up an array of all the assets aid to be deleted
-		var aids = new Array();
-		$('input:checked').each(function () {
-           if (this.checked) {
-				var aid = $(this).attr('name');
-				aid = aid.substring(4,aid.length);
-				//add the aid to the end of the array
-				aids[aids.length] = aid;
-           }
-		});
+
 		pw.assets.deleteAssets(aids,
 			//success callback
 			function(transaction, results){
@@ -275,7 +348,7 @@ $("#deleteAssetPopup #delete").click(function(){
 				alert("there was an error when attempting to delete the checked assets: ", error.code);
 			}
 		);
-	}
+	}*/
 });
 
 
@@ -369,23 +442,36 @@ function showProjectDetails( urlObj, options )
 					console.log(results.rows.length + " assets retrieved");
 					console.log("rendering assets list");
 					var aList = $("#assetList"); //save a reference to the element for efficiency
-					//clear the assets list to start
-					aList.html("");
-					for (var i = 0; i < results.rows.length; i++) {
-						var row = results.rows.item(i);
-						//initially a favorite
-						var fav = 1;
-						var theme = 'e';
-						//if NOT labeled as a favorite
-						if(row['fav'] !== 1){
-							fav = 0;
-							theme = 'c';
-						}
-						aList.append('<input type="checkbox" name="aid-'+row['aid']+'" id="aid-'+row['aid']+'" data-theme="c" /><a class="fav" data-aid="'+row['aid']+'" data-fav="'+fav+'" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme='+theme+'>Favorite</a><label for="aid-'+row['aid']+'">' + row['label'] + '</label>');
-					}
+
+                    //clear the assets list to start
+                    aList.html("");
+
+                    //loop through rows and add them to asset list
+                    for (var i = 0; i < results.rows.length; i++) {
+                        var row = results.rows.item(i);
+                        var aid = row['aid'];
+                        var path = row['path'];
+                        var fav = row['fav'];
+
+                        /*
+                        //initially a favorite
+                        var fav = 1;
+                        var theme = 'e';
+                        //if NOT labeled as a favorite
+                        if(row['fav'] !== 1){
+                            fav = 0;
+                            theme = 'c';
+                        }
+                        */
+                        addProjectAssetMarkup(aid, path, fav);
+                        //formattedAsset = assetTemplate.format(aid, path, theme);
+                        //aList.append(formattedAsset);
+                    }
+
+                    //aList.trigger('create');
 				},
 				function (transaction, error) {
-					alert("there was an error when attempting to retrieve the projects: ", error.code);
+					alert("there was an error when attempting to retrieve the assets: ", error.code);
 				}
 			);
 
