@@ -48,7 +48,7 @@ var pw = {};
                     //projects table
                     transaction.executeSql("CREATE TABLE IF NOT EXISTS projects('pid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' VARCHAR NOT NULL , 'description' VARCHAR, 'active' BOOL NOT NULL  DEFAULT 1, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//assets table
-					transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'label' VARCHAR, 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+					transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//favorites table
 					transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL, 'fav' INTEGER NOT NULL DEFAULT 1)");
                 }
@@ -116,15 +116,12 @@ pw.projects = {
 //of asset objects...
 pw.assets = {
     asset : function(name, path){
-        //TODO: fill out asset object
 		this.name = name;
-		//asset won't have description
-        //this.description = description;
 		this.path = path;
         return this;
     },
 	getAsset : function(aid, onSuccess, onError){
-        var sql = "SELECT aid, pid, path, filename, label, filetype, path, date_created FROM assets WHERE aid = " + aid;
+        var sql = "SELECT aid, pid, path, filename, filetype, path, date_created FROM assets WHERE aid = " + aid;
         if(aid == undefined){
             onError("aid must be specified when calling getAsset()");
             return false;
@@ -133,7 +130,7 @@ pw.assets = {
         }
     },
     getAllAssets : function(pid, onSuccess, onError){
-        var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.label, assets.filetype, assets.path, assets.date_created, favorites.fav FROM assets LEFT JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
+        var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.path, assets.date_created, favorites.fav FROM assets LEFT JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
         if(pid == undefined){
             onError("pid must be specified when calling getAllAssets()");
             return false;
@@ -141,13 +138,12 @@ pw.assets = {
             pw.db.execute(sql, onSuccess, onError);
         }
     },
-    addAsset : function(pid, path, label, onSuccess, onError){
-		//TODO update when add assets supplies full path
-		//var filename = everything after last \ or /
-		var filename = path;
+    addAsset : function(pid, path, onSuccess, onError){
+		//regex to extract filename works for both \ and / file separators
+		var filename = path.replace(/^.*[\\\/]/, '');
 		//just the file extension ex: jpg txt csv
 		var filetype = path.substr(path.lastIndexOf('.')+1, path.length);
-        var sql = "INSERT INTO assets (pid, path, filename, label, filetype, date_created) VALUES('" + pid + "', '" + path +"', '" +filename+"', '"+label+"', '"+filetype+"', DATETIME('NOW'))";
+        var sql = "INSERT INTO assets (pid, path, filename, filetype, date_created) VALUES('" + pid + "', '" + path +"', '" +filename+"', '"+filetype+"', DATETIME('NOW'))";
         pw.db.execute(sql, onSuccess, onError);
     },
     deleteAssets : function(aids, onSuccess, onError){
@@ -293,7 +289,7 @@ $("#addAssetPopup .save").click(function(){
     $("#assetPickerList li").each(function(e){
         var path = $(this).attr("data-path");
         //add the asset to the database and then add to the page
-        pw.assets.addAsset(pw.activeProject, path, '', function(transaction, results){
+        pw.assets.addAsset(pw.activeProject, path, function(transaction, results){
             addProjectAssetMarkup(results.insertId, path, 0);
         });
     });
