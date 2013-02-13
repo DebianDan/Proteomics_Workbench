@@ -62,6 +62,56 @@
     </div><!-- /header -->
 
     <div data-role="content">
+    
+    <!-- Add Scripts -->
+        <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Add Scripts</a>
+        <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
+    	    <a href="#scripts" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+            <input type="button" class="chooseFiles" value="Select File" id="scriptFileChooser">
+            <ul id="scriptPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
+            </ul>
+            <input type="submit" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
+            <a href="#scripts" type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>Cancel</a>
+		</div>
+                 
+        <!-- Delete Scripts -->
+        <a href="#deleteScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Delete Selected Scripts</a>
+        <div data-role="popup" id="deleteScriptPopup" class="ui-content" data-overlay-theme="a">
+                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                    <h3 class="ui-title">Are you sure you want to delete the selected script(s)?</h3>
+                    <a href="#scripts" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                    <a href="#scripts" id="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+                </div>
+        </div>
+        <br><br>
+		
+        
+        
+        <!-- List of Scripts -->
+        <fieldset data-role="controlgroup" style="margin-top:5%;">
+            <div class="ui-body ui-body-b">
+            <br>
+            <div data-theme="b" data-content-theme="d">
+                <ul id="scriptList" data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true" data-filter-placeholder="Search scripts...">
+                </ul>
+        	</div>
+        	<br>
+            <div data-role="fieldcontain">
+               <legend><b>Sort By: </b></legend>
+               <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
+                   <option value="date">Newest</option>
+                  <option value="favorites">Favorites</option>
+                  <option value="type">File Type</option>
+                  <option value="favorites">File Name</option>
+               </select>
+            </div><br>
+            <div id="scriptList" data-role="fieldcontain">
+
+            </div></div>
+        </fieldset>
+    
+    
+    
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
