@@ -21,6 +21,10 @@ if (!String.prototype.format) {
 var assetTemplate = '<input type="checkbox" data-aid="{0}" name="checkbox-{0}" id="checkbox-{0}" data-theme="c" />' +
     '<a class="fav" data-aid="{0}" data-fav="{3}" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="{2}">Favorite</a>' +
     '<label for="checkbox-{0}" data-aid="{0}">{1}</label>';
+	
+//the HTML template for the scripts -- use with String.format()
+var assetTemplate = '<input type="checkbox" data-sid="{0}" name="checkbox-{0}" id="checkbox-{0}" data-theme="c" />' +
+    '<label for="checkbox-{0}" data-sid="{0}">{1}</label>';
 
 ///////////////////////
 // END UTILITY STUFF //
@@ -51,6 +55,8 @@ var pw = {};
 					transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//favorites table
 					transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL, 'fav' INTEGER NOT NULL DEFAULT 1)");
+					//scripts table
+					transaction.executeSql("CREATE TABLE IF NOT EXISTS scripts('sid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
                 }
             );
         }
@@ -183,6 +189,63 @@ pw.assets = {
     removeFavorite : function(pid, aid, onSuccess, onError){
         var sql = "DELETE FROM favorites WHERE pid=" + pid + " AND aid="+ aid;
         pw.db.execute(sql, onSuccess, onError);
+    }
+}
+
+pw.scripts = {
+    script : function(filename, path){
+		this.filename = filename;
+		this.path = path;
+        return this;
+    },
+	getScript : function(sid, onSuccess, onError){
+        var sql = "SELECT sid, path, filename, filetype, path, date_created FROM scripts WHERE sid = " + sid;
+        if(sid == undefined){
+            onError("sid must be specified when calling getScript()");
+            return false;
+        }else{
+            pw.db.execute(sql, onSuccess, onError);
+        }
+    },
+    getAllScripts : function(onSuccess, onError){
+        var sql = "SELECT * FROM scripts WHERE 1=1 ORDER BY date_created DESC";
+        if(pid == undefined){
+            onError("pid must be specified when calling getAllScripts()");
+            return false;
+        }else{
+            pw.db.execute(sql, onSuccess, onError);
+        }
+    },
+    addScript : function(path, onSuccess, onError){
+		//regex to extract filename works for both \ and / file separators
+		var filename = path.replace(/^.*[\\\/]/, '');
+		//just the file extension ex: jpg txt csv
+		var filetype = path.substr(path.lastIndexOf('.')+1, path.length);
+        var sql = "INSERT INTO scripts (path, filename, filetype, date_created) VALUES('" + path +"', '" +filename+"', '"+filetype+"', DATETIME('NOW'))";
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    deleteScripts : function(sids, onSuccess, onError){
+		//remove scripts
+		var sql = "DELETE FROM scripts WHERE sid=";
+		for (var i = 0; i < sids.length; i++) {
+			//treat the last aid differently
+			if (i === sids.length-1){
+				sql += sids[i];
+			}
+			else{
+				sql += sids[i] + " OR sid=";
+			}
+		}
+        pw.db.execute(sql, onSuccess, onError);
+    },
+    deleteScript : function(sid, onSuccess, onError){
+        iSid = parseInt(sid);
+        if(iSid >= 0 && iSid){
+            var sql = "DELETE FROM scripts WHERE sid={0}".format(sid);
+            pw.db.execute(sql, onSuccess, onError);
+        }else{
+            console.log("script ID {0} is not a positive integer.".format(sid));
+        }
     }
 }
 
@@ -350,6 +413,187 @@ $("#deleteAssetPopup #delete").click(function(){
 	}*/
 });
 
+/*********************/
+/*END DELETING ASSETS*/
+/*********************/
+
+//clear list of added assets and close the dialog
+function clearScriptPicker(){
+    $("#scriptPickerList").html("");
+    $("#addScriptPopup").popup("close");
+    return false;
+}
+
+//adds a script to the scripts page (display only)
+function addProjectScriptMarkup(sid, path){
+    var sList = $("#scriptList");
+    if(sList){
+        var markup = scriptTemplate.format(sid, path);
+        sList.append(markup);
+    }
+    sList.trigger('create');
+}
+
+//removes the script from the list of scripts to be added
+$("#scriptPickerList li .cancel").live("click", function(e){
+  $(this).parent().parent().remove();
+  e.preventDefault();
+})
+
+$("#addScriptPopup .close").live("click", function(e){
+    clearScriptPicker();
+    e.preventDefault();
+});
+
+//launches the file browser dialogue when adding a script
+$("#scriptFileChooser").click(function(){
+    var path = Ti.UI.openFileChooserDialog(function(path){
+        //callback after dialog close
+        for(i = 0; i < path.length; i++){
+            $("#scriptPickerList").append("<li data-path='"+path[i]+"'>" +
+                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+                "<input type='text' value='"+path[i]+"'/></li>");
+        }
+    }, {multiple:'false',title:'Select script to add'});
+    $("#scriptPickerList").trigger('create');
+});
+
+//bind to the click event of the add assets button
+$("#addScriptPopup .save").click(function(){
+    console.log("add script button clicked");
+    //get the paths for the added files
+    $("#scriptPickerList li").each(function(e){
+        var path = $(this).attr("data-path");
+        //add the asset to the database and then add to the page
+        pw.scripts.addScript(path, function(transaction, results){
+            addProjectScriptMarkup(results.insertId, path);
+        });
+    });
+    clearScriptPicker();
+});
+
+/********************/
+/*END ADDING SCRIPTS*/
+/********************/
+
+//bind to the click event of the delete asset button
+$("#deleteScriptPopup #delete").click(function(){
+    var sids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
+    $('#scriptList input[data-sid]:checked').each(function () { //get all inputs that are checked and have an attribute of data-sid
+        var sid = $(this).attr('data-sid');
+        if(sid){
+            var self = this;
+            sids.push(sid);
+            pw.scripts.deleteScript(sid, function(transaction, results){
+                $("#scriptList [data-sid='" + sid +"']").remove(); //remove elements with the specified attribute
+                console.log("deleted script with id {0}".format(sid));
+            },function(transaction, error){
+                console.log("error deleting script {0}: {1}".format(sid, error.message));
+            })
+        }
+    });
+
+    if(sids.length){
+        $("#scriptList").trigger('create'); //we removed some stuff so refresh the list
+    }
+
+    /*  !!!NEED TO UPDATE FOR SCRIPTS IF WE DECIDE TO USE THIS METHODS INSTEAD!!!
+    console.log("delete asset button clicked");
+	var numChecked = $( "input:checked" ).length;
+	if (numChecked === 0){
+		alert('Choose at least 1 asset to Delete.');
+	}
+	else{
+		//fill up an array of all the assets aid to be deleted
+
+		pw.assets.deleteAssets(aids,
+			//success callback
+			function(transaction, results){
+				//Remove all deleted assets completely from the list
+				for (var i = 0; i < aids.length; i++) {
+					//find div that wraps all of the asset, empty, remove, then remove favorite
+					var checkBox = $("#assetList").find("input[name='aid-"+aids[i]+"']").parent();
+					checkBox.empty();
+					checkBox.remove();
+					$("#assetList").find("a[data-aid='"+aids[i]+"']").remove();	
+				}
+			},
+			//error callback
+			function(transaction, error){
+				alert("there was an error when attempting to delete the checked assets: ", error.code);
+			}
+		);
+	}*/
+});
+
+/**********************/
+/*END DELETING SCRIPTS*/
+/**********************/
+
+// Load the data for a specific category, based on
+// the URL passed in. Generate markup for the items in the
+// category, inject it into an embedded page, and then make
+// that page the current active page.
+function showScripts( urlObj, options )
+{
+    //var sid = urlObj.hash.replace( /.*sid=/, "" ),
+
+    // The pages we use to display our content are already in
+    // the DOM. The id of the page we are going to write our
+    // content into is specified in the hash before the '?'.
+    
+	//pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+	pageSelector = "#scripts";
+
+    pw.scripts.getAllScripts(function(transaction, results){
+        console.log(results.rows.length + " rows returned");
+        if(results.rows.length > 0){
+
+            var $page = $( pageSelector );
+            //put the content into the page
+			
+			console.log(results.rows.length + " scripts retrieved");
+			console.log("rendering scripts list");
+			var sList = $("#scriptList"); //save a reference to the element for efficiency
+
+			//clear the assets list to start
+			sList.html("");
+
+			//loop through rows and add them to asset list
+			for (var i = 0; i < results.rows.length; i++) {
+				var row = results.rows.item(i);
+				var sid = row['sid'];
+				var path = row['path'];
+
+				addProjectScriptMarkup(sid, path);
+			}
+
+            // Pages are lazily enhanced. We call page() on the page
+            // element to make sure it is always enhanced before we
+            // attempt to enhance the listview markup we just injected.
+            // Subsequent calls to page() are ignored since a page/widget
+            // can only be enhanced once.
+            $page.page();
+
+            // We don't want the data-url of the page we just modified
+            // to be the url that shows up in the browser's location field,
+            // so set the dataUrl option to the URL for the category
+            // we just loaded.
+            options.dataUrl = urlObj.href;
+
+            // Now call changePage() and tell it to switch to
+            // the page we just modified.
+            $.mobile.changePage( $page, options );
+        }
+
+    },function(transaction, error){
+        alert("there was an error when attempting to retrieve the scripts: ", error.code);
+    });
+}
+
+/************************/
+/*END DISPLAYING SCRIPTS*/
+/************************/
 
 //execute on projects page load
 $('#projects').live('pagebeforecreate', function (event) {
@@ -382,7 +626,8 @@ $(document).bind("pagebeforechange", function( e, data ) {
         // want to handle URLs that request the data for a specific
         // category.
         var u = $.mobile.path.parseUrl( data.toPage ),
-            re = /^#project-details\?pid=/;
+            re = /^#project-details\?pid=/,
+			re2 = /^#scripts/;
         if ( u.hash.search(re) !== -1 ) {
 
             // We're being asked to display the items for a specific project.
@@ -392,6 +637,14 @@ $(document).bind("pagebeforechange", function( e, data ) {
             // have to do anything.
             e.preventDefault();
         }
+		else if (u.hash.search(re2) !== -1){
+			// We're being asked to display the scripts.
+            showScripts( u, data.options );
+
+            // Make sure to tell changePage() we've handled this call so it doesn't
+            // have to do anything.
+            e.preventDefault();
+		}
     }
 });
 
