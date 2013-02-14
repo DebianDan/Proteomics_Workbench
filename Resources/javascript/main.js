@@ -23,7 +23,7 @@ var assetTemplate = '<input type="checkbox" data-aid="{0}" name="checkbox-{0}" i
     '<label for="checkbox-{0}" data-aid="{0}">{1}</label>';
 	
 //the HTML template for the scripts -- use with String.format()
-var assetTemplate = '<input type="checkbox" data-sid="{0}" name="checkbox-{0}" id="checkbox-{0}" data-theme="c" />' +
+var scriptTemplate = '<input type="checkbox" data-sid="{0}" name="checkbox-{0}" id="checkbox-{0}" data-theme="c" />' +
     '<label for="checkbox-{0}" data-sid="{0}">{1}</label>';
 
 ///////////////////////
