@@ -209,12 +209,7 @@ pw.scripts = {
     },
     getAllScripts : function(onSuccess, onError){
         var sql = "SELECT * FROM scripts WHERE 1=1 ORDER BY date_created DESC";
-        if(pid == undefined){
-            onError("pid must be specified when calling getAllScripts()");
-            return false;
-        }else{
             pw.db.execute(sql, onSuccess, onError);
-        }
     },
     addScript : function(path, onSuccess, onError){
 		//regex to extract filename works for both \ and / file separators
@@ -446,7 +441,7 @@ $("#addScriptPopup .close").live("click", function(e){
 });
 
 //launches the file browser dialogue when adding a script
-$("#scriptFileChooser").click(function(){
+$("input.chooseScripts").click(function(){
     var path = Ti.UI.openFileChooserDialog(function(path){
         //callback after dialog close
         for(i = 0; i < path.length; i++){
@@ -530,67 +525,31 @@ $("#deleteScriptPopup #delete").click(function(){
 /*END DELETING SCRIPTS*/
 /**********************/
 
-// Load the data for a specific category, based on
-// the URL passed in. Generate markup for the items in the
-// category, inject it into an embedded page, and then make
-// that page the current active page.
-function showScripts( urlObj, options )
-{
-    //var sid = urlObj.hash.replace( /.*sid=/, "" ),
-
-    // The pages we use to display our content are already in
-    // the DOM. The id of the page we are going to write our
-    // content into is specified in the hash before the '?'.
-    
-	//pageSelector = urlObj.hash.replace( /\?.*$/, "" );
-	pageSelector = "#scripts";
-
-    pw.scripts.getAllScripts(function(transaction, results){
-        console.log(results.rows.length + " rows returned");
-        if(results.rows.length > 0){
-
-            var $page = $( pageSelector );
-            //put the content into the page
-			
-			console.log(results.rows.length + " scripts retrieved");
-			console.log("rendering scripts list");
-			var sList = $("#scriptList"); //save a reference to the element for efficiency
-
+//execute on scripts page load
+$('#scripts').live('pagebeforecreate', function (event) {
+    //get all scriptss in database
+    pw.scripts.getAllScripts(
+        //success callback
+        function (transaction, results) {
+            console.log(results.rows.length + " scripts retrieved");
+            console.log("rendering scripts list");
+            var sList = $("#scriptList"); //save a reference to the element for efficiency
 			//clear the assets list to start
 			sList.html("");
-
-			//loop through rows and add them to asset list
+			//loop through rows and add them to script list
 			for (var i = 0; i < results.rows.length; i++) {
 				var row = results.rows.item(i);
 				var sid = row['sid'];
 				var path = row['path'];
 
 				addProjectScriptMarkup(sid, path);
-			}
-
-            // Pages are lazily enhanced. We call page() on the page
-            // element to make sure it is always enhanced before we
-            // attempt to enhance the listview markup we just injected.
-            // Subsequent calls to page() are ignored since a page/widget
-            // can only be enhanced once.
-            $page.page();
-
-            // We don't want the data-url of the page we just modified
-            // to be the url that shows up in the browser's location field,
-            // so set the dataUrl option to the URL for the category
-            // we just loaded.
-            options.dataUrl = urlObj.href;
-
-            // Now call changePage() and tell it to switch to
-            // the page we just modified.
-            $.mobile.changePage( $page, options );
+			}	
+        },
+        function (transaction, error) {
+            alert("there was an error when attempting to retrieve the projects: ", error.code);
         }
-
-    },function(transaction, error){
-        alert("there was an error when attempting to retrieve the scripts: ", error.code);
-    });
-}
-
+    );
+});
 /************************/
 /*END DISPLAYING SCRIPTS*/
 /************************/
@@ -616,6 +575,10 @@ $('#projects').live('pagebeforecreate', function (event) {
     );
 });
 
+/*************************/
+/*END DISPLAYING PROJECTS*/
+/*************************/
+
 // Listen for any attempts to call changePage().
 $(document).bind("pagebeforechange", function( e, data ) {
 
@@ -627,7 +590,6 @@ $(document).bind("pagebeforechange", function( e, data ) {
         // category.
         var u = $.mobile.path.parseUrl( data.toPage ),
             re = /^#project-details\?pid=/,
-			re2 = /^#scripts/;
         if ( u.hash.search(re) !== -1 ) {
 
             // We're being asked to display the items for a specific project.
@@ -637,14 +599,6 @@ $(document).bind("pagebeforechange", function( e, data ) {
             // have to do anything.
             e.preventDefault();
         }
-		else if (u.hash.search(re2) !== -1){
-			// We're being asked to display the scripts.
-            showScripts( u, data.options );
-
-            // Make sure to tell changePage() we've handled this call so it doesn't
-            // have to do anything.
-            e.preventDefault();
-		}
     }
 });
 
