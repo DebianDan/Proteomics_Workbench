@@ -54,7 +54,7 @@ var pw = {};
 					//assets table
 					transaction.executeSql("CREATE TABLE IF NOT EXISTS assets('aid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'pid' INTEGER NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
 					//favorites table
-					transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL, 'fav' INTEGER NOT NULL DEFAULT 1)");
+					transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL)");
 					//scripts table
 					transaction.executeSql("CREATE TABLE IF NOT EXISTS scripts('sid' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'path' VARCHAR NOT NULL, 'filename' VARCHAR NOT NULL , 'filetype' VARCHAR NOT NULL, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
                 }
@@ -136,7 +136,7 @@ pw.assets = {
         }
     },
     getAllAssets : function(pid, onSuccess, onError){
-        var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.path, assets.date_created, favorites.fav FROM assets LEFT JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
+        var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
         if(pid == undefined){
             onError("pid must be specified when calling getAllAssets()");
             return false;
@@ -183,7 +183,7 @@ pw.assets = {
     },
 	//Add functionality
     addFavorite : function(pid, aid, onSuccess, onError){
-        var sql = "INSERT INTO favorites VALUES(" + pid + ", "+ aid + ",1)";
+        var sql = "INSERT INTO favorites VALUES(" + pid + ", "+ aid + ")";
         pw.db.execute(sql, onSuccess, onError);
     },
     removeFavorite : function(pid, aid, onSuccess, onError){
@@ -303,14 +303,15 @@ function clearAssetPicker(){
 
 //adds an asset to the project details page (display only)
 function addProjectAssetMarkup(aid, path, fav){
-    if(!fav){
+    var filename = path.replace(/^.*[\\\/]/, '');
+	if(!fav){
         fav = 0;
     }
     var theme = (fav == 0) ? 'c' : 'e';
 
     var aList = $("#assetList");
     if(aList){
-        var markup = assetTemplate.format(aid, path, theme, fav);
+        var markup = assetTemplate.format(aid, filename, theme, fav);
         aList.append(markup);
     }
     aList.trigger('create');
@@ -336,7 +337,7 @@ $("input.chooseFiles").click(function(){
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
-    }, {multiple:'true',title:'Select data file(s) to add to project'});
+    }, {multiple:true,title:'Select data file(s) to add to project'});
     $("#assetPickerList").trigger('create');
 });
 
@@ -421,9 +422,10 @@ function clearScriptPicker(){
 
 //adds a script to the scripts page (display only)
 function addProjectScriptMarkup(sid, path){
-    var sList = $("#scriptList");
+    var filename = path.replace(/^.*[\\\/]/, '');
+	var sList = $("#scriptList");
     if(sList){
-        var markup = scriptTemplate.format(sid, path);
+        var markup = scriptTemplate.format(sid, filename);
         sList.append(markup);
     }
     sList.trigger('create');
@@ -449,7 +451,7 @@ $("input.chooseScripts").click(function(){
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
-    }, {multiple:'false',title:'Select script to add'});
+    }, {multiple:false,title:'Select script to add'});
     $("#scriptPickerList").trigger('create');
 });
 
@@ -493,24 +495,23 @@ $("#deleteScriptPopup #delete").click(function(){
     }
 
     /*  !!!NEED TO UPDATE FOR SCRIPTS IF WE DECIDE TO USE THIS METHODS INSTEAD!!!
-    console.log("delete asset button clicked");
+    console.log("delete script button clicked");
 	var numChecked = $( "input:checked" ).length;
 	if (numChecked === 0){
-		alert('Choose at least 1 asset to Delete.');
+		alert('Choose at least 1 script to Delete.');
 	}
 	else{
-		//fill up an array of all the assets aid to be deleted
+		//fill up an array of all the script sid to be deleted
 
-		pw.assets.deleteAssets(aids,
+		pw.scripts.deleteScripts(sids,
 			//success callback
 			function(transaction, results){
-				//Remove all deleted assets completely from the list
-				for (var i = 0; i < aids.length; i++) {
-					//find div that wraps all of the asset, empty, remove, then remove favorite
-					var checkBox = $("#assetList").find("input[name='aid-"+aids[i]+"']").parent();
+				//Remove all deleted scripts completely from the list
+				for (var i = 0; i < sids.length; i++) {
+					//find div that wraps all of the scripts, empty, remove
+					var checkBox = $("#scriptList").find("input[name='sid-"+sids[i]+"']").parent();
 					checkBox.empty();
 					checkBox.remove();
-					$("#assetList").find("a[data-aid='"+aids[i]+"']").remove();	
 				}
 			},
 			//error callback
@@ -657,8 +658,12 @@ function showProjectDetails( urlObj, options )
                         var row = results.rows.item(i);
                         var aid = row['aid'];
                         var path = row['path'];
-                        var fav = row['fav'];
-
+						var fav = 1;
+						//not in the favorites table
+						if (row['fav'] == null){
+							fav = 0;
+						}
+						
                         /*
                         //initially a favorite
                         var fav = 1;
