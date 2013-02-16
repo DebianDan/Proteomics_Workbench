@@ -318,12 +318,12 @@ function addProjectAssetMarkup(aid, path, fav){
 }
 
 //removes the asset from the list of assets to be added
-$("#assetPickerList li .cancel").live("click", function(e){
+$("#assetPickerList li .cancel").on("click", function(e){
   $(this).parent().parent().remove();
   e.preventDefault();
 })
 
-$("#addAssetPopup .close").live("click", function(e){
+$("#addAssetPopup .close").on("click", function(e){
     clearAssetPicker();
     e.preventDefault();
 });
@@ -432,12 +432,12 @@ function addProjectScriptMarkup(sid, path){
 }
 
 //removes the script from the list of scripts to be added
-$("#scriptPickerList li .cancel").live("click", function(e){
+$("#scriptPickerList li .cancel").on("click", function(e){
   $(this).parent().parent().remove();
   e.preventDefault();
 })
 
-$("#addScriptPopup .close").live("click", function(e){
+$("#addScriptPopup .close").on("click", function(e){
     clearScriptPicker();
     e.preventDefault();
 });
@@ -527,7 +527,7 @@ $("#deleteScriptPopup #delete").click(function(){
 /**********************/
 
 //execute on scripts page load
-$('#scripts').live('pagebeforecreate', function (event) {
+$('#scripts').on('pagebeforecreate', function (event) {
     //get all scriptss in database
     pw.scripts.getAllScripts(
         //success callback
@@ -556,7 +556,7 @@ $('#scripts').live('pagebeforecreate', function (event) {
 /************************/
 
 //execute on projects page load
-$('#projects').live('pagebeforecreate', function (event) {
+$('#projects').on('pagebeforecreate', function (event) {
     //get all projects in database
     pw.projects.getAllProjects(
         //success callback
@@ -590,7 +590,7 @@ $(document).bind("pagebeforechange", function( e, data ) {
         // want to handle URLs that request the data for a specific
         // category.
         var u = $.mobile.path.parseUrl( data.toPage ),
-            re = /^#project-details\?pid=/,
+            re = /^#project-details\?pid=/;
         if ( u.hash.search(re) !== -1 ) {
 
             // We're being asked to display the items for a specific project.
@@ -709,7 +709,7 @@ function showProjectDetails( urlObj, options )
     });
 }
 
-$(".fav").live("click", function(event, ui){
+$(".fav").on("click", function(event, ui){
     var self = this; //keep reference to this scope
     var success = function(transaction, results){
             console.log("favorite toggle success");
