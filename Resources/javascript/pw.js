@@ -1,7 +1,4 @@
-/**
- * Created with JetBrains WebStorm.
- * User: Steve
- * Date: 2/16/13
- * Time: 4:48 PM
- * To change this template use File | Settings | File Templates.
- */
+//define our proteomics workbench namespace to hold all of our stuff
+var pw = {};
+
+

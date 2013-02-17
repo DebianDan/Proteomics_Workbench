@@ -8,13 +8,35 @@
 	font-size:20px;
 } 
 
-a.fav{
+.itemButton{
     position: relative;
     z-index: 1;
     float: right;
-    margin: -41px 0 0 0 !important;
-    /*border: 0 1px 0 0 solid #ccc;*/
     padding: 2px;
+    border:none;
+    height:40px !important;
+}
+
+.itemList .ui-btn-inner{
+    line-height: 40px;
+    padding: 0 0 0 45px;
+    height:40px;
+}
+
+.itemButton .ui-btn-inner{
+    padding-left:15px !important;
+
+}
+
+a.fav{
+
+}
+
+.editButton{
+}
+
+.editPanel{
+    display:none;
 }
 
 @media all and (min-width: 650px){

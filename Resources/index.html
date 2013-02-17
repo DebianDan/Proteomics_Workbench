@@ -3,9 +3,10 @@
 <head>
     <title>Proteomics Workbench</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/jquery.mobile-1.3.0-beta.1.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="javascript/jquery-1.9.0.min.js"></script>
+
     <script src="javascript/jquery.mobile-1.3.0-beta.1.min.js"></script>
 </head>
 <body>
@@ -105,7 +106,7 @@
                   <option value="favorites">File Name</option>
                </select>
             </div><br>
-            <div id="scriptList" data-role="fieldcontain">
+            <div id="scriptList" class="itemList" data-role="fieldcontain">
 
             </div></div>
         </fieldset>
@@ -218,7 +219,7 @@
                   <option value="favorites">File Name</option>
                </select>
             </div><br>
-            <div id="assetList" data-role="fieldcontain">
+            <div id="assetList" class="itemList" data-role="fieldcontain">
 
             </div></div>
         </fieldset>
@@ -236,5 +237,14 @@
 </div><!-- /page -->
 
 </body>
-<script src="javascript/main.js"></script>
+<script src="javascript/utilities.js"></script>
+<script src="javascript/pw.js"></script>
+<script src="javascript/pw.db.js"></script>
+<script src="javascript/pw.projects.js"></script>
+<script src="javascript/pw.scripts.js"></script>
+<script src="javascript/pw.assets.js"></script>
+<script src="javascript/view/all.js"></script>
+<script src="javascript/view/assets.js"></script>
+<script src="javascript/view/projects.js"></script>
+<script src="javascript/view/scripts.js"></script>
 </html>
