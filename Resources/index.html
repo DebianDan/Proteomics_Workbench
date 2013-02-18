@@ -154,8 +154,8 @@
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                 <h3 class="ui-title">Are you sure you want to reset the database?</h3> <p>This is not reversible.</p>
                 <p>
-                    <span data-role="button" onclick="$('#resetDatabasePopup').popup('close');" data-inline="true" data-rel="back" data-theme="c">Cancel</span>
-                    <span onclick="pw.db.reset(); $('#resetDatabasePopup').popup('close');" data-role="button" data-inline="true" data-theme="b">Delete</span>
+                    <span data-role="button" onClick="$('#resetDatabasePopup').popup('close');" data-inline="true" data-rel="back" data-theme="c">Cancel</span>
+                    <span onClick="pw.db.reset(); $('#resetDatabasePopup').popup('close');" data-role="button" data-inline="true" data-theme="b">Delete</span>
                 </p>
             </div>
         </div>
@@ -188,7 +188,7 @@
     	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         	New title: <input type="text" class="newTitle" value=""><br>
             New description: <input type="text" class="newDescription" value=""><br>
-            <input type="submit" value="Submit" data-theme="b">
+            <input type="submit" value="Submit" data-theme="b" id="edit">
 		</div>
     
         <a href="#deleteProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>     

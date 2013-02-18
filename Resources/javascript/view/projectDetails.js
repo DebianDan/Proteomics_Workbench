@@ -18,11 +18,14 @@ function showProjectDetails( urlObj, options )
             // Get the page we are going to dump our content into.
             var $page = $( pageSelector );
             //put the content into the page
+			
+			//Fill in the fields for Edit Project
+			$("#editProjectPopup .newTitle").val(row['name']);
+			$("#editProjectPopup .newDescription").val(row['description']);
 
             //can be deleted later, just for DEBUG
-            //Code for Edit button: "<a href=\"#\" data-role=\"button\" data-icon=\"edit\" data-iconpos=\"left\" data-mini=\"true\" data-inline=\"true\" data-theme=\"e\">Edit</a>"
-            var markup = "Project Name: " + row['name'] + "&nbsp;<a href=\"#editTitlePopup\">Edit</a>" + "<br/>";
-            markup += "Project Details: " + row['description'] + "&nbsp;<a href=\"#editDescPopup\">Edit</a>" + "<br/>";
+            var markup = "Project Name: " + row['name'] + "<br/>";
+            markup += "Project Details: " + row['description'] + "<br/>";
             markup += "Date Created: " + row['date_created'] + "<br/>";
             markup += "PID: " + row['pid'] + "<br/>";
 
@@ -31,6 +34,7 @@ function showProjectDetails( urlObj, options )
 
             //inject the pid into the delete button for deletion NEEDED
             $('#delete').attr('data-pid', row['pid']);
+			$('#edit').attr('data-pid', row['pid']);
 
             //Forces the project details to be above the asset list
             $("#pDetails").html( markup );
