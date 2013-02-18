@@ -113,6 +113,10 @@ pw.projects = {
     deleteProject : function(id, onSuccess, onError){
 		var sql = "DELETE FROM projects WHERE pid=" + id + "";
         pw.db.execute(sql, onSuccess, onError);
+    },
+	editProject : function(name, description, onSuccess, onError){
+		var sql = "UPDATE projects SET name = '" + name + "', description = '" + description +"' WHERE pid=" + pid + "";
+        pw.db.execute(sql, onSuccess, onError);
     }
 };
 
@@ -289,6 +293,28 @@ $("#deleteProjectPopup #delete").click(function(){
 		}
 	);
 });
+
+//bind to the click event of the edit project button
+$("#editProjectPopup :submit").click(function(){
+    console.log("edit project button clicked");
+    var title = $("#editProjectPopup .newTitle").val();
+    var description = $("#editProjectPopup .newDescription").val();
+    if(title == ""){
+        alert('Project title must be filled in.');
+    }else{
+        pw.projects.editProject(title, description,
+            //success callback
+            function(transaction, results){
+                $("#editProjectPopup").popup("close");
+            },
+            //error callback
+            function(transaction, error){
+                alert("there was an error when attempting to edit the project: ", error.code);
+            }
+        );
+    }
+});
+
 
 /***************/
 /*ADDING ASSETS*/
@@ -626,8 +652,11 @@ function showProjectDetails( urlObj, options )
 
             //can be deleted later, just for DEBUG
 			//Code for Edit button: "<a href=\"#\" data-role=\"button\" data-icon=\"edit\" data-iconpos=\"left\" data-mini=\"true\" data-inline=\"true\" data-theme=\"e\">Edit</a>"
-			var markup = "Project Name: " + row['name'] + "&nbsp;<a href=\"#editTitlePopup\">Edit</a>" + "<br/>";
-            markup += "Project Details: " + row['description'] + "&nbsp;<a href=\"#editDescPopup\">Edit</a>" + "<br/>";
+			
+			$("#editProjectPopup .newTitle").val(row['name']);
+			$("#editProjectPopup .newDescription").val(row['description']);
+			var markup = "Project Name: " + row['name'] + "<br/>";
+            markup += "Project Details: " + row['description'] + "<br/>";
 			markup += "Date Created: " + row['date_created'] + "<br/>";
 			markup += "PID: " + row['pid'] + "<br/>";
 
