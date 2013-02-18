@@ -15,6 +15,32 @@ function addProjectScriptMarkup(sid, path){
     }
     sList.trigger('create');
 }
+
+//takes the settings button DOM element as input
+function showScriptSettings(e){
+    $(e).parents('label')
+}
+
+$(document).on("getDetails", "#scriptList .detailsPane", function(e){
+    e.preventDefault();
+    var self = this;
+    pw.scripts.getScript(e.id, function(script){
+        if(script){
+            console.log(JSON.stringify(script));
+            var detailsPaneMarkup = $(scriptDetailsTemplate.format(script.alias, script.sid, script.path, createArgumentsMarkup(script)));
+            $(self).html(detailsPaneMarkup);
+            $('.tagBox', self).chosen(); //apply the chosen plugin to the multi select box
+            //$('.scriptArguments', self).listview('refresh');
+            //detailsPaneMarkup.trigger('create');
+        }
+    });
+});
+
+function createArgumentsMarkup(script){
+    var tagBox = getTagsSelectMarkup();
+    return argumentTemplate.format("test",tagBox);
+}
+
 //removes the script from the list of scripts to be added
 $(document).on("click", "#scriptPickerList li .cancel", function(e){
     $(this).parent().parent().remove();
@@ -48,6 +74,8 @@ $("#addScriptPopup .save").click(function(){
         //add the asset to the database and then add to the page
         pw.scripts.addScript(path, function(transaction, results){
             addProjectScriptMarkup(results.insertId, path);
+        },function(t,e){
+            console.log("Error when trying to add script: {0}".format(e.message));
         });
     });
     clearScriptPicker();

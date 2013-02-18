@@ -21,8 +21,27 @@ $(document).bind("pagebeforechange", function( e, data ) {
     }
 });
 
-$(document).on("click", ".editButton", function(e){
+$(document).on("click", ".detailsButton", function(e){
     e.preventDefault();
-    $(this).next(".editPanel").toggle(); //get the sibling edit panel to show
+    var container = $(this).parents("label").first().parent();
+    var detailsPane = null;
+    if(container.length){
+        var detailsPane = $(container).next(".detailsPane");
+        if(!detailsPane.length){
+            detailsPane = $(detailsPaneTemplate);
+            container.after(detailsPane);
+            var id = $(this).attr("data-id");
+            var custom = jQuery.Event("getDetails", {"id" : id});
+            detailsPane.trigger(custom);
+        }else{
+            detailsPane.remove();
+        }
+    }
+
+    return false;
+});
+
+$(document).on("click", ".detailsPane", function(e){
+    e.preventDefault();
     return false;
 });

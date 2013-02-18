@@ -23,20 +23,34 @@
     height:40px;
 }
 
+.detailsPane .ui-btn-inner{
+    line-height:normal;
+    padding: inherit;
+    height:auto;
+}
+
 .itemButton .ui-btn-inner{
     padding-left:15px !important;
 
 }
 
-a.fav{
-
+.detailsPane{
+    clear: both;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid rgb(204, 204, 204);
 }
 
-.editButton{
-}
-
-.editPanel{
+#settingsArea{
     display:none;
+}
+
+ul.scriptArguments{
+    width:400px;
+}
+
+ul.scriptArguments input, ul.scriptArguments textarea{
+    margin: 0;
 }
 
 @media all and (min-width: 650px){
