@@ -181,15 +181,13 @@
     </div><!-- /header -->
 
     <div data-role="content">
-    	<!-- Popups for editing the title and description -->
-        <div data-role="popup" id="editTitlePopup" class="ui-content" data-overlay-theme="a">
+    
+    	<a href="#editProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a> 
+    	<!-- Popup for editing the title and description -->
+        <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
     	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         	New title: <input type="text" class="newTitle" value=""><br>
-            <input type="submit" value="Submit" data-theme="b">
-		</div>
-        <div data-role="popup" id="editDescPopup" class="ui-content" data-overlay-theme="a">
-    	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        	New description: <input type="text" class="newDescription" value=""><br>
+            New description: <input type="text" class="newDescription" value=""><br>
             <input type="submit" value="Submit" data-theme="b">
 		</div>
     
