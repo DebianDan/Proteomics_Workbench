@@ -227,24 +227,38 @@
                 </div>
         </div>
         <br><br>
-
+		<a href="#scriptExe">Script Execution page!</a><br>
         <!-- List of Assets -->
+        <div class="ui-grid-a" style="width:200%">
         <fieldset data-role="controlgroup" style="margin-top:5%;">
+        <div class="ui-block-a">
             <div class="ui-body ui-body-b">
             <div data-role="fieldcontain">
                <b>Sort By: </b>
                <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
-                   <option value="date">Newest</option>
+                  <option value="date">Newest</option>
                   <option value="favorites">Favorites</option>
                   <option value="type">File Type</option>
                   <option value="favorites">File Name</option>
                </select>
             </div><br>
             <div id="assetList" class="itemList" data-role="fieldcontain">
-
-            </div></div>
+            </div></div></div>
+		<div class="ui-block-b">
+        	<div class="ui-body ui-body-b">
+            <div data-role="fieldcontain">
+               <b>Sort By: </b>
+               <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
+                  <option value="date">Newest</option>
+                  <option value="favorites">Favorites</option>
+                  <option value="type">File Type</option>
+                  <option value="favorites">File Name</option>
+               </select>
+            </div><br>
+            <div id="scriptList-project" class="itemList" data-role="fieldcontain">
+            </div></div></div>
         </fieldset>
-			
+		</div>
         
     </div><!-- /content -->
 
@@ -253,6 +267,32 @@
         <h3>Navigation panel</h3>
         <a href="#projects" data-role="button">Projects</a>
         <a href="#scripts" data-role="button">Scripts</a>
+    </div>
+
+</div><!-- /page -->
+
+<div data-role="page" id="scriptExe" data-title="Script Execution">
+
+    <div data-role="header">
+        <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
+        <h1>Script Execution</h1>
+        <a href="#settings" data-role="button" data-icon="gear">Settings</a>
+        <a style="position:absolute; margin-left: 90px;top: 3px;" data-role="button" data-icon="back" data-rel="back">Back</a>
+    </div><!-- /header -->
+
+    <div data-role="content">   
+    <fieldset class="ui-grid-a">
+	<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
+	<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
+</fieldset>
+    
+    </div><!-- /content -->
+
+    <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
+        <a href="#navPanel" data-theme="b" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" style="float:right;"></a>
+        <h3>Navigation panel</h3>
+        <a href="#projects" data-role="button">Projects</a>
+        <a href="#scripts" class="ui-btn-active" data-role="button">Scripts</a>
     </div>
 
 </div><!-- /page -->
