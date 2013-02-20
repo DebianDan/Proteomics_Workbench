@@ -69,6 +69,28 @@ function showProjectDetails( urlObj, options )
                     alert("there was an error when attempting to retrieve the assets: ", error.code);
                 }
             );
+			
+			 pw.scripts.getAllScripts(
+				//success callback
+				function (transaction, results) {
+					console.log(results.rows.length + " scripts retrieved");
+					console.log("rendering scripts list");
+					var sList = $("#scriptList-project"); //save a reference to the element for efficiency
+					//clear the assets list to start
+					sList.html("");
+					//loop through rows and add them to script list
+					for (var i = 0; i < results.rows.length; i++) {
+						var row = results.rows.item(i);
+						var sid = row['sid'];
+						var path = row['path'];
+
+						addProjectScriptMarkup(sid, path, "scriptList-project");
+					}
+				},
+				function (transaction, error) {
+					alert("there was an error when attempting to retrieve the projects: ", error.code);
+				}
+			);
 
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we

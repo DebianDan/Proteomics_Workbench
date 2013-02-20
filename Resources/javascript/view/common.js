@@ -13,6 +13,7 @@ $(document).bind("pagebeforechange", function( e, data ) {
 
             // We're being asked to display the items for a specific project.
             showProjectDetails( u, data.options );
+			//showScripts();
 
             // Make sure to tell changePage() we've handled this call so it doesn't
             // have to do anything.
