@@ -227,7 +227,6 @@
                 </div>
         </div>
         <br><br>
-		<a href="#scriptExe">Script Execution page!</a><br>
         <!-- List of Assets -->
         <div class="ui-grid-a" style="width:200%">
         <fieldset data-role="controlgroup" style="margin-top:5%;">
@@ -256,6 +255,10 @@
                </select>
             </div><br>
             <div id="scriptList-project" class="itemList" data-role="fieldcontain">
+            <ul data-role="listview">
+				<li><a href="#scriptExe">test1</a></li>
+				<li><a href="#scriptExe">test2</a></li>
+            </ul>
             </div></div></div>
         </fieldset>
 		</div>
@@ -280,11 +283,10 @@
         <a style="position:absolute; margin-left: 90px;top: 3px;" data-role="button" data-icon="back" data-rel="back">Back</a>
     </div><!-- /header -->
 
-    <div data-role="content">   
-    <fieldset class="ui-grid-a">
-	<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
-	<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
-</fieldset>
+   <ul data-role="listview">
+				<li><a href="#scriptExe">test1</a></li>
+				<li><a href="#scriptExe">test2</a></li>
+            </ul>
     
     </div><!-- /content -->
 
@@ -310,6 +312,7 @@
 <script src="javascript/view/assets.js"></script>
 <script src="javascript/view/projects.js"></script>
 <script src="javascript/view/projectDetails.js"></script>
+<script src="javascript/view/scriptDetails.js"></script>
 <script src="javascript/view/scripts.js"></script>
 <script src="javascript/view/settings.js"></script>
 <script src="javascript/view/templates.js"></script>
