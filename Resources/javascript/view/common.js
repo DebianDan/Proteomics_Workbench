@@ -9,7 +9,9 @@ $(document).bind("pagebeforechange", function( e, data ) {
         // category.
         var u = $.mobile.path.parseUrl( data.toPage ),
             re = /^#project-details\?pid=/;
-        if ( u.hash.search(re) !== -1 ) {
+		var u2 = $.mobile.path.parseUrl( data.toPage ),
+            re2 = /^#scriptExe\?sid=/;
+		if ( u.hash.search(re) !== -1 ) {
 
             // We're being asked to display the items for a specific project.
             showProjectDetails( u, data.options );
@@ -19,6 +21,15 @@ $(document).bind("pagebeforechange", function( e, data ) {
             // have to do anything.
             e.preventDefault();
         }
+		else if ( u2.hash.search(re2) !== -1 ) {
+
+            // We're being asked to display the items for a specific project.
+            showScriptDetails(u2, data.options);
+
+            // Make sure to tell changePage() we've handled this call so it doesn't
+            // have to do anything.
+            e.preventDefault();
+        }  
     }
 });
 

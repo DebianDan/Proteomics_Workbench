@@ -1,3 +1,14 @@
+//adds a script to the project details page (display only)
+function addProjectDetailsScriptMarkup(sid, path){
+    var filename = path.replace(/^.*[\\\/]/, '');
+    var sList = $("#scriptList-project");
+    if(sList){
+        var markup = scriptProjectDetailsTemplate.format(sid, filename);
+        sList.append(markup);
+    }
+    sList.trigger('create');
+}
+
 // Load the data for a specific category, based on
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
@@ -84,7 +95,7 @@ function showProjectDetails( urlObj, options )
 						var sid = row['sid'];
 						var path = row['path'];
 
-						addProjectScriptMarkup(sid, path, "scriptList-project");
+						addProjectDetailsScriptMarkup(sid, path);
 					}
 				},
 				function (transaction, error) {

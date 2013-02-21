@@ -6,9 +6,9 @@ function clearScriptPicker(){
 }
 
 //adds a script to the scripts page (display only)
-function addProjectScriptMarkup(sid, path, listID){
+function addProjectScriptMarkup(sid, path){
     var filename = path.replace(/^.*[\\\/]/, '');
-    var sList = $("#"+listID);
+    var sList = $("#scriptList");
     if(sList){
         var markup = scriptTemplate.format(sid, filename);
         sList.append(markup);
@@ -73,7 +73,7 @@ $("#addScriptPopup .save").click(function(){
         var path = $(this).attr("data-path");
         //add the asset to the database and then add to the page
         pw.scripts.addScript(path, function(transaction, results){
-            addProjectScriptMarkup(results.insertId, path, "scriptList");
+            addProjectScriptMarkup(results.insertId, path);
         },function(t,e){
             console.log("Error when trying to add script: {0}".format(e.message));
         });
@@ -151,7 +151,7 @@ $(document).on('pagebeforecreate', '#scripts', function (event) {
                 var sid = row['sid'];
                 var path = row['path'];
 
-                addProjectScriptMarkup(sid, path, "scriptList");
+                addProjectScriptMarkup(sid, path);
             }
         },
         function (transaction, error) {

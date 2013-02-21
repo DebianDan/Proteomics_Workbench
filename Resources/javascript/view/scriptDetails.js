@@ -1,43 +1,42 @@
 function showScriptDetails( urlObj, options )
 {
-    var pid = urlObj.hash.replace( /.*pid=/, "" ),
+    var sid = urlObj.hash.replace( /.*sid=/, "" ),
 
     // The pages we use to display our content are already in
     // the DOM. The id of the page we are going to write our
     // content into is specified in the hash before the '?'.
         pageSelector = urlObj.hash.replace( /\?.*$/, "" );
 
-    pw.projects.getProject(pid, function(transaction, results){
-        console.log(results.rows.length + " rows returned");
-        if(results.rows.length > 0){
-            var row = results.rows.item(0); //get first result
+    pw.scripts.getScript(sid, function(script){
+        console.log("SID: " + sid);
+        if(script){
             // Get the page we are going to dump our content into.
             var $page = $( pageSelector );
             //put the content into the page
 			
-			//Fill in the fields for Edit Project
+			/*//Fill in the fields for Edit Project
 			$("#editProjectPopup .newTitle").val(row['name']);
 			$("#editProjectPopup .newDescription").val(row['description']);
+			*/
 
             //can be deleted later, just for DEBUG
-            var markup = "Project Name: " + row['name'] + "<br/>";
-            markup += "Project Details: " + row['description'] + "<br/>";
-            markup += "Date Created: " + row['date_created'] + "<br/>";
-            markup += "PID: " + row['pid'] + "<br/>";
+            var markup = "Script Name: " + script.alias + "<br/>";
+            markup += "Script Details: " + script.path + "<br/>";
+            markup += "Date Created: " + script.date_created + "<br/>";
+            markup += "SID: " + script.sid + "<br/>";
 
             //set active project (lazy hack for now)
-            pw.activeProject = parseInt(row['pid']);
+            //pw.activeProject = parseInt(row['pid']);
 
             //inject the pid into the delete button for deletion NEEDED
-            $('#delete').attr('data-pid', row['pid']);
-			$('#edit').attr('data-pid', row['pid']);
+            //$('#delete').attr('data-pid', row['pid']);
+			//$('#edit').attr('data-pid', row['pid']);
 
             //Forces the project details to be above the asset list
-            $("#pDetails").html( markup );
-            console.log("should be changing page content to " + markup);
-            $("#pTitle").html( row['name'] );
+            $("#pScriptDetails").html( markup );
 
-            //Display all the assets for a particular project
+            /* Will have to do this for each arguement
+			//Display all the assets for a particular project
             pw.assets.getAllAssets(pid,
                 //success callback
                 function (transaction, results) {
@@ -65,7 +64,8 @@ function showScriptDetails( urlObj, options )
                     alert("there was an error when attempting to retrieve the assets: ", error.code);
                 }
             );
-
+			*/
+			
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
             // attempt to enhance the listview markup we just injected.
