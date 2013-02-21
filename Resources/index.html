@@ -287,7 +287,14 @@
  
         <!-- The h3 tags are used to force project details to be above the project asset list-->
         <h4 id="pScriptDetails"></h4>	
-    
+		<a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
+		<div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
+                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                    <h3 class="ui-title">Run this script?</h3>
+                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                    <a href="#scriptExe" id="run" data-role="button" data-inline="true" data-theme="b">Run</a>
+                </div>
+        </div>
 </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -312,7 +319,7 @@
 <script src="javascript/view/assets.js"></script>
 <script src="javascript/view/projects.js"></script>
 <script src="javascript/view/projectDetails.js"></script>
-<script src="javascript/view/scriptDetails.js"></script>
+<script src="javascript/view/scriptExecution.js"></script>
 <script src="javascript/view/scripts.js"></script>
 <script src="javascript/view/settings.js"></script>
 <script src="javascript/view/templates.js"></script>

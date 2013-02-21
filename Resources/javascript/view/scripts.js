@@ -65,7 +65,7 @@ $("input.chooseScripts").click(function(){
     $("#scriptPickerList").trigger('create');
 });
 
-//bind to the click event of the add assets button
+//bind to the click event of the add scripts button
 $("#addScriptPopup .save").click(function(){
     console.log("add script button clicked");
     //get the paths for the added files
@@ -81,7 +81,7 @@ $("#addScriptPopup .save").click(function(){
     clearScriptPicker();
 });
 
-//bind to the click event of the delete asset button
+//bind to the click event of the delete script button
 $("#deleteScriptPopup #delete").click(function(){
     var sids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
     $('#scriptList input[data-sid]:checked').each(function () { //get all inputs that are checked and have an attribute of data-sid

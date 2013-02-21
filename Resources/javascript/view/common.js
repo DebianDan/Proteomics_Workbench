@@ -24,7 +24,7 @@ $(document).bind("pagebeforechange", function( e, data ) {
 		else if ( u2.hash.search(re2) !== -1 ) {
 
             // We're being asked to display the items for a specific project.
-            showScriptDetails(u2, data.options);
+            showScriptExecution(u2, data.options);
 
             // Make sure to tell changePage() we've handled this call so it doesn't
             // have to do anything.

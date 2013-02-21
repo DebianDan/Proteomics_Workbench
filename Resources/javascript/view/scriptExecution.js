@@ -1,4 +1,4 @@
-function showScriptDetails( urlObj, options )
+function showScriptExecution( urlObj, options )
 {
     var sid = urlObj.hash.replace( /.*sid=/, "" ),
 
@@ -28,9 +28,9 @@ function showScriptDetails( urlObj, options )
             //set active project (lazy hack for now)
             //pw.activeProject = parseInt(row['pid']);
 
-            //inject the pid into the delete button for deletion NEEDED
-            //$('#delete').attr('data-pid', row['pid']);
-			//$('#edit').attr('data-pid', row['pid']);
+            //inject the path into the run button for executing
+            $('#run').attr('data-path', script.path);
+
 
             //Forces the project details to be above the asset list
             $("#pScriptDetails").html( markup );
@@ -88,3 +88,21 @@ function showScriptDetails( urlObj, options )
         //error on select
     });
 }
+
+//bind to the click event of the Run Script button
+$(document).on('click', "#run", function(){
+    console.log("Run Script button clicked");
+    var path =  $('#run').attr('data-path');
+	var myScript = Ti.Process.createProcess({
+           args:['python',path]
+	});
+
+	myScript.setOnExit(function(){
+		alert("This was triggered on Exit.");
+		console.log("Python Script Finished Running");
+	});	   
+	//Launches the process  
+	myScript.launch();
+	//can poll to see if the process is running by isRunning().
+	
+});
