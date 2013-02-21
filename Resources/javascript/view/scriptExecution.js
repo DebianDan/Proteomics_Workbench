@@ -28,9 +28,9 @@ function showScriptExecution( urlObj, options )
             //set active project (lazy hack for now)
             //pw.activeProject = parseInt(row['pid']);
 
-            //inject the path into the run button for executing
+//THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
+			//inject the path into the run button for executing
             $('#run').attr('data-path', script.path);
-
 
             //Forces the project details to be above the asset list
             $("#pScriptDetails").html( markup );
@@ -92,17 +92,24 @@ function showScriptExecution( urlObj, options )
 //bind to the click event of the Run Script button
 $(document).on('click', "#run", function(){
     console.log("Run Script button clicked");
+//TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
 	var myScript = Ti.Process.createProcess({
            args:['python',path]
 	});
-
+	
+	//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
+	myScript.setOnReadLine(function(data) {
+        alert(data.toString());
+    });
+	
 	myScript.setOnExit(function(){
 		alert("This was triggered on Exit.");
 		console.log("Python Script Finished Running");
 	});	   
 	//Launches the process  
 	myScript.launch();
-	//can poll to see if the process is running by isRunning().
 	
+	//can poll to see if the process is running, will return a Boolean
+	//myScript.isRunning();
 });
