@@ -48,7 +48,7 @@ function showScriptExecution( urlObj, options )
             $("#pScriptDetails").html( markup );
 
             // Will have to do this for each arguement
-			//Display all the assets for a particular project
+			//Display all the assets for the active project
             pw.assets.getAllAssets(pw.activeProject,
                 //success callback
                 function (transaction, results) {
@@ -108,24 +108,28 @@ $(document).on('click', "#run", function(){
     var path =  $('#run').attr('data-path');
 	//get the argument path for the asset from the data-path attribute of the radio button
 	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
-
-	//take an asset as an argument to a python script
-	var myScript = Ti.Process.createProcess({
-           args:['python',path,argPath]
-	});
-	
-	//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
-	myScript.setOnReadLine(function(data) {
-        alert(data.toString());
-    });
-	
-	myScript.setOnExit(function(){
-		alert("This was triggered on Exit.");
-		console.log("Python Script Finished Running");
-	});	   
-	//Launches the process  
-	myScript.launch();
-	
-	//can poll to see if the process is running, will return a Boolean
-	//myScript.isRunning();
+	if (argPath == null){
+		alert("You have to select an asset to input!");
+		$('#runScript').popup("close");
+	}else{
+		//take an asset as an argument to a python script
+		var myScript = Ti.Process.createProcess({
+			   args:['python',path,argPath]
+		});
+		
+		//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
+		myScript.setOnReadLine(function(data) {
+			alert(data.toString());
+		});
+		
+		myScript.setOnExit(function(){
+			alert("This was triggered on Exit.");
+			console.log("Python Script Finished Running");
+		});	   
+		//Launches the process  
+		myScript.launch();
+		
+		//can poll to see if the process is running, will return a Boolean
+		//myScript.isRunning();
+	}
 });
