@@ -89,27 +89,78 @@
         
         
         <!-- List of Scripts -->
-        <fieldset data-role="controlgroup" style="margin-top:5%;">
-            <div class="ui-body ui-body-b">
+
+        <div class="ui-body ui-body-c">
             <br>
             <!--<div data-theme="b" data-content-theme="d">
                 <ul id="scriptList" data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true" data-filter-placeholder="Search scripts...">
                 </ul>
-        	</div>
-        	<br>-->
+            </div>
+            <br>-->
             <div data-role="fieldcontain">
                <b>Sort By: </b>
                <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
-                   <option value="date">Newest</option>
+                  <option value="date">Newest</option>
                   <option value="favorites">Favorites</option>
                   <option value="type">File Type</option>
                   <option value="favorites">File Name</option>
                </select>
-            </div><br>
+            </div>
             <div id="scriptList" class="itemList" data-role="fieldcontain">
 
-            </div></div>
-        </fieldset>
+            </div>
+
+            <div data-role="fieldcontain" class="">
+                <ul class="scriptProperties" data-role="listview" data-inset="true">
+                    <li data-role="fieldcontain">
+                        <label for="label-1">Label: </label>
+                        <input id="label-1" type="text" name="alias" value="C:\Python32\python.exe" />
+                    </li>
+
+                    <li data-role="fieldcontain">
+                        <label for="path-1">Path: </label>
+                        <input type="text" name="path" id="path-1" value="C:\Python32\python.exe" />
+                    </li>
+
+                    <li data-role="fieldcontain">
+                        <div data-role="collapsible" data-theme="a" data-mini="true">
+                            <h4>Arguments</h4>
+                            <ul data-role="listview" class="argumentsList" data-mini="true">
+                                <li data-role="fieldcontain">
+                                    <label for="argLabel-1">Label: </label>
+                                    <input type="text" placeholder="Argument Label" id="argLabel-1" data-mini="true" />
+                                    <label for="argSwitch-1">Switch: </label>
+                                    <input type="text" placeholder="Argument Switch (eg: -i)" id="argSwitch-1" data-mini="true" />
+                                    <label for="argDescription-1">Description: </label>
+                                    <textarea placeholder="Argument Description" type="text" id="argDescription-1" value="test" data-mini="true"></textarea>
+
+                                    <input type="checkbox" name="checkbox-0" id="checkbox-mini-0" data-mini="true" />
+                                    <label for="checkbox-mini-0">Required</label>
+                                </li>
+                                <li data-role="fieldcontain">
+                                    <label for="argLabel-2">Label: </label>
+                                    <input type="text" placeholder="Argument Label" id="argLabel-2" data-mini="true" />
+                                    <label for="argSwitch-2">Switch: </label>
+                                    <input type="text" placeholder="Argument Switch (eg: -i)" id="argSwitch-2" data-mini="true" />
+                                    <label for="argDescription-2">Description: </label>
+                                    <textarea placeholder="Argument Description" type="text" id="argDescription-2" value="test" data-mini="true"></textarea>
+
+                                    <input type="checkbox" name="checkbox-1" id="checkbox-mini-1" data-mini="true" />
+                                    <label for="checkbox-mini-1">Required</label>
+                                </li>
+                            </ul>
+                            <a class="addArguments-1" data-role="button" data-theme="e" href="#">Add Argument</a>
+                        </div>
+                    </li>
+
+
+
+
+
+                </ul>
+
+            </div>
+        </div>
     
     
     

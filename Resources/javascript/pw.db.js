@@ -1,19 +1,6 @@
 //DATABASE STUFF
 (function() {
     var _db; //private variable to hold the returned database object
-    //we define this getter so that it will only try to retrieve the database one time
-    pw.__defineGetter__("db", function(){
-        shortName = 'pwDB';
-        version = '1.0';
-        displayName = 'Database for the Proteomics Workbench software';
-        maxSize = 52428800; // 50MB
-        if(_db == undefined){ //only retrieve the database & create tables on program start
-            console.log("getting the database");
-            _db = openDatabase(shortName, version, displayName, maxSize);
-           createTables();
-        }
-        return _db;
-    });
 
     function dropTables(){
         pw.db.transaction(
@@ -58,6 +45,20 @@
             }
         );
     }
+
+    //we define this getter so that it will only try to retrieve the database one time
+    pw.__defineGetter__("db", function(){
+        var shortName = 'pwDB',
+        version = '1.0',
+        displayName = 'Database for the Proteomics Workbench software',
+        maxSize = 52428800; // 50MB
+        if(!_db){ //only retrieve the database & create tables on program start
+            console.log("getting the database");
+            _db = openDatabase(shortName, version, displayName, maxSize);
+            createTables();
+        }
+        return _db;
+    });
 
     pw.db.reset = function(){
         dropTables();

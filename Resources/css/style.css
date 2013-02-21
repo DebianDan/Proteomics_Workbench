@@ -9,22 +9,27 @@
 } 
 
 .itemButton{
-    position: relative;
+    float:right;
+    margin: 0;
+    padding: 0;
+    margin-top: -2px;
+   /* position: relative;
     z-index: 1;
     float: right;
     padding: 2px;
     border:none;
-    height:40px !important;
+    height:40px !important;*/
 }
 
 .itemList .ui-btn-inner{
-    line-height: 40px;
     padding: 0 0 0 45px;
     height:40px;
+    line-height: 40px;
 }
 
+/*
 .detailsPane .ui-btn-inner{
-    line-height:normal;
+   line-height:normal;
     padding: inherit;
     height:auto;
 }
@@ -32,7 +37,7 @@
 .itemButton .ui-btn-inner{
     padding-left:15px !important;
 
-}
+}*/
 
 .detailsPane{
     clear: both;
