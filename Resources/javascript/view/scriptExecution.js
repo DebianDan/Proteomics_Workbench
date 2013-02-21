@@ -1,9 +1,10 @@
 //adds an asset to the Script Execution page (display only)
 function addAssetScriptExeMarkup(aid, path, fav){
     var filename = path.replace(/^.*[\\\/]/, '');
-    var sList = $("#scriptList-project");
+    var sList = $("#scriptExeAssetList");
     if(sList){
-        var markup = scriptProjectDetailsTemplate.format(sid, filename);
+		//TODO add favorite
+        var markup = scriptExeAssetTemplate.format(aid, path, filename);
         sList.append(markup);
     }
     sList.trigger('create');
@@ -106,8 +107,8 @@ $(document).on('click', "#run", function(){
 //TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
 	//get the argument path for the asset from the data-path attribute of the radio button
-	var argPath = $('#scriptExeAssetList input[data-aid]:checked').attr('data-path');       
-	
+	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
+
 	//take an asset as an argument to a python script
 	var myScript = Ti.Process.createProcess({
            args:['python',path,argPath]

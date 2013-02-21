@@ -286,19 +286,14 @@
          
         <fieldset data-role="controlgroup" style="margin-top:5%;">
             <div class="ui-body ui-body-b">
-            <div data-role="fieldcontain">
-                <b>Label:&nbsp;</b><b>Argument:&nbsp;</b><b>Description:&nbsp;</b>
-           		<input type="radio" name="asset-choice" id="aid1" value="aid1">
-                <label for="aid1">asset1</label>
-        
-                <input type="radio" name="asset-choice" id="aid2" value="aid2">
-                <label for="aid2">asset2</label>
-        
-                <input type="radio" name="asset-choice" id="aid3" value="aid3">
-                <label for="aid3">asset3</label>
+			<p id="argMarkup"><b>Label:&nbsp;</b><b>Argument:&nbsp;</b><b>Description:</b>  These fields will be filled in when tagging is complete...</p>
+            <div id="scriptExeAssetList" data-role="fieldcontain">
+           		<!--<input type="radio" name="scriptAsset" id="aid1" value="aid1">
+                <label for="aid1">asset1</label>-->
             </div><br>
-            <div id="assetList" class="itemList" data-role="fieldcontain">
-            </div></div>
+            <!--<div id="assetList" class="itemList" data-role="fieldcontain">
+            </div>-->
+			</div>
         <br>
 		<a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
 		<div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
