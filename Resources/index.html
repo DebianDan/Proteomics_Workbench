@@ -255,10 +255,6 @@
                </select>
             </div><br>
             <div id="scriptList-project" class="itemList" data-role="fieldcontain">
-            <ul data-role="listview">
-				<li><a href="#scriptExe">test1</a></li>
-				<li><a href="#scriptExe">test2</a></li>
-            </ul>
             </div></div></div>
         </fieldset>
 		</div>
@@ -286,7 +282,24 @@
 <div data-role="content">
  
         <!-- The h3 tags are used to force project details to be above the project asset list-->
-        <h4 id="pScriptDetails"></h4>	
+        <h4 id="pScriptDetails"></h4>
+         
+        <fieldset data-role="controlgroup" style="margin-top:5%;">
+            <div class="ui-body ui-body-b">
+            <div data-role="fieldcontain">
+                <b>Label:&nbsp;</b><b>Argument:&nbsp;</b><b>Description:&nbsp;</b>
+           		<input type="radio" name="asset-choice" id="aid1" value="aid1">
+                <label for="aid1">asset1</label>
+        
+                <input type="radio" name="asset-choice" id="aid2" value="aid2">
+                <label for="aid2">asset2</label>
+        
+                <input type="radio" name="asset-choice" id="aid3" value="aid3">
+                <label for="aid3">asset3</label>
+            </div><br>
+            <div id="assetList" class="itemList" data-role="fieldcontain">
+            </div></div>
+        <br>
 		<a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
 		<div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
                 <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
@@ -295,6 +308,7 @@
                     <a href="#scriptExe" id="run" data-role="button" data-inline="true" data-theme="b">Run</a>
                 </div>
         </div>
+                   
 </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
