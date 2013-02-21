@@ -21,7 +21,7 @@ var scriptDetailsTemplate = '<span>Alias: </span><input type="text" name="alias"
 	
 var scriptProjectDetailsTemplate = '<li data-sid="{0}"><a href="#scriptExe?sid={0}">{1}</a></li>';
 
-var scriptExeAssetTemplate = '<input type="radio" name="scriptAsset" id="aid{0}" value="aid{0}" data-path="{1}"><label for="aid{0}">{2}</label>';
+var scriptExeAssetTemplate = '<input type="radio" name="scriptAsset" id="aid{0}" value="aid{0}" data-path="{1}" data-theme="c"><label for="aid{0}">{2}</label>';
 
 //{1} is the multi select tag markup
 var argumentTemplate = '<li><input type="text" placeholder="Argument Label" class="argLabel" /><input type="text" placeholder="Argument Switch (eg: -i)" class="argSwitch" />{1}<textarea placeholder="Argument Description" type="text" class="argDescription" value="{0}" /></li>';
