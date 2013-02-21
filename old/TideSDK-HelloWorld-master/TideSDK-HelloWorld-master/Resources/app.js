@@ -26,3 +26,18 @@ exitItem = fileItem.addItem('Exit', function() {
 
 menu.appendItem(fileItem);
 Ti.UI.setMenu(menu);
+
+var myScript = Ti.Process.createProcess({
+           args:['python',Ti.API.application.resourcesPath + "/test.py"]
+});
+
+myScript.setOnExit(function(){
+	alert("This was triggered on Exit.");
+});
+   
+//Launches the process  
+myScript.launch();
+//var test = myScript.getStdout();
+//alert(test);
+//can poll to see if the process is running by isRunning().
+console.log("Python Script Finished Running");

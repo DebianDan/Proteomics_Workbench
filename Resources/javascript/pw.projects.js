@@ -25,5 +25,10 @@ pw.projects = {
     deleteProject : function(id, onSuccess, onError){
         var sql = "DELETE FROM projects WHERE pid=" + id + "";
         pw.db.execute(sql, onSuccess, onError);
+    },
+	editProject : function(name, description, pid, onSuccess, onError){
+		var sql = "UPDATE projects SET name = '" + name + "', description = '" + description +"' WHERE pid=" + pid + "";
+        pw.db.execute(sql, onSuccess, onError);
     }
+
 };

@@ -64,3 +64,24 @@ $("#deleteProjectPopup #delete").click(function(){
         }
     );
 });
+
+//bind to the click event of the edit project button
+$(document).on('click', "#editProjectPopup :submit", function(){
+    console.log("edit project button clicked");
+    var title = $("#editProjectPopup .newTitle").val();
+    var description = $("#editProjectPopup .newDescription").val();
+    if(title == ""){
+        alert('Project title must be filled in.');
+    }else{
+        pw.projects.editProject(title, description, pw.activeProject,
+            //success callback
+            function(transaction, results){
+               $("#editProjectPopup").popup("close");
+            },
+            //error callback
+            function(transaction, error){
+                alert("there was an error when attempting to edit the project: ", error.code);
+            }
+        );
+    }
+});

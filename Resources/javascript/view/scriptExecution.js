@@ -1,64 +1,60 @@
-//adds a script to the project details page (display only)
-function addProjectDetailsScriptMarkup(sid, path){
+//adds an asset to the Script Execution page (display only)
+function addAssetScriptExeMarkup(aid, path, fav){
     var filename = path.replace(/^.*[\\\/]/, '');
-    var sList = $("#scriptList-project");
+    var sList = $("#scriptExeAssetList");
     if(sList){
-        var markup = scriptProjectDetailsTemplate.format(sid, filename);
+		//TODO add favorite
+        var markup = scriptExeAssetTemplate.format(aid, path, filename);
         sList.append(markup);
     }
     sList.trigger('create');
 }
 
-// Load the data for a specific category, based on
-// the URL passed in. Generate markup for the items in the
-// category, inject it into an embedded page, and then make
-// that page the current active page.
-function showProjectDetails( urlObj, options )
+function showScriptExecution( urlObj, options )
 {
-    var pid = urlObj.hash.replace( /.*pid=/, "" ),
+    var sid = urlObj.hash.replace( /.*sid=/, "" ),
 
     // The pages we use to display our content are already in
     // the DOM. The id of the page we are going to write our
     // content into is specified in the hash before the '?'.
         pageSelector = urlObj.hash.replace( /\?.*$/, "" );
 
-    pw.projects.getProject(pid, function(transaction, results){
-        console.log(results.rows.length + " rows returned");
-        if(results.rows.length > 0){
-            var row = results.rows.item(0); //get first result
+    pw.scripts.getScript(sid, function(script){
+        console.log("SID: " + sid);
+        if(script){
             // Get the page we are going to dump our content into.
             var $page = $( pageSelector );
             //put the content into the page
 			
-			//Fill in the fields for Edit Project
+			/*//Fill in the fields for Edit Project
 			$("#editProjectPopup .newTitle").val(row['name']);
 			$("#editProjectPopup .newDescription").val(row['description']);
+			*/
 
             //can be deleted later, just for DEBUG
-            var markup = "Project Name: " + row['name'] + "<br/>";
-            markup += "Project Details: " + row['description'] + "<br/>";
-            markup += "Date Created: " + row['date_created'] + "<br/>";
-            markup += "PID: " + row['pid'] + "<br/>";
+            var markup = "Script Name: " + script.alias + "<br/>";
+            markup += "Script Details: " + script.path + "<br/>";
+            markup += "Date Created: " + script.date_created + "<br/>";
+            markup += "SID: " + script.sid + "<br/>";
 
             //set active project (lazy hack for now)
-            pw.activeProject = parseInt(row['pid']);
+            //pw.activeProject = parseInt(row['pid']);
 
-            //inject the pid into the delete button for deletion NEEDED
-            $('#delete').attr('data-pid', row['pid']);
-			$('#edit').attr('data-pid', row['pid']);
+//THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
+			//inject the path into the run button for executing
+            $('#run').attr('data-path', script.path);
 
             //Forces the project details to be above the asset list
-            $("#pDetails").html( markup );
-            console.log("should be changing page content to " + markup);
-            $("#pTitle").html( row['name'] );
+            $("#pScriptDetails").html( markup );
 
-            //Display all the assets for a particular project
-            pw.assets.getAllAssets(pid,
+            // Will have to do this for each arguement
+			//Display all the assets for the active project
+            pw.assets.getAllAssets(pw.activeProject,
                 //success callback
                 function (transaction, results) {
                     console.log(results.rows.length + " assets retrieved");
                     console.log("rendering assets list");
-                    var aList = $("#assetList"); //save a reference to the element for efficiency
+                    var aList = $("#scriptExeAssetList"); //save a reference to the element for efficiency
 
                     //clear the assets list to start
                     aList.html("");
@@ -73,36 +69,15 @@ function showProjectDetails( urlObj, options )
                         if (row['fav'] == null){
                             fav = 0;
                         }
-                        addProjectAssetMarkup(aid, path, fav);
+                        addAssetScriptExeMarkup(aid, path, fav);
                     }
                 },
                 function (transaction, error) {
                     alert("there was an error when attempting to retrieve the assets: ", error.code);
                 }
             );
+			//
 			
-			 pw.scripts.getAllScripts(
-				//success callback
-				function (transaction, results) {
-					console.log(results.rows.length + " scripts retrieved");
-					console.log("rendering scripts list");
-					var sList = $("#scriptList-project"); //save a reference to the element for efficiency
-					//clear the assets list to start
-					sList.html("");
-					//loop through rows and add them to script list
-					for (var i = 0; i < results.rows.length; i++) {
-						var row = results.rows.item(i);
-						var sid = row['sid'];
-						var path = row['path'];
-
-						addProjectDetailsScriptMarkup(sid, path);
-					}
-				},
-				function (transaction, error) {
-					alert("there was an error when attempting to retrieve the projects: ", error.code);
-				}
-			);
-
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
             // attempt to enhance the listview markup we just injected.
@@ -125,3 +100,36 @@ function showProjectDetails( urlObj, options )
         //error on select
     });
 }
+
+//bind to the click event of the Run Script button
+$(document).on('click', "#run", function(){
+    console.log("Run Script button clicked");
+//TODO find a better way to get path to the script
+    var path =  $('#run').attr('data-path');
+	//get the argument path for the asset from the data-path attribute of the radio button
+	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
+	if (argPath == null){
+		alert("You have to select an asset to input!");
+		$('#runScript').popup("close");
+	}else{
+		//take an asset as an argument to a python script
+		var myScript = Ti.Process.createProcess({
+			   args:['python',path,argPath]
+		});
+		
+		//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
+		myScript.setOnReadLine(function(data) {
+			alert(data.toString());
+		});
+		
+		myScript.setOnExit(function(){
+			alert("This was triggered on Exit.");
+			console.log("Python Script Finished Running");
+		});	   
+		//Launches the process  
+		myScript.launch();
+		
+		//can poll to see if the process is running, will return a Boolean
+		//myScript.isRunning();
+	}
+});
