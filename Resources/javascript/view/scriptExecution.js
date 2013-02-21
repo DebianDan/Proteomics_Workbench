@@ -1,3 +1,14 @@
+//adds an asset to the Script Execution page (display only)
+function addAssetScriptExeMarkup(aid, path, fav){
+    var filename = path.replace(/^.*[\\\/]/, '');
+    var sList = $("#scriptList-project");
+    if(sList){
+        var markup = scriptProjectDetailsTemplate.format(sid, filename);
+        sList.append(markup);
+    }
+    sList.trigger('create');
+}
+
 function showScriptExecution( urlObj, options )
 {
     var sid = urlObj.hash.replace( /.*sid=/, "" ),
@@ -35,14 +46,14 @@ function showScriptExecution( urlObj, options )
             //Forces the project details to be above the asset list
             $("#pScriptDetails").html( markup );
 
-            /* Will have to do this for each arguement
+            // Will have to do this for each arguement
 			//Display all the assets for a particular project
-            pw.assets.getAllAssets(pid,
+            pw.assets.getAllAssets(pw.activeProject,
                 //success callback
                 function (transaction, results) {
                     console.log(results.rows.length + " assets retrieved");
                     console.log("rendering assets list");
-                    var aList = $("#assetList"); //save a reference to the element for efficiency
+                    var aList = $("#scriptExeAssetList"); //save a reference to the element for efficiency
 
                     //clear the assets list to start
                     aList.html("");
@@ -57,14 +68,14 @@ function showScriptExecution( urlObj, options )
                         if (row['fav'] == null){
                             fav = 0;
                         }
-                        addProjectAssetMarkup(aid, path, fav);
+                        addAssetScriptExeMarkup(aid, path, fav);
                     }
                 },
                 function (transaction, error) {
                     alert("there was an error when attempting to retrieve the assets: ", error.code);
                 }
             );
-			*/
+			//
 			
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
@@ -94,8 +105,12 @@ $(document).on('click', "#run", function(){
     console.log("Run Script button clicked");
 //TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
+	//get the argument path for the asset from the data-path attribute of the radio button
+	var argPath = $('#scriptExeAssetList input[data-aid]:checked').attr('data-path');       
+	
+	//take an asset as an argument to a python script
 	var myScript = Ti.Process.createProcess({
-           args:['python',path]
+           args:['python',path,argPath]
 	});
 	
 	//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
