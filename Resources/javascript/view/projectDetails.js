@@ -38,7 +38,7 @@ function showProjectDetails( urlObj, options )
             var markup = "Project Name: " + row['name'] + "<br/>";
             markup += "Project Details: " + row['description'] + "<br/>";
             markup += "Date Created: " + row['date_created'] + "<br/>";
-            markup += "PID: " + row['pid'] + "<br/>";
+            //markup += "PID: " + row['pid'] + "<br/>";
 
             //set active project (lazy hack for now)
             pw.activeProject = parseInt(row['pid']);
