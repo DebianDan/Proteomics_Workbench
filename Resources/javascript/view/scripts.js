@@ -140,8 +140,8 @@ function renderScriptList(){
                 html = Mustache.to_html(template, data),
                 sList = $("#scriptsList");
             //clear the assets list to start
-            sList.html(html);
-            sList.trigger('refresh');
+            sList.html(html).trigger('create');
+
         },
         fail : function(error){ //TODO: check to make sure arguments list is correct for this function
             alert("there was an error when attempting to retrieve the projects: ", error.code);
@@ -164,7 +164,6 @@ $(document).on('pagebeforecreate', '#scripts', function (event) {
     //$("#argumentsList").trigger("create");
     //$.mobile.activePage.trigger('create');
     //console.log(html);
-
     renderScriptList();
 
 });
