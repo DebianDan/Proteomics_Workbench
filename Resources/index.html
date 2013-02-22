@@ -3,11 +3,12 @@
 <head>
     <title>Proteomics Workbench</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/jquery.mobile-1.3.0-beta.1.css" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.0.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/chosen.css"/>
-    <script src="javascript/jquery-1.9.0.min.js"></script>
-    <script src="javascript/jquery.mobile-1.3.0-beta.1.min.js"></script>
+    <script src="javascript/jquery-1.8.3.min.js"></script>
+    <script src="javascript/jquery.mobile-1.3.0.min.js"></script>
+    <script src="javascript/mustache.js"></script>
 </head>
 <body>
 
@@ -41,6 +42,7 @@
                 </ul>
         </div>
     </div>
+        <a href="test.html">TEST!!!</a>
 
     </div><!-- /content -->
 
@@ -63,107 +65,103 @@
     </div><!-- /header -->
 
     <div data-role="content">
-    
-    <!-- Add Scripts -->
-        <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Add Scripts</a>
-        <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
-    	    <a href="#scripts" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
-            <input type="button" class="chooseScripts" value="Select File" id="scriptFileChooser">
-            <ul id="scriptPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
-            </ul>
-            <input type="submit" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
-            <a href="#scripts" type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>Cancel</a>
-		</div>
-                 
-        <!-- Delete Scripts -->
-        <a href="#deleteScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Delete Selected Scripts</a>
-        <div data-role="popup" id="deleteScriptPopup" class="ui-content" data-overlay-theme="a">
-                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                    <h3 class="ui-title">Are you sure you want to delete the selected script(s)?</h3>
-                    <a href="#scripts" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#scripts" id="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a" style="text-align:center;">
+                <!-- Add Scripts -->
+                <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Add Scripts</a>
+                <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
+                    <a href="#scripts" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+                    <input type="button" class="chooseScripts" value="Select File" id="scriptFileChooser">
+                    <ul id="scriptPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
+                    </ul>
+                    <input type="submit" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
+                    <a href="#scripts" type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>Cancel</a>
                 </div>
-        </div>
-        <br><br>
-		
-        
-        
-        <!-- List of Scripts -->
 
-        <div class="ui-body ui-body-c">
-            <br>
-            <!--<div data-theme="b" data-content-theme="d">
-                <ul id="scriptList" data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true" data-filter-placeholder="Search scripts...">
-                </ul>
-            </div>
-            <br>-->
-            <div data-role="fieldcontain">
-               <b>Sort By: </b>
-               <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
-                  <option value="date">Newest</option>
-                  <option value="favorites">Favorites</option>
-                  <option value="type">File Type</option>
-                  <option value="favorites">File Name</option>
-               </select>
-            </div>
-            <div id="scriptList" class="itemList" data-role="fieldcontain">
-
-            </div>
-
-            <div data-role="fieldcontain" class="">
-                <ul class="scriptProperties" data-role="listview" data-inset="true">
-                    <li data-role="fieldcontain">
-                        <label for="label-1">Label: </label>
-                        <input id="label-1" type="text" name="alias" value="C:\Python32\python.exe" />
-                    </li>
-
-                    <li data-role="fieldcontain">
-                        <label for="path-1">Path: </label>
-                        <input type="text" name="path" id="path-1" value="C:\Python32\python.exe" />
-                    </li>
-
-                    <li data-role="fieldcontain">
-                        <div data-role="collapsible" data-theme="a" data-mini="true">
-                            <h4>Arguments</h4>
-                            <ul data-role="listview" class="argumentsList" data-mini="true">
-                                <li data-role="fieldcontain">
-                                    <label for="argLabel-1">Label: </label>
-                                    <input type="text" placeholder="Argument Label" id="argLabel-1" data-mini="true" />
-                                    <label for="argSwitch-1">Switch: </label>
-                                    <input type="text" placeholder="Argument Switch (eg: -i)" id="argSwitch-1" data-mini="true" />
-                                    <label for="argDescription-1">Description: </label>
-                                    <textarea placeholder="Argument Description" type="text" id="argDescription-1" value="test" data-mini="true"></textarea>
-
-                                    <input type="checkbox" name="checkbox-0" id="checkbox-mini-0" data-mini="true" />
-                                    <label for="checkbox-mini-0">Required</label>
-                                </li>
-                                <li data-role="fieldcontain">
-                                    <label for="argLabel-2">Label: </label>
-                                    <input type="text" placeholder="Argument Label" id="argLabel-2" data-mini="true" />
-                                    <label for="argSwitch-2">Switch: </label>
-                                    <input type="text" placeholder="Argument Switch (eg: -i)" id="argSwitch-2" data-mini="true" />
-                                    <label for="argDescription-2">Description: </label>
-                                    <textarea placeholder="Argument Description" type="text" id="argDescription-2" value="test" data-mini="true"></textarea>
-
-                                    <input type="checkbox" name="checkbox-1" id="checkbox-mini-1" data-mini="true" />
-                                    <label for="checkbox-mini-1">Required</label>
-                                </li>
-                            </ul>
-                            <a class="addArguments-1" data-role="button" data-theme="e" href="#">Add Argument</a>
-                        </div>
-                    </li>
-
-
-
-
-
-                </ul>
-
+                <!-- Delete Scripts -->
+                <a href="#deleteScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Delete Selected Scripts</a>
+                <div data-role="popup" id="deleteScriptPopup" class="ui-content" data-overlay-theme="a">
+                    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                        <h3 class="ui-title">Are you sure you want to delete the selected script(s)?</h3>
+                        <a href="#scripts" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                        <a href="#scripts" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+                    </div>
+                </div>
             </div>
         </div>
-    
-    
-    
+
+        <div data-role="fieldcontain">
+            <select name="sortBy" id="" data-theme="c" data-mini="true" data-native-menu="false">
+                <option data-placeholder="true">Sort By</option>
+                <option value="date">Newest</option>
+                <option value="favorites">Favorites</option>
+                <option value="type">File Type</option>
+                <option value="favorites">File Name</option>
+            </select>
+        </div>
+
+        <div id="scriptsList">
+
+        </div>
+
+        <div id="tplScriptsListing" style="display:none;">
+            <div data-role="collapsible-set">
+                {{#scripts}}
+                <div data-role="collapsible">
+                    <h3>{{alias}}</h3>
+                    <div data-role="fieldcontain">
+                        <ul class="scriptProperties" data-role="listview" data-inset="true">
+                            <li data-role="fieldcontain">
+                                <label for="label-1">Label: </label>
+                                <input id="label-1" type="text" name="alias" value="{{alias}}" />
+                            </li>
+
+                            <li data-role="fieldcontain">
+                                <label for="path-1">Path: </label>
+                                <input type="text" name="path" id="path-1" value="{{path}}" />
+                            </li>
+
+                            <li data-role="fieldcontain">
+                                <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
+                                    <h4>Input Arguments</h4>
+                                    <ul data-role="listview" class="argumentsList" data-mini="true">
+                                        {{#arguments}}
+                                        <li data-role="fieldcontain">
+                                            <label for="argLabel-{{id}}">Label: </label>
+                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-mini="true" value="{{label}}" />
+                                            <label for="argSwitch-{{id}}">Switch: </label>
+                                            <input type="text" placeholder="Argument Switch (eg: -i)" id="argSwitch-{{id}}" data-mini="true" />
+                                            <label for="argDescription-{{id}}">Description: </label>
+                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" value="test" data-mini="true"></textarea>
+
+                                            <input type="checkbox" name="required-{{id}}" id="required-{{id}}" data-mini="true" />
+                                            <label for="required-{{id}}">Required</label>
+                                        </li>
+                                        {{/arguments}}
+                                        <a class="addInputArgument" data-role="button" data-theme="e" href="#">Add Argument</a>
+                                    </ul>
+                                </div>
+                                <!--
+                                <div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
+
+                                </div>
+
+                                <div id="tplInputArgs">
+
+
+                                </div>
+                                -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {{/scripts}}
+            </div>
+        </div>
+
+
+
+
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -248,7 +246,7 @@
                 <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                     <h3 class="ui-title">Are you sure you want to delete this project?</h3>
                     <a href="#projects" span data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#projects" id="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+                    <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
                 </div>
         </div>
         <br>
@@ -274,7 +272,7 @@
                 <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                     <h3 class="ui-title">Are you sure you want to delete the selected asset(s)?</h3>
                     <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#projectDetails" id="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+                    <a href="#projectDetails" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
                 </div>
         </div>
         
@@ -285,7 +283,7 @@
             <div class="ui-body ui-body-b">
             <div data-role="fieldcontain">
                <b>Sort By: </b>
-               <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
+               <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
                   <option value="date">Newest</option>
                   <option value="favorites">Favorites</option>
                   <option value="type">File Type</option>
@@ -298,7 +296,7 @@
         	<div class="ui-body ui-body-b">
             <div data-role="fieldcontain">
                <b>Sort By: </b>
-               <select name="sortBy" id="sortBy" data-theme="c" data-native-menu="false">
+               <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
                   <option value="date">Newest</option>
                   <option value="favorites">Favorites</option>
                   <option value="type">File Type</option>

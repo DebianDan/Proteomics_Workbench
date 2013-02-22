@@ -44,7 +44,7 @@ function showProjectDetails( urlObj, options )
             pw.activeProject = parseInt(row['pid']);
 
             //inject the pid into the delete button for deletion NEEDED
-            $('#delete').attr('data-pid', row['pid']);
+            $('.delete').attr('data-pid', row['pid']);
 			$('#edit').attr('data-pid', row['pid']);
 
             //Forces the project details to be above the asset list

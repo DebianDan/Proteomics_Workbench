@@ -3,13 +3,24 @@ pw.scripts = (function(){
     var my = {};
 
     my.script = function(data){
-        this.sid = data.sid;
+        this.sid = data['sid'];
         //this.filename = data.filename;
-        this.path = data.path;
-        this.alias = data.alias;
-        this.date_created = data.date_created;
-        this.arglist = [];
+        this.path = data['path'];
+        this.alias = data['alias'];
+        this.date_created = data['date_created'];
+        //this.arglist = [];
+        this.arguments = [{
+            id : 1,
+            label : "hurf durf label 1"
+        }, {
+            id : 2,
+            label : "hurf durf label 2"
+        }]
         return this;
+    }
+
+    function scriptFromSqlResults(results){
+        scriptObj = new my.script();
     }
 
     my.getScript = function(sid, onSuccess, onError){
@@ -22,20 +33,34 @@ pw.scripts = (function(){
                 var myScript = null;
                 if(results.rows.length){
                     var item = results.rows.item(0);
-                    myScript = new my.script({sid : item['sid'],
-                        path : item['path'],
-                        alias : item['alias'],
-                        date_created : item['date_created']
-                        });
+                    myScript = new my.script(item);
                 }
                 onSuccess(myScript);
             }, onError);
         }
     }
 
-    my.getAllScripts = function(onSuccess, onError){
-        var sql = "SELECT * FROM scripts WHERE 1=1 ORDER BY date_created DESC";
-        pw.db.execute(sql, onSuccess, onError);
+    //gets all scripts from the database and packages each up as a script object
+    //argument options is an object with two functions named 'success' and 'callback'. Executed on success or fail respectively.
+    my.getAllScripts = function(options){
+        var sql = "SELECT * FROM scripts WHERE 1=1 ORDER BY date_created DESC",
+        returnObj = {
+            scripts : [] //array of script objects to return
+        };
+
+        pw.db.execute(sql, function(transaction, results){
+            console.log(results.rows.length + " scripts retrieved");
+            //create script objects out of each script
+            if(results.rows.length){
+                for(var i = 0; i < results.rows.length; i++){
+                    var newScript = new my.script(results.rows.item(i));
+                    console.log("in the getter scope: " + JSON.stringify(newScript));
+                    returnObj.scripts.push(newScript);
+                }
+            }
+
+            options.success(returnObj); //call the success callback
+        }, options.error);
     }
 
     my.addScript = function(path, onSuccess, onError){

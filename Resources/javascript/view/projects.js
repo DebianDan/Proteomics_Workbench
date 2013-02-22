@@ -47,7 +47,7 @@ $(document).on('click', "#createProjectPopup :submit", function(){
 });
 
 //bind to the click event of the delete project button
-$("#deleteProjectPopup #delete").click(function(){
+$("#deleteProjectPopup .delete").click(function(){
     console.log("delete project button clicked");
     var pid = pw.activeProject;
     pw.projects.deleteProject(pid,

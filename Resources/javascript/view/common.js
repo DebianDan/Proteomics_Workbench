@@ -33,6 +33,7 @@ $(document).bind("pagebeforechange", function( e, data ) {
     }
 });
 
+/*
 $(document).on("click", ".detailsButton", function(e){
     e.preventDefault();
     var container = $(this).parents("label").first().parent();
@@ -51,9 +52,4 @@ $(document).on("click", ".detailsButton", function(e){
     }
 
     return false;
-});
-
-$(document).on("click", ".detailsPane", function(e){
-    e.preventDefault();
-    return false;
-});
+});*/

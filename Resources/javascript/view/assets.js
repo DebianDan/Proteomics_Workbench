@@ -1,5 +1,5 @@
 //bind to the click event of the delete asset button
-$("#deleteAssetPopup #delete").click(function(){
+$("#deleteAssetPopup .delete").click(function(){
     var aids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
     $('#assetList input[data-aid]:checked').each(function () { //get all inputs that are checked and have an attribute of data-aid
         var aid = $(this).attr('data-aid');

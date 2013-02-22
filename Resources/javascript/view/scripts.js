@@ -22,7 +22,7 @@ function showScriptSettings(e){
 }
 
 $(document).on("getDetails", "#scriptList .detailsPane", function(e){
-    e.preventDefault();
+    /*e.preventDefault();
     var self = this;
     pw.scripts.getScript(e.id, function(script){
         if(script){
@@ -33,7 +33,7 @@ $(document).on("getDetails", "#scriptList .detailsPane", function(e){
             //$('.scriptArguments', self).listview('refresh');
             //detailsPaneMarkup.trigger('create');
         }
-    });
+    });*/
 });
 
 function createArgumentsMarkup(script){
@@ -82,7 +82,7 @@ $("#addScriptPopup .save").click(function(){
 });
 
 //bind to the click event of the delete script button
-$("#deleteScriptPopup #delete").click(function(){
+$("#deleteScriptPopup .delete").click(function(){
     var sids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
     $('#scriptList input[data-sid]:checked').each(function () { //get all inputs that are checked and have an attribute of data-sid
         var sid = $(this).attr('data-sid');
@@ -130,32 +130,41 @@ $("#deleteScriptPopup #delete").click(function(){
      }*/
 });
 
+function renderScriptList(){
+    //get all scripts in database
+    pw.scripts.getAllScripts({
+        success: function(data){
+            console.log("rendering scripts list");
+            console.log("scripts data: " + JSON.stringify(data));
+            var template = $("#tplScriptsListing").html(),
+                html = Mustache.to_html(template, data),
+                sList = $("#scriptsList");
+            //clear the assets list to start
+            sList.html(html);
+            sList.trigger('refresh');
+        },
+        fail : function(error){ //TODO: check to make sure arguments list is correct for this function
+            alert("there was an error when attempting to retrieve the projects: ", error.code);
+        }
+    });
+}
+
 /**********************/
 /*END DELETING SCRIPTS*/
 /**********************/
 
 //execute on scripts page load
 $(document).on('pagebeforecreate', '#scripts', function (event) {
-    //get all scriptss in database
-    pw.scripts.getAllScripts(
-        //success callback
-        function (transaction, results) {
-            console.log(results.rows.length + " scripts retrieved");
-            console.log("rendering scripts list");
-            var sList = $("#scriptList"); //save a reference to the element for efficiency
-            //clear the assets list to start
-            sList.html("");
-            //loop through rows and add them to script list
-            for (var i = 0; i < results.rows.length; i++) {
-                var row = results.rows.item(i);
-                var sid = row['sid'];
-                var path = row['path'];
 
-                addProjectScriptMarkup(sid, path);
-            }
-        },
-        function (transaction, error) {
-            alert("there was an error when attempting to retrieve the projects: ", error.code);
-        }
-    );
+    //testing mustache to fill in arguments
+    //template = $("#tplInputArgs").html();
+    //var html = Mustache.to_html(template, testScript);
+    //$(template).prepend(html);
+    //$("#inputArgumentsList").html(html);
+    //$("#argumentsList").trigger("create");
+    //$.mobile.activePage.trigger('create');
+    //console.log(html);
+
+    renderScriptList();
+
 });
