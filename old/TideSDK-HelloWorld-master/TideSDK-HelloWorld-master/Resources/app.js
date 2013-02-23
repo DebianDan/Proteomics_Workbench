@@ -27,17 +27,41 @@ exitItem = fileItem.addItem('Exit', function() {
 menu.appendItem(fileItem);
 Ti.UI.setMenu(menu);
 
-var myScript = Ti.Process.createProcess({
+//Create a callback function for the notification
+var doSomething = function() {
+    var myScript = Ti.Process.createProcess({
            args:['python',Ti.API.application.resourcesPath + "/test.py"]
+	});
+
+	myScript.setOnExit(function(){
+		alert("This was triggered on Exit.");
+	});
+	   
+	//Launches the process  
+	myScript.launch();
+	//var test = myScript.getStdout();
+	//alert(test);
+	//can poll to see if the process is running by isRunning().
+	console.log("Python Script Finished Running");
+}
+
+
+//Creating a notification and displaying it.
+var notification = Ti.Notification.createNotification({
+    'title' : 'Notification from App',
+    'message' : 'Click here for updates!',
+    'timeout' : 0,
+    'callback' : doSomething
+    //'icon' : 'app://images/notificationIcon.png'        
 });
 
-myScript.setOnExit(function(){
-	alert("This was triggered on Exit.");
+var notification2 = Ti.Notification.createNotification({
+    'title' : 'Hey',
+    'message' : 'updates!',
+    'timeout' : 0,
+    'callback' : doSomething
+    //'icon' : 'app://images/notificationIcon.png'        
 });
-   
-//Launches the process  
-myScript.launch();
-//var test = myScript.getStdout();
-//alert(test);
-//can poll to see if the process is running by isRunning().
-console.log("Python Script Finished Running");
+
+notification.show();
+//notification2.show();
