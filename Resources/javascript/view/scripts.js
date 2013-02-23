@@ -153,22 +153,56 @@ function renderScriptList(){
     });
 }
 
-$(document).on("blur", ".argumentsList input, .argumentsList textarea", function(e){
-    var self = this;
-    var name = $(this).attr("name"),
-        id = $(this).attr("data-id"),
-        val = $(this).val();
-    console.log(JSON.stringify(pw.scripts.argumentsHash[id]));
-    console.log("blurred on argument {0} for id {1}".format(name, id));
+function updateScriptValue(options){
+    var myScript = pw.scripts.getScript({
+        id: options.id,
+        success : function(script){
+            script.update({
+                name : options.name,
+                value : options.val
+            });
+        }
+    });
+}
+
+function updateArgumentValue(options){
+    var myArgument = pw.scripts.getArgument({
+        id: options.id,
+        success : function(a){
+            a.update({
+                name : options.name,
+                value : options.value
+            });
+        }
+    });
+}
+
+$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input, .scriptProperties li:first textarea", function(e){
+    var options = {
+        name : $(this).attr("name"),
+        id : $(this).attr("data-id"),
+        value : $(this).val()
+    };
+    updateScriptValue(options);
 });
 
-$(document).on("change", ".argumentsList input[type=checkbox]", function(e){
-    var required = ($(this).is(":checked")) ? 1 : 0,
-        name = $(this).attr("name"),
-        id = $(this).attr("data-id");
+$(document).on("blur", ".argumentsList input, .argumentsList textarea", function(e){
+    var options = {
+        name : $(this).attr("name"),
+        id : $(this).attr("data-id"),
+        value : $(this).val()
+    };
+    updateArgumentValue(options);
+});
 
-    //update the argument
-    //pw.scripts.arguments.updateArgument(id, name, required);
+
+$(document).on("change", ".argumentsList input[type=checkbox]", function(e){
+    var options ={
+        name : $(this).attr("name"),
+        id : $(this).attr("data-id"),
+        value : ($(this).is(":checked")) ? 1 : 0
+    };
+    updateArgumentValue(options);
 });
 
 /**********************/

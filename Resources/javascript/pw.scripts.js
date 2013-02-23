@@ -2,10 +2,10 @@
 pw.scripts = (function(){
     var my = {};
 
-    scriptHash = {}; //store the scripts after they're generated
-    argumentsHash = {}; //store the arguments after they're generated
+    var scriptHash = {}; //store the scripts after they're generated
+    var argumentHash = {}; //store the arguments after they're generated
 
-    script = function(data){
+    var script = function(data){
         this.sid = data['sid'];
         //this.filename = data.filename;
         this.path = data['path'];
@@ -22,11 +22,14 @@ pw.scripts = (function(){
             label : "hurf durf label 2",
             required: 0
         })]
+        this.update = function(options){
+            console.log('update called on script {0} updating column {1} to {2}'.format(this.sid, options.name, options.value));
+        }
         scriptHash[this.sid] = this;
-        return this;
+        return scriptHash[this.sid];
     }
 
-    argument = function(data){
+    var argument = function(data){
         defaults = {
             id: -1,
             alias: "",
@@ -35,31 +38,47 @@ pw.scripts = (function(){
             required : 0
         }
         $.extend(this, defaults, data); //mix properties of data with defaults & this context
-        this.update = function(){
-            console.log('update called on arg {0}', this.id);
+        this.update = function(options){
+            console.log('update called on arg {0} to update column {1} to {2}'.format(this.id, options.name, options.value));
         }
-
         this.test = function(){
             alert("TEST!");
         }
 
-        argumentsHash[this.id] = this;
-        return this;
+        argumentHash[this.id] = this;
+        return argumentHash[this.id];
     }
 
-    function scriptFromSqlResults(results){
-        scriptObj = new script();
+    my.getArgument = function(options){
+        var returnObject = {},
+            sql = "SELECT * FROM arguments WHERE id = {0}".format(options.id);
+        if(options.id == undefined){
+            onError("id must be specified in options object when calling getArgument()");
+            return false;
+        }else{
+            if(argumentHash[options.id]){ //attempt to get it locally first
+                options.success(argumentHash[options.id]);
+            }else{ //we have to get it from the database
+                pw.db.execute(sql, function(transaction, results){
+                    var myArgument = null;
+                    if(results.rows.length){
+                        var item = results.rows.item(0);
+                        myArgument = new argument(item);
+                    }
+                    options.success(myArgument);
+                }, options.error);
+            }
+        }
     }
 
     my.getScript = function(options){
-        var returnObject = {},
-            sql = "SELECT * FROM scripts WHERE sid = " + sid;
-        if(options.sid == undefined){
-            onError("sid must be specified in options object when calling getScript()");
+        var sql = "SELECT * FROM scripts WHERE sid = {0}".format(options.id);
+        if(options.id == undefined){
+            options.error("id must be specified in options object when calling getScript()");
             return false;
         }else{
-            if(scriptHash[options.sid]){ //attempt to get it locally first
-                options.success(my.scriptHash[options.sid]);
+            if(scriptHash[options.id]){ //attempt to get it locally first
+                options.success(scriptHash[options.id]);
             }else{ //we have to get it from the database
                 pw.db.execute(sql, function(transaction, results){
                     var myScript = null;
@@ -82,8 +101,8 @@ pw.scripts = (function(){
         };
 
         //clear out old scripts and arguments each time this is called
-        scriptsHash = {};
-        argumentsHash = {};
+        scriptHash = {};
+        argumentHash = {};
 
         pw.db.execute(sql, function(transaction, results){
             console.log(results.rows.length + " scripts retrieved");
