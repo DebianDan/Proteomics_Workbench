@@ -110,8 +110,6 @@ pw.scripts = (function(){
             if(results.rows.length){
                 for(var i = 0; i < results.rows.length; i++){
                     var newScript = new script(results.rows.item(i));
-
-                    console.log("in the getter scope: " + JSON.stringify(newScript));
                     returnObj.scripts.push(newScript);
                 }
             }

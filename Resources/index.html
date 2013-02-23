@@ -185,7 +185,6 @@
 
 </div><!-- /page -->
 
-
 <div data-role="page" id="settings" data-title="Settings">
     <div data-role="header">
         <a href="#navPanel" data-role="button" data-icon="bars">Menu</a>
@@ -291,33 +290,51 @@
         <!-- List of Assets -->
         <div class="ui-grid-a" style="width:200%">
         <fieldset data-role="controlgroup" style="margin-top:0%;">
-        <div class="ui-block-a" style="padding-right:10px">
-            <div class="ui-body ui-body-b">
-            <div data-role="fieldcontain">
-               <b>Sort By: </b>
-               <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
-                  <option value="date">Newest</option>
-                  <option value="favorites">Favorites</option>
-                  <option value="type">File Type</option>
-                  <option value="favorites">File Name</option>
-               </select>
-            </div><br>
-            <div id="assetList" class="itemList" data-role="fieldcontain">
-            </div></div></div>
-		<div class="ui-block-b" style="padding-left:10px">
-        	<div class="ui-body ui-body-b">
-            <div data-role="fieldcontain">
-               <b>Sort By: </b>
-               <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
-                  <option value="date">Newest</option>
-                  <option value="favorites">Favorites</option>
-                  <option value="type">File Type</option>
-                  <option value="favorites">File Name</option>
-               </select>
-            </div><br>
-            <div id="scriptList-project" class="itemList" data-role="fieldcontain">
-           
-            </div></div></div>
+            <div class="ui-block-a" style="padding-right:10px">
+                <div class="ui-body ui-body-b">
+                    <div data-role="fieldcontain">
+                       <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
+                          <option data-placeholder="true">Sort By</option>
+                          <option value="date">Newest</option>
+                          <option value="favorites">Favorites</option>
+                          <option value="type">File Type</option>
+                          <option value="favorites">File Name</option>
+                       </select>
+                    </div><br>
+                    <div id="assetList" class="itemList" data-role="fieldcontain">
+                    </div>
+                    <!--
+                    <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
+                        <ul class="itemList" data-role="fieldcontain">
+
+                        </ul>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div class="ui-block-b" style="padding-left:10px">
+                <div class="ui-body ui-body-b">
+                    <div data-role="fieldcontain">
+                       <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
+                          <option data-placeholder="true">Sort By</option>
+                          <option value="date">Newest</option>
+                          <option value="favorites">Favorites</option>
+                          <option value="type">File Type</option>
+                          <option value="favorites">File Name</option>
+                       </select>
+                    </div><br>
+                    <ul id="scriptList-project">
+
+                    </ul>
+                    <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false">
+                        <ul data-role="fieldcontain">
+                            {{#scripts}}
+                            <li data-sid="{{sid}}"><a href="#scriptExe?sid={{sid}}">{{alias}}</a></li>
+                            {{/scripts}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </fieldset>
 		</div>
         
@@ -373,7 +390,7 @@
         <a href="#navPanel" data-theme="b" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" style="float:right;"></a>
         <h3>Navigation panel</h3>
         <a href="#projects" data-role="button">Projects</a>
-        <a href="#scripts" class="ui-btn-active" data-role="button">Scripts</a>
+        <a href="#scripts" data-role="button">Scripts</a>
     </div>
 
 </div><!-- /page -->

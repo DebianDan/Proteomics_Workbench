@@ -77,7 +77,8 @@ $("#addScriptPopup .save").click(function(){
         var path = $(this).attr("data-path");
         //add the asset to the database and then add to the page
         pw.scripts.addScript(path, function(transaction, results){
-            addProjectScriptMarkup(results.insertId, path);
+            //addProjectScriptMarkup(results.insertId, path);
+            renderScriptList();
         },function(t,e){
             console.log("Error when trying to add script: {0}".format(e.message));
         });
@@ -133,13 +134,16 @@ $("#deleteScriptPopup .delete").click(function(){
      );
      }*/
 });
+/**********************/
+/*END DELETING SCRIPTS*/
+/**********************/
+
 
 function renderScriptList(){
     //get all scripts in database
     pw.scripts.getAllScripts({
         success: function(data){
             console.log("rendering scripts list");
-            console.log("scripts data: " + JSON.stringify(data));
             var template = $("#tplScriptsListing").html(),
                 html = Mustache.to_html(template, data),
                 sList = $("#scriptsList");
@@ -204,10 +208,6 @@ $(document).on("change", ".argumentsList input[type=checkbox]", function(e){
     };
     updateArgumentValue(options);
 });
-
-/**********************/
-/*END DELETING SCRIPTS*/
-/**********************/
 
 //execute on scripts page load
 $(document).on('pagebeforecreate', '#scripts', function (event) {
