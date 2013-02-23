@@ -120,13 +120,13 @@
                     <div data-role="fieldcontain">
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
-                                <label for="label-1">Label: </label>
-                                <input id="label-1" type="text" name="alias" value="{{alias}}" />
+                                <label for="alias-{{sid}}">Alias: </label>
+                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
-                                <label for="path-1">Path: </label>
-                                <input type="text" name="path" id="path-1" value="{{path}}" />
+                                <label for="path-{{sid}}">Path: </label>
+                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
                             </li>
 
                             <li data-role="fieldcontain">
@@ -136,17 +136,21 @@
                                         {{#arguments}}
                                         <li data-role="fieldcontain">
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-mini="true" value="{{label}}" />
+                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)" id="argSwitch-{{id}}" data-mini="true" />
+                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" value="test" data-mini="true"></textarea>
-
-                                            <input type="checkbox" name="required-{{id}}" id="required-{{id}}" data-mini="true" />
-                                            <label for="required-{{id}}">Required</label>
+                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <label for="required-{{id}}" checked="checked">Required</label>
+                                            {{#required}}
+                                            <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+                                            {{/required}}
+                                            {{^required}}
+                                            <input type="checkbox" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+                                            {{/required}}
                                         </li>
                                         {{/arguments}}
-                                        <a class="addInputArgument" data-role="button" data-theme="e" href="#">Add Argument</a>
+                                        <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
                                     </ul>
                                 </div>
                                 <!--

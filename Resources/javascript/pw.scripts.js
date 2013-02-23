@@ -2,41 +2,74 @@
 pw.scripts = (function(){
     var my = {};
 
-    my.script = function(data){
+    scriptHash = {}; //store the scripts after they're generated
+    argumentsHash = {}; //store the arguments after they're generated
+
+    script = function(data){
         this.sid = data['sid'];
         //this.filename = data.filename;
         this.path = data['path'];
         this.alias = data['alias'];
         this.date_created = data['date_created'];
         //this.arglist = [];
-        this.arguments = [{
+        this.arguments = [new argument({
             id : 1,
-            label : "hurf durf label 1"
-        }, {
+            label : "hurf durf label 1",
+            description: "description 1",
+            required: 1
+        }), new argument({
             id : 2,
-            label : "hurf durf label 2"
-        }]
+            label : "hurf durf label 2",
+            required: 0
+        })]
+        scriptHash[this.sid] = this;
+        return this;
+    }
+
+    argument = function(data){
+        defaults = {
+            id: -1,
+            alias: "",
+            label : "",
+            description: "",
+            required : 0
+        }
+        $.extend(this, defaults, data); //mix properties of data with defaults & this context
+        this.update = function(){
+            console.log('update called on arg {0}', this.id);
+        }
+
+        this.test = function(){
+            alert("TEST!");
+        }
+
+        argumentsHash[this.id] = this;
         return this;
     }
 
     function scriptFromSqlResults(results){
-        scriptObj = new my.script();
+        scriptObj = new script();
     }
 
-    my.getScript = function(sid, onSuccess, onError){
-        var sql = "SELECT * FROM scripts WHERE sid = " + sid;
-        if(sid == undefined){
-            onError("sid must be specified when calling getScript()");
+    my.getScript = function(options){
+        var returnObject = {},
+            sql = "SELECT * FROM scripts WHERE sid = " + sid;
+        if(options.sid == undefined){
+            onError("sid must be specified in options object when calling getScript()");
             return false;
         }else{
-            pw.db.execute(sql, function(transaction, results){
-                var myScript = null;
-                if(results.rows.length){
-                    var item = results.rows.item(0);
-                    myScript = new my.script(item);
-                }
-                onSuccess(myScript);
-            }, onError);
+            if(scriptHash[options.sid]){ //attempt to get it locally first
+                options.success(my.scriptHash[options.sid]);
+            }else{ //we have to get it from the database
+                pw.db.execute(sql, function(transaction, results){
+                    var myScript = null;
+                    if(results.rows.length){
+                        var item = results.rows.item(0);
+                        myScript = new script(item);
+                    }
+                    options.success(myScript);
+                }, options.error);
+            }
         }
     }
 
@@ -48,17 +81,21 @@ pw.scripts = (function(){
             scripts : [] //array of script objects to return
         };
 
+        //clear out old scripts and arguments each time this is called
+        scriptsHash = {};
+        argumentsHash = {};
+
         pw.db.execute(sql, function(transaction, results){
             console.log(results.rows.length + " scripts retrieved");
             //create script objects out of each script
             if(results.rows.length){
                 for(var i = 0; i < results.rows.length; i++){
-                    var newScript = new my.script(results.rows.item(i));
+                    var newScript = new script(results.rows.item(i));
+
                     console.log("in the getter scope: " + JSON.stringify(newScript));
                     returnObj.scripts.push(newScript);
                 }
             }
-
             options.success(returnObj); //call the success callback
         }, options.error);
     }

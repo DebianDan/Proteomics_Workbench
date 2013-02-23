@@ -52,6 +52,10 @@ $(document).on("click", "#addScriptPopup .close", function(e){
     e.preventDefault();
 });
 
+$(document).on("click", ".addInputArgument", function(e){
+    //add an
+});
+
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
     var path = Ti.UI.openFileChooserDialog(function(path){
@@ -148,6 +152,24 @@ function renderScriptList(){
         }
     });
 }
+
+$(document).on("blur", ".argumentsList input, .argumentsList textarea", function(e){
+    var self = this;
+    var name = $(this).attr("name"),
+        id = $(this).attr("data-id"),
+        val = $(this).val();
+    console.log(JSON.stringify(pw.scripts.argumentsHash[id]));
+    console.log("blurred on argument {0} for id {1}".format(name, id));
+});
+
+$(document).on("change", ".argumentsList input[type=checkbox]", function(e){
+    var required = ($(this).is(":checked")) ? 1 : 0,
+        name = $(this).attr("name"),
+        id = $(this).attr("data-id");
+
+    //update the argument
+    //pw.scripts.arguments.updateArgument(id, name, required);
+});
 
 /**********************/
 /*END DELETING SCRIPTS*/
