@@ -37,17 +37,14 @@ function showScriptExecution( urlObj, options )
             markup += "Date Created: " + script.date_created + "<br/>";
             markup += "SID: " + script.sid + "<br/>";
 
-            //set active project (lazy hack for now)
-            //pw.activeProject = parseInt(row['pid']);
-
-//THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
+			//THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
 			//inject the path into the run button for executing
             $('#run').attr('data-path', script.path);
 
-            //Forces the project details to be above the asset list
+            //Forces the project details to be above the arguements
             $("#pScriptDetails").html( markup );
 
-            // Will have to do this for each arguement
+		// Will have to do this for each arguement
 			//Display all the assets for the active project
             pw.assets.getAllAssets(pw.activeProject,
                 //success callback
@@ -104,7 +101,7 @@ function showScriptExecution( urlObj, options )
 //bind to the click event of the Run Script button
 $(document).on('click', "#run", function(){
     console.log("Run Script button clicked");
-//TODO find a better way to get path to the script
+	//TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
 	//get the argument path for the asset from the data-path attribute of the radio button
 	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
