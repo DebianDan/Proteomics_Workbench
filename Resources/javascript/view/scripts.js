@@ -181,6 +181,30 @@ function updateArgumentValue(options){
     });
 }
 
+$(document).on("click", ".addInputArgument", function(e){
+    //options argument to pass to getScript()
+    var self = this;
+    var options = {
+        id : $(this).attr("data-id"),
+        success : function(script){
+            script.addArgument({
+                success : function(newArg){
+                    console.log("successfully added input argument: {0}".format(JSON.stringify(newArg)));
+                    //we have successfully added the argument to the database
+                    //now we need to create the entry in the form
+                    //get the template for the entry first
+                    var template = $("#tplScriptsListing .argumentsList li")[0].outerHTML, //using outerHTML gives us the wrapping element itself (in this case the <li>) which jquery doesn't do
+                        html = $(Mustache.to_html(template, newArg));
+                    $(self).before(html);
+                    $(self).parent().trigger('create').listview('refresh');
+                }
+            });
+        }
+    }
+    //get the script
+    pw.scripts.getScript(options);
+});
+
 $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input, .scriptProperties li:first textarea", function(e){
     var options = {
         name : $(this).attr("name"),

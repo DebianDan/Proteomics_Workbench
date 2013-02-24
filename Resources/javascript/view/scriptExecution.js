@@ -20,27 +20,19 @@ function showScriptExecution( urlObj, options )
         pageSelector = urlObj.hash.replace( /\?.*$/, "" );
 
     //options method to pass to getScript()
-    var options = {
+    optionsObj = {
         id : sid,
         success : function(script){
             if(script){
-                // Get the page we are going to dump our content into.
+				// Get the page we are going to dump our content into.
                 var $page = $( pageSelector );
                 //put the content into the page
-
-                /*//Fill in the fields for Edit Project
-                 $("#editProjectPopup .newTitle").val(row['name']);
-                 $("#editProjectPopup .newDescription").val(row['description']);
-                 */
 
                 //can be deleted later, just for DEBUG
                 var markup = "Script Name: " + script.alias + "<br/>";
                 markup += "Script Details: " + script.path + "<br/>";
                 markup += "Date Created: " + script.date_created + "<br/>";
                 markup += "SID: " + script.sid + "<br/>";
-
-                //set active project (lazy hack for now)
-                //pw.activeProject = parseInt(row['pid']);
 
                 //THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
                 //inject the path into the run button for executing
@@ -49,7 +41,17 @@ function showScriptExecution( urlObj, options )
                 //Forces the project details to be above the asset list
                 $("#pScriptDetails").html( markup );
 
-                // Will have to do this for each arguement
+                script.arguments.forEach(function(arg){
+                    for(property in arg){
+                        if(typeof arg[property] != "function"){
+                            console.log("...property {0} is {1}".format(property, arg[property]));
+                        }
+                    }
+                });
+
+                //for (the # of arguments) {
+                //display a argument box like below
+                // Will have to do this for each argument
                 //Display all the assets for the active project
                 pw.assets.getAllAssets(pw.activeProject,
                     //success callback
@@ -78,7 +80,6 @@ function showScriptExecution( urlObj, options )
                         alert("there was an error when attempting to retrieve the assets: ", error.code);
                     }
                 );
-                //
 
                 // Pages are lazily enhanced. We call page() on the page
                 // element to make sure it is always enhanced before we
@@ -97,18 +98,15 @@ function showScriptExecution( urlObj, options )
                 // the page we just modified.
                 $.mobile.changePage( $page, options );
             }
-        },
-        error : function(transaction, error){
-            //error on select
         }
     }
-
-    pw.scripts.getScript(options);
+    pw.scripts.getScript(optionsObj);
 }
 
 //bind to the click event of the Run Script button
 $(document).on('click', "#run", function(){
     console.log("Run Script button clicked");
+	$('#runScript').popup("close");
 	//TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
 	//get the argument path for the asset from the data-path attribute of the radio button
@@ -116,7 +114,6 @@ $(document).on('click', "#run", function(){
 	//if required
 	if (argPath == null){
 		alert("You have to select an asset to input!");
-		$('#runScript').popup("close");
 	}else{
 		//Creating a notification for Script Start
 		var note = Ti.Notification.createNotification({
@@ -135,7 +132,10 @@ $(document).on('click', "#run", function(){
 		/*//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
 		myScript.setOnReadLine(function(data) {
 			alert(data.toString());
-		}); */
+		}); 
+		//can poll to see if the process is running, will return a Boolean
+		//myScript.isRunning();
+		*/
 		
 		myScript.setOnExit(function(){
 			note.setMessage("Script has finished running!");
@@ -146,9 +146,7 @@ $(document).on('click', "#run", function(){
 		});	   
 		//Launches the process  
 		myScript.launch();
+		//show start notification
 		note.show();
-		
-		//can poll to see if the process is running, will return a Boolean
-		//myScript.isRunning();
 	}
 });
