@@ -24,7 +24,7 @@ function showScriptExecution( urlObj, options )
         id : sid,
         success : function(script){
             if(script){
-                // Get the page we are going to dump our content into.
+				// Get the page we are going to dump our content into.
                 var $page = $( pageSelector );
                 //put the content into the page
 
@@ -49,8 +49,30 @@ function showScriptExecution( urlObj, options )
                 //Forces the project details to be above the asset list
                 $("#pScriptDetails").html( markup );
 
-                // Will have to do this for each arguement
-                //Display all the assets for the active project
+         //NOT WORKING!!!!!!
+				//This should get all the arguments for the particular script and set them to script.arguments
+				pw.scripts.getAllArguments({
+					id:sid,
+					success:function(args){
+						//all happening asynchronously and I don't know what to do
+						script.arguments = args;
+						alert(script.arguments[0].label);
+					},
+					error: function(transaction, error){
+						//error on select
+					}
+				});
+				//I need the script.arguments to be properly filled up before continuing
+				alert(script.arguments[0].label);
+				alert(script.arguments[1].label);
+				alert("Arguments returned: " + script.arguments.length);
+				alert(script.arguments[0].label);
+				alert(script.arguments[1].label);
+				
+		//for (the # of arguments) {
+			//display a argument box like below
+				// Will have to do this for each argument
+				//Display all the assets for the active project
                 pw.assets.getAllAssets(pw.activeProject,
                     //success callback
                     function (transaction, results) {
@@ -78,7 +100,6 @@ function showScriptExecution( urlObj, options )
                         alert("there was an error when attempting to retrieve the assets: ", error.code);
                     }
                 );
-                //
 
                 // Pages are lazily enhanced. We call page() on the page
                 // element to make sure it is always enhanced before we
@@ -102,13 +123,13 @@ function showScriptExecution( urlObj, options )
             //error on select
         }
     }
-
     pw.scripts.getScript(options);
 }
 
 //bind to the click event of the Run Script button
 $(document).on('click', "#run", function(){
     console.log("Run Script button clicked");
+	$('#runScript').popup("close");
 	//TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
 	//get the argument path for the asset from the data-path attribute of the radio button
@@ -116,7 +137,6 @@ $(document).on('click', "#run", function(){
 	//if required
 	if (argPath == null){
 		alert("You have to select an asset to input!");
-		$('#runScript').popup("close");
 	}else{
 		//Creating a notification for Script Start
 		var note = Ti.Notification.createNotification({
@@ -135,7 +155,10 @@ $(document).on('click', "#run", function(){
 		/*//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
 		myScript.setOnReadLine(function(data) {
 			alert(data.toString());
-		}); */
+		}); 
+		//can poll to see if the process is running, will return a Boolean
+		//myScript.isRunning();
+		*/
 		
 		myScript.setOnExit(function(){
 			note.setMessage("Script has finished running!");
@@ -146,9 +169,7 @@ $(document).on('click', "#run", function(){
 		});	   
 		//Launches the process  
 		myScript.launch();
+		//show start notification
 		note.show();
-		
-		//can poll to see if the process is running, will return a Boolean
-		//myScript.isRunning();
 	}
 });

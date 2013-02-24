@@ -30,7 +30,7 @@ pw.scripts = (function(){
     }
 
     var argument = function(data){
-        defaults = {
+		defaults = {
             id: -1,
             alias: "",
             label : "",
@@ -68,6 +68,28 @@ pw.scripts = (function(){
                     options.success(myArgument);
                 }, options.error);
             }
+        }
+    }
+	my.getAllArguments = function(options){
+        var returnObject = new Array(),
+            sql = "SELECT * FROM arguments WHERE sid = {0}".format(options.id);
+        if(options.id == undefined){
+            options.error("sid must be specified in options object when calling getAllArgument()");
+            return false;
+        }else{
+			//get it from the database
+			pw.db.execute(sql, function(transaction, results){
+				var myArgument = {};
+				var count = 0;
+				alert("rows: " + results.rows.length);
+				while(count < results.rows.length){
+					var item = results.rows.item(count);
+					myArgument = new argument(item);
+					returnObject[count] = myArgument;
+					count++;
+				}
+				options.success(returnObject);
+			}, options.error("Error with arguements table"));
         }
     }
 
