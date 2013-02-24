@@ -20,7 +20,7 @@ function showScriptExecution( urlObj, options )
         pageSelector = urlObj.hash.replace( /\?.*$/, "" );
 
     //options method to pass to getScript()
-    var options = {
+    optionsObj = {
         id : sid,
         success : function(script){
             if(script){
@@ -28,19 +28,11 @@ function showScriptExecution( urlObj, options )
                 var $page = $( pageSelector );
                 //put the content into the page
 
-                /*//Fill in the fields for Edit Project
-                 $("#editProjectPopup .newTitle").val(row['name']);
-                 $("#editProjectPopup .newDescription").val(row['description']);
-                 */
-
                 //can be deleted later, just for DEBUG
                 var markup = "Script Name: " + script.alias + "<br/>";
                 markup += "Script Details: " + script.path + "<br/>";
                 markup += "Date Created: " + script.date_created + "<br/>";
                 markup += "SID: " + script.sid + "<br/>";
-
-                //set active project (lazy hack for now)
-                //pw.activeProject = parseInt(row['pid']);
 
                 //THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
                 //inject the path into the run button for executing
@@ -49,30 +41,18 @@ function showScriptExecution( urlObj, options )
                 //Forces the project details to be above the asset list
                 $("#pScriptDetails").html( markup );
 
-         //NOT WORKING!!!!!!
-				//This should get all the arguments for the particular script and set them to script.arguments
-				pw.scripts.getAllArguments({
-					id:sid,
-					success:function(args){
-						//all happening asynchronously and I don't know what to do
-						script.arguments = args;
-						alert(script.arguments[0].label);
-					},
-					error: function(transaction, error){
-						//error on select
-					}
-				});
-				//I need the script.arguments to be properly filled up before continuing
-				alert(script.arguments[0].label);
-				alert(script.arguments[1].label);
-				alert("Arguments returned: " + script.arguments.length);
-				alert(script.arguments[0].label);
-				alert(script.arguments[1].label);
-				
-		//for (the # of arguments) {
-			//display a argument box like below
-				// Will have to do this for each argument
-				//Display all the assets for the active project
+                script.arguments.forEach(function(arg){
+                    for(property in arg){
+                        if(typeof arg[property] != "function"){
+                            console.log("...property {0} is {1}".format(property, arg[property]));
+                        }
+                    }
+                });
+
+                //for (the # of arguments) {
+                //display a argument box like below
+                // Will have to do this for each argument
+                //Display all the assets for the active project
                 pw.assets.getAllAssets(pw.activeProject,
                     //success callback
                     function (transaction, results) {
@@ -118,12 +98,9 @@ function showScriptExecution( urlObj, options )
                 // the page we just modified.
                 $.mobile.changePage( $page, options );
             }
-        },
-        error : function(transaction, error){
-            //error on select
         }
     }
-    pw.scripts.getScript(options);
+    pw.scripts.getScript(optionsObj);
 }
 
 //bind to the click event of the Run Script button
