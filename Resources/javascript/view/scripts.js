@@ -163,7 +163,7 @@ function updateScriptValue(options){
         success : function(script){
             script.update({
                 name : options.name,
-                value : options.val
+                value : options.value
             });
         }
     });
