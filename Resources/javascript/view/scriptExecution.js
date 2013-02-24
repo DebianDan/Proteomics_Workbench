@@ -113,26 +113,40 @@ $(document).on('click', "#run", function(){
     var path =  $('#run').attr('data-path');
 	//get the argument path for the asset from the data-path attribute of the radio button
 	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
+	//if required
 	if (argPath == null){
 		alert("You have to select an asset to input!");
 		$('#runScript').popup("close");
 	}else{
+		//Creating a notification for Script Start
+		var note = Ti.Notification.createNotification({
+			'title' : 'Script Status',
+			'message' : 'Script is currently running!',
+			'timeout' : 0
+			//'callback' : doSomething
+			//'icon' : 'app://images/notificationIcon.png'        
+		});
+
 		//take an asset as an argument to a python script
 		var myScript = Ti.Process.createProcess({
 			   args:['python',path,argPath]
 		});
 		
-		//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
+		/*//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
 		myScript.setOnReadLine(function(data) {
 			alert(data.toString());
-		});
+		}); */
 		
 		myScript.setOnExit(function(){
-			alert("This was triggered on Exit.");
-			console.log("Python Script Finished Running");
+			note.setMessage("Script has finished running!");
+			//TODO set a callback for when the Notification is clicked
+			//note.setCallback(function(){});
+			note.show();
+			console.log("Script Finished Running");
 		});	   
 		//Launches the process  
 		myScript.launch();
+		note.show();
 		
 		//can poll to see if the process is running, will return a Boolean
 		//myScript.isRunning();
