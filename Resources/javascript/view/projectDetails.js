@@ -9,6 +9,24 @@ function addProjectDetailsScriptMarkup(sid, path){
     sList.trigger('create');
 }
 
+//TODO: can applying templates be a more generic function than this? Making new names is a drag
+function renderProjectDetailsScripts(){
+    //get all scripts in database
+    pw.scripts.getAllScripts({
+        success: function(data){
+            console.log("rendering scripts list (project details)");
+            var template = $("#tplProjectDetailsScripts").html(),
+                html = Mustache.to_html(template, data),
+                sList = $("#scriptList-project");
+            //clear the assets list to start
+            sList.html(html).trigger('create');
+        },
+        error : function(error){ //TODO: check to make sure arguments list is correct for this function
+            alert("there was an error when attempting to retrieve the projects: ", error.code);
+        }
+    });
+}
+
 // Load the data for a specific category, based on
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
@@ -80,7 +98,10 @@ function showProjectDetails( urlObj, options )
                     alert("there was an error when attempting to retrieve the assets: ", error.code);
                 }
             );
-			
+
+            renderProjectDetailsScripts();
+
+            /*
 			 pw.scripts.getAllScripts(
 				//success callback
 				function (transaction, results) {
@@ -102,6 +123,7 @@ function showProjectDetails( urlObj, options )
 					alert("there was an error when attempting to retrieve the projects: ", error.code);
 				}
 			);
+            */
 
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
