@@ -140,7 +140,6 @@ pw.scripts = (function(){
                 options.error(e);
             }
         });
-
     }
 
     //Gets a single script
