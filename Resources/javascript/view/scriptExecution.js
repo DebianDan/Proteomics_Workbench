@@ -1,7 +1,7 @@
 //adds an asset to the Script Execution page (display only)
-function addAssetScriptExeMarkup(aid, path, fav){
+function addAssetScriptExeMarkup(list, aid, path, fav){
     var filename = path.replace(/^.*[\\\/]/, '');
-    var sList = $("#scriptExeAssetList");
+    var sList = $(list);
     if(sList){
 		//TODO add favorite
         var markup = scriptExeAssetTemplate.format(aid, path, filename);
@@ -41,45 +41,54 @@ function showScriptExecution( urlObj, options )
                 //Forces the project details to be above the asset list
                 $("#pScriptDetails").html( markup );
 
-                script.arguments.forEach(function(arg){
+				//TODO clear all the previous arguments out
+				var argList = $("#scriptExeAssetList");
+				//clear the assets list to start
+				argList.html("");
+				var template = $("#tplScriptExeAssetList").html(),
+						html = Mustache.to_html(template, script),
+						aList = $("#scriptExeAssetList");
+				//clear the assets list to start
+				aList.html(html).trigger('create');
+                
+				//for (the # of arguments) {
+                //display a argument box like below
+				script.arguments.forEach(function(arg){
                     for(property in arg){
                         if(typeof arg[property] != "function"){
                             console.log("...property {0} is {1}".format(property, arg[property]));
                         }
                     }
+						
+					//Display all the assets for the active project
+					//Have to do this everytime because we will be running different queries for
+					//different arguments in the future.  i.e. filter csv, then filter xml
+					pw.assets.getAllAssets(pw.activeProject,
+						//success callback
+						function (transaction, results) {
+							console.log(results.rows.length + " assets retrieved");
+							console.log("rendering assets list");
+							
+							//loop through rows and add them to asset list
+							for (var i = 0; i < results.rows.length; i++) {
+								var row = results.rows.item(i);
+								var aid = row['aid'];
+								var path = row['path'];
+								var fav = 1;
+								//not in the favorites table
+								if (row['fav'] == null){
+									fav = 0;
+								}
+								//(convention #scriptExeAssetList0 #scriptExeAssetList1 etc..)
+								aList = "#scriptExeAssetList" + arg.id;
+								addAssetScriptExeMarkup(aList, aid, path, fav);
+							}
+						},
+						function (transaction, error) {
+							alert("there was an error when attempting to retrieve the assets: ", error.code);
+						}
+					);	
                 });
-
-                //for (the # of arguments) {
-                //display a argument box like below
-                // Will have to do this for each argument
-                //Display all the assets for the active project
-                pw.assets.getAllAssets(pw.activeProject,
-                    //success callback
-                    function (transaction, results) {
-                        console.log(results.rows.length + " assets retrieved");
-                        console.log("rendering assets list");
-                        var aList = $("#scriptExeAssetList"); //save a reference to the element for efficiency
-
-                        //clear the assets list to start
-                        aList.html("");
-
-                        //loop through rows and add them to asset list
-                        for (var i = 0; i < results.rows.length; i++) {
-                            var row = results.rows.item(i);
-                            var aid = row['aid'];
-                            var path = row['path'];
-                            var fav = 1;
-                            //not in the favorites table
-                            if (row['fav'] == null){
-                                fav = 0;
-                            }
-                            addAssetScriptExeMarkup(aid, path, fav);
-                        }
-                    },
-                    function (transaction, error) {
-                        alert("there was an error when attempting to retrieve the assets: ", error.code);
-                    }
-                );
 
                 // Pages are lazily enhanced. We call page() on the page
                 // element to make sure it is always enhanced before we
