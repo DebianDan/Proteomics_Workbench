@@ -28,11 +28,16 @@ function showScriptExecution( urlObj, options )
                 var $page = $( pageSelector );
                 //put the content into the page
 
-                //can be deleted later, just for DEBUG
+                 //can be deleted later, just for DEBUG
                 var markup = "Script Name: " + script.alias + "<br/>";
-                markup += "Script Details: " + script.path + "<br/>";
+                //markup += "Script Details: " + script.path + "<br/>";
                 markup += "Date Created: " + script.date_created + "<br/>";
-                markup += "SID: " + script.sid + "<br/>";
+                //markup += "SID: " + script.sid + "<br/>";
+				
+				var moreDetails = "Script Name: " + script.alias + "<br/>";
+                moreDetails += "Script Details: " + script.path + "<br/>";
+                moreDetails += "Date Created: " + script.date_created + "<br/>";
+                moreDetails += "SID: " + script.sid + "<br/>";
 
                 //THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
                 //inject the path into the run button for executing
@@ -40,6 +45,7 @@ function showScriptExecution( urlObj, options )
 
                 //Forces the project details to be above the asset list
                 $("#pScriptDetails").html( markup );
+				$("#pScriptDetailsMore").html( moreDetails );
 
 				//TODO clear all the previous arguments out
 				var argList = $("#scriptExeAssetList");
