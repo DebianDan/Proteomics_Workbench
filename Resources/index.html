@@ -135,6 +135,7 @@
                                     <ul data-role="listview" data-inset="true" class="argumentsList" data-mini="true">
                                         {{#arguments}}
                                         <li data-role="fieldcontain">
+                                            <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
                                             <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>

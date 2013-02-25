@@ -205,6 +205,21 @@ $(document).on("click", ".addInputArgument", function(e){
     pw.scripts.getScript(options);
 });
 
+$(document).on("click", ".deleteArg", function(e){
+    var self = this,
+        options = {
+            id : $(this).attr("data-id"),
+            success : function(myArg){
+                myArg.remove({
+                    success : function(){
+                        $(self).parent().remove();
+                    }
+                });
+            }
+        }
+    pw.scripts.getArgument(options);
+});
+
 $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input, .scriptProperties li:first textarea", function(e){
     var options = {
         name : $(this).attr("name"),
