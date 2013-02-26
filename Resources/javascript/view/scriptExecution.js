@@ -124,6 +124,27 @@ $(document).on('click', "#run", function(){
 	$('#runScript').popup("close");
 	//TODO find a better way to get path to the script
     var path =  $('#run').attr('data-path');
+	var argPaths = [];
+	$('#scriptExeAssetList [id*="scriptExeAssetList"]').each(function(index){
+		//find the required args
+		if ($(this).attr('data-required') == 1){
+			//alert if not checked
+			var temp = $(this).find('input[name="scriptAsset"]:checked').attr('data-path');
+			if (temp == null){
+				alert("You have to select an asset to input for a required argument!");
+				//TODO handle EXIT case
+			}else{
+				argPaths.push(temp);
+			}
+		}else{
+			//if checked add it
+			var temp = $(this).find('input[name="scriptAsset"]:checked').attr('data-path');
+			if (temp != null){
+				argPaths.push(temp);
+			}
+		}
+	});
+	alert(argPaths.length);
 	//get the argument path for the asset from the data-path attribute of the radio button
 	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
 	//if required
@@ -144,13 +165,14 @@ $(document).on('click', "#run", function(){
 			   args:['python',path,argPath]
 		});
 		
-		/*//USEFUL FOR DEBUGGING, ALERTS THE STDOUT LINE BY LINE
+		//USEFUL FOR DEBUGGING, OUTPUTS THE STDOUT LINE BY LINE
 		myScript.setOnReadLine(function(data) {
-			alert(data.toString());
+			$("#scriptOut").append(data.toString() + "\r\n");
 		}); 
+		
 		//can poll to see if the process is running, will return a Boolean
 		//myScript.isRunning();
-		*/
+		
 		
 		myScript.setOnExit(function(){
 			note.setMessage("Script has finished running!");

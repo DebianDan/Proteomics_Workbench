@@ -377,7 +377,7 @@
 			<fieldset data-role="controlgroup" style="margin-top:2%;">
 				<div class="ui-body ui-body-b">
 				<p id="argMarkup{{id}}"><b>Required:</b>{{required}}<b>Label:</b>{{label}}<b>Argument:</b>{{switch}}<b>Description:</b>{{description}}</p>
-				<div id="scriptExeAssetList{{id}}" data-role="fieldcontain">
+				<div id="scriptExeAssetList{{id}}" data-role="fieldcontain" data-required="{{required}}">
 					<!--<input type="radio" name="scriptAsset" id="aid1" value="aid1">
 					<label for="aid1">asset1</label>-->
 				</div><br>
@@ -397,7 +397,7 @@
         </div>
         <div data-role="fieldcontain" style="padding-top:20px;">
             <label for="scriptOut"><b>Script output:</b></label>
-        	<textarea cols="40" rows="8" name="scriptOut" id="scriptOut"></textarea>
+        	<textarea cols="40" rows="16" name="scriptOut" id="scriptOut" readonly></textarea>
     	</div>
                    
 </div><!-- /content -->
