@@ -190,3 +190,9 @@ $(document).on('click', "#run", function(){
 		note.show();
 	}
 });
+
+//Clear the log output
+$(document).on('click', "#clearLog", function(){
+	console.log("Script Log has been cleared.")
+	$("#scriptOut").html("");
+});
