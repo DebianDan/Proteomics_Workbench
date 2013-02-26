@@ -1,10 +1,10 @@
 //adds an asset to the Script Execution page (display only)
-function addAssetScriptExeMarkup(list, aid, path, fav){
+function addAssetScriptExeMarkup(list, aid, argId, path, fav){
     var filename = path.replace(/^.*[\\\/]/, '');
     var sList = $(list);
     if(sList){
 		//TODO add favorite
-        var markup = scriptExeAssetTemplate.format(aid, path, filename);
+        var markup = scriptExeAssetTemplate.format(aid, path, filename, argId);
         sList.append(markup);
     }
     sList.trigger('create');
@@ -87,7 +87,7 @@ function showScriptExecution( urlObj, options )
 								}
 								//(convention #scriptExeAssetList0 #scriptExeAssetList1 etc..)
 								aList = "#scriptExeAssetList" + arg.id;
-								addAssetScriptExeMarkup(aList, aid, path, fav);
+								addAssetScriptExeMarkup(aList, aid, arg.id, path, fav);
 							}
 						},
 						function (transaction, error) {
@@ -123,46 +123,48 @@ $(document).on('click', "#run", function(){
     console.log("Run Script button clicked");
 	$('#runScript').popup("close");
 	//TODO find a better way to get path to the script
-    var path =  $('#run').attr('data-path');
+    var sPath =  $('#run').attr('data-path');
 	var argPaths = [];
+	var valid = true;
 	$('#scriptExeAssetList [id*="scriptExeAssetList"]').each(function(index){
-		//find the required args
-		if ($(this).attr('data-required') == 1){
-			//alert if not checked
-			var temp = $(this).find('input[name="scriptAsset"]:checked').attr('data-path');
-			if (temp == null){
-				alert("You have to select an asset to input for a required argument!");
-				//TODO handle EXIT case
+		if(valid){
+			//find the required args
+			if ($(this).attr('data-required') == 1){
+				//alert if not checked
+				//get the argument path for the asset from the data-path attribute of the radio button
+				var temp = $(this).find('input[name*="scriptAsset"]:checked').attr('data-path');
+				if (temp == null){
+					//breakout if a required asset isn't filled
+					alert("You have to select an asset to input for a required argument!");
+					valid = false;
+				}else{
+					argPaths.push(temp);
+				}
 			}else{
-				argPaths.push(temp);
-			}
-		}else{
-			//if checked add it
-			var temp = $(this).find('input[name="scriptAsset"]:checked').attr('data-path');
-			if (temp != null){
-				argPaths.push(temp);
+				//if not required, but checked add it
+				var temp = $(this).find('input[name*="scriptAsset"]:checked').attr('data-path');
+				if (temp != null){
+					argPaths.push(temp);
+				}
 			}
 		}
 	});
-	alert(argPaths.length);
-	//get the argument path for the asset from the data-path attribute of the radio button
-	var argPath = $('#scriptExeAssetList input[name="scriptAsset"]:checked').attr('data-path');       
-	//if required
-	if (argPath == null){
-		alert("You have to select an asset to input!");
-	}else{
+	//alert(argPaths.length);
+	
+	if (valid){
 		//Creating a notification for Script Start
 		var note = Ti.Notification.createNotification({
 			'title' : 'Script Status',
 			'message' : 'Script is currently running!',
-			'timeout' : 0
+			'timeout' : 0,
 			//'callback' : doSomething
-			//'icon' : 'app://images/notificationIcon.png'        
+			'icon' : 'app://css/images/ajax-loader.gif'        
 		});
 
 		//take an asset as an argument to a python script
 		var myScript = Ti.Process.createProcess({
-			   args:['python',path,argPath]
+			   //args:[] can take the array of argPaths
+			   args:['python',sPath,argPaths]
 		});
 		
 		//USEFUL FOR DEBUGGING, OUTPUTS THE STDOUT LINE BY LINE
@@ -176,6 +178,7 @@ $(document).on('click', "#run", function(){
 		
 		myScript.setOnExit(function(){
 			note.setMessage("Script has finished running!");
+			note.setIcon('app://css/images/greencheck.png');
 			//TODO set a callback for when the Notification is clicked
 			//note.setCallback(function(){});
 			note.show();
