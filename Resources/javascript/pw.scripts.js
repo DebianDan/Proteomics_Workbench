@@ -184,6 +184,7 @@ pw.scripts = (function(){
                             if(results.rows.length){
                                 var item = results.rows.item(0);
                                 myScript = new script(item);
+                                //now that we have the script we can add in the arguments object we got previously
                                 myScript.arguments = argumentArray;
                                 scriptHash[myScript.id] = myScript;
                             }
@@ -227,9 +228,13 @@ pw.scripts = (function(){
                     if(results.rows.length){
                         for(var i = 0; i < results.rows.length; i++){
                             var newScript = new script(results.rows.item(i)),
+                            //since we have ALL of the arguments for EVERY script, we need to get only the ones relevant
+                            //to this script. We use the grep function to filter the arguments array with this purpose in mind.
                             myArgs = $.grep(argumentsArray, function(n,i){return n.sid == newScript.sid});
+                            //now we add the relevant arguments to the newly generated script object
                             newScript.arguments = myArgs;
                             scriptHash[newScript.sid] = newScript; //store it in the hash for future use
+                            //put this new script at the end of the array we're building
                             returnObj.scripts.push(newScript);
                         }
                     }

@@ -74,7 +74,7 @@
 
     <div data-role="content">
         <div class="ui-grid-solo">
-            <div class="ui-block-a" style="text-align:center;">
+            <div class="ui-block-a">
                 <!-- Add Scripts -->
                 <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Add Scripts</a>
                 <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
@@ -87,6 +87,7 @@
                 </div>
 
                 <!-- Delete Scripts -->
+                <!--
                 <a href="#deleteScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Delete Selected Scripts</a>
                 <div data-role="popup" id="deleteScriptPopup" class="ui-content" data-overlay-theme="a">
                     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
@@ -95,6 +96,7 @@
                         <a href="#scripts" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
                     </div>
                 </div>
+                -->
             </div>
         </div>
 
@@ -261,49 +263,49 @@
                     <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
                 </div>
         </div>
-        <br>
 
         
         <!-- The h3 tags are used to force project details to be above the project asset list-->
         <h4 id="pDetails"></h4>
         
-         <!-- Add Assets -->
-        <a href="#addAssetPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Add Assets</a>
-        <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
-    	    <a href="#" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
-            <input type="button" class="chooseFiles" value="Select File(s)">
-            <ul id="assetPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
-            </ul>
-            <input type="button" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
-            <input type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>
-		</div>
-                 
-        <!-- Delete Assets -->
-        <a href="#deleteAssetPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Delete Selected Assets</a>
-        <div data-role="popup" id="deleteAssetPopup" class="ui-content" data-overlay-theme="a">
-                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                    <h3 class="ui-title">Are you sure you want to delete the selected asset(s)?</h3>
-                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#projectDetails" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
-                </div>
-        </div>
-        
         <!-- List of Assets -->
-        <div class="ui-grid-a" style="width:200%">
-        <fieldset data-role="controlgroup" style="margin-top:0%;">
+        <div class="ui-grid-a">
             <div class="ui-block-a" style="padding-right:10px">
+                <!-- Add Assets -->
+                <div style="text-align:right;">
+                    <a href="#addAssetPopup" data-rel="popup" data-icon="plus" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-position-to="window">Add Assets</a>
+                    <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
+                        <a href="#" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+                        <input type="button" class="chooseFiles" value="Select File(s)">
+                        <ul id="assetPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
+                        </ul>
+                        <input type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>
+                        <input type="button" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
+                    </div>
+
+                    <!-- Delete Assets -->
+                    <a href="#deleteAssetPopup" data-icon="delete" data-rel="popup" data-role="button" data-inline="true" data-mini="true" data-theme="a" data-position-to="window">Delete Selected Assets</a>
+                    <div data-role="popup" id="deleteAssetPopup" class="ui-content" data-overlay-theme="a">
+                        <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center;">
+                            <h3 class="ui-title">Are you sure you want to delete the selected asset(s)?</h3>
+                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                            <a href="#projectDetails" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="ui-body ui-body-b">
+                    <fieldset data-role="controlgroup" style="margin-top:0%;">
                     <div data-role="fieldcontain">
                        <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
-                          <option data-placeholder="true">Sort By</option>
+                          <option data-placeholder="true">Sort Assets By...</option>
                           <option value="date">Newest</option>
                           <option value="favorites">Favorites</option>
                           <option value="type">File Type</option>
                           <option value="favorites">File Name</option>
                        </select>
-                    </div><br>
-                    <div id="assetList" class="itemList" data-role="fieldcontain">
                     </div>
+                    <ul id="assetList" class="itemList" data-role="fieldcontain">
+                    </ul>
                     <!--
                     <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
                         <ul class="itemList" data-role="fieldcontain">
@@ -311,32 +313,33 @@
                         </ul>
                     </div>
                     -->
+                    </fieldset>
                 </div>
             </div>
             <div class="ui-block-b" style="padding-left:10px">
-                <div class="ui-body ui-body-b">
+                <div class="ui-body ui-body-b" style="margin-top: 40px;">
+                    <fieldset data-role="controlgroup" style="margin-top:0%;">
                     <div data-role="fieldcontain">
                        <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
-                          <option data-placeholder="true">Sort By</option>
+                          <option data-placeholder="true">Sort Scripts By...</option>
                           <option value="date">Newest</option>
                           <option value="favorites">Favorites</option>
                           <option value="type">File Type</option>
                           <option value="favorites">File Name</option>
                        </select>
-                    </div><br>
-                    <ul id="scriptList-project">
-
-                    </ul>
-                    <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false"><br>
-                        <ul data-role="listview" data-theme="c" data-dividertheme="d" style="padding-right:15px; padding-bottom:6px;">
+                    </div>
+                    <div id="scriptList-project">
+                    </div>
+                    <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false">
+                        <ul data-theme="c" data-dividertheme="d">
                             {{#scripts}}
                             <li data-sid="{{sid}}"><a href="#scriptExe?sid={{sid}}">{{alias}}</a></li>
                             {{/scripts}}
                         </ul>
                     </div>
+                    </fieldset>
                 </div>
             </div>
-        </fieldset>
 		</div>
         
     </div><!-- /content -->
