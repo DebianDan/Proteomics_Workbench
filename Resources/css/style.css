@@ -27,6 +27,11 @@
     line-height: 40px;
 }
 
+div.scrollBar{ 
+	max-height:122px; 
+	overflow:auto;
+} 
+
 /*
 .detailsPane .ui-btn-inner{
    line-height:normal;
