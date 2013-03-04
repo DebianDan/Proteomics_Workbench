@@ -111,6 +111,11 @@ ul.scriptArguments input, ul.scriptArguments textarea{
 
 #pDetails{
     margin-top:0px;
+    min-height:60px;
+}
+
+#scriptExeAssetList h3{
+    margin: 0 0 .5em 0;
 }
 
 

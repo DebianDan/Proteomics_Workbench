@@ -35,7 +35,7 @@ function showScriptExecution( urlObj, options )
                 //markup += "SID: " + script.sid + "<br/>";
 				
 				var moreDetails = "Script Name: " + script.alias + "<br/>";
-                moreDetails += "Script Details: " + script.path + "<br/>";
+                moreDetails += "Path: " + script.path + "<br/>";
                 moreDetails += "Date Created: " + script.date_created + "<br/>";
                 moreDetails += "SID: " + script.sid + "<br/>";
 
