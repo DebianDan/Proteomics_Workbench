@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/chosen.css"/>
     <script src="javascript/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+        //this allows us to ignore certain blocks of content
+        //when the attribute data-enhance="false" is encountered
+        //NOTE: there is a performance penalty with using this... may want to use ajax gets for template data
+        $(document).bind("mobileinit", function(){
+            $.mobile.ignoreContentEnabled = true;
+        });
+    </script>
     <script src="javascript/jquery.mobile-1.3.0.min.js"></script>
+
 </head>
 <body>
 <div data-role="page" id="scripts" data-title="Scripts">
@@ -64,12 +73,12 @@
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
-                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
+                                <input data-enhance="false" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
-                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
+                                <input data-enhance="false" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
@@ -80,11 +89,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
                                             
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -96,11 +105,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
 
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -112,11 +121,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
 
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -128,11 +137,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
 
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -144,11 +153,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
 
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -171,12 +180,12 @@
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
-                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
+                                <input data-enhance="false" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
-                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
+                                <input data-enhance="false" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
@@ -187,11 +196,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
                                             
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -214,12 +223,12 @@
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
-                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
+                                <input data-enhance="false" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
-                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
+                                <input data-enhance="false" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
@@ -230,11 +239,11 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-enhance="false" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-enhance="false" type="text" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true"/>
                                             <label for="required-{{id}}" checked="checked">Required</label>
                                             
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
