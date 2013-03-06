@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="TideSDK" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/../Ti.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Ti.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
