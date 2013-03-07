@@ -1,6 +1,6 @@
 
 pw.scripts = (function(){
-    var my = {}; //this is the objec that will be returned. Anything inside of this will be publicly accessible
+    var my = {}; //this is the object that will be returned. Anything inside of this will be publicly accessible
 
     var scriptHash = {}; //store the scripts after they're generated
     var argumentHash = {}; //store the arguments after they're generated
@@ -20,12 +20,28 @@ pw.scripts = (function(){
                 //update self and hash object
                 this[options.name] = options.value;
                 //need to keep an eye on this hash object. If it get desynced it will be a tricky bug to track down ("why aren't my options updating?")
-                argumentHash[this.id] = this;
+                script[this.sid] = this;
                 if(typeof options.success == "function"){ //prevents the nasty error message if the function isn't passed
                     options.success();
                 }
             },function(t,e){
                 console.log("error when updating the argument value: {0}".format(JSON.stringify(e)));
+                if(typeof options.error == "function"){ //prevents the nasty error message if the function isn't passed
+                    options.error(e);
+                }
+            });
+        }
+
+        this.remove = function(options){
+            var sql = "DELETE FROM scripts where id={0}".format(this.id);
+            pw.db.execute(sql, function(t,r){
+                delete argumentHash[this.id];
+                //TODO: DELETE ALL ARGUMENTS ASSOCIATED WITH THIS SCRIPT!
+                if(typeof options.success == "function"){ //prevents the nasty error message if the function isn't passed
+                    options.success(this);
+                }
+            },function(t,e){
+                console.log("error when deleting the argument: {0}".format(JSON.stringify(e)));
                 if(typeof options.error == "function"){ //prevents the nasty error message if the function isn't passed
                     options.error(e);
                 }
@@ -100,9 +116,6 @@ pw.scripts = (function(){
                     options.error(e);
                 }
             });
-        }
-        this.test = function(){
-            alert("TEST!");
         }
 
         argumentHash[this.id] = this;

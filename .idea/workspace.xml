@@ -2,25 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="arguments are now bound! arguments now retrieved when getting a">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/IntelliLang.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/Proteomics_Workbench.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/TideSDK.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/sass_stdlib.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/img/browser-icon-chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/img/browser-icon-firefox.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/img/browser-icon-safari.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/default_app_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/img/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/img/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/img/slide-01.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/img/slide-02.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/img/slide-03.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/CHANGELOG.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/tests/OrignalSteveTest.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/TextAreaAndInputsPlainTest.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/tests/TextAreaAndInputsPlainTest.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-alert.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-button.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-carousel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-collapse.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-dropdown.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-popover.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/css/bootstrap-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/css/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-scrollspy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-tab.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-tooltip.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-transition.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap-typeahead.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/holder.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/html5shiv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/Resources/bootstrap/js/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/manifest" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/TideSDK-HelloWorld-master/TideSDK-HelloWorld-master/Resources/test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/BootstrapTest/tiapp.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/view/common.js" afterPath="$PROJECT_DIR$/Resources/javascript/view/common.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw.projects.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw.projects.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw.scripts.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw.scripts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/view/scripts.js" afterPath="$PROJECT_DIR$/Resources/javascript/view/scripts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/css/style.css" afterPath="$PROJECT_DIR$/Resources/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="7f2dea4a-8b47-4265-bb4e-118b99130fec" name="Rejected commit: Default" comment="created a new branch to play around with a few api's" />
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362421206909" ignored="false" />
-    <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362418858539" ignored="false" />
+    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362687979279" ignored="false" />
+    <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362520184806" ignored="false" />
+    <file path="/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362520577438" ignored="false" />
+    <file path="/pw.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362690576744" ignored="false" />
+    <file path="/pw.scripts.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362690493366" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +77,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="pw.db.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.db.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="57" column="27" selection-start="3555" selection-end="3555" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="439" column="55" selection-start="24069" selection-end="24069" vertical-scroll-proportion="0.86290324">
+            <state line="9" column="35" selection-start="437" selection-end="437" vertical-scroll-proportion="-5.8846154">
               <folding>
                 <element signature="n#style#0;n#a#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -80,29 +126,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/test.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="268" column="33" selection-start="20587" selection-end="20587" vertical-scroll-proportion="-5.6842103">
-              <folding>
-                <element signature="n#style#0;n#a#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#li#1;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#li#3;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#li#4;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="tag#div#1;tag#div#0;tag#div#2;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="tag#div#2;tag#div#0;tag#div#2;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="projects.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/view/projects.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -121,11 +144,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pw.scripts.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="pw.scripts.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="19" selection-start="1934" selection-end="1934" vertical-scroll-proportion="0.0">
+            <state line="33" column="0" selection-start="1651" selection-end="1651" vertical-scroll-proportion="0.52698046">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pw.projects.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.projects.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="13" selection-start="2372" selection-end="2552" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pw.assets.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.assets.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="8" selection-start="1396" selection-end="1861" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,16 +176,7 @@
       <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="29" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="projectDetails.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/javascript/view/projectDetails.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="31" selection-start="750" selection-end="758" vertical-scroll-proportion="0.0">
+            <state line="154" column="29" selection-start="4064" selection-end="4064" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -160,16 +194,7 @@
       <file leaf-file-name="common.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/view/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="31" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="templates.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/javascript/view/templates.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="20" selection-start="753" selection-end="753" vertical-scroll-proportion="0.0">
+            <state line="50" column="9" selection-start="1897" selection-end="1897" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -199,14 +224,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Resources/javascript/utilities.js" />
-        <option value="$PROJECT_DIR$/Resources/javascript/mustache.jquery.wrapper.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/mustache.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw.scripts.arguments.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw.db.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/view/projectDetails.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/view/scripts.js" />
-        <option value="$PROJECT_DIR$/Resources/javascript/pw.scripts.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/view/templates.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/view/assets.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/view/common.js" />
@@ -215,14 +237,17 @@
         <option value="$PROJECT_DIR$/Resources/javascript/view/scriptExecution.js" />
         <option value="$PROJECT_DIR$/Resources/test.html" />
         <option value="$PROJECT_DIR$/Resources/index.html" />
+        <option value="$PROJECT_DIR$/Resources/test.js" />
+        <option value="$PROJECT_DIR$/Resources/javascript/pw.projects.js" />
+        <option value="$PROJECT_DIR$/Resources/javascript/pw.scripts.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="1216" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -420,46 +445,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Resources">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="javascript">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="view">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Resources">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="css">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -495,11 +480,11 @@
       <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\test" />
       <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript" />
       <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources" />
       <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench" />
       <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\r" />
-      <recent name="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\python" />
     </key>
   </component>
   <component name="RunManager">
@@ -665,7 +650,15 @@
       <created>1362421212553</created>
       <updated>1362421212553</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="arguments are now bound! arguments now retrieved when getting a">
+      <created>1362421271184</created>
+      <updated>1362421271184</updated>
+    </task>
+    <task id="LOCAL-00032" summary="housekeeping">
+      <created>1362687981186</created>
+      <updated>1362687981186</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -689,14 +682,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1616" height="1216" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19128788" sideWeight="0.49551925" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2511097" sideWeight="0.6714015" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1797575" sideWeight="0.6714015" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2660985" sideWeight="0.5007907" order="7" side_tool="true" content_ui="tabs" />
@@ -753,7 +746,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="made a few styling changes for the midterm. Added test.html which shows a sample script arguments page. None of our code is included -- it is straight jquery mobile + base requirements. Performance is still slow. I think this proves where the performance bottleneck is coming from." />
+    <option name="LAST_COMMIT_MESSAGE" value="housekeeping" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -767,8 +760,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="refactored javascript greatly, changed queries to use native websql instead of Ti API" />
-    <MESSAGE value="changed new projects to add to the top of the list instead of the bottom, changed sort criteria to use date_created instead of PID" />
     <MESSAGE value="created ability to view project details page. Currently bugged so that it's only showing the details for the first project you click on" />
     <MESSAGE value="removed the redundant page title element, slightly modified the projects page html. Single project page details bug persists." />
     <MESSAGE value="got favorites display working, can toggle 'on' or 'off', created favorites database table, created assets object containing functions to set and remove favorites from database, added listener on favorites toggle" />
@@ -792,16 +783,13 @@
     <MESSAGE value="input argument delete implemented" />
     <MESSAGE value="cleaned up some of the HTML, especially on the project details page. Added back in the 'details pane' dropdown on assets." />
     <MESSAGE value="made a few styling changes for the midterm. Added test.html which shows a sample script arguments page. None of our code is included -- it is straight jquery mobile + base requirements. Performance is still slow. I think this proves where the performance bottleneck is coming from." />
+    <MESSAGE value="arguments are now bound! arguments now retrieved when getting a" />
+    <MESSAGE value="housekeeping" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/utilities.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -812,21 +800,9 @@
         <state line="0" column="0" selection-start="0" selection-end="20" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.projects.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/view/scripts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="202" column="5" selection-start="7391" selection-end="7391" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/view/templates.js">
@@ -852,21 +828,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/view/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="31" selection-start="1279" selection-end="1279" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="19" selection-start="1934" selection-end="1934" vertical-scroll-proportion="0.0">
+        <state line="50" column="9" selection-start="1897" selection-end="1897" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="29" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.0">
+        <state line="154" column="29" selection-start="4064" selection-end="4064" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -885,30 +854,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/test.html">
+    <entry file="file://$PROJECT_DIR$/test/collapsible_test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="268" column="33" selection-start="20587" selection-end="20587" vertical-scroll-proportion="-5.6842103">
-          <folding>
-            <element signature="n#style#0;n#a#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#li#1;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#li#3;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#li#4;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#1;tag#div#0;tag#div#2;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#2;tag#div#0;tag#div#2;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#li#2;n#ul#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state line="45" column="21" selection-start="1732" selection-end="1732" vertical-scroll-proportion="0.4490566">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="439" column="55" selection-start="24069" selection-end="24069" vertical-scroll-proportion="0.86290324">
+        <state line="9" column="35" selection-start="437" selection-end="437" vertical-scroll-proportion="-5.8846154">
           <folding>
             <element signature="n#style#0;n#a#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -941,6 +896,36 @@
             <element signature="n#style#0;n#textarea#0;n#div#4;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#2;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.assets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="8" selection-start="1396" selection-end="1861" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.db.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="27" selection-start="3555" selection-end="3555" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.projects.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="13" selection-start="2372" selection-end="2552" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw.scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1651" selection-end="1651" vertical-scroll-proportion="0.52698046">
+          <folding />
         </state>
       </provider>
     </entry>
