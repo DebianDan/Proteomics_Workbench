@@ -65,7 +65,7 @@ $("input.chooseScripts").click(function(){
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
-    }, {multiple:false,title:'Select script to add'});
+    }, {multiple:true,title:'Select script to add'});
     $("#scriptPickerList").trigger('create');
 });
 
