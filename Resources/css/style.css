@@ -32,6 +32,27 @@
     line-height: 40px;
 }
 
+.inputFix{
+	border:2px solid #b4b4b4;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+	box-shadow:inset 1px 2px 4px #cdcdcd;
+	-moz-box-shadow:inset 1px 1px 4px #cdcdcd;
+	-webkit-box-shadow:inset 1px 1px 4px #cdcdcd;
+    padding:5px;
+	font-weight:bold;
+	font-size:16px;
+	width:500px !important;
+}
+
+input.inputFix:focus{ 
+    outline:none;
+    box-shadow:0px 0px 12px #387bbe; 
+    -moz-box-shadow:0px 0px 12px #387bbe;
+    -webkit-box-shadow:0px 0px 12px #387bbe;
+}
+
 div.scrollBar{ 
 	max-height:122px; 
 	overflow:auto;

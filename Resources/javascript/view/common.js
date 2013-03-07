@@ -53,3 +53,22 @@ $(document).on("click", ".detailsButton", function(e){
 
     return false;
 });
+
+//hide the input after it loses focus
+$(document).on('blur', "input.inputFix", function(e){
+	var span = $(this).next();
+	$(this).hide();
+	span.html($(this).val());
+	span.show();
+    return false;
+});
+
+//show the input when it's clicked
+$(document).on('click', "span.inputFix", function(e){
+	var input = $(this).prev();
+	$(this).hide();
+	input.show();
+	//forces the cursor to the end of the input
+	input.focus().val(input.val());
+    return false;
+});

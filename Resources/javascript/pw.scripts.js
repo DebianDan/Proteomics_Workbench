@@ -15,6 +15,21 @@ pw.scripts = (function(){
 
         this.update = function(options){
             console.log('update called on script {0} updating column {1} to {2}'.format(this.sid, options.name, options.value));
+			var sql = "UPDATE scripts SET {0} = '{1}' WHERE sid = {2}".format(options.name, options.value, this.sid);
+            pw.db.execute(sql, function(t,r){
+                //update self and hash object
+                this[options.name] = options.value;
+                //need to keep an eye on this hash object. If it get desynced it will be a tricky bug to track down ("why aren't my options updating?")
+                argumentHash[this.id] = this;
+                if(typeof options.success == "function"){ //prevents the nasty error message if the function isn't passed
+                    options.success();
+                }
+            },function(t,e){
+                console.log("error when updating the argument value: {0}".format(JSON.stringify(e)));
+                if(typeof options.error == "function"){ //prevents the nasty error message if the function isn't passed
+                    options.error(e);
+                }
+            });
         }
 
         //callback function is passed the last inserted row id

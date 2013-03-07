@@ -158,7 +158,7 @@ function renderScriptList(){
 }
 
 function updateScriptValue(options){
-    var myScript = pw.scripts.getScript({
+	var myScript = pw.scripts.getScript({
         id: options.id,
         success : function(script){
             script.update({
@@ -220,7 +220,7 @@ $(document).on("click", ".deleteArg", function(e){
     pw.scripts.getArgument(options);
 });
 
-$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input, .scriptProperties li:first textarea", function(e){
+$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input.inputFix", function(e){
     var options = {
         name : $(this).attr("name"),
         id : $(this).attr("data-id"),
@@ -229,7 +229,8 @@ $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input, .s
     updateScriptValue(options);
 });
 
-$(document).on("blur", ".argumentsList input, .argumentsList textarea", function(e){
+
+$(document).on("blur", ".argumentsList input.inputFix", function(e){
     var options = {
         name : $(this).attr("name"),
         id : $(this).attr("data-id"),

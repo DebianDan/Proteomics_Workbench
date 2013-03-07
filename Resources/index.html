@@ -123,12 +123,14 @@
                         <ul class="scriptProperties" data-role="listview" data-inset="true" data-enhance="false">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
-                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
+                                <input data-role="none" style="display:none" class="inputFix" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
+								<span id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
-                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
+                                <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
+								<span id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
@@ -139,11 +141,14 @@
                                         <li data-role="fieldcontain">
                                             <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
                                             <label for="argLabel-{{id}}">Label: </label>
-                                            <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                            <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+											<span id="spanargLabel-{{id}}" class="inputFix" data-id="{{id}}">{{label}}</span><br><br>
                                             <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                            <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+											<span id="spanargSwitch-{{id}}" class="inputFix" data-id="{{id}}">{{switch}}</span><br><br>
                                             <label for="argDescription-{{id}}">Description: </label>
-                                            <textarea placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="test" data-mini="true">{{description}}</textarea>
+                                            <input data-role="none" style="display:none" class="inputFix" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
+											<span id="spanargDescription-{{id}}" class="inputFix" data-id="{{id}}">{{description}}</span><br><br>
                                             <label for="required-{{id}}" checked="checked">Required</label>
                                             {{#required}}
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
