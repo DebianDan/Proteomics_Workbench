@@ -156,6 +156,10 @@
                                             {{^required}}
                                             <input type="checkbox" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
                                             {{/required}}
+                                            <div style="padding-bottom:20px">
+                                        		<a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:left;">Save</a>
+												<a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="a" style="float:right;">Delete</a>
+                                            </div>
                                         </li>
                                         {{/arguments}}
                                         <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
@@ -400,7 +404,11 @@
 			</fieldset>
 			{{/arguments}}
 		</div>
-		<a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
+        <div>
+        	<label for="extraArguments"><h4>Extra Arguments: </h4></label>
+        	<input type="text" name="extraArguments" id="extraArguments" value="" />
+		</div>
+        <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
 		<a href="#" id="clearLog" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Clear Log</a>
 		<div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
                 <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
