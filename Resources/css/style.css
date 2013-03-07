@@ -44,6 +44,7 @@
 	font-weight:bold;
 	font-size:16px;
 	width:500px !important;
+	overflow:scroll;
 }
 
 input.inputFix:focus{ 
