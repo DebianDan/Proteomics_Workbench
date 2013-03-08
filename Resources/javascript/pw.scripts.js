@@ -35,9 +35,10 @@ pw.scripts = (function(){
         //callback function is passed the last inserted row id
         this.addArgument = function(options){
             var sql = "INSERT INTO arguments('sid','required','label') VALUES({0},{1},'{2}')".format(this.sid, 0,"new argument");
+			console.log("Adding Argument: " + sql);
             pw.db.execute(sql, function(t, r){
                 //we are now going to construct an argument object and pass it back to the caller
-                var newArg = new argument({id:r.insertId, sid:this.sid});
+                var newArg = new argument({id:r.insertId, sid:options.id, label:"new argument"});
                 //add it to the arguments hash to keep it consistent
                 argumentHash[newArg.id] = newArg;
                 //use this if statement to prevent the nasty error message if the success function isn't defined or isn't a function

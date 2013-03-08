@@ -152,6 +152,11 @@ $(document).on('click', "#run", function(){
 	//alert(argPaths.length);
 	
 	if (valid){
+		//add extra arguments to the end of the command
+		var extraArgs = $("#extraArguments").val();
+		if(extraArgs != ""){
+			argPaths.push(extraArgs);
+		}
 		//Creating a notification for Script Start
 		var note = Ti.Notification.createNotification({
 			'title' : 'Script Status',
