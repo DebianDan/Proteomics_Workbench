@@ -3,7 +3,7 @@
 <head>
     <title>Proteomics Workbench</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/jquery.mobile-1.3.0.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.0.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/chosen.css"/>
     <script src="javascript/jquery-1.8.3.min.js"></script>
@@ -32,25 +32,25 @@
 
     <div data-role="content">
 
-    <div class="content-primary">
-        <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
-	
-    <!-- popup for Create Project -->
-    <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
-    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        	Title: <input type="text" class="projectTitle" id="createProjectTitle" value=""><br>
-        	Description: <input type="text" class="projectDescription" value=""><br>
-            <input type="submit" value="Submit" data-theme="b">
-	</div>
-    
-    
-    </div>
-    <div class="content-secondary">
-        <div data-theme="b" data-content-theme="d">
+        <div class="content-primary">
+            <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
+
+            <!-- popup for Create Project -->
+            <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                Title: <input type="text" class="projectTitle" id="createProjectTitle" value=""><br>
+                Description: <input type="text" class="projectDescription" value=""><br>
+                <input type="submit" value="Submit" data-theme="b">
+            </div>
+
+
+        </div>
+        <div class="content-secondary">
+            <div data-theme="b" data-content-theme="d">
                 <ul id="projectList" data-role="listview" data-theme="c" data-dividertheme="d" data-filter="true" data-filter-placeholder="Search projects...">
                 </ul>
+            </div>
         </div>
-    </div>
 
     </div><!-- /content -->
 
@@ -120,53 +120,53 @@
                 <div data-role="collapsible">
                     <h3>{{alias}}</h3>
                     <div data-role="fieldcontain">
-                        <ul class="scriptProperties" data-role="listview" data-inset="true" data-enhance="false">
+                        <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
                                 <input data-role="none" style="display:none" class="inputFix" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
-								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
+                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
                                 <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
-								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
+                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
                                     <h4>Input Arguments</h4>
-									<div class="argumentsList" data-role="collapsible-set" data-theme="c" data-content-theme="d">
+                                    <div class="argumentsList" data-role="collapsible-set" data-theme="c" data-content-theme="d">
                                         {{#arguments}}
-										<div class="arg" data-role="collapsible">
-										<h4>{{label}}</h4>
-										<div data-role="fieldcontain">
-                                            <!--<div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>-->
-                                            <label for="argLabel-{{id}}">Label: </label>
-                                            <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
-											<span data-role="none" data-enhance="false" style="display:inline-block" id="spanargLabel-{{id}}" class="inputFix" data-id="{{id}}">{{label}}</span><br><br>
-                                            <label for="argSwitch-{{id}}">Switch: </label>
-                                            <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
-											<span data-role="none" data-enhance="false" style="display:inline-block" id="spanargSwitch-{{id}}" class="inputFix" data-id="{{id}}">{{switch}}</span><br><br>
-                                            <label for="argDescription-{{id}}">Description: </label>
-                                            <input data-role="none" style="display:none" class="inputFix" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
-											<span data-role="none" data-enhance="false" style="display:inline-block" id="spanargDescription-{{id}}" class="inputFix" data-id="{{id}}">{{description}}</span><br><br>
-                                            <label for="required-{{id}}" checked="checked">Required</label>
-                                            {{#required}}
-                                            <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
-                                            {{/required}}
-                                            {{^required}}
-                                            <input type="checkbox" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
-                                            {{/required}}
-                                            <div style="padding-bottom:20px">
-                                        		<a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:left;">Save</a>
-												<a href="#" data-id="{{id}}" class="deleteArg" data-role="button" data-inline="true" data-mini="true" data-theme="a" style="float:right;">Delete</a>
+                                        <div class="arg" data-role="collapsible">
+                                            <h4>{{label}}</h4>
+                                            <div data-role="fieldcontain">
+                                                <!--<div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>-->
+                                                <label for="argLabel-{{id}}">Label: </label>
+                                                <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanargLabel-{{id}}" class="inputFix" data-id="{{id}}">{{label}}</span><br><br>
+                                                <label for="argSwitch-{{id}}">Switch: </label>
+                                                <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanargSwitch-{{id}}" class="inputFix" data-id="{{id}}">{{switch}}</span><br><br>
+                                                <label for="argDescription-{{id}}">Description: </label>
+                                                <input data-role="none" style="display:none" class="inputFix" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
+                                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanargDescription-{{id}}" class="inputFix" data-id="{{id}}">{{description}}</span><br><br>
+                                                <label for="required-{{id}}" checked="checked">Required</label>
+                                                {{#required}}
+                                                <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+                                                {{/required}}
+                                                {{^required}}
+                                                <input type="checkbox" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+                                                {{/required}}
+                                                <div style="padding-bottom:20px">
+                                                    <a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:left;">Save</a>
+                                                    <a href="#" data-id="{{id}}" class="deleteArg" data-role="button" data-inline="true" data-mini="true" data-theme="a" style="float:right;">Delete</a>
+                                                </div>
                                             </div>
-										</div>	
-										</div>
+                                        </div>
                                         {{/arguments}}
-									</div>
-									<a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
+                                    </div>
+                                    <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
                                 </div>
                                 <!--<div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true"></div>
                                 <div id="tplInputArgs"></div>-->
@@ -248,30 +248,30 @@
     </div><!-- /header -->
 
     <div data-role="content">
-    
-    	<a href="#editProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a>
-    	<!-- Popup for editing the title and description -->
+
+        <a href="#editProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a>
+        <!-- Popup for editing the title and description -->
         <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
-    	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        	New title: <input type="text" class="newTitle" value=""><br>
+            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            New title: <input type="text" class="newTitle" value=""><br>
             New description: <input type="text" class="newDescription" value=""><br>
             <input type="submit" value="Submit" data-theme="b" id="edit">
-		</div>
-    
+        </div>
+
         <a href="#deleteProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>
         <!-- popup for Delete Project -->
         <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
-                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                    <h3 class="ui-title">Are you sure you want to delete this project?</h3>
-                    <a href="#projects" span data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
-                </div>
+            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                <h3 class="ui-title">Are you sure you want to delete this project?</h3>
+                <a href="#projects" span data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+            </div>
         </div>
 
-        
+
         <!-- The h3 tags are used to force project details to be above the project asset list-->
         <h4 id="pDetails"></h4>
-        
+
         <!-- List of Assets -->
         <div class="ui-grid-a">
             <div class="ui-block-a" style="padding-right:10px">
@@ -299,53 +299,53 @@
                 </div>
                 <div class="ui-body ui-body-b">
                     <fieldset data-role="controlgroup" style="margin-top:0%;">
-                    <div data-role="fieldcontain">
-                       <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
-                          <option data-placeholder="true">Sort Assets By...</option>
-                          <option value="date">Newest</option>
-                          <option value="favorites">Favorites</option>
-                          <option value="type">File Type</option>
-                          <option value="favorites">File Name</option>
-                       </select>
-                    </div>
-                    <ul id="assetList" class="itemList" data-role="fieldcontain">
-                    </ul>
-                    <!--
-                    <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
-                        <ul class="itemList" data-role="fieldcontain">
-
+                        <div data-role="fieldcontain">
+                            <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
+                                <option data-placeholder="true">Sort Assets By...</option>
+                                <option value="date">Newest</option>
+                                <option value="favorites">Favorites</option>
+                                <option value="type">File Type</option>
+                                <option value="favorites">File Name</option>
+                            </select>
+                        </div>
+                        <ul id="assetList" class="itemList" data-role="fieldcontain">
                         </ul>
-                    </div>
-                    -->
+                        <!--
+                        <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
+                            <ul class="itemList" data-role="fieldcontain">
+
+                            </ul>
+                        </div>
+                        -->
                     </fieldset>
                 </div>
             </div>
             <div class="ui-block-b" style="padding-left:10px">
                 <div class="ui-body ui-body-b" style="margin-top: 40px;">
                     <fieldset data-role="controlgroup" style="margin-top:0%;">
-                    <div data-role="fieldcontain">
-                       <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
-                          <option data-placeholder="true">Sort Scripts By...</option>
-                          <option value="date">Newest</option>
-                          <option value="favorites">Favorites</option>
-                          <option value="type">File Type</option>
-                          <option value="favorites">File Name</option>
-                       </select>
-                    </div>
-                    <div id="scriptList-project">
-                    </div>
-                    <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false">
-                        <ul data-theme="c" data-dividertheme="d">
-                            {{#scripts}}
-                            <li data-sid="{{sid}}"><a href="#scriptExe?sid={{sid}}">{{alias}}</a></li>
-                            {{/scripts}}
-                        </ul>
-                    </div>
+                        <div data-role="fieldcontain">
+                            <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
+                                <option data-placeholder="true">Sort Scripts By...</option>
+                                <option value="date">Newest</option>
+                                <option value="favorites">Favorites</option>
+                                <option value="type">File Type</option>
+                                <option value="favorites">File Name</option>
+                            </select>
+                        </div>
+                        <div id="scriptList-project">
+                        </div>
+                        <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false">
+                            <ul data-theme="c" data-dividertheme="d">
+                                {{#scripts}}
+                                <li data-sid="{{sid}}"><a href="#scriptExe?sid={{sid}}">{{alias}}</a></li>
+                                {{/scripts}}
+                            </ul>
+                        </div>
                     </fieldset>
                 </div>
             </div>
-		</div>
-        
+        </div>
+
     </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
@@ -366,58 +366,58 @@
         <a style="position:absolute; margin-left: 90px;top: 3px;" data-role="button" data-icon="back" data-rel="back">Back</a>
     </div><!-- /header -->
 
-<div data-role="content">
- 		
+    <div data-role="content">
+
         <a href="#scriptDetailsPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" data-icon="info" style="float:right;">More Details</a>
         <div data-role="popup" id="scriptDetailsPopup" class="ui-content" data-overlay-theme="a">
-              <h4 id="pScriptDetailsMore"></h4>
-              <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            <h4 id="pScriptDetailsMore"></h4>
+            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         </div>
         <h4 id="pScriptDetails"></h4>
-         
-		<div id="scriptExeAssetList">
-		
-		</div>
-		
-		<div id="tplScriptExeAssetList" style="display:none;" data-enhance="false"> 
-			{{#arguments}}
-			<fieldset data-role="controlgroup" style="margin-top:2%;">
-				<div class="ui-body ui-body-b">
 
-				<!--<b style="padding-left:20px">Label:&nbsp;</b>{{label}}-->
+        <div id="scriptExeAssetList">
 
-                <h3>{{label}} {{#required}}
-                    <span id="argMarkup{{id}}" style="color:red;"><b>required</b></span>
-                    {{/required}}
-                </h3>
-                {{description}}
-				<div id="scriptExeAssetList{{id}}" data-role="fieldcontain" data-required="{{required}}" class="scrollBar">
+        </div>
+
+        <div id="tplScriptExeAssetList" style="display:none;" data-enhance="false">
+            {{#arguments}}
+            <fieldset data-role="controlgroup" style="margin-top:2%;">
+                <div class="ui-body ui-body-b">
+
+                    <!--<b style="padding-left:20px">Label:&nbsp;</b>{{label}}-->
+
+                    <h3>{{label}} {{#required}}
+                        <span id="argMarkup{{id}}" style="color:red;"><b>required</b></span>
+                        {{/required}}
+                    </h3>
+                    {{description}}
+                    <div id="scriptExeAssetList{{id}}" data-role="fieldcontain" data-required="{{required}}" class="scrollBar">
 					<!--<input type="radio" name="scriptAsset" id="aid1" value="aid1">
 					<label for="aid1">asset1</label>-->
 				</div>
-				</div>
-			</fieldset>
-			{{/arguments}}
-		</div>
-        <div>
-        	<label for="extraArguments"><h4>Extra Arguments: </h4></label>
-        	<input type="text" name="extraArguments" id="extraArguments" value="" />
-		</div>
-        <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
-		<a href="#" id="clearLog" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Clear Log</a>
-		<div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
-                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                    <h3 class="ui-title">Run this script?</h3>
-                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#" id="run" data-role="button" data-inline="true" data-theme="b">Run</a>
                 </div>
+            </fieldset>
+            {{/arguments}}
+        </div>
+        <div>
+            <label for="extraArguments"><h4>Extra Arguments: </h4></label>
+            <input type="text" name="extraArguments" id="extraArguments" value="" />
+        </div>
+        <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
+        <a href="#" id="clearLog" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Clear Log</a>
+        <div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
+            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                <h3 class="ui-title">Run this script?</h3>
+                <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                <a href="#" id="run" data-role="button" data-inline="true" data-theme="b">Run</a>
+            </div>
         </div>
         <div data-role="fieldcontain" style="padding-top:20px;">
-        <label for="scriptOut"><b>Script output:</b></label>
-        <div id="scriptOut" class="textareaFix" style="height:120px; float:right; width:400px;">
-        </div></div>
-                   
-</div><!-- /content -->
+            <label for="scriptOut"><b>Script output:</b></label>
+            <div id="scriptOut" class="textareaFix" style="height:120px; float:right; width:400px;">
+            </div></div>
+
+    </div><!-- /content -->
 
     <div id="navPanel" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
         <a href="#navPanel" data-theme="b" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" style="float:right;"></a>
