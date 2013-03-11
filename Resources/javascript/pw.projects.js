@@ -2,6 +2,12 @@
 pw.projects = (function(){
     var my = {};
 
+    //we'll use this to mixin with the options argument in case people don't pass us the success/error functions
+    var _defaultOptions = {
+        success : function(){},
+        error : function(){}
+    }
+
     //the project object
     var project = function(data){
         //properties
@@ -30,6 +36,11 @@ pw.projects = (function(){
             }, function(t,e){
                 options.error(e);
             });
+        }
+
+        //on success returns an array of asset objects
+        this.getAssets = function(options){
+            //TODO: Implement
         }
 
         this.update = function(options){
@@ -73,6 +84,26 @@ pw.projects = (function(){
             filename : "",
             filetype : "",
             date_created : ""
+        }
+        $.extend(properties, data); //copy data into properties
+
+        var remove = function(options){
+            options = $.extend(_defaultOptions, options);
+            var sqlFav = "DELETE FROM favorites WHERE aid={0}".format(properties.id);
+            var sql = "DELETE FROM assets WHERE aid={0}".format(properties.id);
+            pw.db.execute(sqlFav);
+            pw.db.execute(sql, options.success, options.error);
+        }
+
+        var addFavorite = function(options){
+            options = $.extend(_defaultOptions, options);
+            var sql = "INSERT INTO favorites VALUES({0}, {1})".format(properties.pid, properties.aid);
+            pw.db.execute(sql, options.success, options.error);
+        }
+
+        var removeFavorite = function(pid, aid, onSuccess, onError){
+            var sql = "DELETE FROM favorites WHERE pid={0} and aid={0})".format(properties.pid, properties.aid);
+            pw.db.execute(sql, options.success, options.error);
         }
     }
 
