@@ -52,9 +52,11 @@ $(document).on("click", "#addScriptPopup .close", function(e){
     e.preventDefault();
 });
 
+/*
 $(document).on("click", ".addInputArgument", function(e){
     //add an
 });
+*/
 
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
@@ -65,7 +67,7 @@ $("input.chooseScripts").click(function(){
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
-    }, {multiple:false,title:'Select script to add'});
+    }, {multiple:true,title:'Select script to add'});
     $("#scriptPickerList").trigger('create');
 });
 
@@ -185,18 +187,29 @@ $(document).on("click", ".addInputArgument", function(e){
     //options argument to pass to getScript()
     var self = this;
     var options = {
-        id : $(this).attr("data-id"),
+        id : $(self).attr("data-id"),
         success : function(script){
             script.addArgument({
+				id : $(self).attr("data-id"),
                 success : function(newArg){
                     console.log("successfully added input argument: {0}".format(JSON.stringify(newArg)));
                     //we have successfully added the argument to the database
                     //now we need to create the entry in the form
                     //get the template for the entry first
-                    var template = $("#tplScriptsListing .argumentsList li")[0].outerHTML, //using outerHTML gives us the wrapping element itself (in this case the <li>) which jquery doesn't do
+                    var template = $("#tplScriptsListing .argumentsList div.arg")[0].outerHTML, //using outerHTML gives us the wrapping element itself (in this case the <li>) which jquery doesn't do
                         html = $(Mustache.to_html(template, newArg));
-                    $(self).before(html);
-                    $(self).parent().trigger('create').listview('refresh');
+					//check to see if the arg list was empty
+					var isEmpty = $(self).prev().children('div.arg');
+					if (!isEmpty.length){
+						console.log("The argument list was empty..");
+						$(self).prev().prepend(html);
+					}else{
+						//add the new argument after the last arg in the list
+						isEmpty.last().after(html);
+					}
+					//update the list
+					$(self).prev().trigger('create');
+					$(self).parent().trigger('create');
                 }
             });
         }
@@ -212,7 +225,7 @@ $(document).on("click", ".deleteArg", function(e){
             success : function(myArg){
                 myArg.remove({
                     success : function(){
-                        $(self).parent().remove();
+                        $(self).closest(".arg").remove();
                     }
                 });
             }

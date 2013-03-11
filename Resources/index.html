@@ -124,31 +124,33 @@
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
                                 <input data-role="none" style="display:none" class="inputFix" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
-								<span id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
+								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
                                 <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
-								<span id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
+								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
                                     <h4>Input Arguments</h4>
-                                    <ul data-role="listview" data-inset="true" class="argumentsList" data-mini="true">
+									<div class="argumentsList" data-role="collapsible-set" data-theme="c" data-content-theme="d">
                                         {{#arguments}}
-                                        <li data-role="fieldcontain">
-                                            <div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>
+										<div class="arg" data-role="collapsible">
+										<h4>{{label}}</h4>
+										<div data-role="fieldcontain">
+                                            <!--<div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>-->
                                             <label for="argLabel-{{id}}">Label: </label>
                                             <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
-											<span id="spanargLabel-{{id}}" class="inputFix" data-id="{{id}}">{{label}}</span><br><br>
+											<span data-role="none" data-enhance="false" style="display:inline-block" id="spanargLabel-{{id}}" class="inputFix" data-id="{{id}}">{{label}}</span><br><br>
                                             <label for="argSwitch-{{id}}">Switch: </label>
                                             <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
-											<span id="spanargSwitch-{{id}}" class="inputFix" data-id="{{id}}">{{switch}}</span><br><br>
+											<span data-role="none" data-enhance="false" style="display:inline-block" id="spanargSwitch-{{id}}" class="inputFix" data-id="{{id}}">{{switch}}</span><br><br>
                                             <label for="argDescription-{{id}}">Description: </label>
                                             <input data-role="none" style="display:none" class="inputFix" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
-											<span id="spanargDescription-{{id}}" class="inputFix" data-id="{{id}}">{{description}}</span><br><br>
+											<span data-role="none" data-enhance="false" style="display:inline-block" id="spanargDescription-{{id}}" class="inputFix" data-id="{{id}}">{{description}}</span><br><br>
                                             <label for="required-{{id}}" checked="checked">Required</label>
                                             {{#required}}
                                             <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -156,21 +158,18 @@
                                             {{^required}}
                                             <input type="checkbox" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
                                             {{/required}}
-                                        </li>
+                                            <div style="padding-bottom:20px">
+                                        		<a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:left;">Save</a>
+												<a href="#" data-id="{{id}}" class="deleteArg" data-role="button" data-inline="true" data-mini="true" data-theme="a" style="float:right;">Delete</a>
+                                            </div>
+										</div>	
+										</div>
                                         {{/arguments}}
-                                        <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
-                                    </ul>
+									</div>
+									<a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
                                 </div>
-                                <!--
-                                <div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
-
-                                </div>
-
-                                <div id="tplInputArgs">
-
-
-                                </div>
-                                -->
+                                <!--<div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true"></div>
+                                <div id="tplInputArgs"></div>-->
                             </li>
                         </ul>
                     </div>
@@ -400,7 +399,11 @@
 			</fieldset>
 			{{/arguments}}
 		</div>
-		<a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
+        <div>
+        	<label for="extraArguments"><h4>Extra Arguments: </h4></label>
+        	<input type="text" name="extraArguments" id="extraArguments" value="" />
+		</div>
+        <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
 		<a href="#" id="clearLog" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Clear Log</a>
 		<div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
                 <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
@@ -410,9 +413,9 @@
                 </div>
         </div>
         <div data-role="fieldcontain" style="padding-top:20px;">
-            <label for="scriptOut"><b>Script output:</b></label>
-		<textarea cols="40" rows="8" name="scriptOut" id="scriptOut" style="height:120px" readonly></textarea>
-    	</div>
+        <label for="scriptOut"><b>Script output:</b></label>
+        <div id="scriptOut" class="textareaFix" style="height:120px; float:right; width:400px;">
+        </div></div>
                    
 </div><!-- /content -->
 
