@@ -9,7 +9,7 @@ pw.projects = (function(){
     }
 
     //the project object
-    var project = function(data){
+    var project = function(){
         //properties
         var properties = {
             id : "",
@@ -18,8 +18,18 @@ pw.projects = (function(){
             active : "",
             date_created : ""
         }
-        $.extend(properties, data); //copy data into properties
+
         assets = []; //empty assets array
+
+        //this init function should be called whenever constructing a new instance of this object
+        //a data object is expected to be found in the options argument, will be mixed with the project's properties object
+        //the success and error callbacks are expected to be found in the options argument
+        this.init = function(options){
+            options = $.extend(_defaultOptions, options); //ensure success and error callbacks are defined
+            $.extend(properties, options.data); //copy data into properties
+
+            //TODO: get the assets for this project and then call the success callback
+        }
 
         this.addAsset = function(options){
             //copy options into defaults
@@ -87,23 +97,69 @@ pw.projects = (function(){
         }
         $.extend(properties, data); //copy data into properties
 
+        //function used to update a particular value in this asset
+        //options argument expects: name (string), value (string) and optional success/error callbacks
+        this.update = function(options){
+            options = $.extend(_defaultOptions, options);
+            var sql = "UPDATE assets SET {0} = '{1}' WHERE aid = {2}".format(options.name, options.value, properties.id);
+            pw.db.execute(sql, function(t,r){
+                //update self and hash object
+                properties[options.name] = options.value;
+                options.success(this);
+            },function(t,e){
+                console.log("error when updating the argument value: {0}".format(JSON.stringify(e)));
+                options.error(e);
+            });
+        }
+
         var remove = function(options){
             options = $.extend(_defaultOptions, options);
-            var sqlFav = "DELETE FROM favorites WHERE aid={0}".format(properties.id);
+            var sqlDeleteFav = "DELETE FROM favorites WHERE aid={0}".format(properties.id);
             var sql = "DELETE FROM assets WHERE aid={0}".format(properties.id);
-            pw.db.execute(sqlFav);
+            pw.db.execute(sqlDeleteFav);
             pw.db.execute(sql, options.success, options.error);
         }
 
         var addFavorite = function(options){
             options = $.extend(_defaultOptions, options);
-            var sql = "INSERT INTO favorites VALUES({0}, {1})".format(properties.pid, properties.aid);
+            var sql = "INSERT INTO favorites VALUES({0}, {1})".format(properties.pid, properties.id);
             pw.db.execute(sql, options.success, options.error);
         }
 
-        var removeFavorite = function(pid, aid, onSuccess, onError){
-            var sql = "DELETE FROM favorites WHERE pid={0} and aid={0})".format(properties.pid, properties.aid);
+        var removeFavorite = function(options){
+            options = $.extend(_defaultOptions, options);
+            var sql = "DELETE FROM favorites WHERE pid={0} and aid={0})".format(properties.pid, properties.id);
             pw.db.execute(sql, options.success, options.error);
+        }
+    }
+
+    //options object expects an 'id' key corresponding to the id of the project to fetch
+    my.getProjectEx = function(options){
+        options = $.extend(_defaultOptions, options);
+        if(options.id){
+            var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = {0}".format(options.id);
+            //execute the database call to get the project
+            pw.db.execute(sql, function(t, r){
+                var myProject = null;
+                if(r.rows.length){
+                    //if we have results, create a new project object
+                    var item = results.rows.item(0);
+                    myProject = new project();
+                    //projectOptions contains the data from the database and the success/error callbacks
+                    var projectOptions = {
+                        data : item,
+                        success : options.success,
+                        error : options.error
+                    }
+                    //the init function will set all the property values and call the success/error callback as specified in the options argument
+                    myProject.init(projectOptions);
+                }
+            }, function(t, e){
+                options.error(e);
+            });
+        }else{
+            console.log("pid must be specified when calling getProject()");
+            options.error();
         }
     }
 
