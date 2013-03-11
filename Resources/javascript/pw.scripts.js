@@ -84,7 +84,7 @@ pw.scripts = (function(){
         $.extend(this, defaults, data); //mix properties of data with defaults & this context
 
         //function used to update a particular value in this argument
-        //options argument expects: name (string), value (string) and options success/error callbacks
+        //options argument expects: name (string), value (string) and optional success/error callbacks
         this.update = function(options){
             var sql = "UPDATE arguments SET {0} = '{1}' WHERE id = {2}".format(options.name, options.value, this.id);
             pw.db.execute(sql, function(t,r){
