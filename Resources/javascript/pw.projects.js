@@ -1,4 +1,7 @@
 //PROJECTS STUFF
+//TODO: use Function.prototype.options instead of using this $.extend(_defaultOptions, options) malarky
+//TODO: pw.projects.getProjectEx({id:1,success:function(p){console.log(JSON.stringify(p));}, error:function(e){console.log("oops " + JSON.stringify(e))}});
+
 pw.projects = (function(){
     var my = {};
 
@@ -6,6 +9,62 @@ pw.projects = (function(){
     var _defaultOptions = {
         success : function(){},
         error : function(){}
+    }
+
+    //the asset object
+    var asset = function(){
+        var properties = {
+            aid : "",
+            pid : "",
+            path : "",
+            filename : "",
+            filetype : "",
+            fav : "",
+            date_created : ""
+        }
+
+        //call this function to initialize the properties
+        this.init = function(options){
+            this.properties = $.extend(properties, options); //copy data into properties
+            return this;
+        }
+
+        //function used to update a particular value in this asset
+        //options argument expects: name (string), value (string) and optional success/error callbacks
+        this.update = function(options){
+            options = $.extend({},_defaultOptions, options);
+            var sql = "UPDATE assets SET {0} = '{1}' WHERE aid = {2}".format(options.name, options.value, properties.aid);
+            pw.db.execute(sql, function(t,r){
+                //update self and hash object
+                properties[options.name] = options.value;
+                options.success(this);
+            },function(t,e){
+                console.log("error when updating the argument value: {0}".format(JSON.stringify(e)));
+                options.error(e);
+            });
+        }
+
+        var remove = function(options){
+            options = $.extend({},_defaultOptions, options);
+            var sqlDeleteFav = "DELETE FROM favorites WHERE aid={0}".format(properties.aid);
+            var sql = "DELETE FROM assets WHERE aid={0}".format(properties.aid);
+            pw.db.execute(sqlDeleteFav);
+            pw.db.execute(sql, options.success, options.error);
+        }
+
+        var addFavorite = function(options){
+            options = $.extend({},_defaultOptions, options);
+            var sql = "INSERT INTO favorites VALUES({0}, {1})".format(properties.pid, properties.aid);
+            pw.db.execute(sql, options.success, options.error);
+        }
+
+        var removeFavorite = function(options){
+            options = $.extend({},_defaultOptions, options);
+            var sql = "DELETE FROM favorites WHERE pid={0} and aid={0})".format(properties.pid, properties.aid);
+            pw.db.execute(sql, options.success, options.error);
+        }
+
+        return this;
     }
 
     //the project object
@@ -18,7 +77,7 @@ pw.projects = (function(){
             active : "",
             date_created : "",
             assets : ["not_initialized"]
-            }
+            };
 
             //empty assets array ... should be in a closure to make it private -- force use of getAssets()
             //
@@ -29,14 +88,16 @@ pw.projects = (function(){
              *  the success and error callbacks are expected to be found in the options argument
              ***************/
 
-            init = function(options){
-                options = $.extend(_defaultOptions, options); //ensure success and error callbacks are defined
+        this.init = function(options){
+                console.log("DEBUG: in init function of project, options is: " + JSON.stringify(options));
+                options = $.extend({},_defaultOptions, options); //ensure success and error callbacks are defined
                 $.extend(properties, options.data); //copy data into properties
-                this.properties.assets = new Array(); //clear out 'not_initialized' message in array
+                properties.assets = new Array(); //clear out 'not_initialized' message in array
                 //get the assets for this project, assign to the internal array, then finally call supplied success callback
-                getAssets(options, function(assetsArray){
-                    this.properties.assets = assetsArray;
-                    options.success(this); //pass our context to caller
+
+                this.getAssets(options, function(assetsArray){
+                    properties.assets = assetsArray;
+                    options.success(assetsArray); //pass our context to caller
                 });
             }
 
@@ -60,25 +121,30 @@ pw.projects = (function(){
         //on success returns an array of asset objects
         //optionalCallback will be called instead of options.success if supplied as an argument
         this.getAssets = function(options, optionalCallback){
-            options = $.extend(_defaultOptions, options); //copy default success & error callback functions into options
-            //TODO: extend Function.prototype.options
-            var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
+            options = $.extend({},_defaultOptions, options); //copy default success & error callback functions into options
             if(!options.pid){
-                onError("pid must be specified when calling getAllAssets()");
+                options.error("id (project) must be specified when calling getAllAssets()");
                 return false;
             }else{
+                var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+options.pid+" ORDER BY assets.date_created DESC";
                 var assetsArray = new Array(); // array of asset objects to build & pass to callback
+
                 pw.db.execute(sql, function(t,r){
                     if(r.rows.length){
                         //if we have results, loop through results and build array of assets
-                        results.rows.forEach(function(element, index, array){
-                            assetsArray.push(new asset(element));
-                        });
+                        for(var i = 0; i < r.rows.length; i++){
+                            var item = r.rows.item(i);
+                            var myAsset = new asset();
+                            myAsset = myAsset.init(item);
+                            assetsArray.push(myAsset);
+                            console.log("pushed " + JSON.stringify(myAsset));
+                        }
                     }
                     if(typeof optionalCallback === "function"){
                         optionalCallback(assetsArray);
+                    }else{
+                        options.success(assetsArray);
                     }
-                    options.success(assetsArray);
                 }, function(t,e){
                     options.error(e);
                 });
@@ -117,57 +183,11 @@ pw.projects = (function(){
         }
     };
 
-    //the asset object
-    var asset = function(data){
-        var properties = {
-            id : "",
-            pid : "",
-            path : "",
-            filename : "",
-            filetype : "",
-            date_created : ""
-        }
-        $.extend(properties, data); //copy data into properties
 
-        //function used to update a particular value in this asset
-        //options argument expects: name (string), value (string) and optional success/error callbacks
-        this.update = function(options){
-            options = $.extend(_defaultOptions, options);
-            var sql = "UPDATE assets SET {0} = '{1}' WHERE aid = {2}".format(options.name, options.value, properties.id);
-            pw.db.execute(sql, function(t,r){
-                //update self and hash object
-                properties[options.name] = options.value;
-                options.success(this);
-            },function(t,e){
-                console.log("error when updating the argument value: {0}".format(JSON.stringify(e)));
-                options.error(e);
-            });
-        }
-
-        var remove = function(options){
-            options = $.extend(_defaultOptions, options);
-            var sqlDeleteFav = "DELETE FROM favorites WHERE aid={0}".format(properties.id);
-            var sql = "DELETE FROM assets WHERE aid={0}".format(properties.id);
-            pw.db.execute(sqlDeleteFav);
-            pw.db.execute(sql, options.success, options.error);
-        }
-
-        var addFavorite = function(options){
-            options = $.extend(_defaultOptions, options);
-            var sql = "INSERT INTO favorites VALUES({0}, {1})".format(properties.pid, properties.id);
-            pw.db.execute(sql, options.success, options.error);
-        }
-
-        var removeFavorite = function(options){
-            options = $.extend(_defaultOptions, options);
-            var sql = "DELETE FROM favorites WHERE pid={0} and aid={0})".format(properties.pid, properties.id);
-            pw.db.execute(sql, options.success, options.error);
-        }
-    }
 
     //options object expects an 'id' key corresponding to the id of the project to fetch
     my.getProjectEx = function(options){
-        options = $.extend(_defaultOptions, options);
+        options = $.extend({},_defaultOptions, options);
         if(options.id){
             var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = {0}".format(options.id);
             //execute the database call to get the project
@@ -175,7 +195,7 @@ pw.projects = (function(){
                 var myProject = null;
                 if(r.rows.length){
                     //if we have results, create a new project object
-                    var item = results.rows.item(0);
+                    var item = r.rows.item(0);
                     myProject = new project();
                     //projectOptions contains the data from the database and the success/error callbacks
                     var projectOptions = {
@@ -183,8 +203,10 @@ pw.projects = (function(){
                         success : options.success,
                         error : options.error
                     }
+                    //want to copy the contents of the item to the options object
+                    options = $.extend({},item,options);//explanation: (options overrides item which overrides {})
                     //the init function will set all the property values and call the success/error callback as specified in the options argument
-                    myProject.init(projectOptions);
+                    myProject.init(options);
                 }
             }, function(t, e){
                 options.error(e);

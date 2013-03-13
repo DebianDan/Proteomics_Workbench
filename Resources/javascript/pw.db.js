@@ -71,7 +71,10 @@
         console.log(sql);
         pw.db.transaction(
             function(transaction){
-                transaction.executeSql(sql, [], dataHandler, errorHandler);
+                transaction.executeSql(sql, [], dataHandler, function(t, e){
+                    console.log("bad sql here: " + sql);
+                    errorHandler(t,e);
+                });
             }
         );
     }
