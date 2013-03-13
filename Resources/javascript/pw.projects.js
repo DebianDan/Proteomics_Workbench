@@ -16,20 +16,29 @@ pw.projects = (function(){
             name : "",
             description: "",
             active : "",
-            date_created : ""
-        }
+            date_created : "",
+            assets : ["not_initialized"]
+            }
 
-        assets = []; //empty assets array
+            //empty assets array ... should be in a closure to make it private -- force use of getAssets()
+            //
 
-        //this init function should be called whenever constructing a new instance of this object
-        //a data object is expected to be found in the options argument, will be mixed with the project's properties object
-        //the success and error callbacks are expected to be found in the options argument
-        this.init = function(options){
-            options = $.extend(_defaultOptions, options); //ensure success and error callbacks are defined
-            $.extend(properties, options.data); //copy data into properties
+            /***************
+             *  this init function should be called whenever constructing a new instance of this object
+             *  a data object is expected to be found in the options argument, will be mixed with the project's properties object
+             *  the success and error callbacks are expected to be found in the options argument
+             ***************/
 
-            //TODO: get the assets for this project and then call the success callback
-        }
+            init = function(options){
+                options = $.extend(_defaultOptions, options); //ensure success and error callbacks are defined
+                $.extend(properties, options.data); //copy data into properties
+                this.properties.assets = new Array(); //clear out 'not_initialized' message in array
+                //get the assets for this project, assign to the internal array, then finally call supplied success callback
+                getAssets(options, function(assetsArray){
+                    this.properties.assets = assetsArray;
+                    options.success(this); //pass our context to caller
+                });
+            }
 
         this.addAsset = function(options){
             //copy options into defaults
@@ -49,8 +58,31 @@ pw.projects = (function(){
         }
 
         //on success returns an array of asset objects
-        this.getAssets = function(options){
-            //TODO: Implement
+        //optionalCallback will be called instead of options.success if supplied as an argument
+        this.getAssets = function(options, optionalCallback){
+            options = $.extend(_defaultOptions, options); //copy default success & error callback functions into options
+            //TODO: extend Function.prototype.options
+            var sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+pid+" ORDER BY assets.date_created DESC";
+            if(!options.pid){
+                onError("pid must be specified when calling getAllAssets()");
+                return false;
+            }else{
+                var assetsArray = new Array(); // array of asset objects to build & pass to callback
+                pw.db.execute(sql, function(t,r){
+                    if(r.rows.length){
+                        //if we have results, loop through results and build array of assets
+                        results.rows.forEach(function(element, index, array){
+                            assetsArray.push(new asset(element));
+                        });
+                    }
+                    if(typeof optionalCallback === "function"){
+                        optionalCallback(assetsArray);
+                    }
+                    options.success(assetsArray);
+                }, function(t,e){
+                    options.error(e);
+                });
+            }
         }
 
         this.update = function(options){
