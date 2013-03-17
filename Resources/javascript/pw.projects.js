@@ -1,5 +1,4 @@
 //PROJECTS STUFF
-//TODO: use Function.prototype.options instead of using this $.extend(_defaultOptions, options) malarky
 //TODO: pw.projects.getProjectEx({id:1,success:function(p){console.log(JSON.stringify(p));}, error:function(e){console.log("oops " + JSON.stringify(e))}});
 
 pw.projects = (function(){
@@ -86,8 +85,6 @@ pw.projects = (function(){
         }
     }
 
-
-
     //the project object
    var Project = function(){
        this.properties = {
@@ -170,7 +167,7 @@ pw.projects = (function(){
                                var myAsset = new Asset();
                                myAsset.create(item, function(myAsset){
                                    self.properties.assets.push(myAsset);
-                                   console.log("pushed " + JSON.stringify(myAsset));
+                                   console.log("DEBUG: pushed " + JSON.stringify(myAsset));
                                });
                            }
                        }
@@ -194,7 +191,7 @@ pw.projects = (function(){
        }
 
        this.update = function(options){
-           console.log('update called on project {0} updating column {1} to {2}'.format(this.properties.id, options.name, options.value));
+           console.log('DEBUG: update called on project {0} updating column {1} to {2}'.format(this.properties.id, options.name, options.value));
            var sql = "UPDATE projects SET {0} = '{1}' WHERE pid = {2}".format(options.name, options.value, this.properties.id);
            pw.db.execute(sql, function(t,r){
                //update self and hash object

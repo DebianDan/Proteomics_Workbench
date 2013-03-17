@@ -14,7 +14,6 @@ function renderProjectDetailsScripts(){
     //get all scripts in database
     pw.scripts.getAllScripts({
         success: function(data){
-            console.log("rendering scripts list (project details)");
             var template = $("#tplProjectDetailsScripts").html(),
                 html = Mustache.to_html(template, data),
                 sList = $("#scriptList-project");
@@ -41,7 +40,6 @@ function showProjectDetails( urlObj, options )
         pageSelector = urlObj.hash.replace( /\?.*$/, "" );
 
     pw.projects.getProject(pid, function(transaction, results){
-        console.log(results.rows.length + " rows returned");
         if(results.rows.length > 0){
             var row = results.rows.item(0); //get first result
             // Get the page we are going to dump our content into.
@@ -67,15 +65,12 @@ function showProjectDetails( urlObj, options )
 
             //Forces the project details to be above the asset list
             $("#pDetails").html( markup );
-            console.log("should be changing page content to " + markup);
             $("#pTitle").html( row['name'] );
 
             //Display all the assets for a particular project
             pw.assets.getAllAssets(pid,
                 //success callback
                 function (transaction, results) {
-                    console.log(results.rows.length + " assets retrieved");
-                    console.log("rendering assets list");
                     var aList = $("#assetList"); //save a reference to the element for efficiency
 
                     //clear the assets list to start
@@ -136,7 +131,7 @@ function showProjectDetails( urlObj, options )
             // to be the url that shows up in the browser's location field,
             // so set the dataUrl option to the URL for the category
             // we just loaded.
-            options.dataUrl = urlObj.href;
+            //options.dataUrl = urlObj.href;
 
             // Now call changePage() and tell it to switch to
             // the page we just modified.
