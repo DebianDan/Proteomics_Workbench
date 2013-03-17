@@ -1,12 +1,11 @@
 //execute on projects page load
-$(document).on('pagebeforecreate', '#projects', function (event) {
+$(document).on('pageshow', '#projects', function (event) {
     //get all projects in database
     pw.projects.getAllProjects(
         //success callback
         function (transaction, results) {
-            console.log(results.rows.length + " projects retrieved");
-            console.log("rendering projects list");
             var pList = $("#projectList"); //save a reference to the element for efficiency
+            pList.html("");//clear the html before appending
             for (var i = 0; i < results.rows.length; i++) {
                 var row = results.rows.item(i);
                 pList.append(projectTemplate.format(row['pid'], row['name']));
@@ -21,7 +20,6 @@ $(document).on('pagebeforecreate', '#projects', function (event) {
 
 //bind to the click event of the create new project button
 $(document).on('click', "#createProjectPopup :submit", function(){
-    console.log("create new project button clicked");
     var title = $("#createProjectPopup .projectTitle").val();
     var description = $("#createProjectPopup .projectDescription").val();
     if(title == ""){
@@ -48,7 +46,6 @@ $(document).on('click', "#createProjectPopup :submit", function(){
 
 //bind to the click event of the delete project button
 $("#deleteProjectPopup .delete").click(function(){
-    console.log("delete project button clicked");
     var pid = pw.activeProject;
     pw.projects.deleteProject(pid,
         //success callback
@@ -67,7 +64,6 @@ $("#deleteProjectPopup .delete").click(function(){
 
 //bind to the click event of the edit project button
 $(document).on('click', "#editProjectPopup :submit", function(){
-    console.log("edit project button clicked");
     var title = $("#editProjectPopup .newTitle").val();
     var description = $("#editProjectPopup .newDescription").val();
     if(title == ""){
