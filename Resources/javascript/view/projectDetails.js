@@ -26,6 +26,13 @@ function renderProjectDetailsScripts(){
     });
 }
 
+function renderAssetsList(project){
+    console.log("rendering project details assets list");
+    var template = $("#tplProjectDetailsAssets").html(),
+        html = Mustache.to_html(template, project);
+    $("#assetList").html(html).trigger('create');
+}
+
 // Load the data for a specific category, based on
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
@@ -38,7 +45,41 @@ function showProjectDetails( urlObj, options )
     // the DOM. The id of the page we are going to write our
     // content into is specified in the hash before the '?'.
         pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+    pw.projects.getProjectEx(
+        {'pid' : pid},
+        //success callback
+        function(myProject){
+            // Get the page we are going to dump our content into.
+            var $page = $( pageSelector );
+            pw.activeProject = pid;
+            renderAssetsList(myProject);
+            renderProjectDetailsScripts();
 
+            // Pages are lazily enhanced. We call page() on the page
+            // element to make sure it is always enhanced before we
+            // attempt to enhance the listview markup we just injected.
+            // Subsequent calls to page() are ignored since a page/widget
+            // can only be enhanced once.
+            $page.page();
+
+            // We don't want the data-url of the page we just modified
+            // to be the url that shows up in the browser's location field,
+            // so set the dataUrl option to the URL for the category
+            // we just loaded.
+            options.dataUrl = urlObj.href;
+
+            // Now call changePage() and tell it to switch to
+            // the page we just modified.
+            $.mobile.changePage( $page, options );
+
+            //console.log("OPTIONS: " + JSON.stringify(options));
+        },function(e){
+            console.log("ERROR in showProjectDetails: {0}".format(JSON.stringify(e)));
+        }
+    );
+
+
+    /*
     pw.projects.getProject(pid, function(transaction, results){
         if(results.rows.length > 0){
             var row = results.rows.item(0); //get first result
@@ -96,30 +137,6 @@ function showProjectDetails( urlObj, options )
 
             renderProjectDetailsScripts();
 
-            /*
-			 pw.scripts.getAllScripts(
-				//success callback
-				function (transaction, results) {
-					console.log(results.rows.length + " scripts retrieved");
-					console.log("rendering scripts list");
-					var sList = $("#scriptList-project"); //save a reference to the element for efficiency
-					//clear the assets list to start
-					sList.html("");
-					//loop through rows and add them to script list
-					for (var i = 0; i < results.rows.length; i++) {
-						var row = results.rows.item(i);
-						var sid = row['sid'];
-						var path = row['path'];
-
-						addProjectDetailsScriptMarkup(sid, path);
-					}
-				},
-				function (transaction, error) {
-					alert("there was an error when attempting to retrieve the projects: ", error.code);
-				}
-			);
-            */
-
             // Pages are lazily enhanced. We call page() on the page
             // element to make sure it is always enhanced before we
             // attempt to enhance the listview markup we just injected.
@@ -141,4 +158,6 @@ function showProjectDetails( urlObj, options )
     },function(transaction, error){
         //error on select
     });
+
+    */
 }

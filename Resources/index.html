@@ -240,7 +240,6 @@
 
 </div><!-- /page -->
 
-
 <div data-role="page" id="project-details" data-title="Project Details">
     <div data-role="header">
         <a href="#navPanel" style="float:left;" data-role="button" data-icon="bars">Menu</a>
@@ -266,7 +265,7 @@
         <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                 <h3 class="ui-title">Are you sure you want to delete this project?</h3>
-                <a href="#projects" span data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                <a href="#projects" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
                 <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
             </div>
         </div>
@@ -311,15 +310,26 @@
                                 <option value="favorites">File Name</option>
                             </select>
                         </div>
-                        <ul id="assetList" class="itemList" data-role="fieldcontain">
-                        </ul>
-                        <!--
-                        <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
-                            <ul class="itemList" data-role="fieldcontain">
+                        <div id="assetList" class="itemList" data-role="fieldcontain">
+                        </div>
 
+                        <!-- TODO: use/apply this template for assets -->
+                        <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
+                            <ul class="itemList">
+                                <!-- TODO: correctly show favorites toggle -->
+                                {{#properties.assets}}
+                                <li>
+                                    <input type="checkbox" data-aid="{{properties.aid}}" name="checkbox-{{properties.aid}}" id="checkbox-{{properties.aid}}" data-theme="c" />
+                                    <label for="checkbox-{{properties.aid}}" data-aid="{{properties.aid}}">
+                                        {{properties.filename}}
+                                        <a class="itemButton fav" data-aid="{{properties.aid}}" data-fav="{{properties.fav}}" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="e">Favorite</a>
+                                        <span class="itemButton detailsButton" data-aid="{{properties.aid}}" data-id="{{properties.aid}}" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Edit</span>
+                                    </label>
+                                </li>
+                                {{/properties.assets}}
                             </ul>
                         </div>
-                        -->
+
                     </fieldset>
                 </div>
             </div>
