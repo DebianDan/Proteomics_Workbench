@@ -26,10 +26,19 @@
     padding-left: 18px !important;
 }
 
+ul.itemList{
+    padding:0;
+}
+
 .itemList .ui-btn-inner{
     padding: 0 0 0 45px;
     height:40px;
     line-height: 40px;
+}
+
+.arg.ui-collapsible label{
+    line-height:35px;
+
 }
 
 .inputFix{
@@ -44,6 +53,8 @@
 	font-weight:bold;
 	font-size:16px;
 	width:500px !important;
+    min-height:20px;
+    cursor:text;
 }
 
 .textareaFix{
