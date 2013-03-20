@@ -227,7 +227,8 @@ pw.projects = (function(){
        }
     }
 
-    //options object expects an 'id' key corresponding to the id of the project to fetch
+    //options object expects a 'pid' key corresponding to the id of the project to fetch
+    //returns the full project object to the success function
     my.getProjectEx = function(options, success, error){
         if(options.pid){
             var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = {0}".format(options.pid);
@@ -255,19 +256,34 @@ pw.projects = (function(){
         }
     }
 
-    my.getProject = function(pid, onSuccess, onError){
+    my.getProject = function(pid, success, error){
         var sql = "SELECT pid, name, description, active, date_created FROM projects WHERE pid = " + pid;
         if(pid == undefined){
             onError("pid must be specified when calling getProject()");
             return false;
         }else{
-            pw.db.execute(sql, onSuccess, onError);
+            pw.db.execute(sql, success, error);
         }
     }
 
     my.getAllProjects = function(onSuccess, onError){
         var sql = "SELECT pid, name, description, active, date_created FROM projects ORDER BY date_created DESC";
         pw.db.execute(sql, onSuccess, onError);
+    }
+
+    //returns the created project object to the success function
+    my.createProjectEx = function(options, success, error){
+        if(options.name){
+            var sql = "INSERT INTO projects (name, description, active, date_created) VALUES('" + options.name + "', '" + options.description +"', 1, DATETIME('NOW'))";
+            pw.db.execute(sql, function(t, r){
+                var myProject = new Project();
+                myProject.create(options, success, error);
+            }, function(t, e){
+                error(e);
+            });
+        }else{
+            error("name must be defined when creating a new project");
+        }
     }
 
     my.createProject = function(name, description, onSuccess, onError){
