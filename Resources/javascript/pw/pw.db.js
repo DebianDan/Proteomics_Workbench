@@ -20,6 +20,8 @@
                 transaction.executeSql("DROP TABLE IF EXISTS settings");
                 //script arg types
                 transaction.executeSql("DROP TABLE IF EXISTS tags");
+				//runtimes table
+                transaction.executeSql("DROP TABLE IF EXISTS runtimes");
             }
         );
     }
@@ -42,6 +44,8 @@
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS tags('tid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'name' VARCHAR UNIQUE NOT NULL)");
                 //settings table (just stores the JSON representation of the settings object)
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS settings('settingsString' TEXT)");
+				//runtimes table, defines the runtimes each script uses
+                transaction.executeSql("CREATE TABLE IF NOT EXISTS runtimes('rid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'sid' INTEGER NOT NULL, 'alias' VARCHAR NOT NULL, 'path' VARCHAR)");
             }
         );
     }
