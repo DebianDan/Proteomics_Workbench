@@ -206,12 +206,49 @@
     <div data-role="content">
         <div id="settingsWaiting">Getting settings info...</div>
         <div id="settingsArea">
-            <h2>Scripts</h2>
-            <h3>Python 2.x path</h3>
-            <input id="python2path" type="text" value=""/>
-            <h3>Python 3.x path</h3>
-            <input id="python3path" type="text" value=""/>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <!-- Add Runtime -->
+                <a href="#addRuntimePopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Add Runtime</a>
+                <div data-role="popup" id="addRuntimePopup" class="ui-content" data-overlay-theme="a">
+                    <a href="#settings" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+                    <input type="button" class="chooseRuntime" value="Select File" id="runtimeFileChooser">
+                    <ul id="runtimePickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
+                    </ul>
+                    Alias: <input type="text" class="alias" value=""><br>
+                    <input type="submit" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
+                    <a href="#settings" type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>Cancel</a>
+                </div>
+            </div>
         </div>
+            <div id="tplSettingsListing" style="display:none;" data-enhance="false">
+            <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+                {{#runtime}}
+                <div data-role="collapsible">
+                    <h3>{{alias}}</h3>
+                    <div data-role="fieldcontain">
+                        <ul class="runtimeProperties" data-role="listview" data-inset="true">
+                            <li data-role="fieldcontain">
+                                <label for="alias-{{rid}}">Alias: </label>
+                                <input data-role="none" style="display:none" class="inputFix" id="alias-{{rid}}" data-id="{{rid}}" type="text" name="alias" value="{{alias}}" />
+								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{rid}}" class="inputFix" data-id="{{rid}}">{{alias}}</span>
+                            </li>
+
+                            <li data-role="fieldcontain">
+                                <label for="path-{{rid}}">Path: </label>
+                                <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{rid}}" data-id="{{rid}}" value="{{path}}" />
+								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{rid}}" class="inputFix" data-id="{{rid}}">{{path}}</span>
+                            </li>
+                        <div style="padding-bottom:20px">
+							<a href="#" data-id="{{id}}" class="deleteRuntime" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Runtime</a>
+                        </div>
+                    </div>
+                </div>
+                {{/runtime}}
+            </div>
+        </div>
+
+        </div> <!-- End settings area -->
 
         <div id="tagsArea">
             <h2>Tags</h2>
