@@ -41,6 +41,10 @@ ul.itemList{
 
 }
 
+.arg.ui-collapsible .ui-checkbox{
+    width:109px;
+}
+
 .inputFix{
 	border:2px solid #b4b4b4;
     border-radius:10px;
