@@ -173,7 +173,7 @@
                             </li>
                         </ul>
                         <div style="padding-bottom:20px">
-							<a href="#" data-id="{{id}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Script</a>
+							<a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Script</a>
                         </div>
                     </div>
                 </div>
@@ -215,14 +215,14 @@
                     <input type="button" class="chooseRuntime" value="Select File" id="runtimeFileChooser">
                     <ul id="runtimePickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
                     </ul>
-                    Alias: <input type="text" class="alias" value=""><br>
+                    Alias: <input type="text" class="runtimeAlias" value=""><br>
                     <input type="submit" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
                     <a href="#settings" type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>Cancel</a>
                 </div>
             </div>
         </div>
-            <div id="tplSettingsListing" style="display:none;" data-enhance="false">
-            <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+            <div id="tplRuntimesListing" style="display:none;" data-enhance="false">
+            <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="runtimeList">
                 {{#runtime}}
                 <div data-role="collapsible">
                     <h3>{{alias}}</h3>
@@ -239,15 +239,15 @@
                                 <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{rid}}" data-id="{{rid}}" value="{{path}}" />
 								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{rid}}" class="inputFix" data-id="{{rid}}">{{path}}</span>
                             </li>
+                            </ul>
                         <div style="padding-bottom:20px">
-							<a href="#" data-id="{{id}}" class="deleteRuntime" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Runtime</a>
+							<a href="#" data-id="{{rid}}" class="deleteRuntime" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Runtime</a>
                         </div>
                     </div>
                 </div>
                 {{/runtime}}
             </div>
         </div>
-
         </div> <!-- End settings area -->
 
         <div id="tagsArea">
@@ -487,6 +487,7 @@
 <script src="javascript/pw/model/pw.model.assets.js"></script>
 <script src="javascript/pw/model/pw.model.settings.js"></script>
 <script src="javascript/pw/model/pw.model.tags.js"></script>
+<script src="javascript/pw/model/pw.model.runtimes.js"></script>
 <script src="javascript/pw/view/pw.view.common.js"></script>
 <script src="javascript/pw/view/pw.view.assets.js"></script>
 <script src="javascript/pw/view/pw.view.projects.js"></script>
