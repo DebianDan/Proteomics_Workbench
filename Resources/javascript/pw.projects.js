@@ -23,17 +23,6 @@ pw.projects = (function(){
             date_created : ""
         }
 
-        this.getProperties = function(){
-            return this.properties;
-        }
-
-        this.setProperties = function(newValue){
-            console.log("DEBUG: setting asset properties to {0}".format(JSON.stringify(newValue)));
-            this.properties = $.extend({}, newValue, this.properties);
-
-            return this.properties;
-        }
-
         //call this function to initialize the properties
         this.create = function(options, success, error){
             $.extend(this.properties, options); //copy data into properties
@@ -118,16 +107,6 @@ pw.projects = (function(){
            assets : ["not_initialized"]
        };
 
-       this.getProperties = function(){
-           return this.properties;
-       }
-
-       this.setProperties = function(newValue){
-           this.properties = $.extend({}, newValue, this.properties);
-           //console.log("DEBUG: set project properties to {0}".format(JSON.stringify(newValue)));
-           return this.properties;
-       }
-
        this.create = function(options, success, error){
            //options = $.extend({},_defaultOptions, options); //ensure success and error callbacks are defined
            console.log("DEBUG: in create function of project, options is: {0}".format(JSON.stringify(options)));
@@ -137,7 +116,7 @@ pw.projects = (function(){
            var self = this;
            this.getAssets(options, function(assetsArray){
                if(typeof success == "function"){
-                   self.properties.assets = assetsArray; //should use setProperties?
+                   self.properties.assets = assetsArray;
                    success(self);
                }
            }, function(e){
