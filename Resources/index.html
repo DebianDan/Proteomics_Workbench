@@ -221,10 +221,13 @@
                 </div>
             </div>
         </div>
+		<div id="runtimeList">
+
+        </div>
             <div id="tplRuntimesListing" style="display:none;" data-enhance="false">
-            <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="runtimeList">
-                {{#runtime}}
-                <div data-role="collapsible">
+            <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+                {{#runtimes}}
+                <div data-listid="{{rid}}" data-role="collapsible">
                     <h3>{{alias}}</h3>
                     <div data-role="fieldcontain">
                         <ul class="runtimeProperties" data-role="listview" data-inset="true">
@@ -241,12 +244,13 @@
                             </li>
                             </ul>
                         <div style="padding-bottom:20px">
-							<a href="#" data-id="{{rid}}" class="deleteRuntime" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Runtime</a>
+							<a href="#" data-id="{{rid}}" id="deleteRuntime" class="deleteRuntime" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Runtime</a>
                         </div>
                     </div>
                 </div>
-                {{/runtime}}
+                {{/runtimes}}
             </div>
+			
         </div>
         </div> <!-- End settings area -->
 

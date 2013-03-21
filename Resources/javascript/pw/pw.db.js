@@ -45,7 +45,7 @@
                 //settings table (just stores the JSON representation of the settings object)
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS settings('settingsString' TEXT)");
 				//runtimes table, defines the runtimes each script uses
-                transaction.executeSql("CREATE TABLE IF NOT EXISTS runtimes('rid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'sid' INTEGER NOT NULL, 'alias' VARCHAR NOT NULL, 'path' VARCHAR)");
+                transaction.executeSql("CREATE TABLE IF NOT EXISTS runtimes('rid' INTEGER PRIMARY KEY AUTOINCREMENT, 'sid' INTEGER, 'alias' VARCHAR NOT NULL, 'path' VARCHAR)");
             }
         );
     }

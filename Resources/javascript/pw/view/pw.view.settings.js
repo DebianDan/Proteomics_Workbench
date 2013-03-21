@@ -6,7 +6,9 @@ $(document).on('pagebeforecreate', '#settings', function (event) {
 
 
 $(document).on('settingsRetrieved', function(e){
-    displaySettings();
+    //TODO get rid of settings
+	displaySettings();
+	renderRuntimeList();
 });
 
 $(document).on('tagsRetrieved', function(e){
@@ -31,25 +33,25 @@ $(document).on('click', "#addRuntimePopup :submit", function(){
     var alias = $("#addRuntimePopup .runtimeAlias").val();
 	if(alias == ""){
         alert('Runtime must have an alias.');
-    }
-	else{
-	$("#runtimePickerList li").first(function(e){
-        var path = $(this).attr("data-path");
-        //add the runtime to the database and then add to the page
-        pw.runtimes.addRuntime(alias, path, function(transaction, results){
-            renderRuntimeList();
-        });
-    });
-    clearAssetPicker();
+    }else{
+		var file = $("#runtimePickerList li").first();
+		var path = file.attr("data-path");
+		//add the runtime to the database and then add to the page
+		pw.runtimes.addRuntime(alias, path, function(transaction, results){
+			renderRuntimeList();
+		});
+		clearRuntimePicker();
+	}
 });
 
 //bind to the click event of the delete runtime button
-$(".deleteRuntime").click(function(){
+//$("#deleteRuntime").click(function(){
+//NOT SURE WHY THIS WORKS AND THE ABOVE DOES NOT....
+jQuery("body").on("click", "#deleteRuntime", function(event){
 	var rid = $(this).attr('data-id');
 	if(rid){
 		pw.runtimes.deleteRuntime(rid, function(transaction, results){
-			//TODO
-			$("#runtimeList [data-id='" + rid +"']").remove(); //remove elements with the specified attribute
+			$("#runtimeList [data-listid='" + rid +"']").remove(); //remove runtime chosen
 			console.log("deleted runtime with id {0}".format(rid));
 		},function(transaction, error){
 			console.log("error deleting runtime {0}: {1}".format(rid, error.message));
@@ -61,30 +63,32 @@ $(".deleteRuntime").click(function(){
 //clear list of added assets and close the dialog
 function clearRuntimePicker(){
     $("#runtimePickerList").html("");
+	$("#addRuntimePopup .runtimeAlias").val("");
     $("#addRuntimePopup").popup("close");
     return false;
 }
 
 function renderRuntimeList(){
     //get all runtimes in database
-    pw.runtime.getAllRuntimes({
+    pw.runtimes.getAllRuntimes({
         success: function(data){
             console.log("rendering runtimes list");
             var template = $("#tplRuntimesListing").html(),
                 html = Mustache.to_html(template, data),
                 rList = $("#runtimeList");
-            //clear the assets list to start
+            //refresh the runtimes list to start
             rList.html(html).trigger('create');
-
         },
-        fail : function(error){ //TODO: check to make sure arguments list is correct for this function
-            alert("there was an error when attempting to retrieve the projects: ", error.code);
+        fail : function(error){
+            alert("there was an error when attempting to retrieve the runtimes: ", error.code);
         }
     });
 }
 
 function displaySettings(){
-    $("#python2path").val(pw.settings.paths.python2);
+    
+	/*
+	$("#python2path").val(pw.settings.paths.python2);
     $("#python3path").val(pw.settings.paths.python3);
 
     $("#python2path").blur(function(e){
@@ -95,7 +99,8 @@ function displaySettings(){
         pw.settings.paths.python3 = $(this).val();
         pw.settings.update();
     });
-
+	*/
+	
     $("#settingsWaiting").hide();
     $("#settingsArea").show();
 }

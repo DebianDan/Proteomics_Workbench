@@ -28,7 +28,7 @@ pw.runtimes = (function(){
                 }
             });
         }
-
+		
         this.remove = function(options){
             var sql = "DELETE FROM scripts where id={0}".format(this.id);
             pw.db.execute(sql, function(t,r){
@@ -99,7 +99,7 @@ pw.runtimes = (function(){
     //options.success callback is passed an object containing a key of 'runtimes' whose value is an array of runtime objects
     //options.error callback
     my.getAllRuntimes = function(options){
-        var sql = "SELECT * FROM runtimes ORDER BY alias ASC",
+        var sql = "SELECT * FROM runtimes ORDER BY rid ASC",
         returnObj = {
             runtimes : [] //array of runtime objects to return
         };
@@ -110,7 +110,7 @@ pw.runtimes = (function(){
 		//create script objects out of each script
 		if(results.rows.length){
 			for(var i = 0; i < results.rows.length; i++){
-				var newRuntime = new runtime(results.rows.item(i)),
+				var newRuntime = new runtime(results.rows.item(i));
 				returnObj.runtimes.push(newRuntime);
 			}
 		}
@@ -131,7 +131,7 @@ pw.runtimes = (function(){
         //var filename = path.replace(/^.*[\\\/]/, '');
         //just the file extension ex: jpg txt csv
         //var filetype = path.substr(path.lastIndexOf('.')+1, path.length);
-        var sql = "INSERT INTO runtimes (alias, path) VALUES('{0}', '{1}', DATETIME('NOW'))".format(alias, path);
+        var sql = 'INSERT INTO runtimes (alias, path) VALUES("{0}", "{1}")'.format(alias, path);
         pw.db.execute(sql, onSuccess, onError);
     }
 
