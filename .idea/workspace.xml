@@ -2,34 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\main.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\validateForm.js" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.assets.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.assets.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.db.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/pw.db.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/pw.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.projects.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.scripts.arguments.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.arguments.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.scripts.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.settings.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.settings.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\pw.tags.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.tags.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\utilities.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\assets.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.assets.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\common.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\projectDetails.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\projects.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projects.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\scriptExecution.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\scripts.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scripts.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\settings.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.settings.js" />
-      <change type="MOVED" beforePath="C:\Users\Steve\Documents\SCHOOL\CSE 5915 Information Technology Capstone\Proteomics_Workbench\Resources\javascript\view\templates.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.templates.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/tests/OrignalSteveTest.html" afterPath="$PROJECT_DIR$/Resources/tests/OrignalSteveTest.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/tests/test.html" afterPath="$PROJECT_DIR$/Resources/tests/test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list id="7f2dea4a-8b47-4265-bb4e-118b99130fec" name="Rejected commit: Default" comment="created a new branch to play around with a few api's" />
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363793340639" ignored="false" />
+    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363899840794" ignored="false" />
     <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363808427157" ignored="false" />
     <file path="/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362692777675" ignored="false" />
     <file path="/pw.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363807474691" ignored="false" />
@@ -40,6 +19,8 @@
     <file path="/style.css" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363727703279" ignored="false" />
     <file path="$PROJECT_DIR$/dist/win32/Proteoworkbench/Resources/tests/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363808057956" ignored="false" />
     <file path="$PROJECT_DIR$/dist/win32/Proteoworkbench/Resources/tests/OrignalSteveTest.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363808057956" ignored="false" />
+    <file path="/pw.model.scripts.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363887812858" ignored="false" />
+    <file path="/pw.model.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363903546127" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,32 +40,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Resources/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="79" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.295858">
-              <folding>
-                <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="tag#div#2;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="tag#div#3;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="n#style#0;n#div#2;n#fieldset#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#fieldset#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#fieldset#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="tag#div#4;tag#body#0;tag#html#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="16" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
+            <state line="46" column="0" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -108,19 +67,44 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="pw.model.scripts.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="273" column="52" selection-start="12677" selection-end="12677" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="pw.model.projects.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="230" column="61" selection-start="10521" selection-end="10521" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state line="105" column="27" selection-start="4044" selection-end="4044" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mm_extract4protein_all.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Resources/python/mm_extract4protein_all.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6925315">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="pw.view.common.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="28" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pw.model.runtimes.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.runtimes.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -139,7 +123,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="remote-master" />
+        <entry key="$PROJECT_DIR$" value="82aae30" />
       </map>
     </option>
   </component>
@@ -152,9 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Resources/javascript/view/common.js" />
-        <option value="$PROJECT_DIR$/Resources/javascript/view/scriptExecution.js" />
-        <option value="$PROJECT_DIR$/Resources/test.js" />
         <option value="$PROJECT_DIR$/Resources/test.html" />
         <option value="$PROJECT_DIR$/test/test_500.html" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw.scripts.js" />
@@ -167,15 +148,18 @@
         <option value="$PROJECT_DIR$/Resources/html/projectDetails.html" />
         <option value="$PROJECT_DIR$/Resources/html/scriptExe.html" />
         <option value="$PROJECT_DIR$/Resources/html/scripts.html" />
+        <option value="$PROJECT_DIR$/Resources/javascript/pw/pw.db.js" />
         <option value="$PROJECT_DIR$/Resources/index.html" />
+        <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js" />
+        <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1616" />
+    <option name="height" value="1216" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -299,6 +283,116 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Resources">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="python">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Resources">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="javascript">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Resources">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="javascript">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="pw">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Resources">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="javascript">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="pw">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="view">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Proteomics_Workbench">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Resources">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="javascript">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="pw">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="model">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="ProjectPane">
@@ -361,23 +455,23 @@
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="218" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="218" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="295" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="295" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="218" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="295" />
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Resources/javascript/jquery.mobile-1.3.0-beta.1.js" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="218" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="295" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="893" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="893" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="219" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="217" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="969" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="969" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="296" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="294" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
@@ -437,7 +531,6 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="" />
-      <changelist id="7f2dea4a-8b47-4265-bb4e-118b99130fec" name="Rejected commit: Default" comment="created a new branch to play around with a few api's" />
       <created>1359562245113</created>
       <updated>1359562245113</updated>
     </task>
@@ -637,23 +730,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="1912" y="-8" width="1616" height="1216" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19128788" sideWeight="0.49551925" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38350055" sideWeight="0.49551925" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38684505" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17923036" sideWeight="0.61315495" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2587191" sideWeight="0.6164994" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2660985" sideWeight="0.5007907" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285985" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38684505" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -745,53 +838,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.db.js">
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projects.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="56" selection-start="4061" selection-end="4061" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="18" selection-start="905" selection-end="905" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1361482580412" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.assets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="8" selection-start="856" selection-end="1324" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.assets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="39" selection-start="2710" selection-end="2710" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.templates.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="18" selection-start="194" selection-end="751" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="26" selection-start="1977" selection-end="1977" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="16" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -799,9 +848,46 @@
     <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="230" column="61" selection-start="10521" selection-end="10521" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="18" selection-start="905" selection-end="905" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.assets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="8" selection-start="856" selection-end="1324" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.assets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="39" selection-start="2710" selection-end="2710" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.templates.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="18" selection-start="194" selection-end="751" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="26" selection-start="1977" selection-end="1977" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="0" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -814,7 +900,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="28" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.runtimes.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="273" column="52" selection-start="12677" selection-end="12677" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -826,23 +926,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/index.html">
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="79" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.295858">
-          <folding>
-            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#2;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#div#3;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#fieldset#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#fieldset#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#fieldset#0;n#div#0;n#div#1;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#4;tag#body#0;tag#html#0" expanded="false" />
-          </folding>
+        <state line="105" column="27" selection-start="4044" selection-end="4044" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/python/mm_extract4protein_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.6925315">
+          <folding />
         </state>
       </provider>
     </entry>
