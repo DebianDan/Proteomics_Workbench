@@ -2,7 +2,7 @@
 pw.runtimes = (function(){
     var my = {}; //this is the object that will be returned. Anything inside of this will be publicly accessible
 
-    //the script object
+    //the runtime object
     var runtime = function(data){
         this.rid = data['rid'];
         this.path = data['path'];

@@ -126,13 +126,22 @@
                                 <input data-role="none" style="display:none" class="inputFix" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
                                 <span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
                             </li>
-
+							
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}">Path: </label>
                                 <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
                                 <span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
                             </li>
-
+							
+							<li data-role="fieldcontain">
+								<select name="runtimes-{{sid}}" id="runtimeChooser-{{sid}}" data-id="{{sid}}" data-rid="{{rid}}" data-theme="c" data-mini="true" data-native-menu="false">
+									<option data-placeholder="true">Choose Runtime</option>
+									{{#runtimes}}
+									<option value="{{rid}}">{{alias}}</option>
+									{{/runtimes}}
+								</select>
+							</li>
+							
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
                                     <h4>Input Arguments</h4>

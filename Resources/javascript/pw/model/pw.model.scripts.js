@@ -11,7 +11,11 @@ pw.scripts = (function(){
         this.path = data['path'];
         this.alias = data['alias'];
         this.date_created = data['date_created'];
+		this.rid = data['rid'];
         this.arguments = [];
+
+		//don't know the best way to do this
+		this.runtimes = [];
 
         this.update = function(options){
             console.log('update called on script {0} updating column {1} to {2}'.format(this.sid, options.name, options.value));
@@ -244,40 +248,51 @@ pw.scripts = (function(){
 
         //clear out old scripts and arguments each time this is called
         scriptHash = {};
+		
+		//get all runtimes in database
+		pw.runtimes.getAllRuntimes({
+			success: function(data){
+				//we have to first get all the arguments
+				my.getAllArguments({
+					success : function(argumentsArray){
+						//we now have an array of all the arguments for every script
+						//get every script now
+						pw.db.execute(sql, function(transaction, results){
+							var scriptResults = results; //store the script results
+							console.log(results.rows.length + " scripts retrieved");
+							//create script objects out of each script
+							if(results.rows.length){
+								for(var i = 0; i < results.rows.length; i++){
+									var newScript = new script(results.rows.item(i)),
+									//since we have ALL of the arguments for EVERY script, we need to get only the ones relevant
+									//to this script. We use the grep function to filter the arguments array with this purpose in mind.
+									myArgs = $.grep(argumentsArray, function(n,i){return n.sid == newScript.sid});
+									//now we add the relevant arguments to the newly generated script object
+									newScript.arguments = myArgs;
+									newScript.runtimes = data.runtimes;
+									scriptHash[newScript.sid] = newScript; //store it in the hash for future use
+									//put this new script at the end of the array we're building
+									returnObj.scripts.push(newScript);
+								}
+							}
+							if(typeof options.success == "function"){
+								options.success(returnObj);
+							}
+						}, function(t, e){
+							console.log("error in getAllScripts(): {0}".format(e.message));
+							if(typeof options.error == "function"){
+								options.error(e);
+							}
+						});
+					}
+				});
+			},
+			fail : function(error){
+				alert("there was an error when attempting to retrieve the runtimes: ", error.code);
+			}
+		});
 
-        //we have to first get all the arguments
-        my.getAllArguments({
-            success : function(argumentsArray){
-                //we now have an array of all the arguments for every script
-                //get every script now
-                pw.db.execute(sql, function(transaction, results){
-                    var scriptResults = results; //store the script results
-                    console.log(results.rows.length + " scripts retrieved");
-                    //create script objects out of each script
-                    if(results.rows.length){
-                        for(var i = 0; i < results.rows.length; i++){
-                            var newScript = new script(results.rows.item(i)),
-                            //since we have ALL of the arguments for EVERY script, we need to get only the ones relevant
-                            //to this script. We use the grep function to filter the arguments array with this purpose in mind.
-                            myArgs = $.grep(argumentsArray, function(n,i){return n.sid == newScript.sid});
-                            //now we add the relevant arguments to the newly generated script object
-                            newScript.arguments = myArgs;
-                            scriptHash[newScript.sid] = newScript; //store it in the hash for future use
-                            //put this new script at the end of the array we're building
-                            returnObj.scripts.push(newScript);
-                        }
-                    }
-                    if(typeof options.success == "function"){
-                        options.success(returnObj);
-                    }
-                }, function(t, e){
-                    console.log("error in getAllScripts(): {0}".format(e.message));
-                    if(typeof options.error == "function"){
-                        options.error(e);
-                    }
-                });
-            }
-        });
+        
     }
 
     my.addScript = function(path, onSuccess, onError){

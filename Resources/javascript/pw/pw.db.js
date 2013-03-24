@@ -37,7 +37,7 @@
                 //favorites table
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS favorites('pid' INTEGER NOT NULL, 'aid' INTEGER NOT NULL)");
                 //scripts table
-                transaction.executeSql("CREATE TABLE IF NOT EXISTS scripts('sid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,'path' VARCHAR NOT NULL, 'alias' VARCHAR NOT NULL, 'description' TEXT, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE )");
+                transaction.executeSql("CREATE TABLE IF NOT EXISTS scripts('sid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,'path' VARCHAR NOT NULL, 'alias' VARCHAR NOT NULL, 'description' TEXT, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE, 'rid' INTEGER DEFAULT -1 )");
                 //arguments table, defines the arguments each script takes
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS arguments('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'sid' INTEGER NOT NULL, 'label' VARCHAR NOT NULL, 'switch' VARCHAR, 'required' INTEGER NOT NULL DEFAULT 0, 'description' TEXT)");
                 //argument types (defines the argument -- STRING, ASSET

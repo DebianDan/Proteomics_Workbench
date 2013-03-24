@@ -151,7 +151,16 @@ function renderScriptList(){
                 sList = $("#scriptsList");
             //clear the assets list to start
             sList.html(html).trigger('create');
-
+			$(".scriptProperties select[id*=runtimeChooser]").each(function(){
+				var scriptRID = $(this).attr("data-rid");
+				if(scriptRID != "{{rid}}"){
+					//remove the default choose scripts and select the correct runtime
+					$(this).find("option[value="+ scriptRID +"]").attr('selected','selected');
+					$(this).selectmenu('refresh'); 
+				}
+				
+			});
+			
         },
         fail : function(error){ //TODO: check to make sure arguments list is correct for this function
             alert("there was an error when attempting to retrieve the projects: ", error.code);
@@ -242,6 +251,16 @@ $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input.inp
     updateScriptValue(options);
 });
 
+//updates the runtime that the particular script uses when it is changed
+$(document).on("change", ".scriptProperties select[id*=runtimeChooser]", function(){
+    var options ={
+        name : "rid",
+        id : $(this).attr("data-id"),
+        value : $(this).val()
+    };
+    updateScriptValue(options);
+});
+
 
 $(document).on("blur", ".argumentsList input.inputFix", function(e){
     var options = {
@@ -274,5 +293,4 @@ $(document).on('pagebeforecreate', '#scripts', function (event) {
     //$.mobile.activePage.trigger('create');
     //console.log(html);
     renderScriptList();
-
 });
