@@ -24,94 +24,104 @@ function showScriptExecution( urlObj, options )
         id : sid,
         success : function(script){
             if(script){
-				// Get the page we are going to dump our content into.
-                var $page = $( pageSelector );
-                //put the content into the page
+			//get the runtime that the script uses			
+			var myRuntime = pw.runtimes.getRuntime({
+				id: script.rid,
+				success : function(runtime){
+					
+					// Get the page we are going to dump our content into.
+					var $page = $( pageSelector );
+					//put the content into the page
 
-                 //can be deleted later, just for DEBUG
-                var markup = "Script Name: " + script.alias + "<br/>";
-                //markup += "Script Details: " + script.path + "<br/>";
-                markup += "Date Created: " + script.date_created + "<br/>";
-                //markup += "SID: " + script.sid + "<br/>";
-				
-				var moreDetails = "Script Name: " + script.alias + "<br/>";
-                moreDetails += "Path: " + script.path + "<br/>";
-                moreDetails += "Date Created: " + script.date_created + "<br/>";
-                moreDetails += "SID: " + script.sid + "<br/>";
+					 //can be deleted later, just for DEBUG
+					var markup = "Script Name: " + script.alias + "<br/>";
+					//markup += "Script Details: " + script.path + "<br/>";
+					markup += "Date Created: " + script.date_created + "<br/>";
+					//markup += "SID: " + script.sid + "<br/>";
+					
+					var moreDetails = "Script Name: " + script.alias + "<br/>";
+					moreDetails += "Path: " + script.path + "<br/>";
+					moreDetails += "Date Created: " + script.date_created + "<br/>";
+					moreDetails += "SID: " + script.sid + "<br/>";
 
-                //THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
-                //inject the path into the run button for executing
-                $('#run').attr('data-path', script.path);
+					//THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
+					//inject the path into the run button for executing
+					$('#run').attr('data-path', script.path);
+					$('#run').attr('data-runtime', runtime.path);
 
-                //Forces the project details to be above the asset list
-                $("#pScriptDetails").html( markup );
-				$("#pScriptDetailsMore").html( moreDetails );
+					//Forces the project details to be above the asset list
+					$("#pScriptDetails").html( markup );
+					$("#pScriptDetailsMore").html( moreDetails );
 
-				//TODO clear all the previous arguments out
-				var argList = $("#scriptExeAssetList");
-				//clear the assets list to start
-				argList.html("");
-				var template = $("#tplScriptExeAssetList").html(),
-						html = Mustache.to_html(template, script),
-						aList = $("#scriptExeAssetList");
-				//clear the assets list to start
-				aList.html(html).trigger('create');
-                
-				//for (the # of arguments) {
-                //display a argument box like below
-				script.arguments.forEach(function(arg){
-                    for(property in arg){
-                        if(typeof arg[property] != "function"){
-                            console.log("...property {0} is {1}".format(property, arg[property]));
-                        }
-                    }
-						
-					//Display all the assets for the active project
-					//Have to do this everytime because we will be running different queries for
-					//different arguments in the future.  i.e. filter csv, then filter xml
-					pw.assets.getAllAssets(pw.activeProject,
-						//success callback
-						function (transaction, results) {
-							console.log(results.rows.length + " assets retrieved");
-							console.log("rendering assets list");
-							
-							//loop through rows and add them to asset list
-							for (var i = 0; i < results.rows.length; i++) {
-								var row = results.rows.item(i);
-								var aid = row['aid'];
-								var path = row['path'];
-								var fav = 1;
-								//not in the favorites table
-								if (row['fav'] == null){
-									fav = 0;
-								}
-								//(convention #scriptExeAssetList0 #scriptExeAssetList1 etc..)
-								aList = "#scriptExeAssetList" + arg.id;
-								addAssetScriptExeMarkup(aList, aid, arg.id, path, fav);
+					//TODO clear all the previous arguments out
+					var argList = $("#scriptExeAssetList");
+					//clear the assets list to start
+					argList.html("");
+					var template = $("#tplScriptExeAssetList").html(),
+							html = Mustache.to_html(template, script),
+							aList = $("#scriptExeAssetList");
+					//clear the assets list to start
+					aList.html(html).trigger('create');
+					
+					//for (the # of arguments) {
+					//display a argument box like below
+					script.arguments.forEach(function(arg){
+						for(property in arg){
+							if(typeof arg[property] != "function"){
+								console.log("...property {0} is {1}".format(property, arg[property]));
 							}
-						},
-						function (transaction, error) {
-							alert("there was an error when attempting to retrieve the assets: ", error.code);
 						}
-					);	
-                });
+							
+						//Display all the assets for the active project
+						//Have to do this everytime because we will be running different queries for
+						//different arguments in the future.  i.e. filter csv, then filter xml
+						pw.assets.getAllAssets(pw.activeProject,
+							//success callback
+							function (transaction, results) {
+								console.log(results.rows.length + " assets retrieved");
+								console.log("rendering assets list");
+								
+								//loop through rows and add them to asset list
+								for (var i = 0; i < results.rows.length; i++) {
+									var row = results.rows.item(i);
+									var aid = row['aid'];
+									var path = row['path'];
+									var fav = 1;
+									//not in the favorites table
+									if (row['fav'] == null){
+										fav = 0;
+									}
+									//(convention #scriptExeAssetList0 #scriptExeAssetList1 etc..)
+									aList = "#scriptExeAssetList" + arg.id;
+									addAssetScriptExeMarkup(aList, aid, arg.id, path, fav);
+								}
+							},
+							function (transaction, error) {
+								alert("there was an error when attempting to retrieve the assets: ", error.code);
+							}
+						);	
+					});
 
-                // Pages are lazily enhanced. We call page() on the page
-                // element to make sure it is always enhanced before we
-                // attempt to enhance the listview markup we just injected.
-                // Subsequent calls to page() are ignored since a page/widget
-                // can only be enhanced once.
-                $page.page();
+					// Pages are lazily enhanced. We call page() on the page
+					// element to make sure it is always enhanced before we
+					// attempt to enhance the listview markup we just injected.
+					// Subsequent calls to page() are ignored since a page/widget
+					// can only be enhanced once.
+					$page.page();
 
-                // We don't want the data-url of the page we just modified
-                // to be the url that shows up in the browser's location field,
-                // so set the dataUrl option to the URL for the category
-                // we just loaded.
-                options.dataUrl = urlObj.href;
+					// We don't want the data-url of the page we just modified
+					// to be the url that shows up in the browser's location field,
+					// so set the dataUrl option to the URL for the category
+					// we just loaded.
+					options.dataUrl = urlObj.href;
 
-                // Now call changePage() and tell it to switch to
-                // the page we just modified.
-                $.mobile.changePage( $page, options );
+					// Now call changePage() and tell it to switch to
+					// the page we just modified.
+					$.mobile.changePage( $page, options );
+					
+				}
+			});
+				
             }
         }
     }
@@ -124,6 +134,8 @@ $(document).on('click', "#run", function(){
 	$('#runScript').popup("close");
 	//TODO find a better way to get path to the script
     var sPath =  $('#run').attr('data-path');
+	var rPath =  $('#run').attr('data-runtime');
+	alert(rPath);
 	var argPaths = [];
 	var valid = true;
 	$('#scriptExeAssetList [id*="scriptExeAssetList"]').each(function(index){
@@ -169,7 +181,7 @@ $(document).on('click', "#run", function(){
 		//take an asset as an argument to a python script
 		var myScript = Ti.Process.createProcess({
 			   //args:[] can take the array of argPaths
-			   args:['python',sPath,argPaths]
+			   args:[rPath,sPath,argPaths]
 		});
 		
 		//USEFUL FOR DEBUGGING, OUTPUTS THE STDOUT LINE BY LINE
