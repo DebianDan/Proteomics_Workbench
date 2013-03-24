@@ -60,6 +60,20 @@ jQuery("body").on("click", "#deleteRuntime", function(event){
     $("#runtimeList").trigger('create'); //we removed some stuff so refresh the list
 });
 
+//update the runtime values in the db when they are changed.  No need to press a save button
+$(document).on("blur", ".runtimeProperties > li input.inputFix", function(e){
+    var options = {
+        name : $(this).attr("name"),
+        id : $(this).attr("data-id"),
+        value : $(this).val()
+    };
+    updateRuntimeValue(options);
+	//update the name of the collapsible if the alias was updated
+	if(options.name == "alias"){
+		$("#runtimeList [data-listid='" + options.id +"']").children("h3").find(".ui-btn-text").text(options.value);
+	}
+});
+
 //clear list of added assets and close the dialog
 function clearRuntimePicker(){
     $("#runtimePickerList").html("");
@@ -81,6 +95,18 @@ function renderRuntimeList(){
         },
         fail : function(error){
             alert("there was an error when attempting to retrieve the runtimes: ", error.code);
+        }
+    });
+}
+
+function updateRuntimeValue(options){
+	var myRuntime = pw.runtimes.getRuntime({
+        id: options.id,
+        success : function(runtime){
+            runtime.update({
+                name : options.name,
+                value : options.value
+            });
         }
     });
 }
