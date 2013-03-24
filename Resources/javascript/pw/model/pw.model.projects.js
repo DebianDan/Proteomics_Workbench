@@ -94,9 +94,7 @@ pw.projects = (function(){
                 }
             });
         }
-
-
-        database.projects[id]
+    }
 
     //the project object
    var Project = function(){

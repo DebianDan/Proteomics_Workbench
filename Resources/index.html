@@ -76,6 +76,7 @@
         <div class="ui-grid-solo">
             <div class="ui-block-a">
                 <!-- Add Scripts -->
+                <input style="display:none;" id="scriptsInputDialog" type="file" multiple data-enhance="false" />
                 <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Add Scripts</a>
                 <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
                     <a href="#scripts" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
@@ -116,41 +117,41 @@
 
         <div id="tplScriptsListing" style="display:none;" data-enhance="false">
             <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
-                {{#scripts}}
-                <div data-role="collapsible">
-                    <h3>{{alias}}</h3>
+                {{#rows}}
+                <div data-role="collapsible" id="{{id}}">
+                    <h3>{{doc.name}}</h3>
                     <div data-role="fieldcontain">
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
-                                <label for="alias-{{sid}}">Alias: </label>
-                                <input data-role="none" style="display:none" class="inputFix" id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
-                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{sid}}" class="inputFix" data-id="{{sid}}">{{alias}}</span>
+                                <label for="name-{{doc.id}}">Name: </label>
+                                <input id="name-{{doc.id}}" data-id="{{doc.id}}" type="text" name="name" value="{{doc.name}}" />
                             </li>
 
                             <li data-role="fieldcontain">
-                                <label for="path-{{sid}}">Path: </label>
-                                <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
-                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{sid}}" class="inputFix" data-id="{{sid}}">{{path}}</span>
+                                <label for="path-{{doc.id}}">Path: </label>
+                                <input type="text" name="path" id="path-{{doc.id}}" data-id="path-{{doc.id}}" value="{{doc.path}}" />
+                            </li>
+
+                            <li data-role="fieldcontain">
+                                <label for="description-{{doc.id}}">Description: </label>
+                                <textarea name="description" id="description-{{doc.id}}" data-id="description-{{doc.id}}">{{doc.description}}</textarea>
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
                                     <h4>Input Arguments</h4>
                                     <div class="argumentsList" data-role="collapsible-set" data-theme="c" data-content-theme="d">
-                                        {{#arguments}}
+                                        {{#doc.arguments}}
                                         <div class="arg" data-role="collapsible">
                                             <h4>{{label}}</h4>
                                             <div data-role="fieldcontain">
                                                 <!--<div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>-->
                                                 <label for="argLabel-{{id}}">Label: </label>
-                                                <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
-                                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanargLabel-{{id}}" class="inputFix" data-id="{{id}}">{{label}}</span><br>
+                                                <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                                 <label for="argSwitch-{{id}}">Switch: </label>
-                                                <input data-role="none" style="display:none" class="inputFix" type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
-                                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanargSwitch-{{id}}" class="inputFix" data-id="{{id}}">{{switch}}</span><br>
+                                                <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                                 <label for="argDescription-{{id}}">Description: </label>
-                                                <input data-role="none" style="display:none" class="inputFix" placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
-                                                <span data-role="none" data-enhance="false" style="display:inline-block" id="spanargDescription-{{id}}" class="inputFix" data-id="{{id}}">{{description}}</span><br>
+                                                <input placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
                                                 <label for="required-{{id}}" checked="checked">Required</label>
                                                 {{#required}}
                                                 <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
@@ -164,20 +165,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{/arguments}}
+                                        {{/doc.arguments}}
                                     </div>
-                                    <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
+                                    <a class="addInputArgument" data-id="{{id}}" data-role="button" data-theme="e" href="#">Add Argument</a>
                                 </div>
                                 <!--<div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true"></div>
                                 <div id="tplInputArgs"></div>-->
                             </li>
                         </ul>
-                        <div style="padding-bottom:20px">
-							<a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Delete Script</a>
+                        <div>
+							<a href="#" data-id="{{id}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="e">Delete Script</a>
                         </div>
                     </div>
                 </div>
-                {{/scripts}}
+                {{/rows}}
             </div>
         </div>
 
@@ -483,6 +484,7 @@
 </div><!-- /page -->
 
 </body>
+<script src="javascript/pouchdb.min.js"></script>
 <script src="javascript/pw/pw.utilities.js"></script>
 <script src="javascript/pw/pw.js"></script>
 <script src="javascript/pw/pw.db.js"></script>

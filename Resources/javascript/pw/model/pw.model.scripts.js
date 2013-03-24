@@ -1,5 +1,9 @@
 
 pw.scripts = (function(){
+    var database; //stores reference to PouchDB database
+    Pouch('scripts', function(err, db){
+        database = db;
+    })
     var my = {}; //this is the object that will be returned. Anything inside of this will be publicly accessible
 
     var scriptHash = {}; //store the scripts after they're generated
@@ -123,7 +127,7 @@ pw.scripts = (function(){
     }
 
     //the argument object
-    var Argument = function(data){
+    var Argument = function(){
 		this.properties = {
             aid: 0,
             sid : 0,
@@ -278,13 +282,13 @@ pw.scripts = (function(){
                 argumentHash[myArgument.id] = myArgument;
                 count++;
             }
-            if(typeof options.success == "function"){
-                options.success(returnObject);
+            if(typeof success == "function"){
+                success(returnObject);
             }
         }, function(t, e){
             console.log("error getting all arguments: {0}".format(e.message));
-            if(typeof options.error == "function"){
-                options.error(e);
+            if(typeof error == "function"){
+                error(e);
             }
         });
     }
@@ -336,6 +340,75 @@ pw.scripts = (function(){
         });
     }
 
+    my.getAllScriptsEx = function(success, error){
+        database.allDocs({include_docs: true}, function(err, response){
+            if(!err){
+                if(typeof success == "function"){
+                    success(response);
+                }
+            }else{
+                console.log("error in getAllScriptsEx...");
+                if(typeof error == "function"){
+                    error(err);
+                }
+            }
+        });
+    }
+
+    //data object contains the properties of the script
+    my.addScriptEx = function(data, success, error){
+        database.post(data, function(err, response){
+            if(err){
+                console.log("error in addScriptEx...");
+                if(typeof error == "function"){
+                    error(err);
+                }
+            }
+            if(typeof success == "function"){
+                success(response);
+            }
+        });
+    }
+
+    //add multiple scripts
+    my.addScriptsEx = function(scriptArray, success, error){
+        database.bulkDocs(scriptArray, function(err, response){
+            if(!err){
+                if(typeof success == "function"){
+                    success(response);
+                }
+            }else{
+                console.log("error in addScriptEx...");
+                if(typeof error == "function"){
+                    error(err);
+                }
+            }
+        });
+    }
+
+    my.deleteScriptEx = function(id, success, error){
+        database.get(id, function(err, doc){
+            if(!err){
+                database.remove(doc, function(err, response){
+                    if(!err){
+                        if(typeof success == "function"){
+                            console.log("script " + response.id + " deleted.");
+                            success(response);
+                        }
+                    }else{
+                        if(typeof error == "function"){
+                            error(err);
+                        }
+                    }
+                });
+            }else{
+                if(typeof error == "function"){
+                    error(err);
+                }
+            }
+        });
+    }
+
     my.addScript = function(path, onSuccess, onError){
         //regex to extract filename works for both \ and / file separators
         var alias = path.replace(/^.*[\\\/]/, '');
@@ -343,6 +416,10 @@ pw.scripts = (function(){
         //var filetype = path.substr(path.lastIndexOf('.')+1, path.length);
         var sql = "INSERT INTO scripts (path, alias, date_created) VALUES('{0}', '{1}', DATETIME('NOW'))".format(path, alias);
         pw.db.execute(sql, onSuccess, onError);
+    }
+
+    my.deleteScriptsEx = function(sids, success, error){
+
     }
 
     my.deleteScripts = function(sids, onSuccess, onError){

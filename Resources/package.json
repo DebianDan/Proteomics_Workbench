@@ -1,0 +1,12 @@
+{
+    "name": "proteomics-workbench",
+    "main": "index.html",
+    "window" : {
+        "title" : "Proteomics Workbench",
+        "width" : 1000,
+        "height" : 800,
+        "position" : "center",
+        "toolbar" : true,
+        "icon" : "images/pw_icon.png"
+    }
+}

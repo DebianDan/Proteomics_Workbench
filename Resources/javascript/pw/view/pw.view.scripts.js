@@ -1,3 +1,9 @@
+function chooseFile(name, callback) {
+    var chooser = $(name);
+    chooser.trigger('click');
+    chooser.change(callback);
+}
+
 //clear list of added assets and close the dialog
 function clearScriptPicker(){
     $("#scriptPickerList").html("");
@@ -60,6 +66,8 @@ $(document).on("click", ".addInputArgument", function(e){
 
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
+
+    /*
     var path = Ti.UI.openFileChooserDialog(function(path){
         //callback after dialog close
         for(i = 0; i < path.length; i++){
@@ -68,24 +76,61 @@ $("input.chooseScripts").click(function(){
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
     }, {multiple:true,title:'Select script to add'});
-    $("#scriptPickerList").trigger('create');
+    */
+    chooseFile("#scriptsInputDialog", function(evt){
+        $(this).val().split(";").forEach(function(path){
+            $("#scriptPickerList").append("<li data-path='"+path+"'>" +
+                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+                "<input type='text' value='"+path+"'/></li>");
+        });
+        $("#scriptPickerList").trigger('create');
+    });
 });
 
 //bind to the click event of the add scripts button
 $("#addScriptPopup .save").click(function(){
     console.log("add script button clicked");
     //get the paths for the added files
+    var scriptArray = new Array();
     $("#scriptPickerList li").each(function(e){
-        var path = $(this).attr("data-path");
-        //add the asset to the database and then add to the page
+        var filePath = $(this).attr("data-path");
+        scriptArray.push({
+            path: filePath,
+            name: filePath.replace(/^.*[\\\/]/, ''),
+            description: "",
+            arguments: []
+        });
+
+        /*
+         //add the asset to the database and then add to the page
+         var path = $(this).attr("data-path");
         pw.scripts.addScript(path, function(transaction, results){
             //addProjectScriptMarkup(results.insertId, path);
             renderScriptList();
         },function(t,e){
             console.log("Error when trying to add script: {0}".format(e.message));
         });
+        */
     });
+
+    pw.scripts.addScriptsEx({docs: scriptArray}, function(response){
+        //success
+        console.log(JSON.stringify(response));
+    },function(err){
+        //error
+        console.log(JSON.stringify(err));
+    });
+
     clearScriptPicker();
+    renderScriptList();
+});
+
+$(document).on("click",".deleteScript", function(){
+    console.log("wtf");
+    var id = $(this).attr('data-id');
+    pw.scripts.deleteScriptEx(id, function(response){
+        $("#"+id).remove();
+    });
 });
 
 //bind to the click event of the delete script button
@@ -143,20 +188,32 @@ $("#deleteScriptPopup .delete").click(function(){
 
 function renderScriptList(){
     //get all scripts in database
-    pw.scripts.getAllScripts({
-        success: function(data){
+    pw.scripts.getAllScriptsEx(
+        //success
+        function(data){
+            console.log(JSON.stringify(data));
+            if(data.total_rows > 0){
+                console.log("rendering scripts list");
+                var template = $("#tplScriptsListing").html(),
+                    html = Mustache.to_html(template, data),
+                    sList = $("#scriptsList");
+                //clear the assets list to start
+                sList.html(html).trigger('create');
+            }
+            /*
             console.log("rendering scripts list");
             var template = $("#tplScriptsListing").html(),
                 html = Mustache.to_html(template, data),
                 sList = $("#scriptsList");
             //clear the assets list to start
             sList.html(html).trigger('create');
-
+            */
         },
-        fail : function(error){ //TODO: check to make sure arguments list is correct for this function
+        //error
+        function(error){ //TODO: check to make sure arguments list is correct for this function
             alert("there was an error when attempting to retrieve the projects: ", error.code);
         }
-    });
+    );
 }
 
 function updateScriptValue(options){
