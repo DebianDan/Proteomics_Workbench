@@ -23,17 +23,17 @@ function showScriptSettings(e){
 
 $(document).on("getDetails", "#scriptList .detailsPane", function(e){
     /*e.preventDefault();
-    var self = this;
-    pw.scripts.getScript(e.id, function(script){
-        if(script){
-            console.log(JSON.stringify(script));
-            var detailsPaneMarkup = $(scriptDetailsTemplate.format(script.alias, script.sid, script.path, createArgumentsMarkup(script)));
-            $(self).html(detailsPaneMarkup);
-            $('.tagBox', self).chosen(); //apply the chosen plugin to the multi select box
-            //$('.scriptArguments', self).listview('refresh');
-            //detailsPaneMarkup.trigger('create');
-        }
-    });*/
+     var self = this;
+     pw.scripts.getScript(e.id, function(script){
+     if(script){
+     console.log(JSON.stringify(script));
+     var detailsPaneMarkup = $(scriptDetailsTemplate.format(script.alias, script.sid, script.path, createArgumentsMarkup(script)));
+     $(self).html(detailsPaneMarkup);
+     $('.tagBox', self).chosen(); //apply the chosen plugin to the multi select box
+     //$('.scriptArguments', self).listview('refresh');
+     //detailsPaneMarkup.trigger('create');
+     }
+     });*/
 });
 
 function createArgumentsMarkup(script){
@@ -43,7 +43,9 @@ function createArgumentsMarkup(script){
 
 //removes the script from the list of scripts to be added
 $(document).on("click", "#scriptPickerList li .cancel", function(e){
-    $(this).parent().parent().remove();
+    $(this).parent().parent().fadeOut("fast", function(e){
+        e.remove(); //remove elements with the specified attribute
+    });
     e.preventDefault();
 })
 
@@ -53,13 +55,14 @@ $(document).on("click", "#addScriptPopup .close", function(e){
 });
 
 /*
-$(document).on("click", ".addInputArgument", function(e){
-    //add an
-});
-*/
+ $(document).on("click", ".addInputArgument", function(e){
+ //add an
+ });
+ */
 
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
+    /*
     var path = Ti.UI.openFileChooserDialog(function(path){
         //callback after dialog close
         for(i = 0; i < path.length; i++){
@@ -69,6 +72,16 @@ $("input.chooseScripts").click(function(){
         }
     }, {multiple:true,title:'Select script to add'});
     $("#scriptPickerList").trigger('create');
+    */
+
+    chooseFile("#multipleInput", function(evt){
+        $(this).val().split(";").forEach(function(path){
+            $("#scriptPickerList").append("<li data-path='"+path+"'>" +
+                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+                "<input type='text' value='"+path+"'/></li>");
+        });
+        $("#scriptPickerList").trigger('create');
+    });
 });
 
 //bind to the click event of the add scripts button
@@ -88,6 +101,15 @@ $("#addScriptPopup .save").click(function(){
     clearScriptPicker();
 });
 
+$(document).on("click", ".deleteScript", function(e){
+    var sid = $(this).attr('data-id');
+    pw.scripts.deleteScript(sid, function(){
+        $("#scriptsList .script-" + sid).fadeOut("fast", function(e){
+            e.remove();
+        })
+    })
+})
+
 //bind to the click event of the delete script button
 $("#deleteScriptPopup .delete").click(function(){
     var sids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
@@ -97,7 +119,9 @@ $("#deleteScriptPopup .delete").click(function(){
             var self = this;
             sids.push(sid);
             pw.scripts.deleteScript(sid, function(transaction, results){
-                $("#scriptList [data-sid='" + sid +"']").remove(); //remove elements with the specified attribute
+                $("#scriptList [data-sid='" + sid +"']").fadeOut("fast", function(e){
+                    e.remove(); //remove elements with the specified attribute
+                });
                 console.log("deleted script with id {0}".format(sid));
             },function(transaction, error){
                 console.log("error deleting script {0}: {1}".format(sid, error.message));
@@ -151,16 +175,16 @@ function renderScriptList(){
                 sList = $("#scriptsList");
             //clear the assets list to start
             sList.html(html).trigger('create');
-			$(".scriptProperties select[id*=runtimeChooser]").each(function(){
-				var scriptRID = $(this).attr("data-rid");
-				if(scriptRID != "{{rid}}"){
-					//remove the default choose scripts and select the correct runtime
-					$(this).find("option[value="+ scriptRID +"]").attr('selected','selected');
-					$(this).selectmenu('refresh'); 
-				}
-				
-			});
-			
+            $(".scriptProperties select[id*=runtimeChooser]").each(function(){
+                var scriptRID = $(this).attr("data-rid");
+                if(scriptRID != "{{rid}}"){
+                    //remove the default choose scripts and select the correct runtime
+                    $(this).find("option[value="+ scriptRID +"]").attr('selected','selected');
+                    $(this).selectmenu('refresh');
+                }
+
+            });
+
         },
         fail : function(error){ //TODO: check to make sure arguments list is correct for this function
             alert("there was an error when attempting to retrieve the projects: ", error.code);
@@ -169,7 +193,7 @@ function renderScriptList(){
 }
 
 function updateScriptValue(options){
-	var myScript = pw.scripts.getScript({
+    var myScript = pw.scripts.getScript({
         id: options.id,
         success : function(script){
             script.update({
@@ -199,7 +223,7 @@ $(document).on("click", ".addInputArgument", function(e){
         id : $(self).attr("data-id"),
         success : function(script){
             script.addArgument({
-				id : $(self).attr("data-id"),
+                id : $(self).attr("data-id"),
                 success : function(newArg){
                     console.log("successfully added input argument: {0}".format(JSON.stringify(newArg)));
                     //we have successfully added the argument to the database
@@ -207,18 +231,18 @@ $(document).on("click", ".addInputArgument", function(e){
                     //get the template for the entry first
                     var template = $("#tplScriptsListing .argumentsList div.arg")[0].outerHTML, //using outerHTML gives us the wrapping element itself (in this case the <li>) which jquery doesn't do
                         html = $(Mustache.to_html(template, newArg));
-					//check to see if the arg list was empty
-					var isEmpty = $(self).prev().children('div.arg');
-					if (!isEmpty.length){
-						console.log("The argument list was empty..");
-						$(self).prev().prepend(html);
-					}else{
-						//add the new argument after the last arg in the list
-						isEmpty.last().after(html);
-					}
-					//update the list
-					$(self).prev().trigger('create');
-					$(self).parent().trigger('create');
+                    //check to see if the arg list was empty
+                    var isEmpty = $(self).prev().children('div.arg');
+                    if (!isEmpty.length){
+                        console.log("The argument list was empty..");
+                        $(self).prev().prepend(html);
+                    }else{
+                        //add the new argument after the last arg in the list
+                        isEmpty.last().after(html);
+                    }
+                    //update the list
+                    $(self).prev().trigger('create');
+                    $(self).parent().trigger('create');
                 }
             });
         }
@@ -234,7 +258,9 @@ $(document).on("click", ".deleteArg", function(e){
             success : function(myArg){
                 myArg.remove({
                     success : function(){
-                        $(self).closest(".arg").remove();
+                        $(self).closest(".arg").fadeOut("fast", function(e){
+                            e.remove(); //remove elements with the specified attribute
+                        });
                     }
                 });
             }
@@ -242,7 +268,7 @@ $(document).on("click", ".deleteArg", function(e){
     pw.scripts.getArgument(options);
 });
 
-$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input.inputFix", function(e){
+$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input", function(e){
     var options = {
         name : $(this).attr("name"),
         id : $(this).attr("data-id"),
@@ -262,7 +288,7 @@ $(document).on("change", ".scriptProperties select[id*=runtimeChooser]", functio
 });
 
 
-$(document).on("blur", ".argumentsList input.inputFix", function(e){
+$(document).on("blur", ".argumentsList input[type=text]", function(e){
     var options = {
         name : $(this).attr("name"),
         id : $(this).attr("data-id"),

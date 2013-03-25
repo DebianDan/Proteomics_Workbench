@@ -12,6 +12,12 @@ if (!String.prototype.format) {
     };
 }
 
+function chooseFile(name, callback) {
+    var chooser = $(name);
+    chooser.trigger('click');
+    chooser.change(callback);
+}
+
 function getTagsSelectMarkup(){
     var selectTemplate = '<select class="tagBox" data-role="none" style="width:350px;" multiple data-placeholder="Tags">{0}</select>',
     optionTemplate = '<option value="{0}">{1}</option>',

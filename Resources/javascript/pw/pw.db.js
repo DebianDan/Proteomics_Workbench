@@ -20,7 +20,7 @@
                 transaction.executeSql("DROP TABLE IF EXISTS settings");
                 //script arg types
                 transaction.executeSql("DROP TABLE IF EXISTS tags");
-				//runtimes table
+                //runtimes table
                 transaction.executeSql("DROP TABLE IF EXISTS runtimes");
             }
         );
@@ -44,7 +44,7 @@
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS tags('tid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'name' VARCHAR UNIQUE NOT NULL)");
                 //settings table (just stores the JSON representation of the settings object)
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS settings('settingsString' TEXT)");
-				//runtimes table, defines the runtimes each script uses
+                //runtimes table, defines the runtimes each script uses
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS runtimes('rid' INTEGER PRIMARY KEY AUTOINCREMENT, 'sid' INTEGER, 'alias' VARCHAR NOT NULL, 'path' VARCHAR)");
             }
         );
@@ -53,9 +53,9 @@
     //we define this getter so that it will only try to retrieve the database one time
     pw.__defineGetter__("db", function(){
         var shortName = 'pwDB',
-        version = '1.0',
-        displayName = 'Database for the Proteomics Workbench software',
-        maxSize = 52428800; // 50MB
+            version = '1.0',
+            displayName = 'Database for the Proteomics Workbench software',
+            maxSize = 52428800; // 50MB
         if(!_db){ //only retrieve the database & create tables on program start
             console.log("getting the database");
             _db = openDatabase(shortName, version, displayName, maxSize);
