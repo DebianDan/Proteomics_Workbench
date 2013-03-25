@@ -1,9 +1,3 @@
-function chooseFile(name, callback) {
-    var chooser = $(name);
-    chooser.trigger('click');
-    chooser.change(callback);
-}
-
 //clear list of added assets and close the dialog
 function clearScriptPicker(){
     $("#scriptPickerList").html("");
@@ -29,17 +23,17 @@ function showScriptSettings(e){
 
 $(document).on("getDetails", "#scriptList .detailsPane", function(e){
     /*e.preventDefault();
-    var self = this;
-    pw.scripts.getScript(e.id, function(script){
-        if(script){
-            console.log(JSON.stringify(script));
-            var detailsPaneMarkup = $(scriptDetailsTemplate.format(script.alias, script.sid, script.path, createArgumentsMarkup(script)));
-            $(self).html(detailsPaneMarkup);
-            $('.tagBox', self).chosen(); //apply the chosen plugin to the multi select box
-            //$('.scriptArguments', self).listview('refresh');
-            //detailsPaneMarkup.trigger('create');
-        }
-    });*/
+     var self = this;
+     pw.scripts.getScript(e.id, function(script){
+     if(script){
+     console.log(JSON.stringify(script));
+     var detailsPaneMarkup = $(scriptDetailsTemplate.format(script.alias, script.sid, script.path, createArgumentsMarkup(script)));
+     $(self).html(detailsPaneMarkup);
+     $('.tagBox', self).chosen(); //apply the chosen plugin to the multi select box
+     //$('.scriptArguments', self).listview('refresh');
+     //detailsPaneMarkup.trigger('create');
+     }
+     });*/
 });
 
 function createArgumentsMarkup(script){
@@ -59,14 +53,13 @@ $(document).on("click", "#addScriptPopup .close", function(e){
 });
 
 /*
-$(document).on("click", ".addInputArgument", function(e){
-    //add an
-});
-*/
+ $(document).on("click", ".addInputArgument", function(e){
+ //add an
+ });
+ */
 
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
-
     /*
     var path = Ti.UI.openFileChooserDialog(function(path){
         //callback after dialog close
@@ -76,8 +69,10 @@ $("input.chooseScripts").click(function(){
                 "<input type='text' value='"+path[i]+"'/></li>");
         }
     }, {multiple:true,title:'Select script to add'});
+    $("#scriptPickerList").trigger('create');
     */
-    chooseFile("#scriptsInputDialog", function(evt){
+
+    chooseFile("#multipleInput", function(evt){
         $(this).val().split(";").forEach(function(path){
             $("#scriptPickerList").append("<li data-path='"+path+"'>" +
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
@@ -91,46 +86,17 @@ $("input.chooseScripts").click(function(){
 $("#addScriptPopup .save").click(function(){
     console.log("add script button clicked");
     //get the paths for the added files
-    var scriptArray = new Array();
     $("#scriptPickerList li").each(function(e){
-        var filePath = $(this).attr("data-path");
-        scriptArray.push({
-            path: filePath,
-            name: filePath.replace(/^.*[\\\/]/, ''),
-            description: "",
-            arguments: []
-        });
-
-        /*
-         //add the asset to the database and then add to the page
-         var path = $(this).attr("data-path");
+        var path = $(this).attr("data-path");
+        //add the asset to the database and then add to the page
         pw.scripts.addScript(path, function(transaction, results){
             //addProjectScriptMarkup(results.insertId, path);
             renderScriptList();
         },function(t,e){
             console.log("Error when trying to add script: {0}".format(e.message));
         });
-        */
     });
-
-    pw.scripts.addScriptsEx({docs: scriptArray}, function(response){
-        //success
-        console.log(JSON.stringify(response));
-    },function(err){
-        //error
-        console.log(JSON.stringify(err));
-    });
-
     clearScriptPicker();
-    renderScriptList();
-});
-
-$(document).on("click",".deleteScript", function(){
-    console.log("wtf");
-    var id = $(this).attr('data-id');
-    pw.scripts.deleteScriptEx(id, function(response){
-        $("#"+id).remove();
-    });
 });
 
 //bind to the click event of the delete script button
@@ -188,36 +154,33 @@ $("#deleteScriptPopup .delete").click(function(){
 
 function renderScriptList(){
     //get all scripts in database
-    pw.scripts.getAllScriptsEx(
-        //success
-        function(data){
-            console.log(JSON.stringify(data));
-            if(data.total_rows > 0){
-                console.log("rendering scripts list");
-                var template = $("#tplScriptsListing").html(),
-                    html = Mustache.to_html(template, data),
-                    sList = $("#scriptsList");
-                //clear the assets list to start
-                sList.html(html).trigger('create');
-            }
-            /*
+    pw.scripts.getAllScripts({
+        success: function(data){
             console.log("rendering scripts list");
             var template = $("#tplScriptsListing").html(),
                 html = Mustache.to_html(template, data),
                 sList = $("#scriptsList");
             //clear the assets list to start
             sList.html(html).trigger('create');
-            */
+            $(".scriptProperties select[id*=runtimeChooser]").each(function(){
+                var scriptRID = $(this).attr("data-rid");
+                if(scriptRID != "{{rid}}"){
+                    //remove the default choose scripts and select the correct runtime
+                    $(this).find("option[value="+ scriptRID +"]").attr('selected','selected');
+                    $(this).selectmenu('refresh');
+                }
+
+            });
+
         },
-        //error
-        function(error){ //TODO: check to make sure arguments list is correct for this function
+        fail : function(error){ //TODO: check to make sure arguments list is correct for this function
             alert("there was an error when attempting to retrieve the projects: ", error.code);
         }
-    );
+    });
 }
 
 function updateScriptValue(options){
-	var myScript = pw.scripts.getScript({
+    var myScript = pw.scripts.getScript({
         id: options.id,
         success : function(script){
             script.update({
@@ -247,7 +210,7 @@ $(document).on("click", ".addInputArgument", function(e){
         id : $(self).attr("data-id"),
         success : function(script){
             script.addArgument({
-				id : $(self).attr("data-id"),
+                id : $(self).attr("data-id"),
                 success : function(newArg){
                     console.log("successfully added input argument: {0}".format(JSON.stringify(newArg)));
                     //we have successfully added the argument to the database
@@ -255,18 +218,18 @@ $(document).on("click", ".addInputArgument", function(e){
                     //get the template for the entry first
                     var template = $("#tplScriptsListing .argumentsList div.arg")[0].outerHTML, //using outerHTML gives us the wrapping element itself (in this case the <li>) which jquery doesn't do
                         html = $(Mustache.to_html(template, newArg));
-					//check to see if the arg list was empty
-					var isEmpty = $(self).prev().children('div.arg');
-					if (!isEmpty.length){
-						console.log("The argument list was empty..");
-						$(self).prev().prepend(html);
-					}else{
-						//add the new argument after the last arg in the list
-						isEmpty.last().after(html);
-					}
-					//update the list
-					$(self).prev().trigger('create');
-					$(self).parent().trigger('create');
+                    //check to see if the arg list was empty
+                    var isEmpty = $(self).prev().children('div.arg');
+                    if (!isEmpty.length){
+                        console.log("The argument list was empty..");
+                        $(self).prev().prepend(html);
+                    }else{
+                        //add the new argument after the last arg in the list
+                        isEmpty.last().after(html);
+                    }
+                    //update the list
+                    $(self).prev().trigger('create');
+                    $(self).parent().trigger('create');
                 }
             });
         }
@@ -290,9 +253,19 @@ $(document).on("click", ".deleteArg", function(e){
     pw.scripts.getArgument(options);
 });
 
-$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input.inputFix", function(e){
+$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input", function(e){
     var options = {
         name : $(this).attr("name"),
+        id : $(this).attr("data-id"),
+        value : $(this).val()
+    };
+    updateScriptValue(options);
+});
+
+//updates the runtime that the particular script uses when it is changed
+$(document).on("change", ".scriptProperties select[id*=runtimeChooser]", function(){
+    var options ={
+        name : "rid",
         id : $(this).attr("data-id"),
         value : $(this).val()
     };
@@ -331,5 +304,4 @@ $(document).on('pagebeforecreate', '#scripts', function (event) {
     //$.mobile.activePage.trigger('create');
     //console.log(html);
     renderScriptList();
-
 });
