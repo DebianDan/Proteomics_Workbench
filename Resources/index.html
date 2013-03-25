@@ -15,6 +15,10 @@
             $.mobile.ignoreContentEnabled = true;
         });
     </script>
+    <script type="text/javascript">
+        function showOptions() { document.getElementById('outputOptions').style.display = 'block'; }
+        function hideOptions() { document.getElementById('outputOptions').style.display = 'none'; }
+      </script>
     <script src="javascript/jquery.mobile-1.3.0.min.js"></script>
     <script src="javascript/mustache.js"></script>
 
@@ -137,36 +141,7 @@
                                 <label for="description-{{sid}}">Description: </label>
                                 <textarea name="description" id="description-{{sid}}" data-id="description-{{sid}}">{{description}}</textarea>
                             </li>
-<<<<<<< HEAD
-							
-							<li data-role="fieldcontain">
-								<select name="runtimes-{{sid}}" id="runtimeChooser-{{sid}}" data-id="{{sid}}" data-rid="{{rid}}" data-theme="c" data-mini="true" data-native-menu="false">
-									<option data-placeholder="true">Choose Runtime</option>
-									{{#runtimes}}
-									<option value="{{rid}}">{{alias}}</option>
-									{{/runtimes}}
-								</select>
-							</li>
                             
-                            <li data-role="fieldcontain">
-                                <legend>Does script produce output?</legend>
-                                <input type="radio" name="scriptOutput" id="outputYes" value="outputYes" data-role="none" />
-                                <label for="outputYes">Yes</label>
-        
-                                <input type="radio" name="scriptOutput" id="outputNo" value="outputNo" data-role="none" />
-                                <label for="outputNo">No</label>
-                                <br>
-                                <label for="defaultOutput">Default Output: </label>
-                                <input data-role="none" style="display:none" class="inputFix" id="defaultOutput" data-id="defaultOutput" type="text" name="defaultOutput" value="" />
-                                <span data-role="none" data-enhance="false" style="display:inline-block" id="defaultOutput" class="inputFix" data-id="defaultOutput"></span>
-                                <br>
-                                <label for="outputSwitch">Output Argument Switch: </label>
-                                <input data-role="none" style="display:none" class="inputFix" id="outputSwitch" data-id="outputSwitch" type="text" name="outputSwitch" value="" />
-                                <span data-role="none" data-enhance="false" style="display:inline-block" id="outputSwitch" class="inputFix" data-id="outputSwitch"></span>
-							</li>
-							
-=======
-
                             <li data-role="fieldcontain">
                                 <label for="runtimeChooser-{{sid}}">Runtime: </label>
                                 <select name="runtimes-{{sid}}" id="runtimeChooser-{{sid}}" data-id="{{sid}}" data-rid="{{rid}}" data-theme="c" data-mini="true" data-native-menu="false">
@@ -176,8 +151,23 @@
                                     {{/runtimes}}
                                 </select>
                             </li>
+                            
+                            <li data-role="fieldcontain">
+                                <legend>Does script produce output?</legend>
+                                <input type="radio" name="scriptOutput" id="outputYes" value="outputYes" data-role="none" onClick="showOptions();" />
+                                <label for="outputYes">Yes</label>
+        
+                                <input type="radio" name="scriptOutput" id="outputNo" value="outputNo" data-role="none" onClick="hideOptions();" />
+                                <label for="outputNo">No</label>
+                                <div id="outputOptions" class="hideDefault">
+                                    <label for="defaultOutput">Default Output: </label>
+                                    <input type="text" name="defaultOutput" id="defaultOutput" data-id="defaultOutput" value="" />
+                                    <br>
+                                    <label for="outputSwitch">Output Argument Switch: </label>
+                                    <input type="text" name="outputSwitch" id="outputSwitch" data-id="outputSwitch" value="" />
+                                </div>
+							</li>
 
->>>>>>> origin/node-webkit
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
                                     <h4>Input Arguments</h4>

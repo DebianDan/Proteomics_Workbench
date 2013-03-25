@@ -88,6 +88,10 @@ div.scrollBar{
 	overflow:auto;
 } 
 
+div.hideDefault{
+	display: none;
+}
+
 /*
 .detailsPane .ui-btn-inner{
    line-height:normal;
