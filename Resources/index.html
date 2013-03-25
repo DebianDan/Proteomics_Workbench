@@ -141,6 +141,23 @@
 									{{/runtimes}}
 								</select>
 							</li>
+                            
+                            <li data-role="fieldcontain">
+                                <legend>Does script produce output?</legend>
+                                <input type="radio" name="scriptOutput" id="outputYes" value="outputYes" data-role="none" />
+                                <label for="outputYes">Yes</label>
+        
+                                <input type="radio" name="scriptOutput" id="outputNo" value="outputNo" data-role="none" />
+                                <label for="outputNo">No</label>
+                                <br>
+                                <label for="defaultOutput">Default Output: </label>
+                                <input data-role="none" style="display:none" class="inputFix" id="defaultOutput" data-id="defaultOutput" type="text" name="defaultOutput" value="" />
+                                <span data-role="none" data-enhance="false" style="display:inline-block" id="defaultOutput" class="inputFix" data-id="defaultOutput"></span>
+                                <br>
+                                <label for="outputSwitch">Output Argument Switch: </label>
+                                <input data-role="none" style="display:none" class="inputFix" id="outputSwitch" data-id="outputSwitch" type="text" name="outputSwitch" value="" />
+                                <span data-role="none" data-enhance="false" style="display:inline-block" id="outputSwitch" class="inputFix" data-id="outputSwitch"></span>
+							</li>
 							
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
@@ -258,9 +275,14 @@
                     </div>
                 </div>
                 {{/runtimes}}
-            </div>
-			
+            </div>			
         </div>
+        	<div>
+                <br>
+                <label for="defaultScriptOutput"><h4>Default script output location: </h4></label>
+                <input data-role="none" style="display:none" class="inputFix" id="defaultScriptOutput" data-id="defaultScriptOutput" type="text" name="defaultScriptOutput" value="" />
+                <span data-role="none" data-enhance="false" style="display:inline-block" id="defaultScriptOutput" class="inputFix" data-id="defaultScriptOutput"></span>
+            </div>
         </div> <!-- End settings area -->
 
         <div id="tagsArea">
