@@ -43,7 +43,9 @@ function createArgumentsMarkup(script){
 
 //removes the script from the list of scripts to be added
 $(document).on("click", "#scriptPickerList li .cancel", function(e){
-    $(this).parent().parent().remove();
+    $(this).parent().parent().fadeOut("fast", function(e){
+        e.remove(); //remove elements with the specified attribute
+    });
     e.preventDefault();
 })
 
@@ -99,6 +101,15 @@ $("#addScriptPopup .save").click(function(){
     clearScriptPicker();
 });
 
+$(document).on("click", ".deleteScript", function(e){
+    var sid = $(this).attr('data-id');
+    pw.scripts.deleteScript(sid, function(){
+        $("#scriptsList .script-" + sid).fadeOut("fast", function(e){
+            e.remove();
+        })
+    })
+})
+
 //bind to the click event of the delete script button
 $("#deleteScriptPopup .delete").click(function(){
     var sids = new Array(); //array of asset id's to delete (keeping this so we can do something else if large number of deletes)
@@ -108,7 +119,9 @@ $("#deleteScriptPopup .delete").click(function(){
             var self = this;
             sids.push(sid);
             pw.scripts.deleteScript(sid, function(transaction, results){
-                $("#scriptList [data-sid='" + sid +"']").remove(); //remove elements with the specified attribute
+                $("#scriptList [data-sid='" + sid +"']").fadeOut("fast", function(e){
+                    e.remove(); //remove elements with the specified attribute
+                });
                 console.log("deleted script with id {0}".format(sid));
             },function(transaction, error){
                 console.log("error deleting script {0}: {1}".format(sid, error.message));
@@ -245,7 +258,9 @@ $(document).on("click", ".deleteArg", function(e){
             success : function(myArg){
                 myArg.remove({
                     success : function(){
-                        $(self).closest(".arg").remove();
+                        $(self).closest(".arg").fadeOut("fast", function(e){
+                            e.remove(); //remove elements with the specified attribute
+                        });
                     }
                 });
             }
@@ -273,7 +288,7 @@ $(document).on("change", ".scriptProperties select[id*=runtimeChooser]", functio
 });
 
 
-$(document).on("blur", ".argumentsList input.inputFix", function(e){
+$(document).on("blur", ".argumentsList input[type=text]", function(e){
     var options = {
         name : $(this).attr("name"),
         id : $(this).attr("data-id"),

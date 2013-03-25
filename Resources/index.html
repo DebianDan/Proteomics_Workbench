@@ -21,6 +21,7 @@
 </head>
 <body>
 
+<input style="display:none;" id="multipleInput" type="file" multiple data-enhance="false" />
 
 <div data-role="page" id="projects" class="type-interior" data-title="Projects">
     <div data-role="header">
@@ -117,31 +118,41 @@
 
         <div id="tplScriptsListing" style="display:none;" data-enhance="false">
             <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
-                {{#rows}}
-                <div data-role="collapsible" id="{{id}}">
-                    <h3>{{doc.name}}</h3>
+                {{#scripts}}
+                <div data-role="collapsible" class="script-{{sid}}">
+                    <h3>{{alias}}</h3>
                     <div data-role="fieldcontain">
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
-                                <label for="name-{{doc.id}}">Name: </label>
-                                <input id="name-{{doc.id}}" data-id="{{doc.id}}" type="text" name="name" value="{{doc.name}}" />
+                                <label for="alias-{{sid}}">Alias: </label>
+                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
-                                <label for="path-{{doc.id}}">Path: </label>
-                                <input type="text" name="path" id="path-{{doc.id}}" data-id="path-{{doc.id}}" value="{{doc.path}}" />
+                                <label for="path-{{sid}}">Path: </label>
+                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
                             </li>
 
                             <li data-role="fieldcontain">
-                                <label for="description-{{doc.id}}">Description: </label>
-                                <textarea name="description" id="description-{{doc.id}}" data-id="description-{{doc.id}}">{{doc.description}}</textarea>
+                                <label for="description-{{sid}}">Description: </label>
+                                <textarea name="description" id="description-{{sid}}" data-id="description-{{sid}}">{{description}}</textarea>
+                            </li>
+
+                            <li data-role="fieldcontain">
+                                <label for="runtimeChooser-{{sid}}">Runtime: </label>
+                                <select name="runtimes-{{sid}}" id="runtimeChooser-{{sid}}" data-id="{{sid}}" data-rid="{{rid}}" data-theme="c" data-mini="true" data-native-menu="false">
+                                    <option data-placeholder="true">Choose Runtime</option>
+                                    {{#runtimes}}
+                                    <option value="{{rid}}">{{alias}}</option>
+                                    {{/runtimes}}
+                                </select>
                             </li>
 
                             <li data-role="fieldcontain" class="argumentContainer">
                                 <div id="inputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true">
                                     <h4>Input Arguments</h4>
                                     <div class="argumentsList" data-role="collapsible-set" data-theme="c" data-content-theme="d">
-                                        {{#doc.arguments}}
+                                        {{#arguments}}
                                         <div class="arg" data-role="collapsible">
                                             <h4>{{label}}</h4>
                                             <div data-role="fieldcontain">
@@ -165,20 +176,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{/doc.arguments}}
+                                        {{/arguments}}
                                     </div>
-                                    <a class="addInputArgument" data-id="{{id}}" data-role="button" data-theme="e" href="#">Add Argument</a>
+                                    <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
                                 </div>
                                 <!--<div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true"></div>
                                 <div id="tplInputArgs"></div>-->
                             </li>
                         </ul>
                         <div>
-							<a href="#" data-id="{{id}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="e">Delete Script</a>
+							<a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="e">Delete Script</a>
                         </div>
                     </div>
                 </div>
-                {{/rows}}
+                {{/scripts}}
             </div>
         </div>
 
@@ -234,14 +245,12 @@
                         <ul class="runtimeProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{rid}}">Alias: </label>
-                                <input data-role="none" style="display:none" class="inputFix" id="alias-{{rid}}" data-id="{{rid}}" type="text" name="alias" value="{{alias}}" />
-								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanalias-{{rid}}" class="inputFix" data-id="{{rid}}">{{alias}}</span>
+                                <input id="alias-{{rid}}" data-id="{{rid}}" type="text" name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{rid}}">Path: </label>
-                                <input data-role="none" style="display:none" class="inputFix" type="text" name="path" id="path-{{rid}}" data-id="{{rid}}" value="{{path}}" />
-								<span data-role="none" data-enhance="false" style="display:inline-block" id="spanpath-{{rid}}" class="inputFix" data-id="{{rid}}">{{path}}</span>
+                                <input type="text" name="path" id="path-{{rid}}" data-id="{{rid}}" value="{{path}}" />
                             </li>
                             </ul>
                         <div style="padding-bottom:20px">
@@ -469,8 +478,10 @@
         </div>
         <div data-role="fieldcontain" style="padding-top:20px;">
             <label for="scriptOut"><b>Script output:</b></label>
-            <div id="scriptOut" class="textareaFix" style="height:120px; float:right; width:400px;">
-            </div></div>
+            <textarea id="scriptOut"></textarea>
+            <!--<div id="scriptOut" class="textareaFix" style="height:120px; float:right; width:400px;">
+            </div>-->
+        </div>
 
     </div><!-- /content -->
 
@@ -503,4 +514,6 @@
 <script src="javascript/pw/view/pw.view.settings.js"></script>
 <script src="javascript/pw/view/pw.view.templates.js"></script>
 <script src="javascript/chosen.jquery.min.js"></script>
+
+<script src="javascript/nw-desktop-notifications.js"></script>
 </html>

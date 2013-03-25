@@ -84,15 +84,14 @@ $(document).on("click", "#addAssetPopup .close", function(e){
 
 //launches the file browser dialogue when adding an asset
 $("input.chooseFiles").click(function(){
-    var path = Ti.UI.openFileChooserDialog(function(path){
-        //callback after dialog close
-        for(i = 0; i < path.length; i++){
-            $("#assetPickerList").append("<li data-path='"+path[i]+"'>" +
+    chooseFile("#multipleInput", function(evt){
+        $(this).val().split(";").forEach(function(path){
+            $("#assetPickerList").append("<li data-path='"+path+"'>" +
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
-                "<input type='text' value='"+path[i]+"'/></li>");
-        }
-    }, {multiple:true,title:'Select data file(s) to add to project'});
-    $("#assetPickerList").trigger('create');
+                "<input type='text' value='"+path+"'/></li>");
+        });
+        $("#assetPickerList").trigger('create');
+    });
 });
 
 //bind to the click event of the add assets button
