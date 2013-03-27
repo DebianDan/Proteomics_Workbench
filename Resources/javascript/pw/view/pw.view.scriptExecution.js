@@ -27,6 +27,7 @@ function showScriptExecution( urlObj, options )
                 //get the runtime that the script uses
                 var myRuntime = pw.runtimes.getRuntime({
                     id: script.rid,
+					name: script.alias,
                     success : function(runtime){
 
                         // Get the page we are going to dump our content into.
@@ -170,8 +171,12 @@ $(document).on('click', "#run", function(){
             argPaths.push(extraArgs);
         }
 
-        var spawn = require('child_process').spawn,
-            scriptExe    = spawn(rPath, argPaths);
+        var spawn = require('child_process').spawn;
+        try{
+			var scriptExe    = spawn(rPath, argPaths);
+		}catch(err){
+			$("#scriptOut").text("Error using Runtime on this script!\n Runtime Path:" +rPath+ "\nScript Path:" +argPaths[0]);
+		}
 
         scriptExe.stdout.on('data', function (data) {
             console.log(data);
@@ -180,6 +185,7 @@ $(document).on('click', "#run", function(){
 
         scriptExe.stderr.on('data', function (data) {
             console.log('stderr: ' + data);
+			$("#scriptOut").text("ERROR: " + data);
         });
 
         scriptExe.on('close', function (code) {
@@ -235,5 +241,5 @@ $(document).on('click', "#run", function(){
 //Clear the log output
 $(document).on('click', "#clearLog", function(){
     console.log("Script Log has been cleared.")
-    $("#scriptOut").val("");
+    $("#scriptOut").text("");
 });

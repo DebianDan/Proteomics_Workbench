@@ -64,10 +64,13 @@ pw.runtimes = (function(){
                 if(results.rows.length){
                     var item = results.rows.item(0);
                     myRuntime = new runtime(item);
-                }
-                if(typeof options.success == "function"){
-                    options.success(myRuntime);
-                }
+					if(typeof options.success == "function"){
+						options.success(myRuntime);
+					}
+                }else{
+					alert("You need to Choose a Runtime for this script before running it!\n1)Go to Menu->Scripts\n2)Click " +options.name+ "\n3) Choose Runtime\n");
+				}
+
             }, function(t, e){
                 console.log("error in getScript(): {0}".format(e.message));
                 if(typeof options.error == "function"){

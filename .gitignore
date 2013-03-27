@@ -1,6 +1,3 @@
-#ignore the package zip
-Resources/package.zip
-
 # WebStorm
 .idea/
 data_files/
