@@ -398,7 +398,14 @@
                                     <input type="checkbox" data-aid="{{properties.aid}}" name="checkbox-{{properties.aid}}" id="checkbox-{{properties.aid}}" data-theme="c" />
                                     <label for="checkbox-{{properties.aid}}" data-aid="{{properties.aid}}">
                                         {{properties.filename}}
+
+                                        {{#properties.fav}}
                                         <a class="itemButton fav" data-aid="{{properties.aid}}" data-fav="{{properties.fav}}" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="e">Favorite</a>
+                                        {{/properties.fav}}
+                                        {{^properties.fav}}
+                                        <a class="itemButton fav" data-aid="{{properties.aid}}" data-fav="0" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Favorite</a>
+                                        {{/properties.fav}}
+
                                         <span class="itemButton detailsButton" data-aid="{{properties.aid}}" data-id="{{properties.aid}}" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Edit</span>
                                     </label>
                                 </li>
