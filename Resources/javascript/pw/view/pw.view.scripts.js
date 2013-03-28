@@ -268,7 +268,7 @@ $(document).on("click", ".deleteArg", function(e){
     pw.scripts.getArgument(options);
 });
 
-$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) input", function(e){
+$(document).on("blur", ".scriptProperties > li:not(.argumentContainer) :input", function(e){
     var options = {
         name : $(this).attr("name"),
         id : $(this).attr("data-id"),
