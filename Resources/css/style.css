@@ -92,6 +92,10 @@ div.hideDefault{
 	display: none;
 }
 
+#scripts .ui-listview-filter:nth-child(n+2) {
+    display : none;
+}
+
 /*
 .detailsPane .ui-btn-inner{
    line-height:normal;

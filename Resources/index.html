@@ -106,6 +106,7 @@
             </div>
         </div>
 
+        <!--
         <div data-role="fieldcontain">
             <select name="sortBy" id="" data-theme="c" data-mini="true" data-native-menu="false">
                 <option data-placeholder="true">Sort By</option>
@@ -115,13 +116,15 @@
                 <option value="favorites">File Name</option>
             </select>
         </div>
-
+        -->
+		<br>
         <div id="scriptsList">
 
         </div>
 
         <div id="tplScriptsListing" style="display:none;" data-enhance="false">
             <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+            	<ul data-role="listview" data-filter="true" data-filter-theme="c" data-filter-placeholder="Search scripts...">
                 {{#scripts}}
                 <div data-role="collapsible" class="script-{{sid}}">
                     <h3>{{alias}}</h3>
@@ -210,6 +213,7 @@
                     </div>
                 </div>
                 {{/scripts}}
+                </ul>
             </div>
         </div>
 
