@@ -305,6 +305,12 @@ $(document).on("blur", ".argumentsList input[type=text]", function(e){
         value : $(this).val()
     };
     updateArgumentValue(options);
+    if(options.name == "label"){
+        console.log("updating.......!!!!!!");
+        //update the heading
+        var heading = $(this).closest('.ui-collapsible');
+        $("h4 span.ui-btn-text", heading).first().html(options.value);
+    }
 });
 
 

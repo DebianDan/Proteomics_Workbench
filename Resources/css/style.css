@@ -41,8 +41,13 @@ ul.itemList{
 
 }
 
-.arg.ui-collapsible .ui-checkbox{
-    width:109px;
+#inputArgumentsList > div.ui-collapsible-content {
+    background-color: #CCC;
+}
+
+.outputOptions div{
+    font-weight:normal;
+    margin-top:.5em;
 }
 
 .inputFix{
