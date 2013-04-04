@@ -81,7 +81,7 @@
             <div class="ui-block-a">
                 <!-- Add Scripts -->
                 <input style="display:none;" id="scriptsInputDialog" type="file" multiple data-enhance="false" />
-                <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Add Scripts</a>
+                <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="b" data-position-to="window">Add Script</a>
                 <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
                     <a href="#scripts" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
                     <input type="button" class="chooseScripts" value="Select File" id="scriptFileChooser">
@@ -130,7 +130,7 @@
                     <div data-role="fieldcontain">
                         <div style="float:right; margin-top: -4.15em;">
                             <a href="#" data-inline="true" data-mini="true" data-theme="e" data-role="button">Save Script</a>
-                            <a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="a">Delete Script</a>
+                            <a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="d">Delete Script</a>
                         </div>
                         <div style="clear:both;"></div>
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
@@ -146,7 +146,7 @@
 
                             <li data-role="fieldcontain">
                                 <label for="description-{{sid}}">Description: </label>
-                                <textarea name="description" id="description-{{sid}}" data-id="{{sid}}">{{description}}</textarea>
+                                <textarea name="description" id="description-{{sid}}" placeholder="A brief description for this script" data-id="{{sid}}">{{description}}</textarea>
                             </li>
                             
                             <li data-role="fieldcontain">
@@ -162,12 +162,12 @@
                             <li data-role="fieldcontain">
                                 <fieldset data-role="controlgroup">
                                     <legend>Does script produce output?</legend>
-                                    <input type="radio" name="scriptOutput" id="outputYes" value="outputYes" data-role="none" checked="checked" onClick="showOptions();" />
+                                    <input type="radio" name="scriptOutput" id="outputYes" value="outputYes" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
                                     <label for="outputYes">Yes</label>
 
-                                    <input type="radio" name="scriptOutput" id="outputNo" value="outputNo" data-role="none" onClick="hideOptions();" />
+                                    <input type="radio" name="scriptOutput" checked="checked" id="outputNo" value="outputNo" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                     <label for="outputNo">No</label>
-                                    <div id="outputOptions" class="outputOptions" class="hideDefault">
+                                    <div id="outputOptions" class="outputOptions showHide hideDefault">
                                         <div>Default Output Location: </div>
                                         <input type="text" placeholder="eg: C:\ScriptOutput\" name="defaultOutput" id="defaultOutput" data-id="defaultOutput" value="" />
 
@@ -185,16 +185,19 @@
                                         <div class="arg" data-role="collapsible">
                                             <h4>{{label}}</h4>
                                             <div data-role="fieldcontain">
-                                                <!--<div data-role="button" class="deleteArg" data-id="{{id}}" data-icon="delete" style="position:absolute; left: -11px; top: -18px;" data-mini="true" data-iconpos="notext"></div>-->
+                                                <div style="float:right; margin-top: -4.15em;">
+                                                    <a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="e">Save Argument</a>
+                                                    <a href="#" data-id="{{id}}" class="deleteArg" data-role="button" data-inline="true" data-mini="true" data-theme="d">Delete Argument</a>
+                                                </div>
                                                 <label for="argLabel-{{id}}">Label: </label>
                                                 <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                                 <label for="argSwitch-{{id}}">Switch: </label>
                                                 <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                                 <label for="argDescription-{{id}}">Description: </label>
                                                 <input placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
-                                                <div data-role="fieldcontain" style="margin-top:0em;">
+                                                <div data-role="fieldcontain">
                                                     <fieldset data-role="controlgroup">
-                                                        <legend>Is this field required?</legend>
+                                                        <legend>Required?</legend>
                                                         {{#required}}
                                                         <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
                                                         {{/required}}
@@ -204,15 +207,37 @@
                                                         <label for="required-{{id}}" checked="checked">Required</label>
                                                     </fieldset>
                                                 </div>
-                                                <div style="padding-bottom:20px">
-                                                    <a href="#" data-id="{{id}}" class="deleteArg" data-role="button" data-inline="true" data-mini="true" data-theme="a" style="float:right;">Delete Argument</a>
-                                                    <a href="#" data-id="{{id}}" data-role="button" data-inline="true" data-mini="true" data-theme="e" style="float:right;">Save Argument</a>
+                                                <div data-role="fieldcontain" class="argumentType">
+                                                    <fieldset data-role="controlgroup">
+                                                        <legend>Argument Type</legend>
+                                                        <input type="radio" name="argType" data-id="{{id}}" value="asset" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
+                                                        <span>Asset</span>
+                                                        <input type="radio" name="argType" data-id="{{id}}" value="string" data-role="none" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
+                                                        <span>String</span>
+                                                    </fieldset>
+                                                </div>
+                                                <div data-role="fieldcontain" class="allowMultiSelect">
+                                                    <fieldset data-role="controlgroup">
+                                                        <legend>Allow Multiple Selections?</legend>
+                                                        <input type="radio" name="multipleSelect" data-id="{{id}}" value="outputYes" value="true" data-role="none"  onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                                        <span for="outputYes">Yes</span>
+                                                        <input type="radio" name="multipleSelect" data-id="{{id}}" checked="checked" value="false" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                                        <span for="outputNo">No</span>
+                                                        <div class="showHide hideDefault">
+                                                            <div>Default Separator Character</div>
+                                                            <input type="text" placeholder="leave blank for space" maxlength="1" name="defaultSeparator" data-id="{{id}}" value="" />
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="defaultValue hideDefault" data-role="fieldcontain">
+                                                    <label for="defaultValue-{{id}}">Default Value: </label>
+                                                    <input type="text" placeholder="Default String Value for Argument" data-id="{{id}}" name="defaultValue" id="defaultValue-{{id}}" data-mini="true" />
                                                 </div>
                                             </div>
                                         </div>
                                         {{/arguments}}
                                     </div>
-                                    <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="e" href="#">Add Argument</a>
+                                    <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="b" href="#">Add Argument</a>
                                 </div>
                                 <!--<div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true"></div>
                                 <div id="tplInputArgs"></div>-->
@@ -220,7 +245,7 @@
                         </ul>
                         <div style="float:right; margin-bottom: -1em;">
                             <a href="#" data-inline="true" data-mini="true" data-theme="e" data-role="button">Save Script</a>
-                            <a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="a">Delete Script</a>
+                            <a href="#" data-id="{{sid}}" class="deleteScript" data-role="button" data-inline="true" data-mini="true" data-theme="d">Delete Script</a>
                         </div>
                         <div style="clear:both;"></div>
                     </div>
