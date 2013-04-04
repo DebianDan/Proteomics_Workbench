@@ -31,6 +31,8 @@ function renderAssetsList(project){
     var template = $("#tplProjectDetailsAssets").html(),
         html = Mustache.to_html(template, project);
     $("#assetList").html(html).trigger('create');
+	//set the sort by to Newest everytime
+	$("select[name=sortAssetsBy]").val(1).change();
 }
 
 // Load the data for a specific category, based on

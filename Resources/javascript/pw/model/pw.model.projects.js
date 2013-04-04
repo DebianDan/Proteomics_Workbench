@@ -117,7 +117,7 @@ pw.projects = (function(){
            this.getAssets(options, function(assetsArray){
                if(typeof success == "function"){
                    self.properties.assets = assetsArray;
-                   success(self);
+				   success(self);
                }
            }, function(e){
                if(typeof error == "function"){
@@ -299,6 +299,67 @@ pw.projects = (function(){
 	my.editProject = function(name, description, pid, onSuccess, onError){
 		var sql = "UPDATE projects SET name = '" + name + "', description = '" + description +"' WHERE pid=" + pid + "";
         pw.db.execute(sql, onSuccess, onError);
+    }
+	
+	//on success returns an array of asset objects
+    my.getSortedAssets = function(options, success, error){
+	   if(!options.pid){
+		   if(typeof error == "function"){
+			error("pid must be specified when calling getSortedAssets(). pid is: " + options.pid);
+		   }
+		   return false;
+	   }else{
+			//query is different based on which way we are sorting the assets
+			var sql;
+			switch(options.sortBy)
+			{
+				//Newest
+				case 1:
+				  sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+options.pid+" ORDER BY assets.date_created DESC";
+				  break;
+				//Favorites
+				case 2:
+				  sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+options.pid+" ORDER BY assets.date_created DESC";
+				  break;
+				//FileType  
+				case 3:
+				   sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+options.pid+" ORDER BY assets.filetype COLLATE NOCASE ASC";
+				  break;
+				//FileName
+				case 4:
+				  sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+options.pid+ " ORDER BY assets.filename COLLATE NOCASE ASC";
+				  break;
+				default : sql = "SELECT assets.aid, assets.pid, assets.path, assets.filename, assets.filetype, assets.date_created, favorites.aid as fav FROM assets LEFT OUTER JOIN favorites ON assets.aid = favorites.aid WHERE assets.pid = "+options.pid+" ORDER BY assets.date_created DESC";
+			}
+			if(options.pid == undefined){
+				onError("pid must be specified when calling getSortedAssets()");
+				return false;
+			}
+			sortedAssets = new Array();
+
+		   pw.db.execute(sql, function(t,r){
+			   if(r.rows.length){
+				   //if we have results, loop through results and build array of assets
+				   for(var i = 0; i < r.rows.length; i++){
+					   var item = r.rows.item(i);
+					   var myAsset = new Asset();
+					   myAsset.create(item, function(myAsset){
+						   sortedAssets.push(myAsset);
+						   console.log("DEBUG: pushed " + JSON.stringify(myAsset));
+					   });
+				   }
+			   }
+			   //check the optional callback to call it instead of what's in the options object
+			   if(typeof success == "function"){
+				   success(sortedAssets);
+			   }
+		   }, function(t,e){
+			   if(typeof error == "function"){
+				options.error(e);
+			   }
+		   });
+	   }
+
     }
 
     return my;
