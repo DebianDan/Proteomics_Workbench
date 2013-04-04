@@ -1,3 +1,13 @@
+$(document).on('pageinit', '#scripts', function () {
+    $(this).find('#outer-ul').find('.ui-collapsible-heading').on('click', function () {
+        var that = $(this).closest('.ui-collapsible')[0];
+        $(this).closest('ul').find('.ui-collapsible').filter(function () {
+            return this !== that;
+        }).trigger('collapse');
+        $(this).closest('ul').trigger('refresh');
+    });
+});
+
 //clear list of added assets and close the dialog
 function clearScriptPicker(){
     $("#scriptPickerList").html("");

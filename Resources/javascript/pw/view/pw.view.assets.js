@@ -131,3 +131,19 @@ $(document).on("click", ".fav", function(e){
     }
     return false;
 });
+
+//Sorts the assets based on the users choice
+$(document).on("change", "select[name=sortAssetsBy]", function(){
+	 var success = function(sortedAssets){
+			var project = {"properties":{"assets":sortedAssets}};
+			var template = $("#tplProjectDetailsAssets").html(),
+				html = Mustache.to_html(template, project);
+				$("#assetList").html(html).trigger('create');
+        },
+        fail = function(transaction, error){
+			console.log("Sorting assets failed: " + error.message);
+        };
+		
+	pw.projects.getSortedAssets({"pid":parseInt(pw.activeProject), "sortBy" : parseInt($(this).val())}, success, fail);
+	
+});
