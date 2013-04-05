@@ -54,7 +54,7 @@ pw.scripts = (function(){
 
         //callback function is passed the last inserted row id
         this.addArgument = function(options){
-            var sql = "INSERT INTO arguments('sid','required','label') VALUES({0},{1},'{2}')".format(this.sid, 0,"new argument");
+            var sql = "INSERT INTO arguments('sid', 'required', 'label', 'produces_output', 'multiselect') VALUES({0},{1},'{2}',{3},{4})".format(this.sid, 0,"new argument",0,0);
             console.log("Adding Argument: " + sql);
             pw.db.execute(sql, function(t, r){
                 //we are now going to construct an argument object and pass it back to the caller
@@ -83,7 +83,11 @@ pw.scripts = (function(){
             alias: "",
             label : "",
             description: "",
-            required : 0
+            required : 0,
+            type: 0,
+            default_value: "",
+            multiselect: 0,
+            separator: " "
         }
         $.extend(this, defaults, data); //mix properties of data with defaults & this context
 

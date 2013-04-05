@@ -39,7 +39,7 @@
                 //scripts table
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS scripts('sid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,'path' VARCHAR NOT NULL, 'alias' VARCHAR NOT NULL, 'description' TEXT, 'date_created' DATETIME NOT NULL DEFAULT CURRENT_DATE, 'rid' INTEGER DEFAULT -1 )");
                 //arguments table, defines the arguments each script takes
-                transaction.executeSql("CREATE TABLE IF NOT EXISTS arguments('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'sid' INTEGER NOT NULL, 'label' VARCHAR NOT NULL, 'switch' VARCHAR, 'required' INTEGER NOT NULL DEFAULT 0, 'description' TEXT)");
+                transaction.executeSql("CREATE TABLE IF NOT EXISTS arguments('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'sid' INTEGER NOT NULL, 'label' VARCHAR NOT NULL, 'switch' VARCHAR, 'required' INTEGER NOT NULL DEFAULT 0, 'description' TEXT, 'produces_output' BOOL NOT NULL DEFAULT 0, 'output_switch' VARCHAR, 'output_location' VARCHAR,  'type' INTEGER DEFAULT 0, 'default_value' VARCHAR, 'multiselect' BOOL NOT NULL DEFAULT 0, 'separator' VARCHAR DEFAULT ' ')");
                 //argument types (defines the argument -- STRING, ASSET
                 transaction.executeSql("CREATE TABLE IF NOT EXISTS tags('tid' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'name' VARCHAR UNIQUE NOT NULL)");
                 //settings table (just stores the JSON representation of the settings object)

@@ -162,17 +162,17 @@
                             <li data-role="fieldcontain">
                                 <fieldset data-role="controlgroup">
                                     <legend>Does script produce output?</legend>
-                                    <input type="radio" name="scriptOutput" id="outputYes" value="outputYes" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
-                                    <label for="outputYes">Yes</label>
+                                    <input type="radio" name="produces_output" data-id="{{id}}" id="outputYes-{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                    <label for="outputYes-{{id}}">Yes</label>
 
-                                    <input type="radio" name="scriptOutput" checked="checked" id="outputNo" value="outputNo" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
-                                    <label for="outputNo">No</label>
-                                    <div id="outputOptions" class="outputOptions showHide hideDefault">
+                                    <input type="radio" name="produces_output" data-id="{{sid}}" checked="checked" id="outputNo-{{sid}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                    <label for="outputNo-{{id}}">No</label>
+                                    <div id="outputOptions-{{id}}" class="outputOptions showHide hideDefault">
                                         <div>Default Output Location: </div>
-                                        <input type="text" placeholder="eg: C:\ScriptOutput\" name="defaultOutput" id="defaultOutput" data-id="defaultOutput" value="" />
+                                        <input type="text" placeholder="eg: C:\ScriptOutput\" name="output_location" data-id="{{sid}}" value="" />
 
                                         <div>Default Output Argument Switch: </div>
-                                        <input type="text" placeholder="eg: -o" name="outputSwitch" id="outputSwitch" data-id="outputSwitch" value="" />
+                                        <input type="text" placeholder="eg: -o" name="output_switch" data-id="{{sid}}" value="" />
                                     </div>
                                 </fieldset>
 							</li>
@@ -198,40 +198,46 @@
                                                 <div data-role="fieldcontain">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Required?</legend>
-                                                        {{#required}}
-                                                        <input type="checkbox" checked="checked" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
-                                                        {{/required}}
-                                                        {{^required}}
-                                                        <input type="checkbox" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
-                                                        {{/required}}
-                                                        <label for="required-{{id}}" checked="checked">Required</label>
+                                                        <input type="checkbox" checked="{{required}}" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+
+                                                        <label for="required-{{id}}">Required</label>
                                                     </fieldset>
                                                 </div>
                                                 <div data-role="fieldcontain" class="argumentType">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Argument Type</legend>
-                                                        <input type="radio" name="argType" data-id="{{id}}" value="asset" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
+                                                        {{#type}}
+                                                        <input type="radio" name="type" data-id="{{id}}" value="0" data-role="none" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
                                                         <span>Asset</span>
-                                                        <input type="radio" name="argType" data-id="{{id}}" value="string" data-role="none" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
+                                                        <input type="radio" name="type" data-id="{{id}}" value="1" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
                                                         <span>String</span>
+                                                        {{/type}}
+                                                        {{^type}}
+                                                        <input type="radio" name="type" data-id="{{id}}" value="0" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
+                                                        <span>Asset</span>
+                                                        <input type="radio" name="type" data-id="{{id}}" value="1" data-role="none" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
+                                                        <span>String</span>
+                                                        {{/type}}
                                                     </fieldset>
                                                 </div>
                                                 <div data-role="fieldcontain" class="allowMultiSelect">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Allow Multiple Selections?</legend>
-                                                        <input type="radio" name="multipleSelect" data-id="{{id}}" value="outputYes" value="true" data-role="none"  onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                                        <input type="radio" name="multiselect" data-id="{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
                                                         <span for="outputYes">Yes</span>
-                                                        <input type="radio" name="multipleSelect" data-id="{{id}}" checked="checked" value="false" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+
+                                                        <input type="radio" name="multiselect" data-id="{{id}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                                         <span for="outputNo">No</span>
+
                                                         <div class="showHide hideDefault">
                                                             <div>Default Separator Character</div>
-                                                            <input type="text" placeholder="leave blank for space" maxlength="1" name="defaultSeparator" data-id="{{id}}" value="" />
+                                                            <input type="text" placeholder="leave blank for space" maxlength="1" name="separator" data-id="{{id}}" value="{{separator}}" />
                                                         </div>
                                                     </fieldset>
                                                 </div>
                                                 <div class="defaultValue hideDefault" data-role="fieldcontain">
-                                                    <label for="defaultValue-{{id}}">Default Value: </label>
-                                                    <input type="text" placeholder="Default String Value for Argument" data-id="{{id}}" name="defaultValue" id="defaultValue-{{id}}" data-mini="true" />
+                                                    <label for="default_value-{{id}}">Default Value: </label>
+                                                    <input type="text" placeholder="Default String Value for Argument" data-id="{{id}}" name="default_value" id="default_value-{{id}}" data-mini="true" value="{{default_value}}" />
                                                 </div>
                                             </div>
                                         </div>

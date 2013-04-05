@@ -323,6 +323,17 @@ $(document).on("change", ".argumentsList input[type=checkbox]", function(e){
     updateArgumentValue(options);
 });
 
+$(document).on("change", ".argumentsList input[type=radio]", function(e){
+    if($(this).is(":checked")){
+        var options = {
+            name : $(this).attr("name"),
+            id : $(this).attr("data-id"),
+            value : $(this).val()
+        };
+        updateArgumentValue(options);
+    }
+});
+
 //execute on scripts page load
 $(document).on('pagebeforecreate', '#scripts', function (event) {
 
