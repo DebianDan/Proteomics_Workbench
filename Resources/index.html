@@ -157,6 +157,7 @@
                                     <option value="{{rid}}">{{alias}}</option>
                                     {{/runtimes}}
                                 </select>
+                                <div><a href="#settings" style="float: right;font-size: .75em;padding: .5em;">Manage Runtimes...</a></div>
                             </li>
                             
                             <li data-role="fieldcontain">
@@ -169,7 +170,7 @@
                                     <label for="outputNo-{{id}}">No</label>
                                     <div id="outputOptions-{{id}}" class="outputOptions showHide hideDefault">
                                         <div>Default Output Location: </div>
-                                        <input type="text" placeholder="eg: C:\ScriptOutput\" name="output_location" data-id="{{sid}}" value="" />
+                                        <input type="text" placeholder="Leave blank for script location. Otherwise use an absolute path" name="output_location" data-id="{{sid}}" value="" />
 
                                         <div>Default Output Argument Switch: </div>
                                         <input type="text" placeholder="eg: -o" name="output_switch" data-id="{{sid}}" value="" />

@@ -335,15 +335,9 @@ $(document).on("change", ".argumentsList input[type=radio]", function(e){
 });
 
 //execute on scripts page load
-$(document).on('pagebeforecreate', '#scripts', function (event) {
-
-    //testing mustache to fill in arguments
-    //template = $("#tplInputArgs").html();
-    //var html = Mustache.to_html(template, testScript);
-    //$(template).prepend(html);
-    //$("#inputArgumentsList").html(html);
-    //$("#argumentsList").trigger("create");
-    //$.mobile.activePage.trigger('create');
-    //console.log(html);
+$("#scripts").on('pagebeforeshow', function (event) {
+    var scriptList = $("#scriptList"); //save a reference to the element for efficiency
+    scriptList.html("");//clear the html before appending
+    console.log("DEBUG: ****************************************************************");
     renderScriptList();
 });
