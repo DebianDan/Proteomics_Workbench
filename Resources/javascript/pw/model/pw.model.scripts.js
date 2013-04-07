@@ -7,12 +7,15 @@ pw.scripts = (function(){
 
     //the script object
     var script = function(data){
-        this.sid = data['sid'];
-        this.path = data['path'];
-        this.alias = data['alias'];
-        this.date_created = data['date_created'];
-        this.rid = data['rid'];
-        this.arguments = [];
+        this.sid = data['sid']; //the script ID
+        this.path = data['path']; //the path to the script
+        this.alias = data['alias']; //the alias for the script (display alias)
+        this.date_created = data['date_created']; //when the script was created
+        this.rid = data['rid']; //the runtime ID for this script
+        this.arguments = []; //arguments array
+        this.output_directory = data['output_directory']; //this is the default path to look for script output
+        this.produces_output = data['produces_output']; //bool whether or not the script produces output
+        this.output_regex = data['output_regex'];
 
         //don't know the best way to do this
         this.runtimes = [];
@@ -54,7 +57,7 @@ pw.scripts = (function(){
 
         //callback function is passed the last inserted row id
         this.addArgument = function(options){
-            var sql = "INSERT INTO arguments('sid', 'required', 'label', 'produces_output', 'multiselect') VALUES({0},{1},'{2}',{3},{4})".format(this.sid, 0,"new argument",0,0);
+            var sql = "INSERT INTO arguments('sid', 'required', 'label', 'multiselect') VALUES({0},{1},'{2}',{3})".format(this.sid, 0,"new argument",0);
             console.log("Adding Argument: " + sql);
             pw.db.execute(sql, function(t, r){
                 //we are now going to construct an argument object and pass it back to the caller

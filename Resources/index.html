@@ -15,16 +15,14 @@
             $.mobile.ignoreContentEnabled = true;
         });
     </script>
-    <script type="text/javascript">
-        function showOptions() { document.getElementById('outputOptions').style.display = 'block'; }
-        function hideOptions() { document.getElementById('outputOptions').style.display = 'none'; }
-      </script>
-    <script src="javascript/jquery.mobile-1.3.0.min.js"></script>
+    <script src="javascript/jquery.mobile-1.3.0.js"></script>
     <script src="javascript/mustache.js"></script>
 </head>
 <body>
 
+<input style="display:none;" id="fileInput" type="file" data-enhance="false" />
 <input style="display:none;" id="multipleInput" type="file" multiple data-enhance="false" />
+<input style="display:none;" id="directoryInput" type="file" nwdirectory data-enhance="false" />
 
 <div data-role="page" id="projects" class="type-interior" data-title="Projects">
     <div data-role="header">
@@ -77,46 +75,20 @@
     </div><!-- /header -->
 
     <div data-role="content">
-        <div class="ui-grid-solo">
-            <div class="ui-block-a">
+
                 <!-- Add Scripts -->
                 <input style="display:none;" id="scriptsInputDialog" type="file" multiple data-enhance="false" />
-                <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="b" data-position-to="window">Add Script</a>
+                <a href="#addScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="b" data-position-to="window" style="margin: 0 0 1.5em 0;">Add Script</a>
                 <div data-role="popup" id="addScriptPopup" class="ui-content" data-overlay-theme="a">
                     <a href="#scripts" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
                     <input type="button" class="chooseScripts" value="Select File" id="scriptFileChooser">
                     <ul id="scriptPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
                     </ul>
                     <input type="submit" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
-                    <a href="#scripts" type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>Cancel</a>
+                    <a href="#scripts" type="button" data-role="button" data-inline="true" value="Cancel" class="close">Cancel</a>
                 </div>
-
-                <!-- Delete Scripts -->
-                <!--
-                <a href="#deleteScriptPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Delete Selected Scripts</a>
-                <div data-role="popup" id="deleteScriptPopup" class="ui-content" data-overlay-theme="a">
-                    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                        <h3 class="ui-title">Are you sure you want to delete the selected script(s)?</h3>
-                        <a href="#scripts" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                        <a href="#scripts" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
-                    </div>
-                </div>
-                -->
-            </div>
-        </div>
-
-        <!--
-        <div data-role="fieldcontain">
-            <select name="sortBy" id="" data-theme="c" data-mini="true" data-native-menu="false">
-                <option data-placeholder="true">Sort By</option>
-                <option value="date">Newest</option>
-                <option value="favorites">Favorites</option>
-                <option value="type">File Type</option>
-                <option value="favorites">File Name</option>
-            </select>
-        </div>
-        -->
 		<br>
+
         <div id="scriptsList">
 
         </div>
@@ -140,8 +112,11 @@
                             </li>
 
                             <li data-role="fieldcontain">
-                                <label for="path-{{sid}}">Path: </label>
-                                <input type="text" name="path" id="path-{{sid}}" data-id="{{sid}}" value="{{path}}" />
+                                <label for="path-{{sid}}" style="float:left;">Path: </label>
+                                <div style="width: 78%;position: relative;display: inline-block;">
+                                    <input style="float:left;" type="text" id="path-{{sid}}" placeholder="Path to script" name="path" data-id="{{sid}}" value="{{path}}" />
+                                    <input style="height: 3em; vertical-align: top;" data-role="none" type="button" data-target="path-{{sid}}" class="fileBrowserButton" value="Browse" />
+                                </div>
                             </li>
 
                             <li data-role="fieldcontain">
@@ -157,23 +132,32 @@
                                     <option value="{{rid}}">{{alias}}</option>
                                     {{/runtimes}}
                                 </select>
-                                <div><a href="#settings" style="float: right;font-size: .75em;padding: .5em;">Manage Runtimes...</a></div>
+                                <div style="position: relative;right: 0;width: 100%;text-align: right;margin: .5em 0 0 0;font-size: .75em;"><a href="#settings">Manage Runtimes...</a></div>
                             </li>
                             
                             <li data-role="fieldcontain">
                                 <fieldset data-role="controlgroup">
                                     <legend>Does script produce output?</legend>
-                                    <input type="radio" name="produces_output" data-id="{{id}}" id="outputYes-{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
-                                    <label for="outputYes-{{id}}">Yes</label>
+                                    {{! this conditional block is only here to switch which radio button is checked... there must be a better way }}
+                                    {{#produces_output}}
+                                        <input type="radio" id="outputYes-{{sid}}" name="produces_output" data-id="{{sid}}" checked="checked"  value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                        <label for="outputYes-{{sid}}">Yes</label>
+                                        <input type="radio" id="outputNo-{{sid}}" name="produces_output" data-id="{{sid}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                        <label for="outputNo-{{sid}}">No</label>
+                                    {{/produces_output}}
+                                    {{^produces_output}}
+                                        <input type="radio" id="outputYes-{{sid}}" name="produces_output" data-id="{{sid}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                        <label for="outputYes-{{sid}}">Yes</label>
+                                        <input type="radio" id="outputNo-{{sid}}" name="produces_output" data-id="{{sid}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                        <label for="outputNo-{{sid}}">No</label>
+                                    {{/produces_output}}
 
-                                    <input type="radio" name="produces_output" data-id="{{sid}}" checked="checked" id="outputNo-{{sid}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
-                                    <label for="outputNo-{{id}}">No</label>
-                                    <div id="outputOptions-{{id}}" class="outputOptions showHide hideDefault">
-                                        <div>Default Output Location: </div>
-                                        <input type="text" placeholder="Leave blank for script location. Otherwise use an absolute path" name="output_location" data-id="{{sid}}" value="" />
-
-                                        <div>Default Output Argument Switch: </div>
-                                        <input type="text" placeholder="eg: -o" name="output_switch" data-id="{{sid}}" value="" />
+                                    <div id="outputOptions-{{id}}" class="outputOptions showHide {{^produces_output}}hideDefault{{/produces_output}}">
+                                        <div>Default Output Directory: </div>
+                                        <input style="float:left;" type="text" id="outputDirectory-{{sid}}" placeholder="Leave blank for script location. Otherwise specify a path to a directory" name="output_directory" data-id="{{sid}}" value="{{output_directory}}" />
+                                        <input style="height: 3em; vertical-align: top;" data-role="none" type="button" data-target="outputDirectory-{{sid}}" class="dirBrowserButton" value="Browse" />
+                                        <div style="clear:both;">Regular expression for output: </div>
+                                        <input type="text" placeholder="eg: *.txt will find all files ending in .txt" name="output_regex" data-id="{{sid}}" value="{{output_regex}}" />
                                     </div>
                                 </fieldset>
 							</li>
@@ -221,7 +205,7 @@
                                                         {{/type}}
                                                     </fieldset>
                                                 </div>
-                                                <div data-role="fieldcontain" class="allowMultiSelect">
+                                                <div data-role="fieldcontain" class="allowMultiSelect {{#type}}hideDefault{{/type}}">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Allow Multiple Selections?</legend>
                                                         <input type="radio" name="multiselect" data-id="{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
@@ -236,7 +220,7 @@
                                                         </div>
                                                     </fieldset>
                                                 </div>
-                                                <div class="defaultValue hideDefault" data-role="fieldcontain">
+                                                <div class="defaultValue {{^type}}hideDefault{{/type}}" data-role="fieldcontain">
                                                     <label for="default_value-{{id}}">Default Value: </label>
                                                     <input type="text" placeholder="Default String Value for Argument" data-id="{{id}}" name="default_value" id="default_value-{{id}}" data-mini="true" value="{{default_value}}" />
                                                 </div>

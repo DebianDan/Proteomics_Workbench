@@ -72,18 +72,6 @@ $(document).on("click", "#addScriptPopup .close", function(e){
 
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
-    /*
-    var path = Ti.UI.openFileChooserDialog(function(path){
-        //callback after dialog close
-        for(i = 0; i < path.length; i++){
-            $("#scriptPickerList").append("<li data-path='"+path[i]+"'>" +
-                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
-                "<input type='text' value='"+path[i]+"'/></li>");
-        }
-    }, {multiple:true,title:'Select script to add'});
-    $("#scriptPickerList").trigger('create');
-    */
-
     chooseFile("#multipleInput", function(evt){
         $(this).val().split(";").forEach(function(path){
             $("#scriptPickerList").append("<li data-path='"+path+"'>" +
@@ -192,9 +180,7 @@ function renderScriptList(){
                     $(this).find("option[value="+ scriptRID +"]").attr('selected','selected');
                     $(this).selectmenu('refresh');
                 }
-
             });
-
         },
         fail : function(error){ //TODO: check to make sure arguments list is correct for this function
             alert("there was an error when attempting to retrieve the projects: ", error.code);
@@ -287,6 +273,19 @@ $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) :input", 
     updateScriptValue(options);
 });
 
+
+$(document).on("change", ".scriptProperties > li:not(.argumentContainer) input[type=radio]", function(e){
+    if($(this).is(":checked")){
+        var options = {
+            name : $(this).attr("name"),
+            id : $(this).attr("data-id"),
+            value : $(this).val()
+        };
+        updateScriptValue(options);
+    }
+});
+
+
 //updates the runtime that the particular script uses when it is changed
 $(document).on("change", ".scriptProperties select[id*=runtimeChooser]", function(){
     var options ={
@@ -338,6 +337,5 @@ $(document).on("change", ".argumentsList input[type=radio]", function(e){
 $("#scripts").on('pagebeforeshow', function (event) {
     var scriptList = $("#scriptList"); //save a reference to the element for efficiency
     scriptList.html("");//clear the html before appending
-    console.log("DEBUG: ****************************************************************");
     renderScriptList();
 });
