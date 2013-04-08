@@ -44,7 +44,7 @@
             <!-- popup for Create Project -->
             <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                <ul data-role="listview" data-inset="true" >
+                <ul data-role="listview" data-inset="true">
                 <li data-role="fieldcontain">
                 	<label for="createProjectTitle">Title: </label>
                 	<input type="text" autofocus="autofocus" class="projectTitle" id="createProjectTitle" value="" >
@@ -398,14 +398,16 @@
             <!-- Popup for editing the title and description -->
             <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
                 <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <ul data-role="listview" data-inset="true">
                 <li data-role="fieldcontain">
                 	<label for="newTitle" style="float:left;">New title: </label>
-                	<input type="text" autofocus="autofocus" class="newTitle" id="newTitle" value="">
+                	<input type="text" class="newTitle" id="newTitle" value="">
                 </li>
                 <li data-role="fieldcontain">
                 	<label for="newDescription" style="float:left;">New description: </label>
                 	<input type="text" class="newDescription" id="newDescription" value="" style="float:right;">
                 </li>
+                </ul>
                 <input type="submit" value="Submit" data-theme="b" id="edit">
             </div>
 
