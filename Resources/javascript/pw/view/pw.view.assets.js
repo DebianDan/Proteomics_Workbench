@@ -84,15 +84,20 @@ $(document).on("click", "#addAssetPopup .close", function(e){
 
 //launches the file browser dialogue when adding an asset
 $("input.chooseFiles").click(function(){
-    chooseFile("#multipleInput", function(evt){
+		$("#assetInput").trigger('click');
+});
+
+$("#assetInput").change(function(){
         $(this).val().split(";").forEach(function(path){
             $("#assetPickerList").append("<li data-path='"+path+"'>" +
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path+"'/></li>");
         });
         $("#assetPickerList").trigger('create');
-    });
 });
+
+
+
 
 //bind to the click event of the add assets button
 $("#addAssetPopup .save").click(function(){

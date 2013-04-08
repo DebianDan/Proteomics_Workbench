@@ -8,7 +8,7 @@ $(document).on('pageinit', '#scripts', function () {
     });
 });
 
-//clear list of added assets and close the dialog
+//clear list of added scripts and close the dialog
 function clearScriptPicker(){
     $("#scriptPickerList").html("");
     $("#addScriptPopup").popup("close");
@@ -72,14 +72,16 @@ $(document).on("click", "#addScriptPopup .close", function(e){
 
 //launches the file browser dialogue when adding a script
 $("input.chooseScripts").click(function(){
-    chooseFile("#multipleInput", function(evt){
+		$("#scriptInput").trigger('click');
+});
+
+$("#scriptInput").change(function(){
         $(this).val().split(";").forEach(function(path){
             $("#scriptPickerList").append("<li data-path='"+path+"'>" +
                 "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
                 "<input type='text' value='"+path+"'/></li>");
         });
         $("#scriptPickerList").trigger('create');
-    });
 });
 
 //bind to the click event of the add scripts button
