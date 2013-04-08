@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/css/style.css" afterPath="$PROJECT_DIR$/Resources/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="87da096a-e3f4-45c1-8539-b8d5642fa571" name="New changelist" comment="New changelist" />
     <list id="07a40690-1cbe-4e75-8e2b-bd03c21a99e7" name="Failed commit: Default" comment="lots of little updates everywhere. Arguments list now has correct selection functionality. Added Script title / description to execution and project details page. Added placeholder for project title/description to project details page. numerous little bugs squashed." />
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365448991829" ignored="false" />
+    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365451279318" ignored="false" />
     <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365450907711" ignored="false" />
     <file path="/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362692777675" ignored="false" />
     <file path="/pw.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363807474691" ignored="false" />
@@ -935,7 +933,11 @@
       <created>1365448994096</created>
       <updated>1365448994096</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="lots of little updates everywhere. Arguments list now has correct selection functionality. Added Script title / description to execution and project details page. Added placeholder for project title/description to project details page. numerous little bugs squashed.">
+      <created>1365451283510</created>
+      <updated>1365451283510</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
