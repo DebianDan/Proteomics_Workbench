@@ -15,17 +15,39 @@ $(document).on('tagsRetrieved', function(e){
     displayTags();
 });
 
+//clear list of added runtime and close the dialog
+function clearRuntimePicker(){
+    $("#runtimePickerList").html("");
+    $("#addRuntimePopup").popup("close");
+    return false;
+}
+
+//removes the asset from the list of assets to be added
+$(document).on("click", "#runtimePickerList li .cancel", function(e){
+    $(this).parent().parent().remove();
+    e.preventDefault();
+})
+
+$(document).on("click", "#addRuntimePopup .close", function(e){
+    clearRuntimePicker();
+    e.preventDefault();
+});
+
 //launches the file browser dialogue when adding an a runtime
 $("input.chooseRuntime").click(function(){
-    chooseFile("#multipleInput", function(evt){
-        $(this).val().split(";").forEach(function(path){
-            $("#runtimePickerList").append("<li data-path='"+path+"'>" +
-                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
-                "<input type='text' value='"+path+"'/></li>");
-        });
-        $("#runtimePickerList").trigger('create');
-    });
+		$("#runtimeInput").trigger('click');
 });
+
+$("#runtimeInput").change(function(){
+        var path = $(this).val();
+		//clear the list since only one runtime can be choosen at a time
+		$("#runtimePickerList").html("");
+        $("#runtimePickerList").append("<li data-path='"+path+"'>" +
+        "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+        "<input type='text' value='"+path+"'/></li>");
+        $("#runtimePickerList").trigger('create');
+});
+
 //bind to the click event of the create new runtime button
 $(document).on('click', "#addRuntimePopup :submit", function(){
     var alias = $("#addRuntimePopup .runtimeAlias").val();
