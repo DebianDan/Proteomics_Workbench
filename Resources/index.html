@@ -536,6 +536,8 @@
             <h1 class="scriptTitle">{{alias}}</h1>
             <span class='scriptDescription'>{{description}}</span>
 
+            <h2>Arguments</h2>
+
             {{#arguments}}
             <fieldset class="argument" data-switch="{{switch}}" data-role="controlgroup" style="margin-top:2%;">
                 <div class="ui-body ui-body-b {{#required}}required{{/required}}">
@@ -548,7 +550,7 @@
                         {{ !this is where the list of assets will go }}
                         {{#multiselect}}
                             <div data-role="fieldcontain">
-                                <label for="separator-{{id}}">Asset Separator</label>
+                                <label for="separator-{{id}}">String Separator</label>
                                 <input type="text" value="{{separator}}" id="separator-{{id}}" />
                             </div>
                         {{/multiselect}}
@@ -586,9 +588,20 @@
                 </div>
             </fieldset>
             {{/arguments}}
+
+            {{#produces_output}}
+            <h2>Output Options</h2>
+            <div data-role="fieldcontain">
+                <label for="scriptExeOutputDir">Output Directory</label>
+                <input type="text" id="scriptExeOutputDir" value="{{output_directory}}" />
+
+                <label for="scriptExeRegex">Filename Regular Expression</label>
+                <input type="text" id="scriptExeRegex" value="{{output_regex}}" />
+            </div>
+            {{/produces_output}}
         </div>
         <div>
-            <label for="extraArguments"><h4>Extra Arguments: </h4></label>
+            <h2>Extra Arguments</h2>
             <input type="text" name="extraArguments" id="extraArguments" value="" />
         </div>
         <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
