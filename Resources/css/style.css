@@ -173,6 +173,16 @@ ul.scriptArguments input, ul.scriptArguments textarea{
     color: #222 /*{c-bup-color}*/;
 }
 
+#createProjectPopup-popup{
+    width:70% !important;
+    left: 15% !important;
+}
+
+#createProjectPopup-popup label, #createProjectPopup-popup label input{
+    display: inline;
+    float: left;
+}
+
 #pDetails{
     margin-top:0px;
     min-height:60px;

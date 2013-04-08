@@ -2,23 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/css/style.css" afterPath="$PROJECT_DIR$/Resources/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="87da096a-e3f4-45c1-8539-b8d5642fa571" name="New changelist" comment="New changelist" />
     <list id="07a40690-1cbe-4e75-8e2b-bd03c21a99e7" name="Failed commit: Default" comment="lots of little updates everywhere. Arguments list now has correct selection functionality. Added Script title / description to execution and project details page. Added placeholder for project title/description to project details page. numerous little bugs squashed." />
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365430354798" ignored="false" />
-    <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365431780162" ignored="false" />
+    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365448991829" ignored="false" />
+    <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365450907711" ignored="false" />
     <file path="/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362692777675" ignored="false" />
     <file path="/pw.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363807474691" ignored="false" />
     <file path="/pw.scripts.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362690493366" ignored="false" />
     <file path="/pw.db.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363137109983" ignored="false" />
     <file path="/projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363559794231" ignored="false" />
     <file path="/projectDetails.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363566946827" ignored="false" />
-    <file path="/style.css" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365428221407" ignored="false" />
+    <file path="/style.css" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365451119901" ignored="false" />
     <file path="$PROJECT_DIR$/dist/win32/Proteoworkbench/Resources/tests/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363808057956" ignored="false" />
     <file path="$PROJECT_DIR$/dist/win32/Proteoworkbench/Resources/tests/OrignalSteveTest.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363808057956" ignored="false" />
     <file path="/pw.model.scripts.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365427350551" ignored="false" />
@@ -48,7 +48,7 @@
     <favorites_list name="Proteomics_Workbench" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.56962025">
+    <splitter split-orientation="vertical" split-proportion="0.53567386">
       <split-first>
         <leaf>
           <file leaf-file-name="pw.view.projectDetails.js" pinned="false" current="false" current-in-tab="false">
@@ -80,10 +80,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="161" column="34" selection-start="4037" selection-end="4037" vertical-scroll-proportion="-4.96">
+                <state line="180" column="52" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.65891474">
                   <folding />
                 </state>
               </provider>
@@ -140,10 +140,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="pw.db.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="pw.db.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.db.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="39" column="37" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.45822102">
+                <state line="39" column="37" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -165,20 +165,79 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/.gitignore">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="5" column="6" selection-start="103" selection-end="103" vertical-scroll-proportion="0.3057554">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="pw.view.templates.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.templates.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="24" column="161" selection-start="1871" selection-end="2002" vertical-scroll-proportion="0.0">
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Resources/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="41" column="66" selection-start="2045" selection-end="2045" vertical-scroll-proportion="0.13099042">
+                  <folding>
+                    <element signature="n#style#0;n#input#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#ul#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#label#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#div#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#0;n#fieldset#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#div#0;n#fieldset#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#0;n#fieldset#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#3;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#div#3;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#h1#0;n#div#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#label#0;n#li#0;n#div#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#label#0;n#li#1;n#div#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#li#1;n#div#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#1;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#3;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#2;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#fieldset#0;n#div#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#0;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#a#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#4;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -222,17 +281,17 @@
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scripts.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js" />
-        <option value="$PROJECT_DIR$/Resources/css/style.css" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Resources/css/style.css" />
         <option value="$PROJECT_DIR$/Resources/index.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1616" />
+    <option name="height" value="1216" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -872,7 +931,11 @@
       <created>1365430385740</created>
       <updated>1365430385740</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="lots of little updates everywhere. Arguments list now has correct selection functionality. Added Script title / description to execution and project details page. Added placeholder for project title/description to project details page. numerous little bugs squashed.">
+      <created>1365448994096</created>
+      <updated>1365448994096</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -896,18 +959,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1616" height="1216" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38350055" sideWeight="0.49551925" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16236162" sideWeight="0.8060201" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19530755" sideWeight="0.8353832" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2660985" sideWeight="0.5007907" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19397993" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16461684" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19955407" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1092,9 +1155,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="34" selection-start="4037" selection-end="4037" vertical-scroll-proportion="-4.96">
+        <state line="5" column="6" selection-start="103" selection-end="103" vertical-scroll-proportion="0.24495678">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.db.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="37" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1109,16 +1179,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="6" selection-start="103" selection-end="103" vertical-scroll-proportion="0.3057554">
+        <state line="180" column="52" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.65891474">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="552" column="68" selection-start="38506" selection-end="38506" vertical-scroll-proportion="0.33237547">
+        <state line="41" column="66" selection-start="2045" selection-end="2045" vertical-scroll-proportion="0.13099042">
           <folding>
             <element signature="n#style#0;n#input#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1128,10 +1198,11 @@
             <element signature="n#style#0;n#input#5;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1145,9 +1216,16 @@
             <element signature="n#style#0;n#div#1;n#div#0;n#fieldset#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#2;tag#div#0;tag#div#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#1;tag#div#1;tag#body#0;tag#html#0" expanded="false" />
             <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#3;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#3;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#3;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1155,12 +1233,14 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#li#0;n#div#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#li#1;n#div#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#li#1;n#div#0;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#1;n#div#1;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#3;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#div#2;tag#div#3;tag#body#0;tag#html#0" expanded="false" />
             <element signature="n#style#0;n#a#0;n#div#2;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1169,13 +1249,6 @@
             <element signature="n#style#0;n#a#1;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#4;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="37" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.45822102">
-          <folding />
         </state>
       </provider>
     </entry>
