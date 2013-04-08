@@ -182,6 +182,11 @@ ul.scriptArguments input, ul.scriptArguments textarea{
     margin: 0 0 .5em 0;
 }
 
+#scriptExeAssetList > fieldset > div > div{
+    background-image: none;
+    background-color: #F5D6CC;
+}
+
 
 @media all and (min-width: 650px){
 

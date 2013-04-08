@@ -177,9 +177,9 @@
                                                 <label for="argLabel-{{id}}">Label: </label>
                                                 <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
                                                 <label for="argSwitch-{{id}}">Switch: </label>
-                                                <input type="text" placeholder="Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                                <input type="text" placeholder="Optional Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                                 <label for="argDescription-{{id}}">Description: </label>
-                                                <input placeholder="Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
+                                                <input placeholder="Optional Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
                                                 <div data-role="fieldcontain">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Required?</legend>
@@ -208,13 +208,24 @@
                                                 <div data-role="fieldcontain" class="allowMultiSelect {{#type}}hideDefault{{/type}}">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Allow Multiple Selections?</legend>
-                                                        <input type="radio" name="multiselect" data-id="{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
-                                                        <span for="outputYes">Yes</span>
+                                                        {{#multiselect}}
+                                                            <input type="radio" name="multiselect" data-id="{{id}}" checked="checked" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                                            <span for="outputYes">Yes</span>
 
-                                                        <input type="radio" name="multiselect" data-id="{{id}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
-                                                        <span for="outputNo">No</span>
+                                                            <input type="radio" name="multiselect" data-id="{{id}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                                            <span for="outputNo">No</span>
+                                                        {{/multiselect}}
 
-                                                        <div class="showHide hideDefault">
+                                                        {{^multiselect}}
+                                                            <input type="radio" name="multiselect" data-id="{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                                            <span for="outputYes">Yes</span>
+
+                                                            <input type="radio" name="multiselect" data-id="{{id}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                                            <span for="outputNo">No</span>
+                                                        {{/multiselect}}
+
+
+                                                        <div class="showHide {{^multiselect}}hideDefault{{/multiselect}}">
                                                             <div>Default Separator Character</div>
                                                             <input type="text" placeholder="leave blank for space" maxlength="1" name="separator" data-id="{{id}}" value="{{separator}}" />
                                                         </div>
@@ -512,18 +523,50 @@
             {{#arguments}}
             <fieldset data-role="controlgroup" style="margin-top:2%;">
                 <div class="ui-body ui-body-b">
+                    <h3>{{label}}</h3>
 
-                    <!--<b style="padding-left:20px">Label:&nbsp;</b>{{label}}-->
+                    <span class="scriptDescription">{{description}}</span>
+                    
+                    {{ !type of argument is an asset }}
+                    {{^type}}
+                        {{ !this is where the list of assets will go }}
+                        {{#multiselect}}
+                            <div data-role="fieldcontain">
+                                <label for="separator-{{id}}">Asset Separator</label>
+                                <input type="text" value="{{separator}}" id="separator-{{id}}" />
+                            </div>
+                        {{/multiselect}}
+                        <div class="argAssetList scrollbar" data-role="fieldcontain" data-id="{{id}}" data-multiselect="{{multiselect}}">
+                            {{#multiselect}}
+                                {{ !id format is: asset-argumentID-assetID }}
+                                <fieldset data-role="controlgroup">
+                                    <legend>Choose Assets</legend>
+                                    {{#assets}}
+                                    <input type="checkbox" name="{{properties.filename}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
+                                    <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}</label>
+                                    {{/assets}}
+                                </fieldset>
+                            {{/multiselect}}
 
-                    <h3>{{label}} {{#required}}
-                        <span id="argMarkup{{id}}" style="color:red;"><b>required</b></span>
-                        {{/required}}
-                    </h3>
-                    {{description}}
-                    <div id="scriptExeAssetList{{id}}" data-role="fieldcontain" data-required="{{required}}" class="scrollBar">
-					<!--<input type="radio" name="scriptAsset" id="aid1" value="aid1">
-					<label for="aid1">asset1</label>-->
-				</div>
+                            {{^multiselect}}
+                                <fieldset data-role="controlgroup">
+                                    <legend>Choose Asset</legend>
+                                    {{#assets}}
+                                        <input type="radio" name="{{properties.filename}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
+                                        <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}</label>
+                                    {{/assets}}
+                                </fieldset>
+                            {{/multiselect}}
+                        </div>
+                    {{/type}}
+
+                    {{ !type of argument is a string }}
+                    {{#type}}
+                        <div class="argStringValue" data-role="fieldcontain" data-id="{{id}}">
+                            <label for="argStringValue-{{id}}">Argument Value</label>
+                            <input type="text" class="argValue" id="argStringValue-{{id}}" value="{{default_value}}" />
+                        </div>
+                    {{/type}}
                 </div>
             </fieldset>
             {{/arguments}}

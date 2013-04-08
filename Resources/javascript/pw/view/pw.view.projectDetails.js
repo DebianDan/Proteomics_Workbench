@@ -54,6 +54,7 @@ function showProjectDetails( urlObj, options )
             // Get the page we are going to dump our content into.
             var $page = $( pageSelector );
             pw.activeProject = pid;
+            pw.activeProjectObject = myProject;
             renderAssetsList(myProject);
             renderProjectDetailsScripts();
 

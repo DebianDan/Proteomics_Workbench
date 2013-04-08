@@ -54,16 +54,21 @@ function showScriptExecution( urlObj, options )
                         $("#pScriptDetails").html( markup );
                         $("#pScriptDetailsMore").html( moreDetails );
 
+                        //add in the assets for the current project so that mustache can pick them up
+                        script.assets = pw.activeProjectObject.properties.assets;
+
                         //TODO clear all the previous arguments out
                         var argList = $("#scriptExeAssetList");
                         //clear the assets list to start
                         argList.html("");
+
                         var template = $("#tplScriptExeAssetList").html(),
                             html = Mustache.to_html(template, script),
                             aList = $("#scriptExeAssetList");
                         //clear the assets list to start
                         aList.html(html).trigger('create');
 
+                        /*
                         //for (the # of arguments) {
                         //display a argument box like below
                         script.arguments.forEach(function(arg){
@@ -93,7 +98,8 @@ function showScriptExecution( urlObj, options )
                                             fav = 0;
                                         }
                                         //(convention #scriptExeAssetList0 #scriptExeAssetList1 etc..)
-                                        aList = "#scriptExeAssetList" + arg.id;
+                                        //aList = "#scriptExeAssetList" + arg.id;
+                                        aList = ".argAssetList";
                                         addAssetScriptExeMarkup(aList, aid, arg.id, path, fav);
                                     }
                                 },
@@ -102,6 +108,7 @@ function showScriptExecution( urlObj, options )
                                 }
                             );
                         });
+                        */
 
                         // Pages are lazily enhanced. We call page() on the page
                         // element to make sure it is always enhanced before we
