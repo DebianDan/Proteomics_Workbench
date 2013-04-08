@@ -33,7 +33,7 @@ function showScriptExecution( urlObj, options )
                         // Get the page we are going to dump our content into.
                         var $page = $( pageSelector );
                         //put the content into the page
-
+/*
                         //can be deleted later, just for DEBUG
                         var markup = "Script Name: " + script.alias + "<br/>";
                         //markup += "Script Details: " + script.path + "<br/>";
@@ -45,14 +45,14 @@ function showScriptExecution( urlObj, options )
                         moreDetails += "Date Created: " + script.date_created + "<br/>";
                         moreDetails += "SID: " + script.sid + "<br/>";
 
+                         //Forces the project details to be above the asset list
+                         $("#pScriptDetails").html( markup );
+                         $("#pScriptDetailsMore").html( moreDetails );
+*/
                         //THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
                         //inject the path into the run button for executing
                         $('#run').attr('data-path', script.path);
                         $('#run').attr('data-runtime', runtime.path);
-
-                        //Forces the project details to be above the asset list
-                        $("#pScriptDetails").html( markup );
-                        $("#pScriptDetailsMore").html( moreDetails );
 
                         //add in the assets for the current project so that mustache can pick them up
                         script.assets = pw.activeProjectObject.properties.assets;
@@ -67,48 +67,6 @@ function showScriptExecution( urlObj, options )
                             aList = $("#scriptExeAssetList");
                         //clear the assets list to start
                         aList.html(html).trigger('create');
-
-                        /*
-                        //for (the # of arguments) {
-                        //display a argument box like below
-                        script.arguments.forEach(function(arg){
-                            for(property in arg){
-                                if(typeof arg[property] != "function"){
-                                    console.log("...property {0} is {1}".format(property, arg[property]));
-                                }
-                            }
-
-                            //Display all the assets for the active project
-                            //Have to do this everytime because we will be running different queries for
-                            //different arguments in the future.  i.e. filter csv, then filter xml
-                            pw.assets.getAllAssets(pw.activeProject,
-                                //success callback
-                                function (transaction, results) {
-                                    console.log(results.rows.length + " assets retrieved");
-                                    console.log("rendering assets list");
-
-                                    //loop through rows and add them to asset list
-                                    for (var i = 0; i < results.rows.length; i++) {
-                                        var row = results.rows.item(i);
-                                        var aid = row['aid'];
-                                        var path = row['path'];
-                                        var fav = 1;
-                                        //not in the favorites table
-                                        if (row['fav'] == null){
-                                            fav = 0;
-                                        }
-                                        //(convention #scriptExeAssetList0 #scriptExeAssetList1 etc..)
-                                        //aList = "#scriptExeAssetList" + arg.id;
-                                        aList = ".argAssetList";
-                                        addAssetScriptExeMarkup(aList, aid, arg.id, path, fav);
-                                    }
-                                },
-                                function (transaction, error) {
-                                    alert("there was an error when attempting to retrieve the assets: ", error.code);
-                                }
-                            );
-                        });
-                        */
 
                         // Pages are lazily enhanced. We call page() on the page
                         // element to make sure it is always enhanced before we
@@ -126,7 +84,6 @@ function showScriptExecution( urlObj, options )
                         // Now call changePage() and tell it to switch to
                         // the page we just modified.
                         $.mobile.changePage( $page, options );
-
                     }
                 });
 
@@ -169,7 +126,6 @@ $(document).on('click', "#run", function(){
             }
         }
     });
-    //alert(argPaths.length);
 
     if (valid){
         //add extra arguments to the end of the command
@@ -201,47 +157,6 @@ $(document).on('click', "#run", function(){
                 //do something on click
             });
         });
-
-        /*
-
-        //Creating a notification for Script Start
-        var note = Ti.Notification.createNotification({
-            'title' : 'Script Status',
-            'message' : 'Script is currently running!',
-            'timeout' : 0,
-            //'callback' : doSomething
-            'icon' : 'app://css/images/ajax-loader.gif'
-        });
-
-        //take an asset as an argument to a python script
-        var myScript = Ti.Process.createProcess({
-            //args:[] can take the array of argPaths
-            args:[rPath,sPath,argPaths]
-        });
-
-        //USEFUL FOR DEBUGGING, OUTPUTS THE STDOUT LINE BY LINE
-        myScript.setOnReadLine(function(data) {
-            $("#scriptOut").append(data.toString() + "\r\n");
-        });
-
-        //can poll to see if the process is running, will return a Boolean
-        //myScript.isRunning();
-
-
-        myScript.setOnExit(function(){
-            note.setMessage("Script has finished running!");
-            note.setIcon('app://css/images/greencheck.png');
-            //TODO set a callback for when the Notification is clicked
-            //note.setCallback(function(){});
-            note.show();
-            console.log("Script Finished Running");
-        });
-        //Launches the process
-        myScript.launch();
-        //show start notification
-        note.show();
-
-        */
     }
 });
 

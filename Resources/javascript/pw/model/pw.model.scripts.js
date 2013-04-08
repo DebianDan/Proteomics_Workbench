@@ -10,6 +10,7 @@ pw.scripts = (function(){
         this.sid = data['sid']; //the script ID
         this.path = data['path']; //the path to the script
         this.alias = data['alias']; //the alias for the script (display alias)
+        this.description = data['description'];
         this.date_created = data['date_created']; //when the script was created
         this.rid = data['rid']; //the runtime ID for this script
         this.arguments = []; //arguments array
@@ -32,7 +33,7 @@ pw.scripts = (function(){
                     options.success();
                 }
             },function(t,e){
-                console.log("error when updating the argument value: {0}".format(JSON.stringify(e)));
+                console.log("error when updating the script value: {0}".format(JSON.stringify(e)));
                 if(typeof options.error == "function"){ //prevents the nasty error message if the function isn't passed
                     options.error(e);
                 }
@@ -48,7 +49,7 @@ pw.scripts = (function(){
                     options.success(this);
                 }
             },function(t,e){
-                console.log("error when deleting the argument: {0}".format(JSON.stringify(e)));
+                console.log("error when deleting the script: {0}".format(JSON.stringify(e)));
                 if(typeof options.error == "function"){ //prevents the nasty error message if the function isn't passed
                     options.error(e);
                 }
@@ -85,6 +86,7 @@ pw.scripts = (function(){
             sid : -1,
             alias: "",
             label : "",
+            switch: "",
             description: "",
             required : 0,
             type: 0,

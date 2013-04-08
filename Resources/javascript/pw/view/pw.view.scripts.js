@@ -270,7 +270,7 @@ $(document).on("click", ".deleteArg", function(e){
 
 $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) :input", function(e){
     var options = {
-        name : $(this).attr("name"),
+        name : $(this).attr("data-name"),
         id : $(this).attr("data-id"),
         value : $(this).val()
     };
@@ -281,7 +281,7 @@ $(document).on("blur", ".scriptProperties > li:not(.argumentContainer) :input", 
 $(document).on("change", ".scriptProperties > li:not(.argumentContainer) input[type=radio]", function(e){
     if($(this).is(":checked")){
         var options = {
-            name : $(this).attr("name"),
+            name : $(this).attr("data-name"),
             id : $(this).attr("data-id"),
             value : $(this).val()
         };
@@ -303,7 +303,7 @@ $(document).on("change", ".scriptProperties select[id*=runtimeChooser]", functio
 
 $(document).on("blur", ".argumentsList input[type=text]", function(e){
     var options = {
-        name : $(this).attr("name"),
+        name : $(this).attr("data-name"),
         id : $(this).attr("data-id"),
         value : $(this).val()
     };
@@ -319,7 +319,7 @@ $(document).on("blur", ".argumentsList input[type=text]", function(e){
 
 $(document).on("change", ".argumentsList input[type=checkbox]", function(e){
     var options ={
-        name : $(this).attr("name"),
+        name : $(this).attr("data-name"),
         id : $(this).attr("data-id"),
         value : ($(this).is(":checked")) ? 1 : 0
     };
@@ -329,7 +329,7 @@ $(document).on("change", ".argumentsList input[type=checkbox]", function(e){
 $(document).on("change", ".argumentsList input[type=radio]", function(e){
     if($(this).is(":checked")){
         var options = {
-            name : $(this).attr("name"),
+            name : $(this).attr("data-name"),
             id : $(this).attr("data-id"),
             value : $(this).val()
         };

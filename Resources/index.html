@@ -21,6 +21,9 @@
 <body>
 
 <input style="display:none;" id="fileInput" type="file" data-enhance="false" />
+<input style="display:none;" id="multipleInput" type="file" multiple data-enhance="false" />
+<input style="display:none;" id="directoryInput" type="file" nwdirectory data-enhance="false" />
+
 <input style="display:none;" id="assetInput" type="file" multiple data-enhance="false" />
 <input style="display:none;" id="scriptInput" type="file" multiple data-enhance="false" />
 <input style="display:none;" id="runtimeInput" type="file" data-enhance="false" />
@@ -36,7 +39,7 @@
     <div data-role="content">
 
         <div class="content-primary">
-            <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Create Project</a>
+            <a href="#createProjectPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="b" data-position-to="window" style="margin-bottom:1.5em;">Create Project</a>
 
             <!-- popup for Create Project -->
             <div data-role="popup" id="createProjectPopup" class="ui-content" data-overlay-theme="a">
@@ -109,20 +112,20 @@
                         <ul class="scriptProperties" data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
                                 <label for="alias-{{sid}}">Alias: </label>
-                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" name="alias" value="{{alias}}" />
+                                <input id="alias-{{sid}}" data-id="{{sid}}" type="text" data-name="alias" value="{{alias}}" />
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="path-{{sid}}" style="float:left;">Path: </label>
                                 <div style="width: 78%;position: relative;display: inline-block;">
-                                    <input style="float:left;" type="text" id="path-{{sid}}" placeholder="Path to script" name="path" data-id="{{sid}}" value="{{path}}" />
+                                    <input style="float:left;" type="text" id="path-{{sid}}" placeholder="Path to script" data-name="path" data-id="{{sid}}" value="{{path}}" />
                                     <input style="height: 3em; vertical-align: top;" data-role="none" type="button" data-target="path-{{sid}}" class="fileBrowserButton" value="Browse" />
                                 </div>
                             </li>
 
                             <li data-role="fieldcontain">
                                 <label for="description-{{sid}}">Description: </label>
-                                <textarea name="description" id="description-{{sid}}" placeholder="A brief description for this script" data-id="{{sid}}">{{description}}</textarea>
+                                <textarea data-name="description" name="description-{{sid}}" id="description-{{sid}}" placeholder="A brief description for this script" data-id="{{sid}}">{{description}}</textarea>
                             </li>
                             
                             <li data-role="fieldcontain">
@@ -141,24 +144,24 @@
                                     <legend>Does script produce output?</legend>
                                     {{! this conditional block is only here to switch which radio button is checked... there must be a better way }}
                                     {{#produces_output}}
-                                        <input type="radio" id="outputYes-{{sid}}" name="produces_output" data-id="{{sid}}" checked="checked"  value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                        <input type="radio" id="outputYes-{{sid}}" name="produces_output-{{sid}}" data-name="produces_output" data-id="{{sid}}" checked="checked"  value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
                                         <label for="outputYes-{{sid}}">Yes</label>
-                                        <input type="radio" id="outputNo-{{sid}}" name="produces_output" data-id="{{sid}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                        <input type="radio" id="outputNo-{{sid}}" name="produces_output-{{sid}}" data-name="produces_output" data-id="{{sid}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                         <label for="outputNo-{{sid}}">No</label>
                                     {{/produces_output}}
                                     {{^produces_output}}
-                                        <input type="radio" id="outputYes-{{sid}}" name="produces_output" data-id="{{sid}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                        <input type="radio" id="outputYes-{{sid}}" name="produces_output-{{sid}}" data-name="produces_output" data-id="{{sid}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
                                         <label for="outputYes-{{sid}}">Yes</label>
-                                        <input type="radio" id="outputNo-{{sid}}" name="produces_output" data-id="{{sid}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                        <input type="radio" id="outputNo-{{sid}}" name="produces_output-{{sid}}" data-name="produces_output" data-id="{{sid}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                         <label for="outputNo-{{sid}}">No</label>
                                     {{/produces_output}}
 
                                     <div id="outputOptions-{{id}}" class="outputOptions showHide {{^produces_output}}hideDefault{{/produces_output}}">
                                         <div>Default Output Directory: </div>
-                                        <input style="float:left;" type="text" id="outputDirectory-{{sid}}" placeholder="Leave blank for script location. Otherwise specify a path to a directory" name="output_directory" data-id="{{sid}}" value="{{output_directory}}" />
-                                        <input style="height: 3em; vertical-align: top;" data-role="none" type="button" data-target="outputDirectory-{{sid}}" class="dirBrowserButton" value="Browse" />
+                                        <input type="text" id="outputDirectory-{{sid}}" placeholder="Leave blank for script location. Otherwise specify a path to a directory" data-name="output_directory" data-id="{{sid}}" value="{{output_directory}}" style="float:left;" />
+                                        <input type="button" data-role="none" data-target="outputDirectory-{{sid}}" class="dirBrowserButton" value="Browse" style="height: 3em; vertical-align: top;" />
                                         <div style="clear:both;">Regular expression for output: </div>
-                                        <input type="text" placeholder="eg: *.txt will find all files ending in .txt" name="output_regex" data-id="{{sid}}" value="{{output_regex}}" />
+                                        <input type="text" placeholder="eg: *.txt will find all files ending in .txt" data-name="output_regex" data-id="{{sid}}" value="{{output_regex}}" />
                                     </div>
                                 </fieldset>
 							</li>
@@ -176,16 +179,20 @@
                                                     <a href="#" data-id="{{id}}" class="deleteArg" data-role="button" data-inline="true" data-mini="true" data-theme="d">Delete Argument</a>
                                                 </div>
                                                 <label for="argLabel-{{id}}">Label: </label>
-                                                <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" name="label" data-mini="true" value="{{label}}" />
+                                                <input type="text" placeholder="Argument Label" id="argLabel-{{id}}" data-id="{{id}}" data-name="label" data-mini="true" value="{{label}}" />
                                                 <label for="argSwitch-{{id}}">Switch: </label>
-                                                <input type="text" placeholder="Optional Argument Switch (eg: -i)"  data-id="{{id}}" name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
+                                                <input type="text" placeholder="Optional Argument Switch (eg: -i)"  data-id="{{id}}" data-name="switch" id="argSwitch-{{id}}" data-mini="true" value="{{switch}}" />
                                                 <label for="argDescription-{{id}}">Description: </label>
-                                                <input placeholder="Optional Argument Description" type="text" id="argDescription-{{id}}" data-id="{{id}}" name="description" value="{{description}}" data-mini="true"/>
+                                                <input type="text" placeholder="Optional Argument Description" id="argDescription-{{id}}" data-id="{{id}}" data-name="description" value="{{description}}" data-mini="true"/>
                                                 <div data-role="fieldcontain">
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Required?</legend>
-                                                        <input type="checkbox" checked="{{required}}" name="required" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
-
+                                                        {{#required}}
+                                                            <input type="checkbox" checked="checked" name="required-{{id}}" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+                                                        {{/required}}
+                                                        {{^required}}
+                                                            <input type="checkbox" data-name="required" name="required-{{id}}" data-id="{{id}}" id="required-{{id}}" data-mini="true" />
+                                                        {{/required}}
                                                         <label for="required-{{id}}">Required</label>
                                                     </fieldset>
                                                 </div>
@@ -193,15 +200,15 @@
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Argument Type</legend>
                                                         {{#type}}
-                                                        <input type="radio" name="type" data-id="{{id}}" value="0" data-role="none" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
+                                                        <input type="radio" data-name="type" name="type-{{id}}" data-id="{{id}}" value="0" data-role="none" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
                                                         <span>Asset</span>
-                                                        <input type="radio" name="type" data-id="{{id}}" value="1" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
+                                                        <input type="radio" data-name="type" name="type-{{id}}" data-id="{{id}}" value="1" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
                                                         <span>String</span>
                                                         {{/type}}
                                                         {{^type}}
-                                                        <input type="radio" name="type" data-id="{{id}}" value="0" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
+                                                        <input type="radio" data-name="type" name="type-{{id}}" data-id="{{id}}" value="0" data-role="none" checked="checked" onClick="$(this).closest('.argumentType').siblings('.defaultValue').hide(); $(this).closest('.argumentType').siblings('.allowMultiSelect').fadeIn('fast');" />
                                                         <span>Asset</span>
-                                                        <input type="radio" name="type" data-id="{{id}}" value="1" data-role="none" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
+                                                        <input type="radio" data-name="type" name="type-{{id}}" data-id="{{id}}" value="1" data-role="none" onClick="$(this).closest('.argumentType').siblings('.allowMultiSelect').hide(); $(this).closest('.argumentType').siblings('.defaultValue').fadeIn('fast');" />
                                                         <span>String</span>
                                                         {{/type}}
                                                     </fieldset>
@@ -210,31 +217,31 @@
                                                     <fieldset data-role="controlgroup">
                                                         <legend>Allow Multiple Selections?</legend>
                                                         {{#multiselect}}
-                                                            <input type="radio" name="multiselect" data-id="{{id}}" checked="checked" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                                            <input type="radio" name="multiselect-{{id}}" data-name="multiselect" data-id="{{id}}" checked="checked" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
                                                             <span for="outputYes">Yes</span>
 
-                                                            <input type="radio" name="multiselect" data-id="{{id}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                                            <input type="radio" name="multiselect-{{id}}" data-name="multiselect" data-id="{{id}}" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                                             <span for="outputNo">No</span>
                                                         {{/multiselect}}
 
                                                         {{^multiselect}}
-                                                            <input type="radio" name="multiselect" data-id="{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
+                                                            <input type="radio" name="multiselect-{{id}}" data-name="multiselect" data-id="{{id}}" value="1" data-role="none" onClick="$(this).siblings('.showHide').fadeIn('fast');" />
                                                             <span for="outputYes">Yes</span>
 
-                                                            <input type="radio" name="multiselect" data-id="{{id}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
+                                                            <input type="radio" name="multiselect-{{id}}" data-name="multiselect" data-id="{{id}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                                             <span for="outputNo">No</span>
                                                         {{/multiselect}}
 
 
                                                         <div class="showHide {{^multiselect}}hideDefault{{/multiselect}}">
                                                             <div>Default Separator Character</div>
-                                                            <input type="text" placeholder="leave blank for space" maxlength="1" name="separator" data-id="{{id}}" value="{{separator}}" />
+                                                            <input type="text" placeholder="leave blank for space" maxlength="1" data-name="separator" data-id="{{id}}" value="{{separator}}" />
                                                         </div>
                                                     </fieldset>
                                                 </div>
                                                 <div class="defaultValue {{^type}}hideDefault{{/type}}" data-role="fieldcontain">
                                                     <label for="default_value-{{id}}">Default Value: </label>
-                                                    <input type="text" placeholder="Default String Value for Argument" data-id="{{id}}" name="default_value" id="default_value-{{id}}" data-mini="true" value="{{default_value}}" />
+                                                    <input type="text" placeholder="Default String Value for Argument" data-id="{{id}}" data-name="default_value" name="default_value-{{id}}" id="default_value-{{id}}" data-mini="true" value="{{default_value}}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -286,7 +293,7 @@
         <div class="ui-grid-solo">
             <div class="ui-block-a">
                 <!-- Add Runtime -->
-                <a href="#addRuntimePopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window">Add Runtime</a>
+                <a href="#addRuntimePopup" data-rel="popup" data-role="button" data-inline="true" data-theme="b" data-position-to="window">Add Runtime</a>
                 <div data-role="popup" id="addRuntimePopup" class="ui-content" data-overlay-theme="a">
                     <a href="#settings" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
                     <input type="button" class="chooseRuntime" value="Select File" id="runtimeFileChooser">
@@ -371,29 +378,35 @@
     </div><!-- /header -->
 
     <div data-role="content">
-
-        <a href="#editProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a>
-        <!-- Popup for editing the title and description -->
-        <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
-            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-            New title: <input type="text" class="newTitle" value=""><br>
-            New description: <input type="text" class="newDescription" value=""><br>
-            <input type="submit" value="Submit" data-theme="b" id="edit">
+        <div style="float:left;">
+            <h1 style="margin-top: 0; margin-bottom: .25em;">Project Name</h1>
+            <span style="font-style: italic;">Project description would go here lorem ipsum etc</span>
         </div>
 
-        <a href="#deleteProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>
-        <!-- popup for Delete Project -->
-        <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
-            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                <h3 class="ui-title">Are you sure you want to delete this project?</h3>
-                <a href="#projects" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+        <div style="float:right;">
+            <a href="#editProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a>
+            <!-- Popup for editing the title and description -->
+            <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                New title: <input type="text" class="newTitle" value=""><br>
+                New description: <input type="text" class="newDescription" value=""><br>
+                <input type="submit" value="Submit" data-theme="b" id="edit">
+            </div>
+
+            <a href="#deleteProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Delete Project</a>
+            <!-- popup for Delete Project -->
+            <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
+                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                    <h3 class="ui-title">Are you sure you want to delete this project?</h3>
+                    <a href="#projects" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                    <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="b">Delete</a>
+                </div>
             </div>
         </div>
-
+        <div style="clear:both; margin-bottom: 1.5em;"></div>
 
         <!-- The h3 tags are used to force project details to be above the project asset list-->
-        <h4 id="pDetails"></h4>
+        <!--<h4 id="pDetails"></h4>-->
 
         <!-- List of Assets -->
         <div class="ui-grid-a">
@@ -478,7 +491,7 @@
                         <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false">
                             <ul data-theme="c" data-dividertheme="d">
                                 {{#scripts}}
-                                <li data-sid="{{sid}}"><a href="#scriptExe?sid={{sid}}">{{alias}}</a><div>{{description}}</div></li>
+                                <li data-sid="{{sid}}"><a href="#scriptExe?sid={{sid}}">{{alias}}</a>{{#description}}<div class="scriptDescriptionSmall">{{description}}</div>{{/description}}</li>
                                 {{/scripts}}
                             </ul>
                         </div>
@@ -509,24 +522,26 @@
 
     <div data-role="content">
 
-        <a href="#scriptDetailsPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" data-icon="info" style="float:right;">More Details</a>
-        <div data-role="popup" id="scriptDetailsPopup" class="ui-content" data-overlay-theme="a">
-            <h4 id="pScriptDetailsMore"></h4>
-            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        </div>
-        <h4 id="pScriptDetails"></h4>
-
         <div id="scriptExeAssetList">
 
         </div>
 
         <div id="tplScriptExeAssetList" style="display:none;" data-enhance="false">
-            {{#arguments}}
-            <fieldset data-role="controlgroup" style="margin-top:2%;">
-                <div class="ui-body ui-body-b">
-                    <h3>{{label}}</h3>
+            <a href="#scriptDetailsPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" data-icon="info" style="float:right; margin-top:.1em;">More Details</a>
+            <div data-role="popup" id="scriptDetailsPopup" class="ui-content" data-overlay-theme="a">
+                <h4 id="pScriptDetailsMore"></h4>
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            </div>
 
-                    <span class="scriptDescription">{{description}}</span>
+            <h1 class="scriptTitle">{{alias}}</h1>
+            <span class='scriptDescription'>{{description}}</span>
+
+            {{#arguments}}
+            <fieldset class="argument" data-switch="{{switch}}" data-role="controlgroup" style="margin-top:2%;">
+                <div class="ui-body ui-body-b {{#required}}required{{/required}}">
+                    <h3>{{label}} {{#switch}}({{switch}}){{/switch}}</h3>
+
+                    {{#description}}<span class="scriptDescription">{{description}}</span>{{/description}}
 
                     {{ !type of argument is an asset }}
                     {{^type}}
@@ -543,7 +558,7 @@
                                 <fieldset data-role="controlgroup">
                                     <legend>Choose Assets</legend>
                                     {{#assets}}
-                                    <input type="checkbox" name="{{properties.filename}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
+                                    <input type="checkbox" name="asset-{{id}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
                                     <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}</label>
                                     {{/assets}}
                                 </fieldset>
@@ -553,7 +568,7 @@
                                 <fieldset data-role="controlgroup">
                                     <legend>Choose Asset</legend>
                                     {{#assets}}
-                                        <input type="radio" name="{{properties.filename}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
+                                        <input type="radio" name="asset-{{id}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
                                         <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}</label>
                                     {{/assets}}
                                 </fieldset>
