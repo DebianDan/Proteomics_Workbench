@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/css/style.css" afterPath="$PROJECT_DIR$/Resources/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365378702512" ignored="false" />
+    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365384728581" ignored="false" />
     <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365384639186" ignored="false" />
     <file path="/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362692777675" ignored="false" />
     <file path="/pw.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363807474691" ignored="false" />
@@ -884,7 +880,11 @@
       <created>1365378710411</created>
       <updated>1365378710411</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="mostly have the script execution page representing the argument settings. Radio buttons are still misbehaving somewhat.">
+      <created>1365384732039</created>
+      <updated>1365384732039</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -972,7 +972,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added buttons to browse for paths in scripts page, script and argument properties are now persisting, template properly renders options depending on what is selected" />
+    <option name="LAST_COMMIT_MESSAGE" value="mostly have the script execution page representing the argument settings. Radio buttons are still misbehaving somewhat." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -986,7 +986,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="script arguments are now bound, add argument button now works, arguments are now retrieved when getting a script with any of the methods.&#10; TODO: delete script and delete argument functionality, refactor project to reflect script refactoring" />
     <MESSAGE value="pre-merge commit" />
     <MESSAGE value="input argument delete implemented" />
     <MESSAGE value="cleaned up some of the HTML, especially on the project details page. Added back in the 'details pane' dropdown on assets." />
@@ -1011,6 +1010,7 @@
     <MESSAGE value="starting to get the database linked to script arguments page" />
     <MESSAGE value="added manage runtimes to scripts page. scripts page now re-renders each time it is visited (like the projects page)" />
     <MESSAGE value="added buttons to browse for paths in scripts page, script and argument properties are now persisting, template properly renders options depending on what is selected" />
+    <MESSAGE value="mostly have the script execution page representing the argument settings. Radio buttons are still misbehaving somewhat." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
