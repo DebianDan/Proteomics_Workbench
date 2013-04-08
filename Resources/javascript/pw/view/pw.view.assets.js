@@ -89,9 +89,11 @@ $("input.chooseFiles").click(function(){
 
 $("#assetInput").change(function(){
         $(this).val().split(";").forEach(function(path){
-            $("#assetPickerList").append("<li data-path='"+path+"'>" +
-                "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
-                "<input type='text' value='"+path+"'/></li>");
+			if(path != ""){
+				$("#assetPickerList").append("<li data-path='"+path+"'>" +
+					"<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+					"<input type='text' value='"+path+"'/></li>");
+			}
         });
         $("#assetPickerList").trigger('create');
 });
