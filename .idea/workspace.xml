@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="">
+    <list default="true" id="d15aef15-6e30-4028-bd79-84aee98d6290" name="Default" comment="merged with dan's update, fixed a couple bugs that had introduced with my code.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/node-webkit-v0.4.2-win-ia32/package.nw" afterPath="$PROJECT_DIR$/Resources/node-webkit-v0.4.2-win-ia32/package.nw" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365385054318" ignored="false" />
-    <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365384639186" ignored="false" />
+    <file path="/Dummy.txt" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365386209944" ignored="false" />
+    <file path="/index.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365385431012" ignored="false" />
     <file path="/test.html" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362692777675" ignored="false" />
     <file path="/pw.projects.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1363807474691" ignored="false" />
     <file path="/pw.scripts.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1362690493366" ignored="false" />
@@ -26,7 +29,7 @@
     <file path="/pw.utilities.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365372605259" ignored="false" />
     <file path="/pw.view.scriptExecution.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365382188351" ignored="false" />
     <file path="/pw.view.projectDetails.js" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365382111347" ignored="false" />
-    <file path="/.gitignore" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365385048728" ignored="false" />
+    <file path="/.gitignore" changelist="d15aef15-6e30-4028-bd79-84aee98d6290" time="1365385373022" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +48,7 @@
     <favorites_list name="Proteomics_Workbench" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.41899443">
+    <splitter split-orientation="vertical" split-proportion="0.25826773">
       <split-first>
         <leaf>
           <file leaf-file-name="pw.view.projectDetails.js" pinned="false" current="false" current-in-tab="false">
@@ -140,7 +143,7 @@
           <file leaf-file-name="pw.db.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.db.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="41" column="341" selection-start="2885" selection-end="2885" vertical-scroll-proportion="1.0680628">
+                <state line="41" column="341" selection-start="2885" selection-end="2885" vertical-scroll-proportion="2.0">
                   <folding />
                 </state>
               </provider>
@@ -150,14 +153,15 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Resources/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="528" column="0" selection-start="36211" selection-end="36211" vertical-scroll-proportion="-1.5882353">
+                <state line="72" column="24" selection-start="3526" selection-end="3526" vertical-scroll-proportion="0.4888179">
                   <folding>
                     <element signature="n#style#0;n#input#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#input#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#input#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
                     <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -189,10 +193,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="pw.utilities.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="13" column="0" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                    <marker date="1365385451247" expanded="false" signature="1959:1971" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.gitignore">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="13" selection-start="150" selection-end="150" vertical-scroll-proportion="0.5902778">
+                <state line="10" column="13" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -238,7 +254,6 @@
         <option value="$PROJECT_DIR$/Resources/repackageandrun.bat" />
         <option value="$PROJECT_DIR$/Resources/package.json" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.arguments.js" />
-        <option value="$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scripts.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/pw.db.js" />
@@ -247,8 +262,9 @@
         <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js" />
-        <option value="$PROJECT_DIR$/Resources/index.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Resources/index.html" />
+        <option value="$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js" />
       </list>
     </option>
   </component>
@@ -907,7 +923,19 @@
       <created>1365385028189</created>
       <updated>1365385028189</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="pre-merge commit">
+      <created>1365385060296</created>
+      <updated>1365385060296</updated>
+    </task>
+    <task id="LOCAL-00058" summary="merged with dan's update, fixed a couple bugs that had introduced with my code.">
+      <created>1365385667896</created>
+      <updated>1365385667896</updated>
+    </task>
+    <task id="LOCAL-00059" summary="merged with dan's update, fixed a couple bugs that had introduced with my code.">
+      <created>1365385812971</created>
+      <updated>1365385812971</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -995,7 +1023,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="pre-merge commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged with dan's update, fixed a couple bugs that had introduced with my code." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1009,7 +1037,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="input argument delete implemented" />
     <MESSAGE value="cleaned up some of the HTML, especially on the project details page. Added back in the 'details pane' dropdown on assets." />
     <MESSAGE value="made a few styling changes for the midterm. Added test.html which shows a sample script arguments page. None of our code is included -- it is straight jquery mobile + base requirements. Performance is still slow. I think this proves where the performance bottleneck is coming from." />
     <MESSAGE value="arguments are now bound! arguments now retrieved when getting a" />
@@ -1034,6 +1061,7 @@
     <MESSAGE value="added buttons to browse for paths in scripts page, script and argument properties are now persisting, template properly renders options depending on what is selected" />
     <MESSAGE value="mostly have the script execution page representing the argument settings. Radio buttons are still misbehaving somewhat." />
     <MESSAGE value="pre-merge commit" />
+    <MESSAGE value="merged with dan's update, fixed a couple bugs that had introduced with my code." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1043,16 +1071,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="1" selection-start="608" selection-end="608" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1365373205930" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1146,18 +1164,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="341" selection-start="2885" selection-end="2885" vertical-scroll-proportion="1.0680628">
+        <state line="41" column="341" selection-start="2885" selection-end="2885" vertical-scroll-proportion="2.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="13" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1365385451247" expanded="false" signature="1959:1971" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="528" column="0" selection-start="36211" selection-end="36211" vertical-scroll-proportion="-1.5882353">
+        <state line="72" column="24" selection-start="3526" selection-end="3526" vertical-scroll-proportion="0.4888179">
           <folding>
             <element signature="n#style#0;n#input#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
             <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1185,13 +1221,6 @@
             <element signature="n#style#0;n#a#2;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#5;n#div#1;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="150" selection-end="150" vertical-scroll-proportion="0.5902778">
-          <folding />
         </state>
       </provider>
     </entry>

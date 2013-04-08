@@ -12,6 +12,12 @@ if (!String.prototype.format) {
     };
 }
 
+function chooseFile(name, callback) {
+    var chooser = $(name);
+    chooser.trigger('click');
+    chooser.change(callback);
+}
+
 //this will be fired when anything with the class dirBrowserButton is clicked
 //if that element has a data-target attribute, that will be assumed to be the ID of the input whose value will be updated with the selected directory path
 $(document).on('click', '.dirBrowserButton', function(e){
