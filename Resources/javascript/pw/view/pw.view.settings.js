@@ -40,11 +40,13 @@ $("input.chooseRuntime").click(function(){
 
 $("#runtimeInput").change(function(){
         var path = $(this).val();
-		//clear the list since only one runtime can be choosen at a time
-		$("#runtimePickerList").html("");
-        $("#runtimePickerList").append("<li data-path='"+path+"'>" +
-        "<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
-        "<input type='text' value='"+path+"'/></li>");
+		if(path != ""){
+			//clear the list since only one runtime can be choosen at a time
+			$("#runtimePickerList").html("");
+			$("#runtimePickerList").append("<li data-path='"+path+"'>" +
+			"<input type='button' value='remove' data-role='button' data-icon='minus' data-iconpos='notext' data-mini='true' data-inline='true' class='cancel' />" +
+			"<input type='text' value='"+path+"'/></li>");
+		}
         $("#runtimePickerList").trigger('create');
 });
 
