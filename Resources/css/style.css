@@ -89,7 +89,7 @@ input.inputFix:focus{
 }
 
 div.scrollBar{ 
-	max-height:122px; 
+	/*max-height:122px;*/
 	overflow:auto;
 } 
 
@@ -221,10 +221,12 @@ ul.scriptArguments input, ul.scriptArguments textarea{
 
 .scriptDescriptionSmall{
     margin-left: 1.5em;
-    margin-top: -1.75em;
+    margin-top: -.75em;
     font-size: .75em;
     font-weight: normal;
     font-style: italic;
+    margin-bottom: .75em;
+    line-height:1.25em;
 }
 
 /*
