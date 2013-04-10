@@ -257,8 +257,6 @@
                                     </div>
                                     <a class="addInputArgument" data-id="{{sid}}" data-role="button" data-theme="b" href="#">Add Argument</a>
                                 </div>
-                                <!--<div id="outputArgumentsList" data-role="collapsible" data-theme="a" data-mini="true"></div>
-                                <div id="tplInputArgs"></div>-->
                             </li>
                         </ul>
                         <div style="float:right; margin-bottom: -1em;">
@@ -272,9 +270,6 @@
                 </ul>
             </div>
         </div>
-
-
-
 
     </div><!-- /content -->
 
@@ -300,7 +295,7 @@
         <div id="settingsArea">
         <div class="ui-grid-solo">
             <div class="ui-block-a">
-                <!-- Add Runtime -->
+                <!-- Add Runtime Popup -->
                 <a href="#addRuntimePopup" data-rel="popup" data-role="button" data-inline="true" data-theme="b" data-position-to="window">Add Runtime</a>
                 <div data-role="popup" id="addRuntimePopup" class="ui-content" data-overlay-theme="a">
                     <a href="#settings" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
@@ -412,7 +407,7 @@
             </div>
 
             <a href="#deleteProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="a" data-position-to="window" style="float:right;">Delete Project</a>
-            <!-- popup for Delete Project -->
+            <!-- Popup for Delete Project confirmation -->
             <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
                 <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                     <h3 class="ui-title">Are you sure you want to delete this project?</h3>
@@ -422,9 +417,6 @@
             </div>
         </div>
         <div style="clear:both; margin-bottom: 1.5em;"></div>
-
-        <!-- The h3 tags are used to force project details to be above the project asset list-->
-        <!--<h4 id="pDetails"></h4>-->
 
         <!-- List of Assets -->
         <div class="ui-grid-a">
@@ -441,7 +433,7 @@
 						<input type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>
                     </div>
 
-                    <!-- Delete Assets -->
+                    <!-- Delete Assets confirmation -->
                     <a href="#deleteAssetPopup" data-icon="delete" data-rel="popup" data-role="button" data-inline="true" data-mini="true" data-theme="a" data-position-to="window">Delete Selected Assets</a>
                     <div data-role="popup" id="deleteAssetPopup" class="ui-content" data-overlay-theme="a">
                         <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center;">
@@ -545,11 +537,6 @@
         </div>
 
         <div id="tplScriptExeAssetList" style="display:none;" data-enhance="false">
-            <a href="#scriptDetailsPopup" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" data-icon="info" style="float:right; margin-top:.1em;">More Details</a>
-            <div data-role="popup" id="scriptDetailsPopup" class="ui-content" data-overlay-theme="a">
-                <h4 id="pScriptDetailsMore"></h4>
-                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-            </div>
 
             <h1 class="scriptTitle">{{alias}}</h1>
             <span class='scriptDescription'>{{description}}</span>
@@ -624,6 +611,7 @@
         </div>
         <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
         <a href="#" id="clearLog" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Clear Log</a>
+        <!-- Run Script Popup -->
         <div data-role="popup" id="runScript" class="ui-content" data-overlay-theme="a">
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                 <h3 class="ui-title">Run this script?</h3>
@@ -634,8 +622,6 @@
         <div data-role="fieldcontain" style="padding-top:20px;">
             <label for="scriptOut"><b>Script output:</b></label>
             <textarea id="scriptOut"></textarea>
-            <!--<div id="scriptOut" class="textareaFix" style="height:120px; float:right; width:400px;">
-            </div>-->
         </div>
 
     </div><!-- /content -->
