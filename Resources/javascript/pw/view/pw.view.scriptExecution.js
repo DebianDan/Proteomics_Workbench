@@ -103,27 +103,75 @@ $(document).on('click', "#run", function(){
     var argPaths = [];
     argPaths.push(sPath); //hack to get it working
     var valid = true;
-    $('#scriptExeAssetList [id*="scriptExeAssetList"]').each(function(index){
+    $('#scriptExeAssetList .argument').each(function(index){
         if(valid){
-            //find the required args
-            if ($(this).attr('data-required') == 1){
-                //alert if not checked
-                //get the argument path for the asset from the data-path attribute of the radio button
-                var temp = $(this).find('input[name*="scriptAsset"]:checked').attr('data-path');
-                if (temp == null){
-                    //breakout if a required asset isn't filled
+            var req = $(this).attr('data-required'),
+			argSwitch = $(this).attr('data-switch'),
+			type = $(this).attr('data-type'),
+			multi = $(this).attr('data-multi');
+			
+			//TODO figure out how to use Switch without "-i"
+			//trying to push the switch first, but I think it will show up as "-i" "C:\Test.txt"
+			//and I don't know if this will work
+			if(argSwitch){
+				argPaths.push(argSwitch);
+			}
+			
+			//string argument
+			if(type == 1){
+				var argVal = $(this).find('input[id*="argStringValue"]').val();
+				alert(argVal);
+				//breakout if a required asset isn't supplied
+				if (!argVal && req){
                     alert("You have to select an asset to input for a required argument!");
                     valid = false;
                 }else{
-                    argPaths.push(temp);
+                    argPaths.push(argVal);
                 }
-            }else{
-                //if not required, but checked add it
-                var temp = $(this).find('input[name*="scriptAsset"]:checked').attr('data-path');
-                if (temp != null){
-                    argPaths.push(temp);
+			}
+			//radio select
+			else if(multi == 0 && type == 0){
+				var argVal = $(this).find('input[id*="asset"]:checked').attr('data-path');
+				alert(argVal);
+				//breakout if a required asset isn't supplied
+				if (!argVal && req){
+                    alert("You have to select an asset to input for a required argument!");
+                    valid = false;
+                }else{
+                    argPaths.push(argVal);
                 }
-            }
+			}
+			//multiselect with checkboxes
+			else if(multi == 1 && type == 0){
+				var sep = $(this).find('input[id*="separator"]').val();
+				var argVal = null;
+				var first = true;
+				//makes a big string using the supplied seperator and strips off the beginning and ending quotes
+				//so that when spawn is called on C:\Test.txt','C:\Test.txt'C:\Test.txt it will be wrapped correctly and
+				//trick the command line into thinking these are seperate arguments
+				
+				//could push them seperately, but then there is no way to use the seperator...
+				$(this).find('input[id*="asset"]:checked').each(function(){
+					if(first){
+						argVal = $(this).attr('data-path')+"'";
+						first = false;
+					}else if(sep){
+						argVal += sep + "'" + $(this).attr('data-path')+ "'";
+					}else{
+						argVal += " " + "'" + $(this).attr('data-path')+ "'";
+					}
+				});	
+				//strip off last "
+				argVal = argVal.substring(0, argVal.length - 1);
+				alert(argVal);
+				//breakout if a required asset isn't supplied
+				if (!argVal && req){
+                    alert("You have to select an asset to input for a required argument!");
+                    valid = false;
+                }else{
+                    argPaths.push(argVal);
+                }
+			}
         }
     });
 
@@ -136,7 +184,7 @@ $(document).on('click', "#run", function(){
 
         var spawn = require('child_process').spawn;
         try{
-			var scriptExe    = spawn(rPath, argPaths);
+			var scriptExe = spawn(rPath, argPaths);
 		}catch(err){
 			$("#scriptOut").text("Error using Runtime on this script!\n Runtime Path:" +rPath+ "\nScript Path:" +argPaths[0]);
 		}
@@ -163,5 +211,5 @@ $(document).on('click', "#run", function(){
 //Clear the log output
 $(document).on('click', "#clearLog", function(){
     console.log("Script Log has been cleared.")
-    $("#scriptOut").text("");
+    $("#scriptOut").val('');
 });
