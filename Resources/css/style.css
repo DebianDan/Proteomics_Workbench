@@ -224,18 +224,14 @@ ul.scriptArguments input, ul.scriptArguments textarea{
 }
 
 .scriptDescriptionSmall{
-<<<<<<< HEAD
-    margin-left: 1.5em;
-    margin-top: -.75em;
-=======
     margin-left: 0em;
-    margin-top: -1.75em;
->>>>>>> eae81134401f5afcc25a4b83fa6fec88c85f9817
+    margin-top: -.5em;
     font-size: .75em;
     font-weight: normal;
     font-style: italic;
     margin-bottom: .75em;
-    line-height:1.25em;
+    line-height: 1.25em;
+    width: 95%;
 }
 
 /*

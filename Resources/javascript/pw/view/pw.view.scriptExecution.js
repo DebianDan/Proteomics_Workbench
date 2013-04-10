@@ -102,49 +102,55 @@ $(document).on('click', "#run", function(){
     var rPath =  $('#run').attr('data-runtime');
     var argPaths = [];
     argPaths.push(sPath); //hack to get it working
+    var argString = "";//this is what we will push to the argPaths, we will just keep appending to it
     var valid = true;
     $('#scriptExeAssetList .argument').each(function(index){
         if(valid){
-            var req = $(this).attr('data-required'),
-			argSwitch = $(this).attr('data-switch'),
-			type = $(this).attr('data-type'),
-			multi = $(this).attr('data-multi');
+            var req = parseInt($(this).attr('data-required')),
+                argSwitch = $(this).attr('data-switch'),
+                type = parseInt($(this).attr('data-type')),
+                multi = parseInt($(this).attr('data-multi')),
+                label = $(this).attr('data-label'),
+                argVal = "";
 			
 			//TODO figure out how to use Switch without "-i"
 			//trying to push the switch first, but I think it will show up as "-i" "C:\Test.txt"
 			//and I don't know if this will work
 			if(argSwitch){
-				argPaths.push(argSwitch);
+				//argPaths.push(argSwitch);
+                argString += "{0} ".format(argSwitch);
 			}
 			
 			//string argument
 			if(type == 1){
-				var argVal = $(this).find('input[id*="argStringValue"]').val();
+				argVal = $(this).find('input[id*="argStringValue"]').val();
 				alert(argVal);
 				//breakout if a required asset isn't supplied
 				if (!argVal && req){
-                    alert("You have to select an asset to input for a required argument!");
+                    alert("You have to enter a string for the required argument '{0}'!".format(label));
                     valid = false;
                 }else{
-                    argPaths.push(argVal);
+                    //argPaths.push(argVal);
+                    argString += "{0} ".format(argVal);
                 }
 			}
 			//radio select
 			else if(multi == 0 && type == 0){
-				var argVal = $(this).find('input[id*="asset"]:checked').attr('data-path');
+				argVal = $(this).find('input[id*="asset"]:checked').attr('data-path');
 				alert(argVal);
 				//breakout if a required asset isn't supplied
 				if (!argVal && req){
-                    alert("You have to select an asset to input for a required argument!");
+                    alert("You have to select an asset to input for a required argument '{0}'!".format(label));
                     valid = false;
                 }else{
-                    argPaths.push(argVal);
+                    //argPaths.push(argVal);
+                    argString += "{0} ".format(argVal);
                 }
 			}
 			//multiselect with checkboxes
 			else if(multi == 1 && type == 0){
-				var sep = $(this).find('input[id*="separator"]').val();
-				var argVal = null;
+                argVal = "";
+				var sep = $(this).find('input[id*="separator"]').val() || " ";
 				var first = true;
 				//makes a big string using the supplied seperator and strips off the beginning and ending quotes
 				//so that when spawn is called on C:\Test.txt','C:\Test.txt'C:\Test.txt it will be wrapped correctly and
@@ -152,6 +158,10 @@ $(document).on('click', "#run", function(){
 				
 				//could push them seperately, but then there is no way to use the seperator...
 				$(this).find('input[id*="asset"]:checked').each(function(){
+                    argVal += "{0}{1}".format($(this).attr('data-path'), sep);
+
+                    /*
+                    //don't need this I don't think
 					if(first){
 						argVal = $(this).attr('data-path')+"'";
 						first = false;
@@ -159,26 +169,27 @@ $(document).on('click', "#run", function(){
 						argVal += sep + "'" + $(this).attr('data-path')+ "'";
 					}else{
 						argVal += " " + "'" + $(this).attr('data-path')+ "'";
-					}
+					}*/
 				});	
-				//strip off last "
-				argVal = argVal.substring(0, argVal.length - 1);
+				//strip off last " safely
+                //argVal.replace(/"$/, "");
 				alert(argVal);
 				//breakout if a required asset isn't supplied
 				if (!argVal && req){
-                    alert("You have to select an asset to input for a required argument!");
+                    alert("You have to select an asset to input for a required argument '{0}'!".format(label));
                     valid = false;
                 }else{
-                    argPaths.push(argVal);
+                    argString += "{0} ".format(argVal);
                 }
 			}
         }
     });
 
     if (valid){
+        argPaths.push(argString);
         //add extra arguments to the end of the command
         var extraArgs = $("#extraArguments").val();
-        if(extraArgs != ""){
+        if(extraArgs){
             argPaths.push(extraArgs);
         }
 
