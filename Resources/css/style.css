@@ -113,6 +113,10 @@ div.hideDefault{
 
 }*/
 
+p#scriptLink{
+	text-indent:-25px;
+}
+
 .detailsPane{
     clear: both;
     background-color: white;
@@ -220,7 +224,7 @@ ul.scriptArguments input, ul.scriptArguments textarea{
 }
 
 .scriptDescriptionSmall{
-    margin-left: 1.5em;
+    margin-left: 0em;
     margin-top: -1.75em;
     font-size: .75em;
     font-weight: normal;
