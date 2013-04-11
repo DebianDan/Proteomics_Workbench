@@ -385,9 +385,18 @@
     </div><!-- /header -->
 
     <div data-role="content">
+    <!--
         <div style="float:left;">
             <h1 style="margin-top: 0; margin-bottom: .25em;">Project Name</h1>
             <span style="font-style: italic;">Project description would go here lorem ipsum etc</span>
+        </div>
+ 	-->       
+        <div id="projectDetailsHeader">
+        </div>
+        
+        <div id="tplProjectDetailsHeader" style="float:left;">
+        	<h1 style="margin-top: 0; margin-bottom: .25em;">{{properties.name}}</h1>
+        	<span style="font-style: italic;">{{properties.description}}</span>
         </div>
 
         <div style="float:right;">

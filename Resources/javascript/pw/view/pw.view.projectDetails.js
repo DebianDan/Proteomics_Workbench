@@ -35,6 +35,14 @@ function renderAssetsList(project){
 	$("select[name=sortAssetsBy]").val(1).change();
 }
 
+function renderProjectDetails(project){
+    console.log("rendering project details");
+    var template = $("#tplProjectDetailsHeader").html(),
+    	html = Mustache.to_html(template, project);
+    $("#projectDetailsHeader").html(html).trigger('create');
+}
+
+
 // Load the data for a specific category, based on
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
@@ -55,7 +63,8 @@ function showProjectDetails( urlObj, options )
             var $page = $( pageSelector );
             pw.activeProject = pid;
             pw.activeProjectObject = myProject;
-            renderAssetsList(myProject);
+            renderProjectDetails(myProject);
+			renderAssetsList(myProject);
             renderProjectDetailsScripts();
 
             // Pages are lazily enhanced. We call page() on the page
