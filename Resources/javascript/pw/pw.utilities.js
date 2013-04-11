@@ -18,31 +18,7 @@ function chooseFile(name, callback) {
     chooser.change(callback);
 }
 
-//this will be fired when anything with the class dirBrowserButton is clicked
-//if that element has a data-target attribute, that will be assumed to be the ID of the input whose value will be updated with the selected directory path
-$(document).on('click', '.dirBrowserButton', function(e){
-    //see if there is a data-for attribute so we can update that
-    var targetID = $(this).attr("data-target");
-    chooseFile("#directoryInput", function(evt){
-        var newValue = $(this).val();
-        if(targetID){
-            updateInputAndBlur(targetID, newValue);
-        }
-    });
-    return false;
-});
 
-$(document).on('click', '.fileBrowserButton', function(e){
-    //see if there is a data-for attribute so we can update that
-    var targetID = $(this).attr("data-target");
-    chooseFile("#fileInput", function(evt){
-        var newValue = $(this).val();
-        if(targetID){
-            updateInputAndBlur(targetID, newValue);
-        }
-    });
-    return false;
-});
 
 function updateInputAndBlur(targetID, newValue){
     var target = $('#'+targetID);

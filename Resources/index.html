@@ -487,6 +487,10 @@
 
                                         <span class="itemButton detailsButton" data-aid="{{properties.aid}}" data-id="{{properties.aid}}" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Edit</span>
                                     </label>
+                                    <div id="detailsPane-{{properties.aid}}" class="detailsPane hideDefault" data-id="{{properties.aid}}">
+                                        <a class="openFile" data-role="button" data-mini="true" data-path="{{properties.path}}">Open File</a>
+                                        <a class="openFileLocation" data-role="button" data-mini="true" data-path="{{properties.path}}">Show In Folder</a>
+                                    </div>
                                 </li>
                                 {{/properties.assets}}
                             </ul>

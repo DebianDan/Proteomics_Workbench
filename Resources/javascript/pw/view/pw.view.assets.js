@@ -98,9 +98,6 @@ $("#assetInput").change(function(){
         $("#assetPickerList").trigger('create');
 });
 
-
-
-
 //bind to the click event of the add assets button
 $("#addAssetPopup .save").click(function(){
     console.log("add asset button clicked");

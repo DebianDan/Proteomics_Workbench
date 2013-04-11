@@ -159,20 +159,7 @@ $(document).on('click', "#run", function(){
 				//could push them seperately, but then there is no way to use the seperator...
 				$(this).find('input[id*="asset"]:checked').each(function(){
                     argVal += "{0}{1}".format($(this).attr('data-path'), sep);
-
-                    /*
-                    //don't need this I don't think
-					if(first){
-						argVal = $(this).attr('data-path')+"'";
-						first = false;
-					}else if(sep){
-						argVal += sep + "'" + $(this).attr('data-path')+ "'";
-					}else{
-						argVal += " " + "'" + $(this).attr('data-path')+ "'";
-					}*/
-				});	
-				//strip off last " safely
-                //argVal.replace(/"$/, "");
+				});
 				alert(argVal);
 				//breakout if a required asset isn't supplied
 				if (!argVal && req){
