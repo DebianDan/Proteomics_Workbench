@@ -180,25 +180,26 @@ $(document).on('click', "#run", function(){
             argPaths.push(extraArgs);
         }
 
-        var spawn = require('child_process').spawn;
         try{
 			var scriptExe = spawn(rPath, argPaths);
 		}catch(err){
-			$("#scriptOut").text("Error using Runtime on this script!\n Runtime Path:" +rPath+ "\nScript Path:" +argPaths[0]);
+			$("#scriptOut").html("<span class='error'>Error using Runtime on this script!\n Runtime Path:" +rPath+ "\nScript Path:" +argPaths[0] + "</span>");
 		}
 
         scriptExe.stdout.on('data', function (data) {
             console.log(data);
-            $("#scriptOut").val(data);
+            //var dataHTML = data;
+            //dataHTML = dataHTML.replace(/\n/g, '<br />');
+            $("#scriptOut").html(JSON.stringify(data));
         });
 
         scriptExe.stderr.on('data', function (data) {
             console.log('stderr: ' + data);
-			$("#scriptOut").text("ERROR: " + data);
+			$("#scriptOut").html("ERROR: " + data);
         });
 
         scriptExe.on('close', function (code) {
-            console.log('child process exited with code ' + code);
+            //console.log('child process exited with code ' + code);
             window.LOCAL_NW.desktopNotifications.notify('css/images/greencheck.png', 'Script Completed', 'The script has completed execution', function(){
                 //do something on click
             });
@@ -209,5 +210,5 @@ $(document).on('click', "#run", function(){
 //Clear the log output
 $(document).on('click', "#clearLog", function(){
     console.log("Script Log has been cleared.")
-    $("#scriptOut").val('');
+    $("#scriptOut").html('');
 });

@@ -18,34 +18,6 @@ $("#deleteAssetPopup .delete").click(function(){
     if(aids.length){
         $("#assetList").trigger('create'); //we removed some stuff so refresh the list
     }
-
-    /*
-     console.log("delete asset button clicked");
-     var numChecked = $( "input:checked" ).length;
-     if (numChecked === 0){
-     alert('Choose at least 1 asset to Delete.');
-     }
-     else{
-     //fill up an array of all the assets aid to be deleted
-
-     pw.assets.deleteAssets(aids,
-     //success callback
-     function(transaction, results){
-     //Remove all deleted assets completely from the list
-     for (var i = 0; i < aids.length; i++) {
-     //find div that wraps all of the asset, empty, remove, then remove favorite
-     var checkBox = $("#assetList").find("input[name='aid-"+aids[i]+"']").parent();
-     checkBox.empty();
-     checkBox.remove();
-     $("#assetList").find("a[data-aid='"+aids[i]+"']").remove();
-     }
-     },
-     //error callback
-     function(transaction, error){
-     alert("there was an error when attempting to delete the checked assets: ", error.code);
-     }
-     );
-     }*/
 });
 
 //clear list of added assets and close the dialog

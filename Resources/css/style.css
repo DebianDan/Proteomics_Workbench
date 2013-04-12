@@ -19,6 +19,23 @@
     border-bottom:1px solid #CCC;
 }
 
+span.error{
+    color:red;
+    font-weight:bolder;
+}
+
+#scriptOut{
+    overflow:scroll;
+}
+
+.header{
+    background: none;
+    background-color: #F8F8F8;
+    padding: 21px;
+    margin:0;
+    text-align:center;
+}
+
 h3.sectionTitle{
     background-color: #444;
     color: #FFF;
@@ -62,7 +79,7 @@ h3.sectionTitle{
 
 .addDeleteAssets{
     float: right;
-    width: 198px;
+    width: 50%;
     height: 40px;
     line-height: 10px;
     margin-right: 3px;

@@ -385,13 +385,35 @@
     </div><!-- /header -->
 
     <div data-role="content">
-    <!--
-        <div style="float:left;">
-            <h1 style="margin-top: 0; margin-bottom: .25em;">Project Name</h1>
-            <span style="font-style: italic;">Project description would go here lorem ipsum etc</span>
-        </div>
- 	-->       
-        <div id="projectDetailsHeader" style="float:left;"  >
+        <div id="projectDetailsHeader" class="section header">
+            <div style="float:right;">
+                <a href="#editProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a>
+                <!-- Popup for editing the title and description -->
+                <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                    <ul data-role="listview" data-inset="true">
+                        <li data-role="fieldcontain">
+                            <label for="newTitle" style="float:left;">New title: </label>
+                            <input type="text" class="newTitle" id="newTitle" value="">
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="newDescription" style="float:left;">New description: </label>
+                            <input type="text" class="newDescription" id="newDescription" value="" style="float:right;">
+                        </li>
+                    </ul>
+                    <input type="submit" value="Submit" data-theme="b" id="edit">
+                </div>
+
+                <a href="#deleteProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="a" data-position-to="window" style="float:right;">Delete Project</a>
+                <!-- Popup for Delete Project confirmation -->
+                <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
+                    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                        <h3 class="ui-title">Are you sure you want to delete this project?</h3>
+                        <a href="#projects" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                        <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="a">Delete</a>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div id="tplProjectDetailsHeader" style="display:none;" data-enhance="false">
@@ -399,34 +421,7 @@
         	<span style="font-style: italic;">{{properties.description}}</span>
         </div>
 
-        <div style="float:right;">
-            <a href="#editProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Edit Project</a>
-            <!-- Popup for editing the title and description -->
-            <div data-role="popup" id="editProjectPopup" class="ui-content" data-overlay-theme="a">
-                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                <ul data-role="listview" data-inset="true">
-                <li data-role="fieldcontain">
-                	<label for="newTitle" style="float:left;">New title: </label>
-                	<input type="text" class="newTitle" id="newTitle" value="">
-                </li>
-                <li data-role="fieldcontain">
-                	<label for="newDescription" style="float:left;">New description: </label>
-                	<input type="text" class="newDescription" id="newDescription" value="" style="float:right;">
-                </li>
-                </ul>
-                <input type="submit" value="Submit" data-theme="b" id="edit">
-            </div>
 
-            <a href="#deleteProjectPopup" data-rel="popup" data-mini="true" data-role="button" data-inline="true" data-theme="a" data-position-to="window" style="float:right;">Delete Project</a>
-            <!-- Popup for Delete Project confirmation -->
-            <div data-role="popup" id="deleteProjectPopup" class="ui-content" data-overlay-theme="a">
-                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                    <h3 class="ui-title">Are you sure you want to delete this project?</h3>
-                    <a href="#projects" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                    <a href="#projects" class="delete" data-role="button" data-inline="true" data-theme="a">Delete</a>
-                </div>
-            </div>
-        </div>
         <div style="clear:both; margin-bottom: 1.5em;"></div>
 
         <!-- List of Assets -->
@@ -569,16 +564,17 @@
         </div>
 
         <div id="tplScriptExeAssetList" style="display:none;" data-enhance="false">
-
-            <h1 class="scriptTitle">{{alias}}</h1>
-            <span class='scriptDescription'>{{description}}</span>
+            <div class="section header">
+                <h1 class="scriptTitle">{{alias}}</h1>
+                <span class='scriptDescription'>{{description}}</span>
+            </div>
 
             <h2>Arguments</h2>
 
             {{#arguments}}
             <fieldset class="argument section" data-label="{{label}}" data-switch="{{switch}}" data-required="{{required}}" data-type="{{type}}" data-multi="{{multiselect}}"data-role="controlgroup" style="margin-top:2%;">
                 <div class="ui-body ui-body-b {{#required}}required{{/required}}">
-                    <h3>{{label}} {{#switch}}({{switch}}){{/switch}}</h3>
+                    <h3 class="sectionTitle">{{label}} {{#switch}}({{switch}}){{/switch}}</h3>
 
                     {{#description}}<span class="scriptDescription">{{description}}</span>{{/description}}
 
@@ -653,7 +649,7 @@
         </div>
         <div data-role="fieldcontain" style="padding-top:20px;">
             <label for="scriptOut"><b>Script output:</b></label>
-            <textarea id="scriptOut"></textarea>
+            <div id="scriptOut"></div>
         </div>
 
     </div><!-- /content -->
