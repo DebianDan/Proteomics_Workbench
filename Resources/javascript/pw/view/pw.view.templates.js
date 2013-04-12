@@ -5,7 +5,11 @@ var assetTemplate = '<li><input type="checkbox" data-aid="{0}" name="checkbox-{0
     '<label for="checkbox-{0}" data-aid="{0}">{1}' +
     '<a class="itemButton fav" data-aid="{0}" data-fav="{3}" data-role="button" data-icon="star" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="{2}">Favorite</a>' +
     '<span class="itemButton detailsButton" data-aid="{0}" data-id="{0}" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">Edit</span>' +
-    '</label></li>';
+    '</label>' +
+    '<div id="detailsPane-{0}" class="detailsPane hideDefault" data-id="{0}">' +
+    '<a class="openFile" data-role="button" data-mini="true" data-path="{4}">Open File</a>' +
+    '<a class="openFileLocation" data-role="button" data-mini="true" data-path="{4}">Show In Folder</a>' +
+    '</div></li>';
 
 //the HTML template for the scripts -- use with String.format()
 var scriptTemplate = '<input type="checkbox" data-sid="{0}" name="checkbox-{0}" id="checkbox-{0}" data-theme="c" />' +

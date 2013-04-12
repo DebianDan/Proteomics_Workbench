@@ -1,6 +1,7 @@
 # Node Webkit
-Resources/package.zip
+Resources/*.zip
 Resources/node-webkit-v0.4.2-win-ia32/package.nw
+
 
 # WebStorm
 .idea/

@@ -30,7 +30,8 @@ function renderAssetsList(project){
     console.log("rendering project details assets list");
     var template = $("#tplProjectDetailsAssets").html(),
         html = Mustache.to_html(template, project);
-    $("#assetList").html(html).trigger('create');
+    //$("#assetList").html(html).trigger('create');
+    $("#assetList").html(html);
 	//set the sort by to Newest everytime
 	$("select[name=sortAssetsBy]").val(1).change();
 }

@@ -391,10 +391,10 @@
             <span style="font-style: italic;">Project description would go here lorem ipsum etc</span>
         </div>
  	-->       
-        <div id="projectDetailsHeader">
+        <div id="projectDetailsHeader" style="float:left;"  >
         </div>
         
-        <div id="tplProjectDetailsHeader" style="float:left;">
+        <div id="tplProjectDetailsHeader" style="display:none;" data-enhance="false">
         	<h1 style="margin-top: 0; margin-bottom: .25em;">{{properties.name}}</h1>
         	<span style="font-style: italic;">{{properties.description}}</span>
         </div>
@@ -432,45 +432,58 @@
         <!-- List of Assets -->
         <div class="ui-grid-a">
             <div class="ui-block-a" style="padding-right:10px">
-                <!-- Add Assets -->
-                <div>
-                    <a href="#addAssetPopup" data-rel="popup" data-icon="plus" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-position-to="window">Add Assets</a>
-                    <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
-                        <a href="#" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
-                        <input type="button" class="chooseFiles" value="Select File(s)">
-                        <ul id="assetPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
-                        </ul>
-                        <input type="button" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
-						<input type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>
-                    </div>
-
-                    <!-- Delete Assets confirmation -->
-                    <a href="#deleteAssetPopup" data-icon="delete" data-rel="popup" data-role="button" data-inline="true" data-mini="true" data-theme="a" data-position-to="window">Delete Selected Assets</a>
-                    <div data-role="popup" id="deleteAssetPopup" class="ui-content" data-overlay-theme="a">
-                        <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center;">
-                            <h3 class="ui-title">Are you sure you want to delete the selected asset(s)?</h3>
-                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
-                            <a href="#projectDetails" class="delete" data-role="button" data-inline="true" data-theme="a">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-body ui-body-b">
+                <div class="ui-body section">
+                    <h3 class="sectionTitle">File Assets</h3>
                     <fieldset data-role="controlgroup" style="margin-top:0%;">
-                        <div data-role="fieldcontain">
-                            <select name="sortAssetsBy" class="sortBy" data-theme="c" data-native-menu="false">
-                                <option data-placeholder="true">Sort Assets By...</option>
-                                <option value="1">Newest</option>
-                                <option value="2">Favorites</option>
-                                <option value="3">File Type</option>
-                                <option value="4">File Name</option>
-                            </select>
+                        <!-- bar that contains the  -->
+                        <div class="assetControls">
+                            <!-- Add Assets -->
+                            <div class="addDeleteAssets">
+                                <div>
+                                    <a href="#addAssetPopup" style="width:100%;" data-rel="popup" data-icon="plus" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-position-to="window">Add Assets</a>
+                                    <div data-role="popup" id="addAssetPopup" class="ui-content" data-overlay-theme="a">
+                                        <a href="#" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+                                        <input type="button" class="chooseFiles" value="Select File(s)">
+                                        <ul id="assetPickerList" data-role="fieldcontain" style="list-style:none; margin:0; padding:0;">
+                                        </ul>
+                                        <input type="button" data-role="button" data-inline="true" value="Submit" data-theme="b" class="save" />
+                                        <input type="button" data-role="button" data-inline="true" value="Cancel" class="close"/>
+                                    </div>
+                                    <!-- Delete Assets confirmation -->
+                                    <a href="#deleteAssetPopup" style="width:100%;" data-icon="delete" data-rel="popup" data-role="button" data-inline="true" data-mini="true" data-theme="a" data-position-to="window">Delete Selected Assets</a>
+                                    <div data-role="popup" id="deleteAssetPopup" class="ui-content" data-overlay-theme="a">
+                                        <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center;">
+                                            <h3 class="ui-title">Are you sure you want to delete the selected asset(s)?</h3>
+                                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                                            <a href="#projectDetails" class="delete" data-role="button" data-inline="true" data-theme="a">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sort / Filter Assets -->
+                            <div class="sortFilter">
+                                <div data-role="fieldcontain">
+                                    <select id="sortAssetsBy" name="sortAssetsBy" class="sortBy" data-theme="c" data-native-menu="false">
+                                        <option data-placeholder="true">Sort Assets By...</option>
+                                        <option value="1">Newest</option>
+                                        <option value="2">Favorites</option>
+                                        <option value="3">File Type</option>
+                                        <option value="4">File Name</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+
+
+                        <div style="clear:both;"></div>
+
                         <div id="assetList" class="itemList" data-role="fieldcontain">
                         </div>
 
                         <!-- TODO: use/apply this template for assets -->
                         <div id="tplProjectDetailsAssets" style="display:none;" data-enhance="false">
-                            <ul class="itemList">
+                            <ul class="itemList" data-role="listview"  data-filter="true" data-filter-placeholder="Search assets...">
                                 <!-- TODO: correctly show favorites toggle -->
                                 {{#properties.assets}}
                                 <li>
@@ -499,9 +512,11 @@
                     </fieldset>
                 </div>
             </div>
-            <div class="ui-block-b" style="padding-left:10px">
-                <div class="ui-body ui-body-b" style="margin-top: 40px;">
+            <div class="ui-block-b section">
+                <h3 class="sectionTitle">Scripts</h3>
+                <div class="ui-body ui-body-b">
                     <fieldset data-role="controlgroup" style="margin-top:0%;">
+                        <!--
                         <div data-role="fieldcontain">
                             <select name="sortBy" class="sortBy" data-theme="c" data-native-menu="false">
                                 <option data-placeholder="true">Sort Scripts By...</option>
@@ -511,6 +526,8 @@
                                 <option value="favorites">File Name</option>
                             </select>
                         </div>
+                        -->
+
                         <div id="scriptList-project">
                         </div>
                         <div id="tplProjectDetailsScripts" style="display:none;" data-enhance="false">
@@ -559,7 +576,7 @@
             <h2>Arguments</h2>
 
             {{#arguments}}
-            <fieldset class="argument" data-label="{{label}}" data-switch="{{switch}}" data-required="{{required}}" data-type="{{type}}" data-multi="{{multiselect}}"data-role="controlgroup" style="margin-top:2%;">
+            <fieldset class="argument section" data-label="{{label}}" data-switch="{{switch}}" data-required="{{required}}" data-type="{{type}}" data-multi="{{multiselect}}"data-role="controlgroup" style="margin-top:2%;">
                 <div class="ui-body ui-body-b {{#required}}required{{/required}}">
                     <h3>{{label}} {{#switch}}({{switch}}){{/switch}}</h3>
 

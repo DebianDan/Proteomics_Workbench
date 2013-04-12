@@ -1,6 +1,107 @@
 @charset "utf-8";
 /* CSS Document */
 
+.sortFilter{
+    float:left;
+}
+
+.sortFilter .ui-select{
+    width:auto;
+}
+
+.sortFilter .ui-field-contain{
+    border-bottom: 1px solid #CCC;
+    margin:0;
+    line-height: 29px;
+}
+
+.itemList li:last-child label{
+    border-bottom:1px solid #CCC;
+}
+
+h3.sectionTitle{
+    background-color: #444;
+    color: #FFF;
+    padding: 8px;
+    font-weight: bolder;
+    text-shadow: none;
+    border: 1px dotted #FFF;
+    margin-bottom: 10px;
+}
+
+#assetList{
+    margin-top:10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#assetList ul li{
+    padding:0px;
+    margin:0px;
+    border:none;
+    background: none;
+}
+
+#assetList .ui-body-c, .ui-overlay-c {
+    background:none;
+    background-color:#FFF;
+    margin: 0;
+    box-shadow: none;
+}
+
+#assetList .ui-input-clear{
+    display:none;
+}
+
+#assetList > .ui-listview-filter{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.addDeleteAssets{
+    float: right;
+    width: 198px;
+    height: 40px;
+    line-height: 10px;
+    margin-right: 3px;
+}
+
+#assetList .itemList{
+    margin-top:10px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.section{
+    box-shadow: 4px 4px 8px #ccc;
+    border-radius:10px;
+    margin-bottom: 13px;
+    padding-top: 0;
+    border:none;
+    background:none;
+    background-image: linear-gradient(left top, rgb(248,248,248) 84%, rgb(252,252,252) 100%, rgb(255,255,255) 100%);
+    background-image: -o-linear-gradient(left top, rgb(248,248,248) 84%, rgb(252,252,252) 100%, rgb(255,255,255) 100%);
+    background-image: -moz-linear-gradient(left top, rgb(248,248,248) 84%, rgb(252,252,252) 100%, rgb(255,255,255) 100%);
+    background-image: -webkit-linear-gradient(left top, rgb(248,248,248) 84%, rgb(252,252,252) 100%, rgb(255,255,255) 100%);
+    background-image: -ms-linear-gradient(left top, rgb(248,248,248) 84%, rgb(252,252,252) 100%, rgb(255,255,255) 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        color-stop(0.84, rgb(248,248,248)),
+        color-stop(1, rgb(252,252,252)),
+        color-stop(1, rgb(255,255,255))
+    );
+    margin-right:8px;
+}
+
+.section > fieldset{
+    padding-bottom: 1px;
+}
+
 #pageTitle
 {
 	text-align:center;

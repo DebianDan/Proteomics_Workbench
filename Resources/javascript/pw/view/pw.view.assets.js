@@ -63,12 +63,12 @@ function addProjectAssetMarkup(aid, path, fav){
     }
     var theme = (fav == 0) ? 'c' : 'e';
 
-    var aList = $("#assetList");
-    if(aList){
-        var markup = assetTemplate.format(aid, filename, theme, fav);
-        aList.append(markup);
+    var itemList = $("#assetList ul.itemList");
+    if(itemList){
+        var markup = assetTemplate.format(aid, filename, theme, fav, path);
+        itemList.append(markup);
     }
-    aList.trigger('create');
+    itemList.trigger('create');
 }
 
 //removes the asset from the list of assets to be added
