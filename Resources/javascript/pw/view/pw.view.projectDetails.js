@@ -1,3 +1,49 @@
+//execute on project details page load
+$(document).on('pagebeforeshow', '#project-details', function (event) {
+
+    //var pid = urlObj.hash.replace( /.*pid=/, "" ),
+
+    // The pages we use to display our content are already in
+    // the DOM. The id of the page we are going to write our
+    // content into is specified in the hash before the '?'.
+        //pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+    pw.projects.getProjectEx(
+        {'pid' : pw.activeProject},
+        //success callback
+        function(myProject){
+            // Get the page we are going to dump our content into.
+            //var $page = $( pageSelector );
+            //pw.activeProject = pid;
+            pw.activeProjectObject = myProject;
+            renderProjectDetails(myProject);
+            renderAssetsList(myProject);
+            renderProjectDetailsScripts();
+
+            // Pages are lazily enhanced. We call page() on the page
+            // element to make sure it is always enhanced before we
+            // attempt to enhance the listview markup we just injected.
+            // Subsequent calls to page() are ignored since a page/widget
+            // can only be enhanced once.
+
+            //$page.page();
+
+            // We don't want the data-url of the page we just modified
+            // to be the url that shows up in the browser's location field,
+            // so set the dataUrl option to the URL for the category
+            // we just loaded.
+            //options.dataUrl = urlObj.href;
+
+            // Now call changePage() and tell it to switch to
+            // the page we just modified.
+            //$.mobile.changePage( $page, options );
+
+            //console.log("OPTIONS: " + JSON.stringify(options));
+        },function(e){
+            console.log("ERROR in showProjectDetails: {0}".format(JSON.stringify(e)));
+        }
+    );
+});
+
 //adds a script to the project details page (display only)
 function addProjectDetailsScriptMarkup(sid, path){
     var filename = path.replace(/^.*[\\\/]/, '');

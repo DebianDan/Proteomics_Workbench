@@ -127,19 +127,23 @@ pw.projects = (function(){
        }
 
        this.addAsset = function(options, success, error){
+           var self = this;
            //copy options into defaults
            options = $.extend({path:"", success : function(){}, error : function(){}}, options);
            //regex to extract filename works for both \ and / file separators
-           options.fileName = path.replace(/^.*[\\\/]/, '');
+           //options.fileName = path.replace(/^.*[\\\/]/, '');
+           options.fileName = path.basename(options.path);
            //just the file extension ex: jpg txt csv
-           options.fileType = options.path.substr(options.path.lastIndexOf('.')+1, options.path.length);
+           //options.fileType = options.path.substr(options.path.lastIndexOf('.')+1, options.path.length);
+           options.fileType = path.extname(options.path);
+           var myOptions = options;
            var sql = "INSERT INTO assets (pid, path, filename, filetype, date_created) VALUES('{0}', '{1}', '{2}', '{3}', DATETIME('NOW'))".format(options.pid, options.path, options.fileName, options.fileType);
-           pw.db.execute(sql, function(t,r,options){
-               options.aid = r.insertId;
+           pw.db.execute(sql, function(t,r){
+               myOptions.aid = r.insertId;
                //create a new Asset object and call the create function
                var myAsset = new Asset();
-               myAsset.create(options, function(newAsset){
-                   this.properties.assets.push(newAsset); //add the new asset to our properties object
+               myAsset.create(myOptions, function(newAsset){
+                   self.properties.assets.push(newAsset); //add the new asset to our properties object
                    if(typeof success == "function"){
                     success(newAsset);
                    }

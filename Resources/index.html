@@ -170,8 +170,8 @@
                                         <div>Default Output Directory: </div>
                                         <input type="text" id="outputDirectory-{{sid}}" placeholder="Leave blank for script location. Otherwise specify a path to a directory" data-name="output_directory" data-id="{{sid}}" value="{{output_directory}}" style="float:left;" />
                                         <input type="button" data-role="none" data-target="outputDirectory-{{sid}}" class="dirBrowserButton" value="Browse" style="height: 3em; vertical-align: top;" />
-                                        <div style="clear:both;">Regular expression for output: </div>
-                                        <input type="text" placeholder="eg: *.txt will find all files ending in .txt" data-name="output_regex" data-id="{{sid}}" value="{{output_regex}}" />
+                                        <div style="clear:both;">Output Filter String: </div>
+                                        <input type="text" placeholder="eg: *.txt will find all files ending in .txt, *_prot* will find all files with _prot in them, etc" data-name="output_regex" data-id="{{sid}}" value="{{output_regex}}" />
                                     </div>
                                 </fieldset>
 							</li>
@@ -241,7 +241,6 @@
                                                             <input type="radio" name="multiselect-{{id}}" data-name="multiselect" data-id="{{id}}" checked="checked" value="0" data-role="none" onClick="$(this).siblings('.showHide').fadeOut('fast');" />
                                                             <span for="outputNo">No</span>
                                                         {{/multiselect}}
-
 
                                                         <div class="showHide {{^multiselect}}hideDefault{{/multiselect}}">
                                                             <div>Default Separator Character</div>
@@ -663,20 +662,16 @@
                 <fieldset data-role="controlgroup">
                     <p>The following files were found in <code>{{outputDirectory}}</code> after executing. Please select which files you would like to add back into your project:</p>
                     {{#matchedFiles}}
-                        <input type="checkbox" checked id="matched-{{.}}" data-theme="c" />
+                        <input class="matchedFile" type="checkbox" checked id="matched-{{.}}" data-filename="{{.}}" data-path="{{outputDirectory}}" data-theme="c" />
                         <label for="matched-{{.}}">
                             {{.}}
                             <span class="itemButton detailsButton" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">More</span>
                         </label>
-                        <div id="detailsPane-{{.}}" class="detailsPane hideDefault">
-                            <a class="openFile" data-role="button" data-mini="true" data-path="{{outputDirectory}}{{.}}">Open File</a>
-                            <a class="openFileLocation" data-role="button" data-mini="true" data-path="{{outputDirectory}}{{.}}">Show In Folder</a>
-                        </div>
                     {{/matchedFiles}}
                 </fieldset>
             </div>
 
-            <div data-role="button" data-theme="b" class="addToProject">Add Selected</div>
+            <div data-role="button" data-theme="b" class="addSelected">Add Selected</div>
             <div data-role="button" data-theme="a" class="addNone">Add None</div>
         </div>
 

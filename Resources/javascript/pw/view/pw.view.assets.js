@@ -72,14 +72,15 @@ $("#assetInput").change(function(){
 
 //bind to the click event of the add assets button
 $("#addAssetPopup .save").click(function(){
-    console.log("add asset button clicked");
     //get the paths for the added files
     $("#assetPickerList li").each(function(e){
-        var path = $(this).attr("data-path");
+        var assetPath = $(this).attr("data-path");
         //add the asset to the database and then add to the page
-        pw.assets.addAsset(pw.activeProject, path, function(transaction, results){
-            addProjectAssetMarkup(results.insertId, path, 0);
-        });
+        pw.activeProjectObject.addAsset({path:assetPath, pid: pw.activeProjectObject.properties.pid},
+            function(newAsset){
+                addProjectAssetMarkup(newAsset.properties.aid, newAsset.properties.path, 0);
+            }
+        );
     });
     clearAssetPicker();
 });
