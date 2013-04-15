@@ -26,7 +26,7 @@ pw.projects = (function(){
         //call this function to initialize the properties
         this.create = function(options, success, error){
             $.extend(this.properties, options); //copy data into properties
-            console.log("DEBUG: in create function of asset, properties is: {0}".format(JSON.stringify(this.properties)));
+            //console.log("DEBUG: in create function of asset, properties is: {0}".format(JSON.stringify(this.properties)));
             //check for alterative success callback
             if(typeof success == "function"){
                 success(this);
@@ -109,7 +109,7 @@ pw.projects = (function(){
 
        this.create = function(options, success, error){
            //options = $.extend({},_defaultOptions, options); //ensure success and error callbacks are defined
-           console.log("DEBUG: in create function of project, options is: {0}".format(JSON.stringify(options)));
+           //console.log("DEBUG: in create function of project, options is: {0}".format(JSON.stringify(options)));
            $.extend(this.properties, options); //copy data into properties
            this.properties.assets = new Array(); //clear out 'not_initialized' message in array
            //get the assets for this project, assign to the internal array, then finally call supplied success callback
@@ -172,7 +172,7 @@ pw.projects = (function(){
                                var myAsset = new Asset();
                                myAsset.create(item, function(myAsset){
                                    self.properties.assets.push(myAsset);
-                                   console.log("DEBUG: pushed " + JSON.stringify(myAsset));
+                                   //console.log("DEBUG: pushed " + JSON.stringify(myAsset));
                                });
                            }
                        }
@@ -196,7 +196,7 @@ pw.projects = (function(){
        }
 
        this.update = function(options, success, error){
-           console.log('DEBUG: update called on project {0} updating column {1} to {2}'.format(this.properties.id, options.name, options.value));
+           //console.log('DEBUG: update called on project {0} updating column {1} to {2}'.format(this.properties.id, options.name, options.value));
            var sql = "UPDATE projects SET {0} = '{1}' WHERE pid = {2}".format(options.name, options.value, this.properties.id);
            pw.db.execute(sql, function(t,r){
                //update self and hash object
@@ -345,7 +345,7 @@ pw.projects = (function(){
 					   var myAsset = new Asset();
 					   myAsset.create(item, function(myAsset){
 						   sortedAssets.push(myAsset);
-						   console.log("DEBUG: pushed " + JSON.stringify(myAsset));
+						   //console.log("DEBUG: pushed " + JSON.stringify(myAsset));
 					   });
 				   }
 			   }

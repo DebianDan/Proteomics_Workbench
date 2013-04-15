@@ -622,21 +622,23 @@
             </fieldset>
             {{/arguments}}
 
+            <div>
+                <h2>Extra Arguments</h2>
+                <input type="text" name="extraArguments" id="extraArguments" value="" />
+            </div>
+
             {{#produces_output}}
             <h2>Output Options</h2>
             <div data-role="fieldcontain">
                 <label for="scriptExeOutputDir">Output Directory</label>
-                <input type="text" id="scriptExeOutputDir" value="{{output_directory}}" />
+                <input type="text" class="scriptExeOutputDir" id="scriptExeOutputDir" placeholder="leave blank for script location" value="{{output_directory}}" />
 
-                <label for="scriptExeRegex">Filename Regular Expression</label>
+                <label for="scriptExeRegex">Matching Expression</label>
                 <input type="text" id="scriptExeRegex" value="{{output_regex}}" />
             </div>
             {{/produces_output}}
         </div>
-        <div>
-            <h2>Extra Arguments</h2>
-            <input type="text" name="extraArguments" id="extraArguments" value="" />
-        </div>
+
         <a href="#runScript" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:left;">Run Script</a>
         <a href="#" id="clearLog" data-role="button" data-inline="true" data-theme="e" data-position-to="window" style="float:right;">Clear Log</a>
         <!-- Run Script Popup -->
@@ -647,10 +649,38 @@
                 <a href="#" id="run" data-role="button" data-inline="true" data-theme="e">Run</a>
             </div>
         </div>
-        <div data-role="fieldcontain" style="padding-top:20px;">
+
+        <div data-role="fieldcontain" style="padding-top:20px;" id="scriptOutput">
             <label for="scriptOut"><b>Script output:</b></label>
             <div id="scriptOut"></div>
         </div>
+
+        <div id="matchedFilesPopup" data-role="popup" data-transition="flip" data-overlay-theme="a" data-position-to="window" class="ui-content">
+        </div>
+
+        <div id="tplmatchedFilesPopup" style="display:none" data-enhance="false">
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <p>The following files were found in <code>{{outputDirectory}}</code> after executing. Please select which files you would like to add back into your project:</p>
+                    {{#matchedFiles}}
+                        <input type="checkbox" checked id="matched-{{.}}" data-theme="c" />
+                        <label for="matched-{{.}}">
+                            {{.}}
+                            <span class="itemButton detailsButton" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">More</span>
+                        </label>
+                        <div id="detailsPane-{{.}}" class="detailsPane hideDefault">
+                            <a class="openFile" data-role="button" data-mini="true" data-path="{{outputDirectory}}{{.}}">Open File</a>
+                            <a class="openFileLocation" data-role="button" data-mini="true" data-path="{{outputDirectory}}{{.}}">Show In Folder</a>
+                        </div>
+                    {{/matchedFiles}}
+                </fieldset>
+            </div>
+
+            <div data-role="button" data-theme="b" class="addToProject">Add Selected</div>
+            <div data-role="button" data-theme="a" class="addNone">Add None</div>
+        </div>
+
+
 
     </div><!-- /content -->
 

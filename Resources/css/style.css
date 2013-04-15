@@ -26,6 +26,9 @@ span.error{
 
 #scriptOut{
     overflow:scroll;
+    max-height:400px;
+    min-height:100px;
+    background-color:#FFF;
 }
 
 .header{

@@ -38,7 +38,7 @@ function addProjectAssetMarkup(aid, path, fav){
     var itemList = $("#assetList ul.itemList");
     if(itemList){
         var markup = assetTemplate.format(aid, filename, theme, fav, path);
-        itemList.append(markup);
+        itemList.prepend(markup);
     }
     itemList.trigger('create');
 }
