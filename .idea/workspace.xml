@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" name="Default" comment="finally got the output arguments to work proper">
+    <list default="true" id="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/index.html" afterPath="$PROJECT_DIR$/Resources/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.assets.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.assets.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" afterPath="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/repackageandrun.bat" afterPath="$PROJECT_DIR$/Resources/repackageandrun.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/css/style.css" afterPath="$PROJECT_DIR$/Resources/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Proteomics_Workbench.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365999098015" ignored="false" />
+    <file path="/Dummy.txt" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365999380954" ignored="false" />
     <file path="/.gitignore" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365784678369" ignored="false" />
-    <file path="/index.html" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365999243724" ignored="false" />
-    <file path="/style.css" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365980600844" ignored="false" />
+    <file path="/index.html" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1366131259788" ignored="false" />
+    <file path="/style.css" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1366129382553" ignored="false" />
     <file path="/pw.view.projectDetails.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365997530640" ignored="false" />
     <file path="/pw.view.assets.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365998525762" ignored="false" />
-    <file path="/pw.view.scriptExecution.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365998823324" ignored="false" />
+    <file path="/pw.view.scriptExecution.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1366131149916" ignored="false" />
     <file path="/pw.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365979140528" ignored="false" />
     <file path="/pw.model.projects.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365993484327" ignored="false" />
     <file path="/pw.view.common.js" changelist="eea45ad6-2dd5-46d4-a9c2-90450747ceb6" time="1365997779625" ignored="false" />
@@ -44,9 +42,10 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Resources/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="169" selection-start="11813" selection-end="11813" vertical-scroll-proportion="0.36659878">
+            <state line="629" column="26" selection-start="43603" selection-end="43603" vertical-scroll-proportion="0.6015625">
               <folding>
                 <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="tag#div#2;tag#body#0;tag#html#0" expanded="false" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -79,13 +78,21 @@
       <file leaf-file-name="pw.view.projectDetails.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="6" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.0">
+            <state line="124" column="62" selection-start="5051" selection-end="5051" vertical-scroll-proportion="-32.8">
               <folding>
                 <element signature="n#!!block;n#addProjectDetailsScriptMarkup#0" expanded="false" />
-                <element signature="n#!!block;n#renderProjectDetailsScripts#0" expanded="false" />
                 <element signature="n#!!block;n#renderAssetsList#0" expanded="false" />
                 <element signature="n#!!block;n#renderProjectDetails#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="144" column="19" selection-start="2931" selection-end="2931" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,7 +109,7 @@
       <file leaf-file-name="pw.utilities.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="0" selection-start="611" selection-end="611" vertical-scroll-proportion="0.0">
+            <state line="19" column="0" selection-start="609" selection-end="609" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <marker date="1365709945400" expanded="false" signature="986:998" placeholder="..." />
@@ -123,16 +130,7 @@
       <file leaf-file-name="pw.view.scriptExecution.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="14" selection-start="2384" selection-end="2384" vertical-scroll-proportion="-12.92">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pw.model.scripts.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.scripts.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="28" selection-start="891" selection-end="906" vertical-scroll-proportion="0.0">
+            <state line="241" column="0" selection-start="10304" selection-end="10304" vertical-scroll-proportion="-9.96">
               <folding />
             </state>
           </provider>
@@ -190,11 +188,11 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.templates.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/pw.js" />
-        <option value="$PROJECT_DIR$/Resources/css/style.css" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.assets.js" />
+        <option value="$PROJECT_DIR$/Resources/css/style.css" />
         <option value="$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js" />
         <option value="$PROJECT_DIR$/Resources/index.html" />
       </list>
@@ -436,7 +434,11 @@
       <created>1365985450343</created>
       <updated>1365985450343</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Files now can be added back into the project after script execution. project details and script exe pages refresh assets each time they are shown">
+      <created>1365999385420</created>
+      <updated>1365999385420</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -504,7 +506,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="starting to get the add asset functionality in line" />
+    <option name="LAST_COMMIT_MESSAGE" value="Files now can be added back into the project after script execution. project details and script exe pages refresh assets each time they are shown" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -521,6 +523,7 @@
     <MESSAGE value="lots of styling changes in the project details page. Modified the .bat file to also package for mac." />
     <MESSAGE value="some more styling changes. Working more on getting the script execution to work properly." />
     <MESSAGE value="starting to get the add asset functionality in line" />
+    <MESSAGE value="Files now can be added back into the project after script execution. project details and script exe pages refresh assets each time they are shown" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -540,13 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="22" selection-start="1319" selection-end="1319" vertical-scroll-proportion="-14.12">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="492" selection-end="492" vertical-scroll-proportion="0.0">
@@ -558,16 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="28" selection-start="891" selection-end="906" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="611" selection-end="611" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1365709945400" expanded="false" signature="986:998" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -587,25 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="6" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!block;n#addProjectDetailsScriptMarkup#0" expanded="false" />
-            <element signature="n#!!block;n#renderProjectDetailsScripts#0" expanded="false" />
-            <element signature="n#!!block;n#renderAssetsList#0" expanded="false" />
-            <element signature="n#!!block;n#renderProjectDetails#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="14" selection-start="1392" selection-end="1392" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/model/pw.model.projects.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="150" column="28" selection-start="6489" selection-end="6489" vertical-scroll-proportion="53.44">
@@ -622,18 +589,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/pw.utilities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="609" selection-end="609" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1365709945400" expanded="false" signature="986:998" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.projectDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="62" selection-start="5051" selection-end="5051" vertical-scroll-proportion="-32.8">
+          <folding>
+            <element signature="n#!!block;n#addProjectDetailsScriptMarkup#0" expanded="false" />
+            <element signature="n#!!block;n#renderAssetsList#0" expanded="false" />
+            <element signature="n#!!block;n#renderProjectDetails#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="14" selection-start="1392" selection-end="1392" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="19" selection-start="2931" selection-end="2931" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/javascript/pw/view/pw.view.scriptExecution.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="14" selection-start="2384" selection-end="2384" vertical-scroll-proportion="-12.92">
+        <state line="241" column="0" selection-start="10304" selection-end="10304" vertical-scroll-proportion="-9.96">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="169" selection-start="11813" selection-end="11813" vertical-scroll-proportion="0.36659878">
+        <state line="629" column="26" selection-start="43603" selection-end="43603" vertical-scroll-proportion="0.6015625">
           <folding>
             <element signature="n#style#0;n#a#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#ul#0;n#div#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="tag#div#2;tag#body#0;tag#html#0" expanded="false" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />

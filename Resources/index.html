@@ -586,14 +586,18 @@
                                 <input type="text" value="{{separator}}" id="separator-{{id}}" />
                             </div>
                         {{/multiselect}}
-                        <div class="argAssetList scrollBar" data-role="fieldcontain" data-id="{{id}}" data-multiselect="{{multiselect}}">
+                        <div class="argAssetList" data-role="fieldcontain" data-id="{{id}}" data-multiselect="{{multiselect}}">
                             {{#multiselect}}
                                 {{ !id format is: asset-argumentID-assetID }}
-                                <fieldset data-role="controlgroup">
+                                <fieldset data-role="controlgroup argList">
                                     <legend>Choose Assets</legend>
                                     {{#assets}}
-                                    <input type="checkbox" name="asset-{{id}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
-                                    <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}</label>
+                                    <input type="checkbox" name="asset-{{id}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.path}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
+                                    <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}
+                                    <span class="sideButton">
+                                        <a href="#" data-path="{{properties.path}}">Output Location</a>
+                                    </span>
+                                    </label>
                                     {{/assets}}
                                 </fieldset>
                             {{/multiselect}}
@@ -602,8 +606,12 @@
                                 <fieldset data-role="controlgroup">
                                     <legend>Choose Asset</legend>
                                     {{#assets}}
-                                        <input type="radio" name="asset-{{id}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.filename}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
-                                        <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}</label>
+                                        <input type="radio" name="asset-{{id}}" id="asset-{{id}}-{{properties.aid}}" value="{{properties.path}}" data-path="{{properties.path}}" data-theme="c" data-fav="{{properties.fav}}" />
+                                        <label for="asset-{{id}}-{{properties.aid}}">{{properties.filename}}
+                                        <span class="sideButton">
+                                            <a href="#" data-path="{{properties.path}}">Output Location</a>
+                                        </span>
+                                        </label>
                                     {{/assets}}
                                 </fieldset>
                             {{/multiselect}}
@@ -629,10 +637,10 @@
             {{#produces_output}}
             <h2>Output Options</h2>
             <div data-role="fieldcontain">
-                <label for="scriptExeOutputDir">Output Directory</label>
+                <label for="scriptExeOutputDir">Look In Directory</label>
                 <input type="text" class="scriptExeOutputDir" id="scriptExeOutputDir" placeholder="leave blank for script location" value="{{output_directory}}" />
 
-                <label for="scriptExeRegex">Matching Expression</label>
+                <label for="scriptExeRegex">For Files Matching Expression</label>
                 <input type="text" id="scriptExeRegex" value="{{output_regex}}" />
             </div>
             {{/produces_output}}
@@ -665,7 +673,6 @@
                         <input class="matchedFile" type="checkbox" checked id="matched-{{.}}" data-filename="{{.}}" data-path="{{outputDirectory}}" data-theme="c" />
                         <label for="matched-{{.}}">
                             {{.}}
-                            <span class="itemButton detailsButton" data-role="button" data-icon="gear" data-iconpos="notext" data-mini="true" data-inline="true" data-theme="c">More</span>
                         </label>
                     {{/matchedFiles}}
                 </fieldset>

@@ -235,3 +235,19 @@ $(document).on("click", "div.addNone", function(e){
 $(document).on('click', "#clearLog", function(){
     $("#scriptOut").html('');
 });
+
+//update the output directory location with the field's value
+$(document).on("click", ".sideButton > a", function(e){
+    e.preventDefault();
+
+    var newValue = $(this).parents("label").siblings("input").first().val();
+    try{
+       var outputLoc = path.dirname(newValue);
+       $(".scriptExeOutputDir").val(outputLoc);
+    }catch(e){
+        newPath = path.dirname(newValue);
+        console.log("error setting output location. Maybe not a valid path? {0}".format(newValue));
+    }
+
+    return false;
+});

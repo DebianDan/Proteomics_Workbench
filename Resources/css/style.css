@@ -122,6 +122,31 @@ h3.sectionTitle{
     padding-bottom: 1px;
 }
 
+span.sideButton{
+    float: right;
+    margin-top: -11px;
+    width: 41px;
+    font-size: 12px;
+    text-decoration: none;
+    background-color: rgba(136,136,136,.125);
+    height: 38px;
+    width: 57px;
+    border: 1px solid #FFF;
+    margin-right: -21px;
+    margin-bottom: -9px;
+}
+
+span.sideButton a{
+    text-decoration: none;
+    color: #FFF;
+    text-align: center;
+    margin-top: 5px;
+    text-shadow: none;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
 #pageTitle
 {
 	text-align:center;
