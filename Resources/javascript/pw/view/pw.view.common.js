@@ -1,4 +1,6 @@
 // Listen for any attempts to call changePage().
+// checks to the url to see what page it is being changed to and keeps the pw.activeProject or pw.activeScript fresh
+// this ensures that it is indeed always the active script or project
 $(document).bind("pagebeforechange", function( e, data ) {
 
     // We only want to handle changePage() calls where the caller is
@@ -47,6 +49,8 @@ $(document).on('click', '.dirBrowserButton', function(e){
     return false;
 });
 
+//this will be fired when anything with the class fileBrowserButton is clicked
+//if that element has a data-target attribute, that will be assumed to be the ID of the input whose value will be updated with the selected file path
 $(document).on('click', '.fileBrowserButton', function(e){
     //see if there is a data-for attribute so we can update that
     var targetID = $(this).attr("data-target");

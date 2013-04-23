@@ -1,3 +1,8 @@
+/*
+This file was more relevant before we began to use mustache.js (see https://github.com/janl/mustache.js/) for more details.
+This was used to store templates of the html and then were populated using the string.format() function in the pw.utilites.js file.
+*/
+
 var projectTemplate = '<li data-pid="{0}"><a href=\"#project-details?pid={0}">{1}</li>';
 
 //the HTML template for the assets inside of a project -- use with String.format()
