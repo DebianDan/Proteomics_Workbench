@@ -1,12 +1,14 @@
-//execute on project details page load
+//Execute on project details page load
 $(document).on('pagebeforeshow', '#scriptExe', function (event) {
-    $("#scriptOut").html("");//clear old script output
+    $("#scriptOut").html("");//clear old script output on a page refresh
 
-    //options method to pass to getScript()
+    //create the options method to pass to getScript() then called getScript()
     optionsObj = {
-        id : pw.activeScript,
+        //pw.activeScript is always the script that is currently active
+		id : pw.activeScript,
         success : function(script){
-            if(script){
+            //script is the script that is returned by getScript() that is called below
+			if(script){
                 //set the active script so we can reuse it later
                 pw.activeScriptObject = script;
                 //get the runtime that the script uses
@@ -14,8 +16,7 @@ $(document).on('pagebeforeshow', '#scriptExe', function (event) {
                     id: script.rid,
                     name: script.alias,
                     success : function(runtime){
-                        //THIS IS A HACK, FIND A BETTER WAY TO DO THIS!!!!!!!!!!!
-                        //inject the path into the run button for executing
+                        //inject the paths into the run button for executing
                         $('#run').attr('data-path', script.path);
                         $('#run').attr('data-runtime', runtime.path);
 
@@ -29,7 +30,8 @@ $(document).on('pagebeforeshow', '#scriptExe', function (event) {
                             //clear the assets list to start
                             argList.html("");
 
-                            var template = $("#tplScriptExeAssetList").html(),
+                            //use mustache to fill out all of the assets
+							var template = $("#tplScriptExeAssetList").html(),
                                 html = Mustache.to_html(template, script),
                                 aList = $("#scriptExeAssetList");
                             //clear the assets list to start
@@ -43,6 +45,7 @@ $(document).on('pagebeforeshow', '#scriptExe', function (event) {
             }
         }
     }
+	//finally call getScript(). This was done ass backwards where we created the options object first with what to do onSuccess baked in and then called getScript(). 
     pw.scripts.getScript(optionsObj);
 });
 
@@ -65,13 +68,14 @@ $(document).on('click', "#run", function(){
     $("#scriptOut").html("");//clear the html of the output
     $("#matchedFilesPopup").html("");
 
-    //TODO find a better way to get path to the script
+    //grab the embedded path of the script and runtime
     var sPath =  $('#run').attr('data-path');
     var rPath =  $('#run').attr('data-runtime');
-    var argPaths = [];
-    argPaths.push(sPath); //hack to get it working
+    var argPaths = []; //array to hold all of the script arguments
+    argPaths.push(sPath); //the script path is the first argument
     var argString = "";//this is what we will push to the argPaths, we will just keep appending to it
     var valid = true;
+	//for each argument of the script
     $('#scriptExeAssetList .argument').each(function(index){
         if(valid){
             var req = parseInt($(this).attr('data-required')),
@@ -89,6 +93,7 @@ $(document).on('click', "#run", function(){
                 //argString += "{0} ".format(argSwitch);
 			}
 			
+			//This if else_if ladder handles the 3 major cases of argument possibilities
 			//string argument
 			if(type == 1){
 				argVal = $(this).find('input[id*="argStringValue"]').val();
@@ -143,7 +148,6 @@ $(document).on('click', "#run", function(){
     });
 
     if (valid){
-        //argPaths.push(argString.trim());
         //add extra arguments to the end of the command
         var extraArgs = $("#extraArguments").val(),
             outputDirectory = $("#scriptExeAssetList .scriptExeOutputDir").val();
@@ -159,10 +163,12 @@ $(document).on('click', "#run", function(){
         }
 
         try{
-            console.log(rPath + " " + argPaths.join(' '));
+            //Node-webkit calls, spawns a child process aka runs the script
+			console.log(rPath + " " + argPaths.join(' '));
 			var scriptExe = spawn(rPath, argPaths, {cwd:outputDirectory});
 
-            scriptExe.stdout.on('data', function (data) {
+            //outputs the data to under the run script button output textarea
+			scriptExe.stdout.on('data', function (data) {
                 if(data){
                     console.log(data);
                     var dataHTML = data.toString();
