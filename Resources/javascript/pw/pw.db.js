@@ -1,8 +1,9 @@
-//DATABASE STUFF
+//ALL DATABASE STUFF
 (function() {
     var _db; //private variable to hold the returned database object
 
-    function dropTables(){
+    //debugging feature to reset all the tables..  BE CAREFUL YOU WILL LOSE ALL OF YOUR DATA!!
+	function dropTables(){
         pw.db.transaction(
             function(transaction){
                 console.log("dropping existing tables");
@@ -26,6 +27,7 @@
         );
     }
 
+	//Create all the DB tables if they are not already created, should only be ran once the first time you open the app
     function createTables(){
         pw.db.transaction(
             function(transaction){
