@@ -1,15 +1,21 @@
-
+/*
+Object assciated with the Runtimes, that is the intreperter of any given language. Example: python.exe is the Runtime needed to execute python scripts
+*/
 pw.runtimes = (function(){
-    var my = {}; //this is the object that will be returned. Anything inside of this will be publicly accessible
+    var my = {}; // this is the object that will be returned. Anything inside of this will be publicly accessible
+				 // for example anything below that is my.Something can be accessed from any other file.
+				 // So if you want to get a list of all runtimes in the Settings.view page you would call pw.runtimes.getAllRuntimes(options)
+				 // details of what needs to be passed in the options objects is specified below
 
-    //the runtime object
+    //the runtime object. This is private, but is the object returned by all the calls below
+	//anytime you get a runtime it will be packaged in this object
     var runtime = function(data){
         this.rid = data['rid'];
         this.path = data['path'];
         this.alias = data['alias'];
         this.sid = "";
 
-
+		//allows the runtime to be updated directly from the object
         this.update = function(options){
             console.log('update called on runtimes {0} updating column {1} to {2}'.format(this.rid, options.name, options.value));
             var sql = "UPDATE runtimes SET {0} = '{1}' WHERE rid = {2}".format(options.name, options.value, this.rid);
@@ -26,29 +32,12 @@ pw.runtimes = (function(){
                 }
             });
         }
-        /*
-         this.remove = function(options){
-         var sql = "DELETE FROM scripts where id={0}".format(this.id);
-         pw.db.execute(sql, function(t,r){
-         delete argumentHash[this.id];
-         //TODO: DELETE ALL ARGUMENTS ASSOCIATED WITH THIS SCRIPT!
-         if(typeof options.success == "function"){ //prevents the nasty error message if the function isn't passed
-         options.success(this);
-         }
-         },function(t,e){
-         console.log("error when deleting the argument: {0}".format(JSON.stringify(e)));
-         if(typeof options.error == "function"){ //prevents the nasty error message if the function isn't passed
-         options.error(e);
-         }
-         });
-         }
-         */
     }
 
 
     //Gets a single runtime
     //options.id [required] corresponds to the rid in the runtimes database table
-    //options.success callback is passed the populated runtime object
+    //options.success callback is passed to the populated runtime object
     //options.error callback
     my.getRuntime = function(options){
         var sql = "SELECT * FROM runtimes WHERE rid = {0}".format(options.id);
@@ -68,6 +57,7 @@ pw.runtimes = (function(){
 						options.success(myRuntime);
 					}
                 }else{
+					//if someone is trying to use a script before a runtime is chosen for it, prompt them to set one before preceeding
 					alert("You need to Choose a Runtime for this script before running it!\n1)Go to Menu->Scripts\n2)Click " +options.name+ "\n3) Choose Runtime\n");
 				}
 
@@ -90,12 +80,13 @@ pw.runtimes = (function(){
             };
 
         pw.db.execute(sql, function(transaction, results){
-            //var runtimeResults = results; //store the script results
             console.log(results.rows.length + " runtimes retrieved");
             //create script objects out of each script
             if(results.rows.length){
                 for(var i = 0; i < results.rows.length; i++){
-                    var newRuntime = new runtime(results.rows.item(i));
+                    //this is where the private runtime object from above is being used
+					//it is creating a runtime object based on the results of the DB call
+					var newRuntime = new runtime(results.rows.item(i));
                     returnObj.runtimes.push(newRuntime);
                 }
             }
@@ -110,16 +101,14 @@ pw.runtimes = (function(){
         });
     }
 
-
+	//add a Runtime to the DB when a new one is added in the settings page
+	//alias is the name of the file such as text.txt and path is the full path such as C:\Users\Test\test.txt
     my.addRuntime = function(alias, path, onSuccess, onError){
-        //regex to extract filename works for both \ and / file separators
-        //var filename = path.replace(/^.*[\\\/]/, '');
-        //just the file extension ex: jpg txt csv
-        //var filetype = path.substr(path.lastIndexOf('.')+1, path.length);
         var sql = 'INSERT INTO runtimes (alias, path) VALUES("{0}", "{1}")'.format(alias, path);
         pw.db.execute(sql, onSuccess, onError);
     }
 
+	//Delete a runtime based on the rid which is short for RUNTIMEid
     my.deleteRuntime = function(rid, onSuccess, onError){
         iRid = parseInt(rid);
         if(iRid >= 0 && iRid){
