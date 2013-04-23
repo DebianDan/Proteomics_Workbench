@@ -1,33 +1,37 @@
+//before the page loads, fire the 2 custom events below which are settingsRetrieved and tagsRetrieved
 $(document).on('pagebeforecreate', '#settings', function (event) {
     //fire the getters off manually
     pw.settings;
     pw.tags;
 });
 
-
 $(document).on('settingsRetrieved', function(e){
-    //TODO get rid of settings
+	//disables the standard message "waiting to load runtimes"
 	displaySettings();
+	//gets all Runtimes from the DB and displays them using mustache.js
 	renderRuntimeList();
 });
 
+//NOT fully implemented, just writes a debug message to the console
 $(document).on('tagsRetrieved', function(e){
-    displayTags();
+    //This is where tags will be retrieved and displayed
+	displayTags();
 });
 
-//clear list of added runtime and close the dialog
+//clear list of added runtimes and closes the dialog
 function clearRuntimePicker(){
     $("#runtimePickerList").html("");
     $("#addRuntimePopup").popup("close");
     return false;
 }
 
-//removes the asset from the list of assets to be added
+//removes the asset from the list of assets to be added when dialog is cancelled
 $(document).on("click", "#runtimePickerList li .cancel", function(e){
     $(this).parent().parent().remove();
     e.preventDefault();
 })
 
+//clear list of added runtimes and closes the dialog
 $(document).on("click", "#addRuntimePopup .close", function(e){
     clearRuntimePicker();
     e.preventDefault();
@@ -38,6 +42,7 @@ $("input.chooseRuntime").click(function(){
 		$("#runtimeInput").trigger('click');
 });
 
+//in the dialog popup when the runtime is changed clear the input and add the newly chosen one
 $("#runtimeInput").change(function(){
         var path = $(this).val();
 		if(path != ""){
@@ -50,7 +55,9 @@ $("#runtimeInput").change(function(){
         $("#runtimePickerList").trigger('create');
 });
 
-//bind to the click event of the create new runtime button
+//bind to the click event of the create new runtime button in the add runtime dialog
+//when submitted check if a runtime is chosen if so get the path from custom attribute "data-path"
+//this is when the public runtime model is called by pw.runtimes.addRuntime() and renderRuntimeList() happens on success
 $(document).on('click', "#addRuntimePopup :submit", function(){
     var alias = $("#addRuntimePopup .runtimeAlias").val();
     if(alias == ""){
@@ -67,8 +74,9 @@ $(document).on('click', "#addRuntimePopup :submit", function(){
 });
 
 //bind to the click event of the delete runtime button
-//$("#deleteRuntime").click(function(){
-//NOT SURE WHY THIS WORKS AND THE ABOVE DOES NOT....
+//get the embedded rid of the Runtime to be deleted and call pw.runtimes.deleteRuntime()
+//this is the API that we provide in all of the .model files, which makes it simple to add, delete, read, and update any particular item
+//after it has been deleted find it in the HTML markup and remove it so it's no longer on the page
 jQuery("body").on("click", "#deleteRuntime", function(event){
     var rid = $(this).attr('data-id');
     if(rid){
@@ -109,7 +117,9 @@ function renderRuntimeList(){
     pw.runtimes.getAllRuntimes({
         success: function(data){
             console.log("rendering runtimes list");
-            var template = $("#tplRuntimesListing").html(),
+            //grab the mustache.js template from in the HTML and create list by passing the array of runtimes
+			//that were retrieved by getAllRuntimes() and populate the div with id "runtimeList"
+			var template = $("#tplRuntimesListing").html(),
                 html = Mustache.to_html(template, data),
                 rList = $("#runtimeList");
             //refresh the runtimes list to start
@@ -121,11 +131,15 @@ function renderRuntimeList(){
     });
 }
 
+//when updating any value associated with a runtime
 function updateRuntimeValue(options){
-    var myRuntime = pw.runtimes.getRuntime({
+    //first get the runtime based on the RUNTIMEid
+	var myRuntime = pw.runtimes.getRuntime({
         id: options.id,
         success : function(runtime){
-            runtime.update({
+            //runtime is the object returned by getRuntime and .update is the private field available to update the name and value
+			//see pw.model.runtimes.js for more information
+			runtime.update({
                 name : options.name,
                 value : options.value
             });
@@ -134,21 +148,6 @@ function updateRuntimeValue(options){
 }
 
 function displaySettings(){
-
-    /*
-     $("#python2path").val(pw.settings.paths.python2);
-     $("#python3path").val(pw.settings.paths.python3);
-
-     $("#python2path").blur(function(e){
-     pw.settings.paths.python2 = $(this).val();
-     pw.settings.update();
-     });
-     $("#python3path").blur(function(e){
-     pw.settings.paths.python3 = $(this).val();
-     pw.settings.update();
-     });
-     */
-
     $("#settingsWaiting").hide();
     $("#settingsArea").show();
 }
